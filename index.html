@@ -9,6 +9,9 @@
         font-size: 0.8em; /* Example size, adjust as needed */
         color: #666; /* Example color, adjust as needed */
     }
+    .warning-text {
+            color: red;
+    }
 </style>
 
 </head>
@@ -42,7 +45,8 @@
 <p class="small-text">
     The viscosity rating reflects the thickness or fluidity of the final product. Lower viscosity values indicate a more fluid, water-like consistency, while higher values indicate a thicker, more solid consistency like that of butters or waxes. This helps in understanding the texture and spreadability of the skincare product.
 </p>
-<p id="productConsistency">Product Consistency: </p>
+<p id="productConsistency">Product Consistency: </p>    
+<p id="emulsionWarning" class="warning-text"></p>
 
     	<script>
 const ingredients = {
@@ -101,6 +105,43 @@ function getProductConsistency(viscosityRating) {
     }
 }
 
+function checkEmulsionStability() {
+    let hasOil = false, hasWater = false, emulsifierPercentage = 0;
+    const totalParts = Array.from(document.getElementById('skincareTable').querySelector('tbody').rows)
+        .reduce((total, row) => {
+            const select = row.querySelector('select[name="ingredient"]');
+            const input = row.querySelector('input[name="parts"]');
+            const ingredient = select.value;
+            const parts = parseInt(input.value) || 0;
+
+            if (ingredient && parts > 0) {
+                if (ingredients[ingredient].phase === 'oil') {
+                    hasOil = true;
+                }
+                if (ingredients[ingredient].phase === 'aqueous') {
+                    hasWater = true;
+                }
+                if (ingredients[ingredient].phase === 'emulsifier') {
+                    emulsifierPercentage += parts;
+                }
+            }
+            return total + parts;
+        }, 0);
+
+    const warningElement = document.getElementById('emulsionWarning');
+    if (hasOil && hasWater) {
+        if (emulsifierPercentage < 3) {
+            warningElement.innerText = 'Warning: Your mixture contains both oil and water phases but does not have enough emulsifier. This may lead to separation. Ideally, the mixture should have between 3% and 7% of emulsifiers like beeswax or butters.';
+        } else if (emulsifierPercentage > 7) {
+            warningElement.innerText = 'Warning: Your mixture contains too much emulsifier, which may lead to skin irritation or a greasy feel.  Ideally, the mixture should have between 3% and 7% of emulsifiers like beeswax or butters.';
+        } else {
+            warningElement.innerText = '';
+        }
+    } else {
+        warningElement.innerText = '';
+    }
+}
+
 function updateTable() {
     const tableBody = document.getElementById('skincareTable').querySelector('tbody');
     let totalParts = 0;
@@ -124,6 +165,9 @@ function updateTable() {
             totalViscosity += parts * viscosity;
         }
     });
+
+    // Check for emulsion stability
+    checkEmulsionStability();
 
     // Update the percentages, comedogenic, and viscosity for each ingredient
     Array.from(tableBody.rows).forEach(row => {
