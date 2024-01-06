@@ -170,12 +170,12 @@
       const newRow = document.createElement('tr');
       newRow.innerHTML = `
           <td class="ingredient-select-cell">
-              <select name="ingredient" onchange="updateSelectedIngredients(this); showDescription(this);">
-                  <option value="">Select an ingredient</option>
-                  ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
-                      .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
-              </select>
-              <div class="ingredient-description" style="display:none;"></div> <!-- Hidden by default -->
+            <select name="ingredient" onchange="updateSelectedIngredients(this); showDescription(this);" data-prev-value="">
+                <option value="">Select an ingredient</option>
+                ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
+                    .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
+            </select>
+            <div class="ingredient-description" style="display:none;"></div>
           </td>
           <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
           <td></td><td></td><td></td>
@@ -183,6 +183,19 @@
       tableBody.appendChild(newRow);
       updateTable();
   }
+
+  function updateAllSelectOptions() {
+    document.querySelectorAll('#skincareForm select[name="ingredient"]').forEach(select => {
+        const currentVal = select.value;
+        select.innerHTML = `
+            <option value="">Select an ingredient</option>
+            ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient) || ingredient === currentVal)
+                .map(ingredient => `<option value="${ingredient}" ${ingredient === currentVal ? 'selected' : ''}>${ingredient}</option>`).join('')}
+        `;
+    });
+}
+// Call this function initially to set up the first ingredient dropdown
+updateAllSelectOptions();
 
   function showDescription(selectElement) {
       const descriptionDiv = selectElement.nextElementSibling; // The div for the description
@@ -234,9 +247,25 @@
   }
 
   function updateSelectedIngredients(selectElement) {
-      selectedIngredients = Array.from(document.querySelectorAll('#skincareForm select[name="ingredient"]'))
-                                .map(select => select.value)
-                                .filter(value => value);
+      const selectedValue = selectElement.value;
+      const previouslySelectedValue = selectElement.getAttribute('data-prev-value');
+
+      // Add the newly selected ingredient
+      if (selectedValue && !selectedIngredients.includes(selectedValue)) {
+          selectedIngredients.push(selectedValue);
+      }
+
+      // Remove the previously selected ingredient
+      const prevIndex = selectedIngredients.indexOf(previouslySelectedValue);
+      if (prevIndex > -1) {
+          selectedIngredients.splice(prevIndex, 1);
+      }
+
+      // Update the data-prev-value attribute
+      selectElement.setAttribute('data-prev-value', selectedValue);
+  
+      // Update options in all other select elements
+      updateAllSelectOptions();
   }
 
   function getProductConsistency(viscosityRating) {
