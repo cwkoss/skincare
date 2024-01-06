@@ -17,7 +17,15 @@
 </head>
 <body>
     <h2>Skincare Formulation</h2>
+<label for="productType">Select Product Type:</label>
+<select id="productType" onchange="updateGuidance()">
+    <option value="">Choose...</option>
+    <option value="lotion">Lotion</option>
+    <option value="cream">Cream</option>
+    <option value="butter">Butter</option>
+</select>
 
+<p id="guidance">Please select a product type to see the formulation guidance.</p>
 <table id="skincareTable" class="table">
     <thead>
         <tr>
@@ -36,6 +44,11 @@
         <button type="button" onclick="addIngredient()">Add Ingredient</button>
         <button type="submit">Submit Formulation</button>
     </form>
+
+<p id="overallOilPercentage">Overall Oil Percentage: </p>
+<p id="overallAqueousPercentage">Overall Aqueous Percentage: </p>
+<p id="overallEmulsifierPercentage">Overall Emulsifier Percentage: </p>
+
 
 <p id="overallComedogenicRating">Overall Comedogenic Rating: </p>
 <p class="small-text">
@@ -62,6 +75,7 @@ const ingredients = {
 let selectedIngredients = [];
 
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('productType').value = ''; // Reset the product type selection
     addIngredient();
     document.getElementById('skincareForm').addEventListener('change', updateTable);
     document.getElementById('skincareForm').addEventListener('submit', handleSubmit);
@@ -83,6 +97,27 @@ function addIngredient() {
     `;
     tableBody.appendChild(newRow);
     updateTable();
+}
+
+function updateGuidance() {
+    const productType = document.getElementById('productType').value;
+    let guidanceText = '';
+
+    switch (productType) {
+        case 'lotion':
+            guidanceText = 'Lotion: 70-80% Water, 3-6% Emulsifier, 8-23% Oils and Butters';
+            break;
+        case 'cream':
+            guidanceText = 'Cream: 60-70% Water, 3-6% Emulsifier, Balanced mix of Oils and Butters';
+            break;
+        case 'butter':
+            guidanceText = 'Butter: 60% Water, 6-8% Emulsifier, Higher percentage of Butters';
+            break;
+        default:
+            guidanceText = 'Please select a product type to see the formulation guidance.';
+    }
+
+    document.getElementById('guidance').innerText = guidanceText;
 }
 
 function updateSelectedIngredients(selectElement) {
@@ -194,12 +229,56 @@ function updateTable() {
     document.getElementById('overallComedogenicRating').innerText = `Overall Comedogenic Rating: ${overallComedogenicRating}`;
     document.getElementById('overallViscosityRating').innerText = `Overall Viscosity Rating: ${overallViscosityRating}`;
     document.getElementById('productConsistency').innerText = `Product Consistency: ${productConsistency}`;
+
+    calculateOverallPercentages(totalParts);
 }
 
 
 
 
 
+function calculateOverallPercentages(totalParts) {
+    let totalOil = 0, totalAqueous = 0, totalEmulsifier = 0;
+
+    // ... existing logic to calculate total parts ...
+
+    // Update totals for oil, aqueous, and emulsifier phases
+    Array.from(document.getElementById('skincareTable').querySelector('tbody').rows).forEach(row => {
+        const select = row.querySelector('select[name="ingredient"]');
+        const input = row.querySelector('input[name="parts"]');
+        const ingredient = select.value;
+        const parts = parseInt(input.value) || 0;
+
+        if (ingredient && parts > 0) {
+            switch (ingredients[ingredient].phase) {
+                case 'oil':
+                    totalOil += parts;
+                    break;
+                case 'aqueous':
+                    totalAqueous += parts;
+                    break;
+                case 'emulsifier':
+                    totalEmulsifier += parts;
+                    break;
+            }
+        }
+    });
+
+    // Only calculate and display percentages if totalParts is greater than 0
+    if (totalParts > 0) {
+        const overallOilPercentage = ((totalOil / totalParts) * 100).toFixed(2);
+        const overallAqueousPercentage = ((totalAqueous / totalParts) * 100).toFixed(2);
+        const overallEmulsifierPercentage = ((totalEmulsifier / totalParts) * 100).toFixed(2);
+
+        document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
+        document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
+        document.getElementById('overallEmulsifierPercentage').innerText = `Overall Emulsifier Percentage: ${overallEmulsifierPercentage}%`;
+    } else {
+        document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: 0%`;
+        document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: 0%`;
+        document.getElementById('overallEmulsifierPercentage').innerText = `Overall Emulsifier Percentage: 0%`;
+    }
+}
 
 
 function handleSubmit(e) {
