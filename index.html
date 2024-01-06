@@ -47,7 +47,7 @@
 
 <p id="overallOilPercentage">Overall Oil Percentage: </p>
 <p id="overallAqueousPercentage">Overall Aqueous Percentage: </p>
-<p id="overallEmulsifierPercentage">Overall Emulsifier Percentage: </p>
+<p id="overallemulsifierParts">Overall Emulsifier Percentage: </p>
 
 
 <p id="overallComedogenicRating">Overall Comedogenic Rating: </p>
@@ -99,6 +99,19 @@ function addIngredient() {
     updateTable();
 }
 
+function getRecommendedProportions(productType) {
+    switch (productType) {
+        case 'lotion':
+            return { minOil: 8, maxOil: 23, minAqueous: 70, maxAqueous: 80, minEmulsifier: 3, maxEmulsifier: 6 };
+        case 'cream':
+            return { minOil: 20, maxOil: 40, minAqueous: 60, maxAqueous: 70, minEmulsifier: 3, maxEmulsifier: 6 };
+        case 'butter':
+            return { minOil: 20, maxOil: 40, minAqueous: 0, maxAqueous: 0, minEmulsifier: 0, maxEmulsifier: 10 };
+        default:
+            return null;
+    }
+}
+
 function updateGuidance() {
     const productType = document.getElementById('productType').value;
     let guidanceText = '';
@@ -111,13 +124,14 @@ function updateGuidance() {
             guidanceText = 'Cream: 60-70% Water, 3-6% Emulsifier, Balanced mix of Oils and Butters';
             break;
         case 'butter':
-            guidanceText = 'Butter: 60% Water, 6-8% Emulsifier, Higher percentage of Butters';
+            guidanceText = 'Butter: No Water, Emulsifier optional, 60-80% butters and 20-40% oils.  This balance can be adjusted to achieve the desired consistency; more butter leads to a thicker product, while more oil makes it softer and easier to spread.';
             break;
         default:
             guidanceText = 'Please select a product type to see the formulation guidance.';
     }
 
     document.getElementById('guidance').innerText = guidanceText;
+    document.getElementById('guidance').classList.remove('warning-text'); // Reset warning class
 }
 
 function updateSelectedIngredients(selectElement) {
@@ -141,7 +155,7 @@ function getProductConsistency(viscosityRating) {
 }
 
 function checkEmulsionStability() {
-    let hasOil = false, hasWater = false, emulsifierPercentage = 0;
+    let hasOil = false, hasWater = false, emulsifierParts = 0;
     const totalParts = Array.from(document.getElementById('skincareTable').querySelector('tbody').rows)
         .reduce((total, row) => {
             const select = row.querySelector('select[name="ingredient"]');
@@ -157,23 +171,22 @@ function checkEmulsionStability() {
                     hasWater = true;
                 }
                 if (ingredients[ingredient].phase === 'emulsifier') {
-                    emulsifierPercentage += parts;
+                    emulsifierParts += parts;
                 }
             }
             return total + parts;
         }, 0);
 
     const warningElement = document.getElementById('emulsionWarning');
+    warningElement.innerText = '';
+
+    // Add warning message if conditions are met
     if (hasOil && hasWater) {
-        if (emulsifierPercentage < 3) {
-            warningElement.innerText = 'Warning: Your mixture contains both oil and water phases but does not have enough emulsifier. This may lead to separation. Ideally, the mixture should have between 3% and 7% of emulsifiers like beeswax or butters.';
-        } else if (emulsifierPercentage > 7) {
-            warningElement.innerText = 'Warning: Your mixture contains too much emulsifier, which may lead to skin irritation or a greasy feel.  Ideally, the mixture should have between 3% and 7% of emulsifiers like beeswax or butters.';
-        } else {
-            warningElement.innerText = '';
+        if (emulsifierParts < 3 * totalParts / 100) {
+            warningElement.innerText = 'Warning: Your mixture contains both oil and water phases but does not have enough emulsifier. This may lead to separation.';
+        } else if (emulsifierParts > 7 * totalParts / 100) {
+            warningElement.innerText = 'Warning: Your mixture contains too much emulsifier, which may lead to skin irritation or a greasy feel.';
         }
-    } else {
-        warningElement.innerText = '';
     }
 }
 
@@ -239,10 +252,13 @@ function updateTable() {
 
 function calculateOverallPercentages(totalParts) {
     let totalOil = 0, totalAqueous = 0, totalEmulsifier = 0;
+    const productType = document.getElementById('productType').value;
+    const recommended = getRecommendedProportions(productType);
+    const guidanceElement = document.getElementById('guidance');
 
-    // ... existing logic to calculate total parts ...
+    // Reset and update the guidance text based on the selected product type
+    updateGuidance();
 
-    // Update totals for oil, aqueous, and emulsifier phases
     Array.from(document.getElementById('skincareTable').querySelector('tbody').rows).forEach(row => {
         const select = row.querySelector('select[name="ingredient"]');
         const input = row.querySelector('input[name="parts"]');
@@ -264,21 +280,31 @@ function calculateOverallPercentages(totalParts) {
         }
     });
 
-    // Only calculate and display percentages if totalParts is greater than 0
-    if (totalParts > 0) {
+    if (totalParts > 0 && recommended) {
         const overallOilPercentage = ((totalOil / totalParts) * 100).toFixed(2);
         const overallAqueousPercentage = ((totalAqueous / totalParts) * 100).toFixed(2);
-        const overallEmulsifierPercentage = ((totalEmulsifier / totalParts) * 100).toFixed(2);
+        const overallemulsifierParts = ((totalEmulsifier / totalParts) * 100).toFixed(2);
 
         document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
         document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
-        document.getElementById('overallEmulsifierPercentage').innerText = `Overall Emulsifier Percentage: ${overallEmulsifierPercentage}%`;
+        document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: ${overallemulsifierParts}%`;
+
+        // Check if proportions are out of recommended ranges
+        if (overallOilPercentage < recommended.minOil || overallOilPercentage > recommended.maxOil ||
+            overallAqueousPercentage < recommended.minAqueous || overallAqueousPercentage > recommended.maxAqueous ||
+            overallemulsifierParts < recommended.minEmulsifier || overallemulsifierParts > recommended.maxEmulsifier) {
+            document.getElementById('guidance').classList.add('warning-text');
+            document.getElementById('guidance').innerText += ' (Your current formulation is out of the recommended range for the selected product type.)';
+        } else {
+            document.getElementById('guidance').classList.remove('warning-text');
+        }
     } else {
         document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: 0%`;
         document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: 0%`;
-        document.getElementById('overallEmulsifierPercentage').innerText = `Overall Emulsifier Percentage: 0%`;
+        document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: 0%`;
     }
 }
+
 
 
 function handleSubmit(e) {
