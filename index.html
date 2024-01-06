@@ -12,11 +12,15 @@
     .warning-text {
             color: red;
     }
-    .description-text {
-        font-size: 0.75em; /* Smaller than the main text */
-        color: #555; /* Slightly darker than your small-text color */
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
+    .ingredient-select-cell {
+        max-width: 150px; /* Set a maximum width */
+        word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
+    }
+    .ingredient-description {
+        font-size: 0.75em; /* Smaller font size */
+        color: #787878; /* Lighter color for subtlety */
+        margin-top: 5px; /* Space above the description */
+        padding-left: 5px; /* Some padding for alignment */
     }
 </style>
 
@@ -165,12 +169,13 @@
       const tableBody = document.getElementById('skincareTable').querySelector('tbody');
       const newRow = document.createElement('tr');
       newRow.innerHTML = `
-          <td>
-              <select name="ingredient" onchange="updateSelectedIngredients(this)">
+          <td class="ingredient-select-cell">
+              <select name="ingredient" onchange="updateSelectedIngredients(this); showDescription(this);">
                   <option value="">Select an ingredient</option>
                   ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
                       .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
               </select>
+              <div class="ingredient-description" style="display:none;"></div> <!-- Hidden by default -->
           </td>
           <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
           <td></td><td></td><td></td>
@@ -178,6 +183,20 @@
       tableBody.appendChild(newRow);
       updateTable();
   }
+
+  function showDescription(selectElement) {
+      const descriptionDiv = selectElement.nextElementSibling; // The div for the description
+      const selectedIngredient = selectElement.value;
+      const descriptionText = selectedIngredient ? ingredients[selectedIngredient].description : '';
+
+      if (selectedIngredient) {
+          descriptionDiv.style.display = 'block'; // Show the description
+          descriptionDiv.innerText = descriptionText;
+      } else {
+          descriptionDiv.style.display = 'none'; // Hide the description
+      }
+  }
+
 
   function getRecommendedProportions(productType) {
       switch (productType) {
