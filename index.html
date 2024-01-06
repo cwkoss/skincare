@@ -17,55 +17,58 @@
 </head>
 <body>
     <h2>Skincare Formulation</h2>
-<label for="productType">Select Product Type:</label>
-<select id="productType" onchange="updateGuidance()">
-    <option value="">Choose...</option>
-    <option value="lotion">Lotion</option>
-    <option value="cream">Cream</option>
-    <option value="butter">Butter</option>
-</select>
+    <label for="userName">Your Name:</label>
+    <input type="text" id="userName" name="userName" required placeholder="Enter your name">
+    <label for="productType">Select Product Type:</label>
+    <select id="productType" onchange="updateGuidance()">
+        <option value="">Choose...</option>
+        <option value="lotion">Lotion</option>
+        <option value="cream">Cream</option>
+        <option value="butter">Butter</option>
+    </select>
 
-<p id="guidance">Please select a product type to see the formulation guidance.</p>
-<table id="skincareTable" class="table">
-    <thead>
-        <tr>
-            <th>Ingredient</th>
-            <th>Parts</th>
-            <th>Percentage</th>
-            <th>Comedogenic</th>
-	    <th>Viscosity</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Dynamic rows will be added here in the <tbody> section -->
-    </tbody>
-</table>
-    <form id="skincareForm">
-        <button type="button" onclick="addIngredient()">Add Ingredient</button>
-        <button type="submit">Submit Formulation</button>
-    </form>
+    <p id="guidance">Please select a product type to see the formulation guidance.</p>
+    <table id="skincareTable" class="table">
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Parts</th>
+                <th>Percentage</th>
+                <th>Comedogenic</th>
+    	    <th>Viscosity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic rows will be added here in the <tbody> section -->
+        </tbody>
+    </table>
+        <form id="skincareForm">
+            <button type="button" onclick="addIngredient()">Add Ingredient</button>
+            <button type="submit">Submit Formulation</button>
+        </form>
 
-<p id="overallOilPercentage">Overall Oil Percentage: </p>
-<p id="overallAqueousPercentage">Overall Aqueous Percentage: </p>
-<p id="overallemulsifierParts">Overall Emulsifier Percentage: </p>
+    <p id="overallOilPercentage">Overall Oil Percentage: </p>
+    <p id="overallAqueousPercentage">Overall Aqueous Percentage: </p>
+    <p id="overallemulsifierParts">Overall Emulsifier Percentage: </p>
 
 
-<p id="overallComedogenicRating">Overall Comedogenic Rating: </p>
-<p class="small-text">
-    The comedogenic rating indicates how likely an ingredient is to clog pores. A lower rating (closer to 0) suggests that the ingredient is less likely to clog pores, while a higher rating (closer to 5) suggests a higher likelihood. This rating is crucial for individuals with acne-prone skin.
-</p>
-<p id="overallViscosityRating">Overall Viscosity Rating: </p>
-<p class="small-text">
-    The viscosity rating reflects the thickness or fluidity of the final product. Lower viscosity values indicate a more fluid, water-like consistency, while higher values indicate a thicker, more solid consistency like that of butters or waxes. This helps in understanding the texture and spreadability of the skincare product.
-</p>
-<p id="productConsistency">Product Consistency: </p>
-<p id="emulsionWarning" class="warning-text"></p>
+    <p id="overallComedogenicRating">Overall Comedogenic Rating: </p>
+    <p class="small-text">
+        The comedogenic rating indicates how likely an ingredient is to clog pores. A lower rating (closer to 0) suggests that the ingredient is less likely to clog pores, while a higher rating (closer to 5) suggests a higher likelihood. This rating is crucial for individuals with acne-prone skin.
+    </p>
+    <p id="overallViscosityRating">Overall Viscosity Rating: </p>
+    <p class="small-text">
+        The viscosity rating reflects the thickness or fluidity of the final product. Lower viscosity values indicate a more fluid, water-like consistency, while higher values indicate a thicker, more solid consistency like that of butters or waxes. This helps in understanding the texture and spreadability of the skincare product.
+    </p>
+    <p id="productConsistency">Product Consistency: </p>
+    <p id="emulsionWarning" class="warning-text"></p>
 
 <script type="module">
-  // Import the functions you need from the SDKs you need
+  // Import Firebase app and Firestore services
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
@@ -79,265 +82,290 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  async function handleSubmit(e) {
+      e.preventDefault();
+
+      const userName = document.getElementById('userName').value;
+      const productType = document.getElementById('productType').value;
+      const formulationData = getFormulationData();
+
+      try {
+          const docRef = await addDoc(collection(db, "formulations"), {
+              userName: userName,
+              productType: productType,
+              formulation: formulationData
+          });
+          console.log("Document written with ID: ", docRef.id);
+          // Handle successful submission, e.g., show a message to the user
+      } catch (e) {
+          console.error("Error adding document: ", e);
+          // Handle errors here, e.g., show error message to the user
+      }
+  }
+
+  // Export the handleSubmit function to make it accessible from other scripts
+  window.handleSubmit = handleSubmit;
+
+  function getFormulationData() {
+      // Collect and return formulation data from the table
+      // Example: return an array of objects containing ingredient data
+      const rows = document.getElementById('skincareTable').querySelector('tbody').rows;
+      return Array.from(rows).map(row => {
+          const ingredient = row.cells[0].innerText;
+          const parts = row.cells[1].innerText;
+          return { ingredient, parts };
+      });
+  }
+
 </script>
+<script>
 
+  const ingredients = {
+      "Coconut oil": { phase: "oil", comedogenic: 4, viscosity: 5 },
+      "Argan oil": { phase: "oil", comedogenic: 0, viscosity: 3 },
+      "Sunflower oil": { phase: "oil", comedogenic: 2, viscosity: 3 },
+      "Distilled water": { phase: "aqueous", comedogenic: 0, viscosity: 1 },
+      "Salt water": { phase: "aqueous", comedogenic: -1, viscosity: 1.5 },
+      "Beeswax": { phase: "emulsifier", comedogenic: 2, viscosity: 10 },
+      "Cocoa butter": { phase: "emulsifier", comedogenic: 4, viscosity: 8 }
+  };
 
-    	<script>
-const ingredients = {
-    "Coconut oil": { phase: "oil", comedogenic: 4, viscosity: 5 },
-    "Argan oil": { phase: "oil", comedogenic: 0, viscosity: 3 },
-    "Sunflower oil": { phase: "oil", comedogenic: 2, viscosity: 3 },
-    "Distilled water": { phase: "aqueous", comedogenic: 0, viscosity: 1 },
-    "Salt water": { phase: "aqueous", comedogenic: -1, viscosity: 1.5 },
-    "Beeswax": { phase: "emulsifier", comedogenic: 2, viscosity: 10 },
-    "Cocoa butter": { phase: "emulsifier", comedogenic: 4, viscosity: 8 }
-};
+  let selectedIngredients = [];
 
-let selectedIngredients = [];
+  document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('productType').value = ''; // Reset the product type selection
+      addIngredient();
+      document.getElementById('skincareForm').addEventListener('change', updateTable);
+      document.getElementById('skincareForm').addEventListener('submit', window.handleSubmit);
+  });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('productType').value = ''; // Reset the product type selection
-    addIngredient();
-    document.getElementById('skincareForm').addEventListener('change', updateTable);
-    document.getElementById('skincareForm').addEventListener('submit', handleSubmit);
-});
+  function addIngredient() {
+      const tableBody = document.getElementById('skincareTable').querySelector('tbody');
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+          <td>
+              <select name="ingredient" onchange="updateSelectedIngredients(this)">
+                  <option value="">Select an ingredient</option>
+                  ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
+                      .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
+              </select>
+          </td>
+          <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
+          <td></td><td></td><td></td>
+      `;
+      tableBody.appendChild(newRow);
+      updateTable();
+  }
 
-function addIngredient() {
-    const tableBody = document.getElementById('skincareTable').querySelector('tbody');
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-        <td>
-            <select name="ingredient" onchange="updateSelectedIngredients(this)">
-                <option value="">Select an ingredient</option>
-                ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
-                    .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
-            </select>
-        </td>
-        <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
-        <td></td><td></td><td></td>
-    `;
-    tableBody.appendChild(newRow);
-    updateTable();
-}
+  function getRecommendedProportions(productType) {
+      switch (productType) {
+          case 'lotion':
+              return { minOil: 8, maxOil: 23, minAqueous: 70, maxAqueous: 80, minEmulsifier: 3, maxEmulsifier: 6 };
+          case 'cream':
+              return { minOil: 20, maxOil: 40, minAqueous: 60, maxAqueous: 70, minEmulsifier: 3, maxEmulsifier: 6 };
+          case 'butter':
+              return { minOil: 20, maxOil: 40, minAqueous: 0, maxAqueous: 0, minEmulsifier: 0, maxEmulsifier: 10 };
+          default:
+              return null;
+      }
+  }
 
-function getRecommendedProportions(productType) {
-    switch (productType) {
-        case 'lotion':
-            return { minOil: 8, maxOil: 23, minAqueous: 70, maxAqueous: 80, minEmulsifier: 3, maxEmulsifier: 6 };
-        case 'cream':
-            return { minOil: 20, maxOil: 40, minAqueous: 60, maxAqueous: 70, minEmulsifier: 3, maxEmulsifier: 6 };
-        case 'butter':
-            return { minOil: 20, maxOil: 40, minAqueous: 0, maxAqueous: 0, minEmulsifier: 0, maxEmulsifier: 10 };
-        default:
-            return null;
-    }
-}
+  function updateGuidance() {
+      const productType = document.getElementById('productType').value;
+      let guidanceText = '';
 
-function updateGuidance() {
-    const productType = document.getElementById('productType').value;
-    let guidanceText = '';
+      switch (productType) {
+          case 'lotion':
+              guidanceText = 'Lotion: 70-80% Water, 3-6% Emulsifier, 8-23% Oils and Butters';
+              break;
+          case 'cream':
+              guidanceText = 'Cream: 60-70% Water, 3-6% Emulsifier, Balanced mix of Oils and Butters';
+              break;
+          case 'butter':
+              guidanceText = 'Butter: No Water, Emulsifier optional, 60-80% butters and 20-40% oils.  This balance can be adjusted to achieve the desired consistency; more butter leads to a thicker product, while more oil makes it softer and easier to spread.';
+              break;
+          default:
+              guidanceText = 'Please select a product type to see the formulation guidance.';
+      }
 
-    switch (productType) {
-        case 'lotion':
-            guidanceText = 'Lotion: 70-80% Water, 3-6% Emulsifier, 8-23% Oils and Butters';
-            break;
-        case 'cream':
-            guidanceText = 'Cream: 60-70% Water, 3-6% Emulsifier, Balanced mix of Oils and Butters';
-            break;
-        case 'butter':
-            guidanceText = 'Butter: No Water, Emulsifier optional, 60-80% butters and 20-40% oils.  This balance can be adjusted to achieve the desired consistency; more butter leads to a thicker product, while more oil makes it softer and easier to spread.';
-            break;
-        default:
-            guidanceText = 'Please select a product type to see the formulation guidance.';
-    }
+      document.getElementById('guidance').innerText = guidanceText;
+      document.getElementById('guidance').classList.remove('warning-text'); // Reset warning class
+  }
 
-    document.getElementById('guidance').innerText = guidanceText;
-    document.getElementById('guidance').classList.remove('warning-text'); // Reset warning class
-}
+  function updateSelectedIngredients(selectElement) {
+      selectedIngredients = Array.from(document.querySelectorAll('#skincareForm select[name="ingredient"]'))
+                                .map(select => select.value)
+                                .filter(value => value);
+  }
 
-function updateSelectedIngredients(selectElement) {
-    selectedIngredients = Array.from(document.querySelectorAll('#skincareForm select[name="ingredient"]'))
-                              .map(select => select.value)
-                              .filter(value => value);
-}
+  function getProductConsistency(viscosityRating) {
+      if (viscosityRating >= 1 && viscosityRating <= 2) {
+          return "Liquid";
+      } else if (viscosityRating <= 4) {
+          return "Lotion";
+      } else if (viscosityRating <= 6) {
+          return "Cream";
+      } else if (viscosityRating <= 8) {
+          return "Butter";
+      } else {
+          return "Wax";
+      }
+  }
 
-function getProductConsistency(viscosityRating) {
-    if (viscosityRating >= 1 && viscosityRating <= 2) {
-        return "Liquid";
-    } else if (viscosityRating <= 4) {
-        return "Lotion";
-    } else if (viscosityRating <= 6) {
-        return "Cream";
-    } else if (viscosityRating <= 8) {
-        return "Butter";
-    } else {
-        return "Wax";
-    }
-}
+  function checkEmulsionStability() {
+      let hasOil = false, hasWater = false, emulsifierParts = 0;
+      const totalParts = Array.from(document.getElementById('skincareTable').querySelector('tbody').rows)
+          .reduce((total, row) => {
+              const select = row.querySelector('select[name="ingredient"]');
+              const input = row.querySelector('input[name="parts"]');
+              const ingredient = select.value;
+              const parts = parseInt(input.value) || 0;
 
-function checkEmulsionStability() {
-    let hasOil = false, hasWater = false, emulsifierParts = 0;
-    const totalParts = Array.from(document.getElementById('skincareTable').querySelector('tbody').rows)
-        .reduce((total, row) => {
-            const select = row.querySelector('select[name="ingredient"]');
-            const input = row.querySelector('input[name="parts"]');
-            const ingredient = select.value;
-            const parts = parseInt(input.value) || 0;
+              if (ingredient && parts > 0) {
+                  if (ingredients[ingredient].phase === 'oil') {
+                      hasOil = true;
+                  }
+                  if (ingredients[ingredient].phase === 'aqueous') {
+                      hasWater = true;
+                  }
+                  if (ingredients[ingredient].phase === 'emulsifier') {
+                      emulsifierParts += parts;
+                  }
+              }
+              return total + parts;
+          }, 0);
 
-            if (ingredient && parts > 0) {
-                if (ingredients[ingredient].phase === 'oil') {
-                    hasOil = true;
-                }
-                if (ingredients[ingredient].phase === 'aqueous') {
-                    hasWater = true;
-                }
-                if (ingredients[ingredient].phase === 'emulsifier') {
-                    emulsifierParts += parts;
-                }
-            }
-            return total + parts;
-        }, 0);
+      const warningElement = document.getElementById('emulsionWarning');
+      warningElement.innerText = '';
 
-    const warningElement = document.getElementById('emulsionWarning');
-    warningElement.innerText = '';
+      // Add warning message if conditions are met
+      if (hasOil && hasWater) {
+          if (emulsifierParts < 3 * totalParts / 100) {
+              warningElement.innerText = 'Warning: Your mixture contains both oil and water phases but does not have enough emulsifier. This may lead to separation.';
+          } else if (emulsifierParts > 7 * totalParts / 100) {
+              warningElement.innerText = 'Warning: Your mixture contains too much emulsifier, which may lead to skin irritation or a greasy feel.';
+          }
+      }
+  }
 
-    // Add warning message if conditions are met
-    if (hasOil && hasWater) {
-        if (emulsifierParts < 3 * totalParts / 100) {
-            warningElement.innerText = 'Warning: Your mixture contains both oil and water phases but does not have enough emulsifier. This may lead to separation.';
-        } else if (emulsifierParts > 7 * totalParts / 100) {
-            warningElement.innerText = 'Warning: Your mixture contains too much emulsifier, which may lead to skin irritation or a greasy feel.';
-        }
-    }
-}
+  function updateTable() {
+      const tableBody = document.getElementById('skincareTable').querySelector('tbody');
+      let totalParts = 0;
+      let totalComedogenic = 0;
+      let totalViscosity = 0;
 
-function updateTable() {
-    const tableBody = document.getElementById('skincareTable').querySelector('tbody');
-    let totalParts = 0;
-    let totalComedogenic = 0;
-    let totalViscosity = 0;
+      // Sum up the total parts, comedogenic, and viscosity values
+      Array.from(tableBody.rows).forEach(row => {
+          const select = row.querySelector('select[name="ingredient"]');
+          const input = row.querySelector('input[name="parts"]');
 
-    // Sum up the total parts, comedogenic, and viscosity values
-    Array.from(tableBody.rows).forEach(row => {
-        const select = row.querySelector('select[name="ingredient"]');
-        const input = row.querySelector('input[name="parts"]');
+          const ingredient = select.value;
+          const parts = parseInt(input.value) || 0;
 
-        const ingredient = select.value;
-        const parts = parseInt(input.value) || 0;
+          if (ingredient && parts > 0) {
+              const comedogenic = ingredients[ingredient].comedogenic;
+              const viscosity = ingredients[ingredient].viscosity;
 
-        if (ingredient && parts > 0) {
-            const comedogenic = ingredients[ingredient].comedogenic;
-            const viscosity = ingredients[ingredient].viscosity;
+              totalParts += parts;
+              totalComedogenic += parts * comedogenic;
+              totalViscosity += parts * viscosity;
+          }
+      });
 
-            totalParts += parts;
-            totalComedogenic += parts * comedogenic;
-            totalViscosity += parts * viscosity;
-        }
-    });
+      // Check for emulsion stability
+      checkEmulsionStability();
 
-    // Check for emulsion stability
-    checkEmulsionStability();
+      // Update the percentages, comedogenic, and viscosity for each ingredient
+      Array.from(tableBody.rows).forEach(row => {
+          const select = row.querySelector('select[name="ingredient"]');
+          const input = row.querySelector('input[name="parts"]');
+          const ingredient = select.value;
+          const parts = parseInt(input.value) || 0;
 
-    // Update the percentages, comedogenic, and viscosity for each ingredient
-    Array.from(tableBody.rows).forEach(row => {
-        const select = row.querySelector('select[name="ingredient"]');
-        const input = row.querySelector('input[name="parts"]');
-        const ingredient = select.value;
-        const parts = parseInt(input.value) || 0;
+          if (ingredient && parts > 0) {
+              const percentage = ((parts / totalParts) * 100).toFixed(2);
+              const comedogenic = ingredients[ingredient].comedogenic;
+              const viscosity = ingredients[ingredient].viscosity;
 
-        if (ingredient && parts > 0) {
-            const percentage = ((parts / totalParts) * 100).toFixed(2);
-            const comedogenic = ingredients[ingredient].comedogenic;
-            const viscosity = ingredients[ingredient].viscosity;
+              row.cells[2].innerText = `${percentage}%`;
+              row.cells[3].innerText = comedogenic;
+              row.cells[4].innerText = viscosity;
+          }
+      });
 
-            row.cells[2].innerText = `${percentage}%`;
-            row.cells[3].innerText = comedogenic;
-            row.cells[4].innerText = viscosity;
-        }
-    });
+      const overallComedogenicRating = totalParts ? (totalComedogenic / totalParts).toFixed(2) : 0;
+      const overallViscosityRating = totalParts ? (totalViscosity / totalParts).toFixed(2) : 0;
+      const productConsistency = getProductConsistency(overallViscosityRating);
 
-    const overallComedogenicRating = totalParts ? (totalComedogenic / totalParts).toFixed(2) : 0;
-    const overallViscosityRating = totalParts ? (totalViscosity / totalParts).toFixed(2) : 0;
-    const productConsistency = getProductConsistency(overallViscosityRating);
+      document.getElementById('overallComedogenicRating').innerText = `Overall Comedogenic Rating: ${overallComedogenicRating}`;
+      document.getElementById('overallViscosityRating').innerText = `Overall Viscosity Rating: ${overallViscosityRating}`;
+      document.getElementById('productConsistency').innerText = `Product Consistency: ${productConsistency}`;
 
-    document.getElementById('overallComedogenicRating').innerText = `Overall Comedogenic Rating: ${overallComedogenicRating}`;
-    document.getElementById('overallViscosityRating').innerText = `Overall Viscosity Rating: ${overallViscosityRating}`;
-    document.getElementById('productConsistency').innerText = `Product Consistency: ${productConsistency}`;
-
-    calculateOverallPercentages(totalParts);
-}
-
-
+      calculateOverallPercentages(totalParts);
+  }
 
 
 
-function calculateOverallPercentages(totalParts) {
-    let totalOil = 0, totalAqueous = 0, totalEmulsifier = 0;
-    const productType = document.getElementById('productType').value;
-    const recommended = getRecommendedProportions(productType);
-    const guidanceElement = document.getElementById('guidance');
-
-    // Reset and update the guidance text based on the selected product type
-    updateGuidance();
-
-    Array.from(document.getElementById('skincareTable').querySelector('tbody').rows).forEach(row => {
-        const select = row.querySelector('select[name="ingredient"]');
-        const input = row.querySelector('input[name="parts"]');
-        const ingredient = select.value;
-        const parts = parseInt(input.value) || 0;
-
-        if (ingredient && parts > 0) {
-            switch (ingredients[ingredient].phase) {
-                case 'oil':
-                    totalOil += parts;
-                    break;
-                case 'aqueous':
-                    totalAqueous += parts;
-                    break;
-                case 'emulsifier':
-                    totalEmulsifier += parts;
-                    break;
-            }
-        }
-    });
-
-    if (totalParts > 0 && recommended) {
-        const overallOilPercentage = ((totalOil / totalParts) * 100).toFixed(2);
-        const overallAqueousPercentage = ((totalAqueous / totalParts) * 100).toFixed(2);
-        const overallemulsifierParts = ((totalEmulsifier / totalParts) * 100).toFixed(2);
-
-        document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
-        document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
-        document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: ${overallemulsifierParts}%`;
-
-        // Check if proportions are out of recommended ranges
-        if (overallOilPercentage < recommended.minOil || overallOilPercentage > recommended.maxOil ||
-            overallAqueousPercentage < recommended.minAqueous || overallAqueousPercentage > recommended.maxAqueous ||
-            overallemulsifierParts < recommended.minEmulsifier || overallemulsifierParts > recommended.maxEmulsifier) {
-            document.getElementById('guidance').classList.add('warning-text');
-            document.getElementById('guidance').innerText += ' (Your current formulation is out of the recommended range for the selected product type.)';
-        } else {
-            document.getElementById('guidance').classList.remove('warning-text');
-        }
-    } else {
-        document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: 0%`;
-        document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: 0%`;
-        document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: 0%`;
-    }
-}
 
 
+  function calculateOverallPercentages(totalParts) {
+      let totalOil = 0, totalAqueous = 0, totalEmulsifier = 0;
+      const productType = document.getElementById('productType').value;
+      const recommended = getRecommendedProportions(productType);
+      const guidanceElement = document.getElementById('guidance');
 
-function handleSubmit(e) {
-    e.preventDefault();
-    // Your form submission logic
-}
+      // Reset and update the guidance text based on the selected product type
+      updateGuidance();
 
-	</script>
+      Array.from(document.getElementById('skincareTable').querySelector('tbody').rows).forEach(row => {
+          const select = row.querySelector('select[name="ingredient"]');
+          const input = row.querySelector('input[name="parts"]');
+          const ingredient = select.value;
+          const parts = parseInt(input.value) || 0;
 
-    <!-- Bootstrap JS and its dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+          if (ingredient && parts > 0) {
+              switch (ingredients[ingredient].phase) {
+                  case 'oil':
+                      totalOil += parts;
+                      break;
+                  case 'aqueous':
+                      totalAqueous += parts;
+                      break;
+                  case 'emulsifier':
+                      totalEmulsifier += parts;
+                      break;
+              }
+          }
+      });
+
+      if (totalParts > 0 && recommended) {
+          const overallOilPercentage = ((totalOil / totalParts) * 100).toFixed(2);
+          const overallAqueousPercentage = ((totalAqueous / totalParts) * 100).toFixed(2);
+          const overallemulsifierParts = ((totalEmulsifier / totalParts) * 100).toFixed(2);
+
+          document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
+          document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
+          document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: ${overallemulsifierParts}%`;
+
+          // Check if proportions are out of recommended ranges
+          if (overallOilPercentage < recommended.minOil || overallOilPercentage > recommended.maxOil ||
+              overallAqueousPercentage < recommended.minAqueous || overallAqueousPercentage > recommended.maxAqueous ||
+              overallemulsifierParts < recommended.minEmulsifier || overallemulsifierParts > recommended.maxEmulsifier) {
+              document.getElementById('guidance').classList.add('warning-text');
+              document.getElementById('guidance').innerText += ' (Your current formulation is out of the recommended range for the selected product type.)';
+          } else {
+              document.getElementById('guidance').classList.remove('warning-text');
+          }
+      } else {
+          document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: 0%`;
+          document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: 0%`;
+          document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: 0%`;
+      }
+  }
+
+
+</script>
 </body>
 </html>
