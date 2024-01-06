@@ -72,10 +72,8 @@
             <!-- Dynamic rows will be added here in the <tbody> section -->
         </tbody>
     </table>
-        <form id="skincareForm">
-            <button type="button" onclick="addIngredient()">Add Ingredient</button>
-            <button type="submit">Submit Formulation</button>
-        </form>
+    <button type="button" onclick="addIngredient()">Add Ingredient</button>
+
 
     <p id="overallOilPercentage">Overall Oil Percentage: </p>
     <p id="overallAqueousPercentage">Overall Aqueous Percentage: </p>
@@ -92,6 +90,11 @@
     </p>
     <p id="productConsistency">Product Consistency: </p>
     <p id="emulsionWarning" class="warning-text"></p>
+
+    <form id="skincareForm">
+
+        <button type="submit">Submit Recipe for Formulation</button>
+    </form>
 
 <script type="module">
   // Import Firebase app and Firestore services
@@ -190,9 +193,9 @@ function showAlert(message, type) {
     "Shea Butter": { phase: "oil", comedogenic: 0, viscosity: 6, description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins." },
     "Jojoba Oil": { phase: "oil", comedogenic: 2, viscosity: 2, description: "Mimics natural skin oils, balances skin's sebum production." },
     "Glycerin": { phase: "aqueous", comedogenic: 0, viscosity: 2, description: "A humectant that draws moisture into the skin, suitable for all skin types." },
-    "Almond Oil": { phase: "oil", comedogenic: 2, viscosity: 3, description: "Gentle on skin, rich in vitamin E, and excellent for dry skin." }
+    "Almond Oil": { phase: "oil", comedogenic: 2, viscosity: 3, description: "Gentle on skin, rich in vitamin E, and excellent for dry skin." },
     "Lecithin": { phase: "emulsifier", comedogenic: 0, viscosity: 5, description: "Natural stabilizer, thickens formulas and creates protective barrier on skin. (not sure about this viscosity value)" },
-    "Cetearyl Alcoho": { phase: "emulsifier", comedogenic: 0, viscosity: 8, description: "This is a fatty alcohol derived from natural sources like coconut and palm oils. It's used not only as an emulsifier but also as a thickener and stabilizer in creams and lotions." }
+    "Cetearyl Alcohol": { phase: "emulsifier", comedogenic: 0, viscosity: 8, description: "This is a fatty alcohol derived from natural sources like coconut and palm oils. It's used not only as an emulsifier but also as a thickener and stabilizer in creams and lotions." },
   };
 
   let selectedIngredients = [];
