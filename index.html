@@ -334,7 +334,6 @@
       let totalOil = 0, totalAqueous = 0, totalEmulsifier = 0;
       const productType = document.getElementById('productType').value;
       const recommended = getRecommendedProportions(productType);
-      const guidanceElement = document.getElementById('guidance');
 
       // Reset and update the guidance text based on the selected product type
       updateGuidance();
@@ -342,8 +341,8 @@
       Array.from(document.getElementById('skincareTable').querySelector('tbody').rows).forEach(row => {
           const select = row.querySelector('select[name="ingredient"]');
           const input = row.querySelector('input[name="parts"]');
-          const ingredient = select.value;
-          const parts = parseInt(input.value) || 0;
+          const ingredient = select ? select.value : '';
+          const parts = input ? parseInt(input.value) || 0 : 0;
 
           if (ingredient && parts > 0) {
               switch (ingredients[ingredient].phase) {
@@ -360,15 +359,15 @@
           }
       });
 
-      if (totalParts > 0 && recommended) {
-          const overallOilPercentage = ((totalOil / totalParts) * 100).toFixed(2);
-          const overallAqueousPercentage = ((totalAqueous / totalParts) * 100).toFixed(2);
-          const overallemulsifierParts = ((totalEmulsifier / totalParts) * 100).toFixed(2);
+      const overallOilPercentage = totalParts > 0 ? ((totalOil / totalParts) * 100).toFixed(2) : '0';
+      const overallAqueousPercentage = totalParts > 0 ? ((totalAqueous / totalParts) * 100).toFixed(2) : '0';
+      const overallemulsifierParts = totalParts > 0 ? ((totalEmulsifier / totalParts) * 100).toFixed(2) : '0';
 
-          document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
-          document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
-          document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: ${overallemulsifierParts}%`;
+      document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
+      document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
+      document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: ${overallemulsifierParts}%`;
 
+      if (recommended && totalParts > 0) {
           // Check if proportions are out of recommended ranges
           if (overallOilPercentage < recommended.minOil || overallOilPercentage > recommended.maxOil ||
               overallAqueousPercentage < recommended.minAqueous || overallAqueousPercentage > recommended.maxAqueous ||
@@ -378,12 +377,9 @@
           } else {
               document.getElementById('guidance').classList.remove('warning-text');
           }
-      } else {
-          document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: 0%`;
-          document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: 0%`;
-          document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: 0%`;
       }
   }
+
 
 
 </script>
