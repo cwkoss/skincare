@@ -1,25 +1,136 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap Form Example</title>
+    <title>Skincare Formulation</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Hello World</h1>
-        <form>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+    <h2>Skincare Formulation</h2>
+    <form id="skincareForm">
+        <div id="ingredientInputs"></div>
+        <button type="button" onclick="addIngredient()">Add Ingredient</button>
+        <button type="submit">Submit Formulation</button>
+    </form>
+<table id="skincareTable" class="table">
+    <thead>
+        <tr>
+            <th>Ingredient</th>
+            <th>Parts</th>
+            <th>Percentage</th>
+            <th>Comedogenic</th>
+	    <th>Viscosity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamic rows will be added here in the <tbody> section -->
+    </tbody>
+</table>
+
+<p id="overallComedogenicRating">Overall Comedogenic Rating: </p>
+<p id="overallViscosityRating">Overall Viscosity Rating: </p>
+<p id="productConsistency">Product Consistency: </p>
+
+    	<script>
+const ingredients = {
+    "Coconut oil": { phase: "oil", comedogenic: 4, viscosity: 5 },
+    "Argan oil": { phase: "oil", comedogenic: 0, viscosity: 3 },
+    "Sunflower oil": { phase: "oil", comedogenic: 2, viscosity: 3 },
+    "Distilled water": { phase: "aqueous", comedogenic: 0, viscosity: 1 },
+    "Salt water": { phase: "aqueous", comedogenic: -1, viscosity: 1.5 },
+    "Beeswax": { phase: "emulsifier", comedogenic: 2, viscosity: 10 },
+    "Cocoa butter": { phase: "emulsifier", comedogenic: 4, viscosity: 8 }
+};
+
+let selectedIngredients = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+    addIngredient();
+    document.getElementById('skincareForm').addEventListener('change', updateTable);
+    document.getElementById('skincareForm').addEventListener('submit', handleSubmit);
+});
+
+function addIngredient() {
+    const ingredientsDiv = document.getElementById('ingredientInputs');
+    const newDiv = document.createElement('div');
+    newDiv.innerHTML = `
+        <select name="ingredient" onchange="updateSelectedIngredients(this)">
+            <option value="">Select an ingredient</option>
+            ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
+                .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
+        </select>
+        <input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()">
+    `;
+    ingredientsDiv.appendChild(newDiv);
+    updateTable();
+}
+
+function updateSelectedIngredients(selectElement) {
+    selectedIngredients = Array.from(document.querySelectorAll('#skincareForm select[name="ingredient"]'))
+                              .map(select => select.value)
+                              .filter(value => value);
+}
+
+function getProductConsistency(viscosityRating) {
+    if (viscosityRating >= 1 && viscosityRating <= 2) {
+        return "Liquid";
+    } else if (viscosityRating <= 4) {
+        return "Lotion";
+    } else if (viscosityRating <= 6) {
+        return "Cream";
+    } else if (viscosityRating <= 8) {
+        return "Butter";
+    } else {
+        return "Wax";
+    }
+}
+
+function updateTable() {
+    const formData = new FormData(document.getElementById('skincareForm'));
+    const data = {};
+    let totalParts = 0;
+    let totalComedogenic = 0;
+    let totalViscosity = 0;
+
+    formData.forEach((value, key) => {
+        if (!data[key]) {
+            data[key] = [];
+        }
+        data[key].push(value);
+        if (key === 'parts') {
+            totalParts += parseInt(value, 10) || 0;
+        }
+    });
+
+    const tbodyHtml = data.ingredient.map((ingredient, index) => {
+        const parts = parseInt(data.parts[index]) || 0;
+        const comedogenic = ingredients[ingredient].comedogenic;
+        const viscosity = ingredients[ingredient].viscosity;
+        const percentage = totalParts ? ((parts / totalParts) * 100).toFixed(2) : 0;
+        totalComedogenic += parts * comedogenic;
+        totalViscosity += parts * viscosity;
+        return `<tr><td>${ingredient}</td><td>${parts}</td><td>${percentage}%</td><td>${comedogenic}</td><td>${viscosity}</td></tr>`;
+    }).join('');
+
+    const overallComedogenicRating = totalParts ? (totalComedogenic / totalParts).toFixed(2) : 0;
+    const overallViscosityRating = totalParts ? (totalViscosity / totalParts).toFixed(2) : 0;
+    const productConsistency = getProductConsistency(overallViscosityRating);
+
+    document.getElementById('skincareTable').querySelector('tbody').innerHTML = tbodyHtml;
+    document.getElementById('overallComedogenicRating').innerText = `Overall Comedogenic Rating: ${overallComedogenicRating}`;
+    document.getElementById('overallViscosityRating').innerText = `Overall Viscosity Rating: ${overallViscosityRating}`;
+    document.getElementById('productConsistency').innerText = `Product Consistency: ${productConsistency}`;
+}
+
+
+
+
+function handleSubmit(e) {
+    e.preventDefault();
+    // Your form submission logic
+}
+
+	</script>
 
     <!-- Bootstrap JS and its dependencies -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -27,3 +138,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
