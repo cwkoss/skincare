@@ -7,11 +7,7 @@
 </head>
 <body>
     <h2>Skincare Formulation</h2>
-    <form id="skincareForm">
-        <div id="ingredientInputs"></div>
-        <button type="button" onclick="addIngredient()">Add Ingredient</button>
-        <button type="submit">Submit Formulation</button>
-    </form>
+
 <table id="skincareTable" class="table">
     <thead>
         <tr>
@@ -26,6 +22,10 @@
         <!-- Dynamic rows will be added here in the <tbody> section -->
     </tbody>
 </table>
+    <form id="skincareForm">
+        <button type="button" onclick="addIngredient()">Add Ingredient</button>
+        <button type="submit">Submit Formulation</button>
+    </form>
 
 <p id="overallComedogenicRating">Overall Comedogenic Rating: </p>
 <p id="overallViscosityRating">Overall Viscosity Rating: </p>
@@ -51,17 +51,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function addIngredient() {
-    const ingredientsDiv = document.getElementById('ingredientInputs');
-    const newDiv = document.createElement('div');
-    newDiv.innerHTML = `
-        <select name="ingredient" onchange="updateSelectedIngredients(this)">
-            <option value="">Select an ingredient</option>
-            ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
-                .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
-        </select>
-        <input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()">
+    const tableBody = document.getElementById('skincareTable').querySelector('tbody');
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>
+            <select name="ingredient" onchange="updateSelectedIngredients(this)">
+                <option value="">Select an ingredient</option>
+                ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
+                    .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
+            </select>
+        </td>
+        <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
+        <td></td><td></td><td></td>
     `;
-    ingredientsDiv.appendChild(newDiv);
+    tableBody.appendChild(newRow);
     updateTable();
 }
 
@@ -86,41 +89,58 @@ function getProductConsistency(viscosityRating) {
 }
 
 function updateTable() {
-    const formData = new FormData(document.getElementById('skincareForm'));
-    const data = {};
+    const tableBody = document.getElementById('skincareTable').querySelector('tbody');
     let totalParts = 0;
     let totalComedogenic = 0;
     let totalViscosity = 0;
 
-    formData.forEach((value, key) => {
-        if (!data[key]) {
-            data[key] = [];
-        }
-        data[key].push(value);
-        if (key === 'parts') {
-            totalParts += parseInt(value, 10) || 0;
+    // Sum up the total parts, comedogenic, and viscosity values
+    Array.from(tableBody.rows).forEach(row => {
+        const select = row.querySelector('select[name="ingredient"]');
+        const input = row.querySelector('input[name="parts"]');
+
+        const ingredient = select.value;
+        const parts = parseInt(input.value) || 0;
+
+        if (ingredient && parts > 0) {
+            const comedogenic = ingredients[ingredient].comedogenic;
+            const viscosity = ingredients[ingredient].viscosity;
+
+            totalParts += parts;
+            totalComedogenic += parts * comedogenic;
+            totalViscosity += parts * viscosity;
         }
     });
 
-    const tbodyHtml = data.ingredient.map((ingredient, index) => {
-        const parts = parseInt(data.parts[index]) || 0;
-        const comedogenic = ingredients[ingredient].comedogenic;
-        const viscosity = ingredients[ingredient].viscosity;
-        const percentage = totalParts ? ((parts / totalParts) * 100).toFixed(2) : 0;
-        totalComedogenic += parts * comedogenic;
-        totalViscosity += parts * viscosity;
-        return `<tr><td>${ingredient}</td><td>${parts}</td><td>${percentage}%</td><td>${comedogenic}</td><td>${viscosity}</td></tr>`;
-    }).join('');
+    // Update the percentages, comedogenic, and viscosity for each ingredient
+    Array.from(tableBody.rows).forEach(row => {
+        const select = row.querySelector('select[name="ingredient"]');
+        const input = row.querySelector('input[name="parts"]');
+        const ingredient = select.value;
+        const parts = parseInt(input.value) || 0;
+
+        if (ingredient && parts > 0) {
+            const percentage = ((parts / totalParts) * 100).toFixed(2);
+            const comedogenic = ingredients[ingredient].comedogenic;
+            const viscosity = ingredients[ingredient].viscosity;
+
+            row.cells[2].innerText = `${percentage}%`;
+            row.cells[3].innerText = comedogenic;
+            row.cells[4].innerText = viscosity;
+        }
+    });
 
     const overallComedogenicRating = totalParts ? (totalComedogenic / totalParts).toFixed(2) : 0;
     const overallViscosityRating = totalParts ? (totalViscosity / totalParts).toFixed(2) : 0;
     const productConsistency = getProductConsistency(overallViscosityRating);
 
-    document.getElementById('skincareTable').querySelector('tbody').innerHTML = tbodyHtml;
     document.getElementById('overallComedogenicRating').innerText = `Overall Comedogenic Rating: ${overallComedogenicRating}`;
     document.getElementById('overallViscosityRating').innerText = `Overall Viscosity Rating: ${overallViscosityRating}`;
     document.getElementById('productConsistency').innerText = `Product Consistency: ${productConsistency}`;
 }
+
+
+
 
 
 
