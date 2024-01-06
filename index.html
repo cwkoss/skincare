@@ -179,7 +179,7 @@ function showAlert(message, type) {
     "Distilled water": { phase: "aqueous", comedogenic: 0, viscosity: 1, description: "Hydrates and serves as a base for water-soluble ingredients." },
     "Salt water": { phase: "aqueous", comedogenic: 0, viscosity: 1.5, description: "Research is mixed. Some sources suggest that salt water might have beneficial effects on the skin, including potential antimicrobial properties and the ability to dry out pimples. Salt water could also irritate sensitive skin or exacerbate conditions like eczema or dermatitis. " },
     "Beeswax": { phase: "emulsifier", comedogenic: 2, viscosity: 10, description: "Natural stabilizer, thickens formulas and creates protective barrier on skin." },
-    "Cocoa butter": { phase: "emulsifier", comedogenic: 4, viscosity: 8, description: "Nourishes skin, reduces scars, and offers a chocolaty aroma." },
+    "Cocoa butter": { phase: "oil", comedogenic: 4, viscosity: 8, description: "Nourishes skin, reduces scars, and offers a chocolaty aroma." },
     "Pecan oil": { phase: "oil", comedogenic: 2, viscosity: 4, description: "Rich in antioxidants, moisturizes skin, and promotes hair health." },
     "Green tea": { phase: "aqueous", comedogenic: 0, viscosity: 1, description: "Rich in antioxidants, reduces inflammation, and promotes skin healing." },
     "Pumpkin seed oil": { phase: "oil", comedogenic: 2, viscosity: 4, description: "Improves skin tone, fights acne, and soothes sensitive skin." },
@@ -187,10 +187,12 @@ function showAlert(message, type) {
     "Okra seed oil": { phase: "oil", comedogenic: 2, viscosity: 3, description: "Promotes a healthy scalp and is rich in unsaturated fats. (comedogenic rating estimated)" },
     "Olive oil": { phase: "oil", comedogenic: 2, viscosity: 4, description: "Moisturizes skin, rich in vitamins, and promotes hair health." },
     "Aloe Vera Gel": { phase: "aqueous", comedogenic: 0, viscosity: 2, description: "Soothes skin irritations, hydrates, and has healing properties." },
-    "Shea Butter": { phase: "emulsifier", comedogenic: 0, viscosity: 6, description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins." },
+    "Shea Butter": { phase: "oil", comedogenic: 0, viscosity: 6, description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins." },
     "Jojoba Oil": { phase: "oil", comedogenic: 2, viscosity: 2, description: "Mimics natural skin oils, balances skin's sebum production." },
     "Glycerin": { phase: "aqueous", comedogenic: 0, viscosity: 2, description: "A humectant that draws moisture into the skin, suitable for all skin types." },
     "Almond Oil": { phase: "oil", comedogenic: 2, viscosity: 3, description: "Gentle on skin, rich in vitamin E, and excellent for dry skin." }
+    "Lecithin": { phase: "emulsifier", comedogenic: 0, viscosity: 5, description: "Natural stabilizer, thickens formulas and creates protective barrier on skin. (not sure about this viscosity value)" },
+    "Cetearyl Alcoho": { phase: "emulsifier", comedogenic: 0, viscosity: 8, description: "This is a fatty alcohol derived from natural sources like coconut and palm oils. It's used not only as an emulsifier but also as a thickener and stabilizer in creams and lotions." }
   };
 
   let selectedIngredients = [];
@@ -207,12 +209,12 @@ function showAlert(message, type) {
       const newRow = document.createElement('tr');
       newRow.innerHTML = `
           <td class="ingredient-select-cell">
-            <select name="ingredient" onchange="updateSelectedIngredients(this); showDescription(this);" data-prev-value="">
-                <option value="">Select an ingredient</option>
-                ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
-                    .map(ingredient => `<option value="${ingredient}">${ingredient}</option>`).join('')}
-            </select>
-            <div class="ingredient-description" style="display:none;"></div>
+              <select name="ingredient" onchange="updateSelectedIngredients(this)">
+                  <option value="">Select an ingredient</option>
+                  ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
+                      .map(ingredient => `<option value="${ingredient}">${ingredient} ${getEmojiForPhase(ingredients[ingredient].phase)}</option>`).join('')}
+              </select>
+              <div class="ingredient-description" style="display:none;"></div>
           </td>
           <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
           <td></td><td></td><td></td>
@@ -267,13 +269,13 @@ updateAllSelectOptions();
 
       switch (productType) {
           case 'lotion':
-              guidanceText = 'Lotion: 70-80% Water, 3-6% Emulsifier, 8-23% Oils and Butters';
+              guidanceText = 'Lotion: 70-80% 💧 Aqueous, 3-6% 🧈 Emulsifier, 8-23% 🍯 Oils or Butters';
               break;
           case 'cream':
-              guidanceText = 'Cream: 60-70% Water, 3-6% Emulsifier, Balanced mix of Oils and Butters';
+              guidanceText = 'Cream: 60-70% 💧 Aqeuous, 3-6% 🧈 Emulsifier, 🍯 Balanced mix of Oils and Butters';
               break;
           case 'butter':
-              guidanceText = 'Butter: No Water, Emulsifier optional, 60-80% butters and 20-40% oils.  This balance can be adjusted to achieve the desired consistency; more butter leads to a thicker product, while more oil makes it softer and easier to spread.';
+              guidanceText = 'Butter: 🚫💧 No Water, 🧈 Emulsifier optional, 🍯 60-80% butters and 20-40% oils.  This balance can be adjusted to achieve the desired consistency; more butter leads to a thicker product, while more oil makes it softer and easier to spread.';
               break;
           default:
               guidanceText = 'Please select a product type to see the formulation guidance.';
@@ -448,9 +450,9 @@ updateAllSelectOptions();
       const overallAqueousPercentage = totalParts > 0 ? ((totalAqueous / totalParts) * 100).toFixed(2) : '0';
       const overallemulsifierParts = totalParts > 0 ? ((totalEmulsifier / totalParts) * 100).toFixed(2) : '0';
 
-      document.getElementById('overallOilPercentage').innerText = `Overall Oil Percentage: ${overallOilPercentage}%`;
-      document.getElementById('overallAqueousPercentage').innerText = `Overall Aqueous Percentage: ${overallAqueousPercentage}%`;
-      document.getElementById('overallemulsifierParts').innerText = `Overall Emulsifier Percentage: ${overallemulsifierParts}%`;
+      document.getElementById('overallOilPercentage').innerText = `Overall 🍯 Oil Percentage: ${overallOilPercentage}%`;
+      document.getElementById('overallAqueousPercentage').innerText = `Overall 💧 Aqueous Percentage: ${overallAqueousPercentage}%`;
+      document.getElementById('overallemulsifierParts').innerText = `Overall 🧈 Emulsifier Percentage: ${overallemulsifierParts}%`;
 
       if (recommended && totalParts > 0) {
           // Check if proportions are out of recommended ranges
@@ -465,7 +467,18 @@ updateAllSelectOptions();
       }
   }
 
-
+  function getEmojiForPhase(phase) {
+      switch (phase) {
+          case 'oil':
+              return '🍯';
+          case 'aqueous':
+              return '💧';
+          case 'emulsifier':
+              return '🧈';
+          default:
+              return '';
+      }
+  }
 
 </script>
 </body>
