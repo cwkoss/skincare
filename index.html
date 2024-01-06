@@ -22,6 +22,26 @@
         margin-top: 5px; /* Space above the description */
         padding-left: 5px; /* Some padding for alignment */
     }
+    .alert {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1000;
+        padding: 15px;
+        margin: 10px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
 </style>
 
 </head>
@@ -111,9 +131,26 @@
           // Handle successful submission, e.g., show a message to the user
       } catch (e) {
           console.error("Error adding document: ", e);
-          // Handle errors here, e.g., show error message to the user
-      }
+          // Display the error message on the page
+        showAlert(`Something went wrong with sending your recipe. Please send me a screenshot of this page. Error: ${e.message}`, 'error');
+    }
   }
+
+  // Function to display alerts
+function showAlert(message, type) {
+    const alertBox = document.createElement('div');
+    alertBox.classList.add('alert');
+    if (type === 'error') {
+        alertBox.classList.add('alert-danger');
+    } else {
+        alertBox.classList.add('alert-success');
+    }
+    alertBox.innerText = message;
+
+    // Append the alert box to a container in your HTML, or directly to the body
+    document.body.appendChild(alertBox);
+
+}
 
   // Export the handleSubmit function to make it accessible from other scripts
   window.handleSubmit = handleSubmit;
@@ -263,7 +300,7 @@ updateAllSelectOptions();
 
       // Update the data-prev-value attribute
       selectElement.setAttribute('data-prev-value', selectedValue);
-  
+
       // Update options in all other select elements
       updateAllSelectOptions();
   }
