@@ -110,13 +110,16 @@
 
   function getFormulationData() {
       // Collect and return formulation data from the table
-      // Example: return an array of objects containing ingredient data
-      const rows = document.getElementById('skincareTable').querySelector('tbody').rows;
+      const rows = document.getElementById('skincareTable').querySelectorAll('tbody tr');
       return Array.from(rows).map(row => {
-          const ingredient = row.cells[0].innerText;
-          const parts = row.cells[1].innerText;
-          return { ingredient, parts };
-      });
+          const ingredientSelect = row.querySelector('select[name="ingredient"]');
+          const partsInput = row.querySelector('input[name="parts"]');
+
+          const ingredient = ingredientSelect.value;
+          const parts = partsInput.value;
+
+          return { ingredient, parts: parts ? parseInt(parts) : 0 };
+      }).filter(item => item.ingredient && item.parts > 0); // Filter out rows with empty ingredient or parts
   }
 
 </script>
