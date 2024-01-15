@@ -57,23 +57,32 @@
             background-color: #d4edda;
             border-color: #c3e6cb;
         }
+        .comedogenic {
+            font-weight: bold;
+        }
         .comedogenic-0 {
-            color: green;
+            background-color: rgb(156, 243, 156);
         }
         .comedogenic-1 {
-            color: #80c080; /* light green */
+            background-color: #b9f3b9; /* light green */
         }
         .comedogenic-2 {
-            color: yellow;
+            background-color: rgb(255, 255, 116);
         }
         .comedogenic-3 {
-            color: #ffcc00; /* orange */
+            background-color: #f0d35e; /* orange */
         }
         .comedogenic-4 {
-            color: #ff8000; /* dark orange */
+            background-color: #f1b67a; /* dark orange */
         }
         .comedogenic-5 {
-            color: red;
+            background-color: rgb(250, 148, 148);
+        }
+        .table tbody tr:nth-of-type(even) {
+            background-color: #f2f2f2;
+        }
+        .table tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
         }
     </style>
 
@@ -420,7 +429,7 @@
               <div class="ingredient-description" style="display:none;"></div>
           </td>
           <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
-          <td class="comedogenic"></td><td></td><td></td>
+          <td></td><td class="comedogenic"></td><td></td>
       `;
             tableBody.appendChild(newRow);
             updateTable();
