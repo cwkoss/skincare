@@ -421,7 +421,7 @@
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
           <td class="ingredient-select-cell">
-              <select name="ingredient" onchange="updateSelectedIngredients(this); showDescription(this);">
+              <select name="ingredient" onchange="updateSelectedIngredients(this); showDescription(this); updateTable()">
                   <option value="">Select an ingredient</option>
                   ${Object.keys(ingredients).filter(ingredient => !selectedIngredients.includes(ingredient))
                     .map(ingredient => `<option value="${ingredient}">${ingredient} ${getEmojiForPhase(ingredients[ingredient].phase)}</option>`).join('')}
@@ -630,8 +630,13 @@
         function setComedogenicColoring(row) {
             // Set the comedogenic coloring for the comedogenic cell
             const comedogenic = row.cells[3].innerText;
-            row.classList.remove('comedogenic-0', 'comedogenic-1', 'comedogenic-2', 'comedogenic-3', 'comedogenic-4', 'comedogenic-5');
-            row.cells[3].classList.add(`comedogenic-${comedogenic}`);
+            row.cells[3].classList.remove(...['comedogenic-0', 'comedogenic-1', 'comedogenic-2', 'comedogenic-3', 'comedogenic-4', 'comedogenic-5']);
+            // check that comedogenic is a number
+            if (comedogenic) {
+                row.cells[3].classList.add(`comedogenic-${comedogenic}`);
+            }
+
+           
         }
 
 
