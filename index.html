@@ -57,6 +57,24 @@
             background-color: #d4edda;
             border-color: #c3e6cb;
         }
+        .comedogenic-0 {
+            color: green;
+        }
+        .comedogenic-1 {
+            color: #80c080; /* light green */
+        }
+        .comedogenic-2 {
+            color: yellow;
+        }
+        .comedogenic-3 {
+            color: #ffcc00; /* orange */
+        }
+        .comedogenic-4 {
+            color: #ff8000; /* dark orange */
+        }
+        .comedogenic-5 {
+            color: red;
+        }
     </style>
 
 </head>
@@ -402,7 +420,7 @@
               <div class="ingredient-description" style="display:none;"></div>
           </td>
           <td><input type="number" name="parts" min="1" placeholder="Parts" oninput="updateTable()"></td>
-          <td></td><td></td><td></td>
+          <td class="comedogenic"></td><td></td><td></td>
       `;
             tableBody.appendChild(newRow);
             updateTable();
@@ -585,6 +603,8 @@
                     row.cells[3].innerText = comedogenic;
                     row.cells[4].innerText = viscosity;
                 }
+
+                setComedogenicColoring(row);
             });
 
             const overallComedogenicRating = totalParts ? (totalComedogenic / totalParts).toFixed(2) : 0;
@@ -598,8 +618,12 @@
             calculateOverallPercentages(totalParts);
         }
 
-
-
+        function setComedogenicColoring(row) {
+            // Set the comedogenic coloring for the comedogenic cell
+            const comedogenic = row.cells[3].innerText;
+            row.classList.remove('comedogenic-0', 'comedogenic-1', 'comedogenic-2', 'comedogenic-3', 'comedogenic-4', 'comedogenic-5');
+            row.cells[3].classList.add(`comedogenic-${comedogenic}`);
+        }
 
 
         function calculateOverallPercentages(totalParts) {
