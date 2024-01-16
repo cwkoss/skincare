@@ -18,22 +18,23 @@
 //   response.send("Hello from Firebase!");
 // });
 const functions = require("firebase-functions");
-const { OpenAIApi } = require("openai");
+const OpenAI = require("openai");
 
-const apiKey = functions.config().openai.key;
-const openai = OpenAIApi(apiKey);
+const openai = new OpenAI({
+    apiKey: functions.config().openai.key,
+});
 
 exports.chatWithOpenAI = functions.https.onRequest(async (request, response) => {
     try {
         const inputText = request.body.text || "what is the meaning of life?"; // Fallback text
 
-        const gptResponse = await openai.createCompletion({
+        const gptResponse = await openai.Completions.create({
             model: "text-davinci-003",
             prompt: inputText,
             max_tokens: 150,
         });
 
-        response.send({ reply: gptResponse.data.choices[0].text });
+        response.send({ reply: gptResponse.choices[0].text });
     } catch (error) {
         console.error("Error calling OpenAI: ", error);
         response.status(500).send("Error processing your request");

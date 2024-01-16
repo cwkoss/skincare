@@ -17,6 +17,9 @@ module.exports = {
     "indent": "off",
     "object-curly-spacing": "off",
     "comma-dangle": "off",
+    "max-len": "off",
+    "new-cap": "off",
+
   },
   overrides: [
     {
@@ -29,3 +32,4 @@ module.exports = {
   ],
   globals: {},
 };
+
