@@ -149,11 +149,13 @@
     </p>
     <p id="productConsistency">Product Consistency: </p>
     <p id="emulsionWarning" class="warning-text"></p>
-
+    
+    <button onclick="analyzeRecipe()">Analyze my formulation</button>
     <form id="skincareForm">
-
         <button type="submit">Submit Recipe for Formulation</button>
     </form>
+
+    <p id="chatbotResponse"></p>
 
     <script type="module">
         // Import Firebase app and Firestore services
@@ -715,7 +717,7 @@
             }
         }
 
-        function askChatGPT(question) {
+        function analyzeRecipe() {
             // Endpoint URL from Firebase Function
             const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/chatWithOpenAI';
             const formulation = getFormulationData().map(item => item.ingredient + " (parts: " + item.parts + ")").join(', ');
@@ -738,6 +740,8 @@
                 .then(data => {
                     console.log('Success:', data);
                     console.log(data.reply.choices[0].message.content);
+                    // push the response to the chatbotResponse paragraph
+                    document.getElementById('chatbotResponse').innerText = data.reply.choices[0].message.content;
                     // Process the response here. For example, update the UI with the response.
                     // ...
                 })
