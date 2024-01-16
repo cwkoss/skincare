@@ -217,19 +217,6 @@
         // Export the handleSubmit function to make it accessible from other scripts
         window.handleSubmit = handleSubmit;
 
-        function getFormulationData() {
-            // Collect and return formulation data from the table
-            const rows = document.getElementById('skincareTable').querySelectorAll('tbody tr');
-            return Array.from(rows).map(row => {
-                const ingredientSelect = row.querySelector('select[name="ingredient"]');
-                const partsInput = row.querySelector('input[name="parts"]');
-
-                const ingredient = ingredientSelect.value;
-                const parts = partsInput.value;
-
-                return { ingredient, parts: parts ? parseInt(parts) : 0 };
-            }).filter(item => item.ingredient && item.parts > 0); // Filter out rows with empty ingredient or parts
-        }
 
     </script>
     <script>
@@ -418,6 +405,21 @@
                 description: "Niacinamide is a water-soluble vitamin that works with the natural substances in your skin to help visibly improve the appearance of enlarged pores, uneven skin tone, fine lines and wrinkles, dullness, and a weakened surface."
             },
         };
+
+        function getFormulationData() {
+            // Collect and return formulation data from the table
+            const rows = document.getElementById('skincareTable').querySelectorAll('tbody tr');
+            return Array.from(rows).map(row => {
+                const ingredientSelect = row.querySelector('select[name="ingredient"]');
+                const partsInput = row.querySelector('input[name="parts"]');
+
+                const ingredient = ingredientSelect.value;
+                const parts = partsInput.value;
+
+                return { ingredient, parts: parts ? parseInt(parts) : 0 };
+            }).filter(item => item.ingredient && item.parts > 0); // Filter out rows with empty ingredient or parts
+        }
+
 
         let selectedIngredients = [];
 
@@ -716,12 +718,14 @@
         function askChatGPT(question) {
             // Endpoint URL from Firebase Function
             const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/chatWithOpenAI';
+            const formulation = getFormulationData().map(item => item.ingredient + " (parts: " + item.parts + ")").join(', ');
 
             // Prepare the request payload
             const data = {
-                text: question
+                text: "Hello, I am trying to formulate a " + document.getElementById('productType').value + " with the following ingredients: " + formulation + ". What is the best way to formulate this?",
             };
-
+        
+            console.log(data.text);
             // Make a POST request to the Firebase Function
             fetch(endpoint, {
                 method: 'POST',
@@ -741,8 +745,6 @@
                     console.error('Error:', error);
                 });
         }
-
-        // Example usage: askChatGPT('Hello, how are you?');
 
 
     </script>

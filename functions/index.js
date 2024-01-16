@@ -44,7 +44,7 @@ exports.chatWithOpenAI = functions.https.onRequest((request, response) => {
                 messages: [
                     {
                       role: "system",
-                      content: "You are a helpful assistant designed to output JSON.",
+                      content: "You are a helpful assistant designed to help people create skincare forumulations that are safe and effective.  You will receive a potential skincare recipe and should give advice on whether the recipe looks like it will be successful, what the benefits and risks of the recipe are, and suggest potential modifications. Keep your response concise and to the point - it should only include a numbered list of modifications and suggestions.",
                     },
                     { role: "user", content: inputText },
                   ],
