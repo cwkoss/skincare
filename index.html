@@ -733,6 +733,7 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
+                    console.log(data.reply.choices[0].message.content);
                     // Process the response here. For example, update the UI with the response.
                     // ...
                 })
