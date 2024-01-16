@@ -19,6 +19,7 @@ module.exports = {
     "max-len": "off",
     "new-cap": "off",
     "quotes": "off",
+    "spaced-comment": "off",
   },
   overrides: [
     {

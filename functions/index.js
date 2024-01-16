@@ -20,7 +20,7 @@
 
 
 const corsOptions = {
-    origin: 'https://cwkoss.github.io/'
+    origin: true // 'https://cwkoss.github.io/'
 };
 const cors = require("cors")(corsOptions);
 const functions = require("firebase-functions");
@@ -36,16 +36,24 @@ exports.chatWithOpenAI = functions.https.onRequest((request, response) => {
         try {
             const inputText = request.body.text || "what is the meaning of life?";
 
-            const gptResponse = await openai.Completions.create({
-                model: "text-davinci-003",
-                prompt: inputText,
-                max_tokens: 150,
+            const gptResponse = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                temperature: 0.9,
+                n: 1,
+                stream: false,
+                messages: [
+                    {
+                      role: "system",
+                      content: "You are a helpful assistant designed to output JSON.",
+                    },
+                    { role: "user", content: inputText },
+                  ],
             });
-
+            console.log("GPT Response: ", gptResponse);
             response.send({ reply: gptResponse.choices[0].text });
         } catch (error) {
             console.error("Error calling OpenAI: ", error);
-            response.status(500).send("Error processing your request");
+            response.status(500).send("Error processing your request: " + error);
         }
     });
 });
