@@ -713,6 +713,37 @@
             }
         }
 
+        function askChatGPT(question) {
+            // Endpoint URL from Firebase Function
+            const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/chatWithOpenAI';
+
+            // Prepare the request payload
+            const data = {
+                text: question
+            };
+
+            // Make a POST request to the Firebase Function
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    // Process the response here. For example, update the UI with the response.
+                    // ...
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Example usage: askChatGPT('Hello, how are you?');
+
+
     </script>
 </body>
 
