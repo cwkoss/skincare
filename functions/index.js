@@ -17,11 +17,17 @@
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
-const functions = require("firebase-functions");
-const cors = require('cors')({origin: true});
-const { OpenAIApi } = require("openai");
 
-const openai = new OpenAIApi({
+
+const corsOptions = {
+    origin: 'https://cwkoss.github.io/'
+};
+const cors = require("cors")(corsOptions);
+const functions = require("firebase-functions");
+
+const { OpenAI } = require("openai");
+
+const openai = new OpenAI({
     apiKey: functions.config().openai.key,
 });
 
