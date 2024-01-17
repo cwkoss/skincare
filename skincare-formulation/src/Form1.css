@@ -1,0 +1,24 @@
+
+.form1-button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #657c62;
+    cursor: pointer;
+  }
+  
+  .form1-button.selected {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .form1-submit {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .form1-submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
