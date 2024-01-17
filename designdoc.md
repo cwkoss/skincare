@@ -35,7 +35,7 @@ Page has a bunch of concerns/goals in toggle-able buttons and/or a control that 
 "Skin cancer prevention"
 "Cruelty-free products"
 "Hair loss"
-"Rosacea
+"Rosacea"
 
 Page 3 - What is your current skincare regimen?
 
