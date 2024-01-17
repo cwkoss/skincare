@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/skincare-formulation/static/css/main.21496dd7.chunk.css",
-    "main.js": "/skincare-formulation/static/js/main.a97b7f59.chunk.js",
-    "main.js.map": "/skincare-formulation/static/js/main.a97b7f59.chunk.js.map",
-    "runtime~main.js": "/skincare-formulation/static/js/runtime~main.68a870a7.js",
-    "runtime~main.js.map": "/skincare-formulation/static/js/runtime~main.68a870a7.js.map",
-    "static/js/2.8dea5cbf.chunk.js": "/skincare-formulation/static/js/2.8dea5cbf.chunk.js",
-    "static/js/2.8dea5cbf.chunk.js.map": "/skincare-formulation/static/js/2.8dea5cbf.chunk.js.map",
-    "static/js/3.31c88699.chunk.js": "/skincare-formulation/static/js/3.31c88699.chunk.js",
-    "static/js/3.31c88699.chunk.js.map": "/skincare-formulation/static/js/3.31c88699.chunk.js.map",
-    "index.html": "/skincare-formulation/index.html",
-    "precache-manifest.077045436f00832e3e2c1de8269e5a85.js": "/skincare-formulation/precache-manifest.077045436f00832e3e2c1de8269e5a85.js",
-    "service-worker.js": "/skincare-formulation/service-worker.js",
-    "static/css/main.21496dd7.chunk.css.map": "/skincare-formulation/static/css/main.21496dd7.chunk.css.map"
+    "main.css": "/skincare/static/css/main.21496dd7.chunk.css",
+    "main.js": "/skincare/static/js/main.a97b7f59.chunk.js",
+    "main.js.map": "/skincare/static/js/main.a97b7f59.chunk.js.map",
+    "runtime~main.js": "/skincare/static/js/runtime~main.8275a493.js",
+    "runtime~main.js.map": "/skincare/static/js/runtime~main.8275a493.js.map",
+    "static/js/2.8dea5cbf.chunk.js": "/skincare/static/js/2.8dea5cbf.chunk.js",
+    "static/js/2.8dea5cbf.chunk.js.map": "/skincare/static/js/2.8dea5cbf.chunk.js.map",
+    "static/js/3.31c88699.chunk.js": "/skincare/static/js/3.31c88699.chunk.js",
+    "static/js/3.31c88699.chunk.js.map": "/skincare/static/js/3.31c88699.chunk.js.map",
+    "index.html": "/skincare/index.html",
+    "precache-manifest.f7281b1efd48c8c86183bb323551bd57.js": "/skincare/precache-manifest.f7281b1efd48c8c86183bb323551bd57.js",
+    "service-worker.js": "/skincare/service-worker.js",
+    "static/css/main.21496dd7.chunk.css.map": "/skincare/static/css/main.21496dd7.chunk.css.map"
   }
 }
