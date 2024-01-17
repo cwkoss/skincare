@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Form1 from './Form1';
 import Form2 from './Form2';
 import Summary from './Summary'; // Make sure to create this component
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           <div style={{ textAlign: 'center', marginTop: '20%' }}>
-            <h1>Welcome to the Skincare Formulation App</h1>
+            <h1>Welcome to the Skincare Formulation App!</h1>
             <Link to="/form1"><button>Start Form</button></Link>
           </div>
         } />
