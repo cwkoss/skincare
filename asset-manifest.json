@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/skincare/static/css/main.21496dd7.chunk.css",
-    "main.js": "/skincare/static/js/main.58a987f0.chunk.js",
-    "main.js.map": "/skincare/static/js/main.58a987f0.chunk.js.map",
+    "main.js": "/skincare/static/js/main.a97b7f59.chunk.js",
+    "main.js.map": "/skincare/static/js/main.a97b7f59.chunk.js.map",
     "runtime~main.js": "/skincare/static/js/runtime~main.8275a493.js",
     "runtime~main.js.map": "/skincare/static/js/runtime~main.8275a493.js.map",
     "static/js/2.8dea5cbf.chunk.js": "/skincare/static/js/2.8dea5cbf.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.31c88699.chunk.js": "/skincare/static/js/3.31c88699.chunk.js",
     "static/js/3.31c88699.chunk.js.map": "/skincare/static/js/3.31c88699.chunk.js.map",
     "index.html": "/skincare/index.html",
-    "precache-manifest.df562037dcbf136e77e3c6c357704ba0.js": "/skincare/precache-manifest.df562037dcbf136e77e3c6c357704ba0.js",
+    "precache-manifest.f7281b1efd48c8c86183bb323551bd57.js": "/skincare/precache-manifest.f7281b1efd48c8c86183bb323551bd57.js",
     "service-worker.js": "/skincare/service-worker.js",
     "static/css/main.21496dd7.chunk.css.map": "/skincare/static/css/main.21496dd7.chunk.css.map"
   }
