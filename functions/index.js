@@ -49,7 +49,8 @@ exports.chatWithOpenAI = functions.https.onRequest((request, response) => {
                     { role: "user", content: inputText },
                   ],
             });
-            console.log("GPT Response: ", gptResponse);
+            console.log("Request: " + request.body.text);
+            console.log("GPT Response: ", gptResponse.choices[0].message.content);
             response.send({ reply: gptResponse });
         } catch (error) {
             console.error("Error calling OpenAI: ", error);
