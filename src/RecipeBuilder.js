@@ -51,20 +51,26 @@ function RecipeBuilder() {
     const [temporaryInputs, setTemporaryInputs] = useState({});
 
     const handleAdditiveChange = (ingredientName, value) => {
-      // Update the temporary input state
-      setTemporaryInputs({ ...temporaryInputs, [ingredientName]: value });
-
+        // Update the temporary input state
+        setTemporaryInputs({ ...temporaryInputs, [ingredientName]: value });
+        // If the value is a valid complete number, update the proportions immediately
+        const newValue = parseFloat(value);
+        if (!isNaN(newValue) && value.match(/^\d+(\.\d+)?$/)) {
+            const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
+            setIngredientProportions(newProportions);
+            redistributeProportions(ingredientName, newValue);
+        }
     };
-    
+
     const handleAdditiveBlur = (ingredientName) => {
-      const value = temporaryInputs[ingredientName];
-      const newValue = value ? parseFloat(value) : 0;
-      if (!isNaN(newValue)) {
-        // Update the real proportions and redistribute
-        const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
-        setIngredientProportions(newProportions);
-        redistributeProportions(ingredientName, newValue);
-      }
+        const value = temporaryInputs[ingredientName];
+        const newValue = value ? parseFloat(value) : 0;
+        if (!isNaN(newValue)) {
+            // Update the real proportions and redistribute
+            const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
+            setIngredientProportions(newProportions);
+            redistributeProportions(ingredientName, newValue);
+        }
     };
 
 
