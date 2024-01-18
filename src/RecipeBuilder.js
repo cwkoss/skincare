@@ -70,6 +70,31 @@ function RecipeBuilder() {
         return ingredient ? ingredient.phase === "additive" : false;
     };
 
+    const roundProportions = () => {
+        const newProportions = { ...ingredientProportions };
+        let roundedTotal = 0;
+      
+        // Round each proportion
+        Object.keys(newProportions).forEach(key => {
+          newProportions[key] = Math.round(newProportions[key]);
+          roundedTotal += newProportions[key];
+        });
+      
+        // Adjust if the rounded total is not 100%
+        if (roundedTotal !== 100) {
+          const adjustment = roundedTotal > 100 ? -1 : 1;
+          for (const key in newProportions) {
+            if (newProportions[key] > 0) {
+              newProportions[key] += adjustment;
+              if (roundedTotal + adjustment === 100) break;
+            }
+          }
+        }
+      
+        setIngredientProportions(newProportions);
+      };
+      
+
     const ingredientRowStyle = {
         display: 'flex',
         justifyContent: 'space-between',
@@ -88,6 +113,13 @@ function RecipeBuilder() {
         width: '95%', // Ensure the table takes full width
         borderCollapse: 'collapse',
     };
+
+    const headerStyle = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '10px',
+      };
 
 
     useEffect(() => {
@@ -137,7 +169,10 @@ function RecipeBuilder() {
                 </div>
             )}
 
-            <h3>Selected Ingredients:</h3>
+            <div style={headerStyle}>
+                <h3>Selected Ingredients:</h3>
+                <button onClick={roundProportions}>Round to Whole %</button>
+            </div>
             <table style={tableStyle}>
                 <tbody>
                     {selectedIngredients.map(name => (
