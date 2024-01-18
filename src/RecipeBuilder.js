@@ -55,8 +55,10 @@ function RecipeBuilder() {
         setTemporaryInputs({ ...temporaryInputs, [ingredientName]: value });
         // If the value is a valid complete number, update the proportions immediately
         const newValue = parseFloat(value);
+        const maxPercent = ingredients[ingredientName].max_percent || 100; // Default to 100 if not specified
         if (!isNaN(newValue) && value.match(/^\d+(\.\d+)?$/)) {
-            const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
+            const boundedValue = newValue > maxPercent ? maxPercent : newValue;
+            const newProportions = { ...ingredientProportions, [ingredientName]: boundedValue };
             setIngredientProportions(newProportions);
             redistributeProportions(ingredientName, newValue);
         }
@@ -65,13 +67,15 @@ function RecipeBuilder() {
     const handleAdditiveBlur = (ingredientName) => {
         const value = temporaryInputs[ingredientName];
         const newValue = value ? parseFloat(value) : 0;
-        if (!isNaN(newValue)) {
-            // Update the real proportions and redistribute
-            const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
-            setIngredientProportions(newProportions);
-            redistributeProportions(ingredientName, newValue);
+        const maxPercent = ingredients[ingredientName].max_percent || 100; // Default to 100 if not specified
+        const boundedValue = newValue > maxPercent ? maxPercent : newValue;
+        if (!isNaN(boundedValue)) {
+          // Update the real proportions and redistribute
+          const newProportions = { ...ingredientProportions, [ingredientName]: boundedValue };
+          setIngredientProportions(newProportions);
+          redistributeProportions(ingredientName, boundedValue);
         }
-    };
+      };
 
 
 
@@ -206,13 +210,18 @@ function RecipeBuilder() {
                             <tr>
                                 <td colSpan="2">
                                     {isAdditive(name) ? (
+                                        <div style={{ position: 'relative' }}>
                                         <input
-                                            type="text"
-                                            value={temporaryInputs[name] ?? ingredientProportions[name]}
-                                            onChange={(e) => handleAdditiveChange(name, e.target.value)}
-                                            onBlur={(e) => handleAdditiveBlur(name, e.target.value)}
-                                            style={{ width: '100%' }}
+                                          type="text"
+                                          value={temporaryInputs[name] ?? ingredientProportions[name]}
+                                          onChange={(e) => handleAdditiveChange(name, e.target.value)}
+                                          onBlur={(e) => handleAdditiveBlur(name, e.target.value)}
+                                          style={{ width: '100%', borderColor: ingredientProportions[name] === ingredients[name].max_percent ? 'red' : 'initial' }}
                                         />
+                                        {ingredientProportions[name] === ingredients[name].max_percent && (
+                                          <span style={{ position: 'absolute', right: 0, top: 0, color: 'red' }}>Max</span>
+                                        )}
+                                      </div>
                                     ) : (
                                         <input
                                             type="range"
