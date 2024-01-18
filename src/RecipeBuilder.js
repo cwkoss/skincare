@@ -21,37 +21,45 @@ function RecipeBuilder() {
     };
 
     const redistributeProportions = (adjustedIngredient, adjustedValue) => {
-        let remainingProportion = 100 - Object.keys(ingredientProportions)
-          .filter(name => isAdditive(name))
-          .reduce((acc, name) => acc + parseFloat(ingredientProportions[name]), 0);
-      
+        const totalAdditiveProportion = Object.keys(ingredientProportions)
+            .filter(name => isAdditive(name) && name !== adjustedIngredient)
+            .reduce((acc, name) => acc + ingredientProportions[name], 0);
+
+        const remainingProportion = 100 - totalAdditiveProportion - adjustedValue;
         const nonAdditiveIngredients = selectedIngredients.filter(name => !isAdditive(name) && name !== adjustedIngredient);
-        remainingProportion -= adjustedValue;
-      
-        // Distribute remaining proportion among non-additive ingredients
+        const totalNonAdditiveProportion = nonAdditiveIngredients.reduce((acc, name) => acc + ingredientProportions[name], 0);
+
+        const scaleFactor = totalNonAdditiveProportion === 0 ? 0 : remainingProportion / totalNonAdditiveProportion;
+
         const newProportions = { ...ingredientProportions };
         nonAdditiveIngredients.forEach(name => {
-          newProportions[name] = parseFloat((remainingProportion / nonAdditiveIngredients.length).toFixed(2));
+            newProportions[name] = ingredientProportions[name] * scaleFactor;
         });
         if (adjustedIngredient !== "null") {
-          newProportions[adjustedIngredient] = parseFloat(adjustedValue.toFixed(2));
+            newProportions[adjustedIngredient] = adjustedValue;
         }
-      
-        setIngredientProportions(newProportions);
-      };
-      
 
-      const handleSliderChange = (ingredientName, value) => {
+        setIngredientProportions(newProportions);
+    };
+
+
+
+    const handleSliderChange = (ingredientName, value) => {
         const newValue = parseFloat(value);
         redistributeProportions(ingredientName, newValue);
-      };
+    };
 
-      const handleAdditiveChange = (ingredientName, value) => {
+    const handleAdditiveChange = (ingredientName, value) => {
         const newValue = parseFloat(value);
+        // Update the proportion for the current additive ingredient
         const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
+
         setIngredientProportions(newProportions);
-        redistributeProportions(null, 0); // Call with null to not adjust the recently changed additive
-      };
+        // Call redistributeProportions with the current ingredient and its new value
+        redistributeProportions(ingredientName, newValue);
+    };
+
+
 
     const isIngredientSelected = (ingredientName) => {
         return selectedIngredients.includes(ingredientName);
@@ -60,7 +68,7 @@ function RecipeBuilder() {
     const isAdditive = (ingredientName) => {
         const ingredient = ingredients[ingredientName];
         return ingredient ? ingredient.phase === "additive" : false;
-      };
+    };
 
     const ingredientRowStyle = {
         display: 'flex',
@@ -84,27 +92,27 @@ function RecipeBuilder() {
 
     useEffect(() => {
         const newProportions = {};
-      
+
         // Set initial proportions for selected ingredients
         selectedIngredients.forEach(ingredient => {
-          if (isAdditive(ingredient)) {
-            newProportions[ingredient] = 1; // Set initial value for additive
-          } else {
-            newProportions[ingredient] = 10; // Set initial value for non-additive
-          }
+            if (isAdditive(ingredient)) {
+                newProportions[ingredient] = 1; // Set initial value for additive
+            } else {
+                newProportions[ingredient] = 10; // Set initial value for non-additive
+            }
         });
-      
+
         setIngredientProportions(prevProportions => {
-          // Retain the proportions of ingredients that are still selected
-          return Object.keys(prevProportions)
-            .filter(key => selectedIngredients.includes(key))
-            .reduce((acc, key) => {
-              acc[key] = prevProportions[key];
-              return acc;
-            }, newProportions);
+            // Retain the proportions of ingredients that are still selected
+            return Object.keys(prevProportions)
+                .filter(key => selectedIngredients.includes(key))
+                .reduce((acc, key) => {
+                    acc[key] = prevProportions[key];
+                    return acc;
+                }, newProportions);
         });
-      }, [selectedIngredients]);
-      
+    }, [selectedIngredients]);
+
 
     return (
         <div>
