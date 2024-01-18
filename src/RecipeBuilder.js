@@ -145,6 +145,10 @@ function RecipeBuilder() {
         }, 10); // Delay of 100 milliseconds
     };
 
+    const calculateTotalPercentage = () => {
+        return Object.values(ingredientProportions).reduce((acc, value) => acc + value, 0);
+      };
+
 
     const ingredientRowStyle = {
         display: 'flex',
@@ -196,7 +200,11 @@ function RecipeBuilder() {
         });
     }, [selectedIngredients]);
 
-
+    const totalPercentage = calculateTotalPercentage();
+    const totalPercentageStyle = {
+        color: totalPercentage === 100 ? 'black' : 'red',
+    };
+    
     return (
         <div>
             <h2>Recipe Builder</h2>
@@ -222,6 +230,7 @@ function RecipeBuilder() {
 
             <div style={headerStyle}>
                 <h3>Selected Ingredients:</h3>
+                <span style={totalPercentageStyle}>{totalPercentage.toFixed(2)}%</span>
             </div>
             <table style={tableStyle}>
                 <tbody>
