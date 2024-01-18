@@ -210,6 +210,13 @@ function RecipeBuilder() {
         marginBottom: '10px',
     };
 
+    const headerWithButtonStyle = {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '10px',
+    };
+
 
     useEffect(() => {
         const newProportions = {};
@@ -244,7 +251,11 @@ function RecipeBuilder() {
             {currentStep === 'selectIngredients' && (
                 <div>
                     <div>
-                        <h3>Available Ingredients:</h3>
+                        <div style={headerWithButtonStyle}>
+                            <h3>Available Ingredients:</h3>
+                            <button onClick={goToProportionAdjustment}>Adjust Proportions</button>
+                            <span></span>
+                        </div>
                         {Object.entries(ingredients).map(([name, details]) => (
                             <div
                                 key={name}
@@ -256,14 +267,14 @@ function RecipeBuilder() {
                             </div>
                         ))}
                     </div>
-                    <button onClick={goToProportionAdjustment}>Adjust Proportions</button>
                 </div>
             )}
             {currentStep === 'adjustProportions' && (
                 <div>
-                    <button onClick={goBackToSelectIngredients}>Back to Ingredients</button>
+
                     <div style={headerStyle}>
-                        <h3>Selected Ingredients:</h3>
+                        <button onClick={goBackToSelectIngredients}>Back to Ingredients</button>
+                        <h3>Ingredient Proportions:</h3>
                         <span style={totalPercentageStyle}>{totalPercentage.toFixed(2)}%</span>
                     </div>
                     <table style={tableStyle}>
