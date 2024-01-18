@@ -141,13 +141,25 @@ function RecipeBuilder() {
 
   // Redistribute the negative sum among positive non-additive ingredients
   if (negativeSum < 0) {
-    const positiveKeys = nonAdditiveKeys.filter(key => newProportions[key] > 0);
+    const positiveKeys = nonAdditiveKeys.filter(key => newProportions[key] >= 0.01);
     const positiveAdjustment = Math.abs(negativeSum) / positiveKeys.length;
 
     positiveKeys.forEach(key => {
       newProportions[key] += positiveAdjustment;
     });
   }
+
+      // Final check if total exceeds 100%
+      const finalTotal = Object.values(newProportions).reduce((acc, val) => acc + val, 0);
+      if (finalTotal > 100) {
+          const excess = finalTotal - 100;
+          const positiveKeys = nonAdditiveKeys.filter(key => newProportions[key] > 0);
+          const excessAdjustment = excess / positiveKeys.length;
+  
+          positiveKeys.forEach(key => {
+              newProportions[key] -= excessAdjustment;
+          });
+      }
 
         setIngredientProportions(newProportions);
     };
