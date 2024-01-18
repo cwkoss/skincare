@@ -204,6 +204,7 @@ function RecipeBuilder() {
                                             value={ingredientProportions[name]}
                                             onChange={(e) => handleSliderChange(name, e.target.value)}
                                             onMouseUp={handleMouseUp}
+                                            onTouchEnd={handleMouseUp}
                                             style={{ width: '100%' }}
                                         />
                                     )}
