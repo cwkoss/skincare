@@ -16,7 +16,7 @@ function RecipeBuilder() {
             setIngredientProportions(newProportions);
         } else {
             setSelectedIngredients([...selectedIngredients, ingredientName]);
-            setIngredientProportions({ ...ingredientProportions, [ingredientName]: ingredients[ingredientName].phase === "additive" ? 1 : 10 });
+            setIngredientProportions({ ...ingredientProportions, [ingredientName]: ingredients[ingredientName].phase === "additive" ? ingredients[ingredientName].default_percent : 10 });
         }
     };
 
