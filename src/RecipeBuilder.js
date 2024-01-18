@@ -22,42 +22,42 @@ function RecipeBuilder() {
 
     const redistributeProportions = (adjustedIngredient, adjustedValue) => {
         const totalAdditiveProportion = Object.keys(ingredientProportions)
-          .filter(name => isAdditive(name))
-          .reduce((acc, name) => acc + ingredientProportions[name], 0);
-      
+            .filter(name => isAdditive(name))
+            .reduce((acc, name) => acc + ingredientProportions[name], 0);
+
         let remainingProportion = 100 - totalAdditiveProportion;
         const nonAdditiveIngredients = selectedIngredients.filter(name => !isAdditive(name));
-      
+
         // First, set the adjusted ingredient's value and subtract it from the remaining proportion
         const newProportions = { ...ingredientProportions, [adjustedIngredient]: adjustedValue };
         remainingProportion -= adjustedValue;
-      
+
         // Then, distribute the remaining proportion among the other non-additive ingredients
         const totalCurrentNonAdditive = nonAdditiveIngredients
-          .filter(name => name !== adjustedIngredient)
-          .reduce((acc, name) => acc + newProportions[name], 0);
-      
+            .filter(name => name !== adjustedIngredient)
+            .reduce((acc, name) => acc + newProportions[name], 0);
+
         // Prevent negative values during redistribution
         if (totalCurrentNonAdditive > 0) {
-          const scaleFactor = remainingProportion / totalCurrentNonAdditive;
-          nonAdditiveIngredients.forEach(name => {
-            if (name !== adjustedIngredient) {
-              let adjustedProportion = newProportions[name] * scaleFactor;
-              newProportions[name] = adjustedProportion < 0 ? 0 : adjustedProportion;
-            }
-          });
+            const scaleFactor = remainingProportion / totalCurrentNonAdditive;
+            nonAdditiveIngredients.forEach(name => {
+                if (name !== adjustedIngredient) {
+                    let adjustedProportion = newProportions[name] * scaleFactor;
+                    newProportions[name] = adjustedProportion < 0 ? 0 : adjustedProportion;
+                }
+            });
         } else {
-          // If there are no other non-additives, set their proportions to 0
-          nonAdditiveIngredients.forEach(name => {
-            if (name !== adjustedIngredient) {
-              newProportions[name] = 0;
-            }
-          });
+            // If there are no other non-additives, set their proportions to 0
+            nonAdditiveIngredients.forEach(name => {
+                if (name !== adjustedIngredient) {
+                    newProportions[name] = 0;
+                }
+            });
         }
-      
+
         setIngredientProportions(newProportions);
-      };
-      
+    };
+
 
 
 
@@ -113,28 +113,41 @@ function RecipeBuilder() {
         const newProportions = { ...ingredientProportions };
         let roundedTotal = 0;
 
-        // Round each proportion
+        // Round each non-additive proportion
         Object.keys(newProportions).forEach(key => {
-            // only round if the ingredient is not phase additive
             if (!isAdditive(key)) {
                 newProportions[key] = Math.round(newProportions[key]);
             }
             roundedTotal += newProportions[key];
         });
 
-        // Adjust if the rounded total is not 100%, only adjusting non-additives
-        if (roundedTotal !== 100) {
-            const adjustment = roundedTotal > 100 ? -1 : 1;
-            const nonAdditiveKeys = Object.keys(newProportions).filter(key => !isAdditive(key));
-            for (let i = 0; i < nonAdditiveKeys.length; i++) {
-                const key = nonAdditiveKeys[i];
-                if (newProportions[key] > 0) {
-                    newProportions[key] += adjustment;
-                    roundedTotal += adjustment;
-                    if (roundedTotal === 100) break;
-                }
-            }
-        }
+        // Calculate discrepancy and adjust non-additive proportions
+        const discrepancy = 100 - roundedTotal;
+        const nonAdditiveKeys = Object.keys(newProportions).filter(key => !isAdditive(key));
+        const adjustmentPerIngredient = discrepancy / nonAdditiveKeys.length;
+
+        nonAdditiveKeys.forEach(key => {
+            newProportions[key] += adjustmentPerIngredient;
+        });
+
+        // Handle negative proportions
+  let negativeSum = 0;
+  nonAdditiveKeys.forEach(key => {
+    if (newProportions[key] < 0) {
+      negativeSum += newProportions[key];
+      newProportions[key] = 0;
+    }
+  });
+
+  // Redistribute the negative sum among positive non-additive ingredients
+  if (negativeSum < 0) {
+    const positiveKeys = nonAdditiveKeys.filter(key => newProportions[key] > 0);
+    const positiveAdjustment = Math.abs(negativeSum) / positiveKeys.length;
+
+    positiveKeys.forEach(key => {
+      newProportions[key] += positiveAdjustment;
+    });
+  }
 
         setIngredientProportions(newProportions);
     };
@@ -147,7 +160,7 @@ function RecipeBuilder() {
 
     const calculateTotalPercentage = () => {
         return Object.values(ingredientProportions).reduce((acc, value) => acc + value, 0);
-      };
+    };
 
 
     const ingredientRowStyle = {
@@ -202,9 +215,9 @@ function RecipeBuilder() {
 
     const totalPercentage = calculateTotalPercentage();
     const totalPercentageStyle = {
-        color: totalPercentage === 100 ? 'black' : 'red',
+        color: Math.abs(totalPercentage - 100) < 0.01 ? 'black' : 'red',
     };
-    
+
     return (
         <div>
             <h2>Recipe Builder</h2>
