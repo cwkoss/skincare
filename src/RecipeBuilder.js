@@ -16,7 +16,7 @@ function RecipeBuilder() {
             setIngredientProportions(newProportions);
         } else {
             setSelectedIngredients([...selectedIngredients, ingredientName]);
-            setIngredientProportions({ ...ingredientProportions, [ingredientName]: ingredients[ingredientName].phase === "additive" ? 1: 10 });
+            setIngredientProportions({ ...ingredientProportions, [ingredientName]: ingredients[ingredientName].phase === "additive" ? 1 : 10 });
         }
     };
 
@@ -48,15 +48,23 @@ function RecipeBuilder() {
         const newValue = parseFloat(value);
         redistributeProportions(ingredientName, newValue);
     };
+    const [temporaryInputs, setTemporaryInputs] = useState({});
 
     const handleAdditiveChange = (ingredientName, value) => {
-        const newValue = parseFloat(value);
-        // Update the proportion for the current additive ingredient
-        const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
+      // Update the temporary input state
+      setTemporaryInputs({ ...temporaryInputs, [ingredientName]: value });
 
+    };
+    
+    const handleAdditiveBlur = (ingredientName) => {
+      const value = temporaryInputs[ingredientName];
+      const newValue = value ? parseFloat(value) : 0;
+      if (!isNaN(newValue)) {
+        // Update the real proportions and redistribute
+        const newProportions = { ...ingredientProportions, [ingredientName]: newValue };
         setIngredientProportions(newProportions);
-        // Call redistributeProportions with the current ingredient and its new value
         redistributeProportions(ingredientName, newValue);
+      }
     };
 
 
@@ -76,7 +84,10 @@ function RecipeBuilder() {
 
         // Round each proportion
         Object.keys(newProportions).forEach(key => {
-            newProportions[key] = Math.round(newProportions[key]);
+            // only round if the ingredient is not phase additive
+            if (!isAdditive(key)) {
+                newProportions[key] = Math.round(newProportions[key]);
+            }
             roundedTotal += newProportions[key];
         });
 
@@ -96,9 +107,9 @@ function RecipeBuilder() {
 
     const handleMouseUp = () => {
         setTimeout(() => {
-          roundProportions();
+            roundProportions();
         }, 10); // Delay of 100 milliseconds
-      };
+    };
 
 
     const ingredientRowStyle = {
@@ -191,8 +202,9 @@ function RecipeBuilder() {
                                     {isAdditive(name) ? (
                                         <input
                                             type="text"
-                                            value={ingredientProportions[name]}
+                                            value={temporaryInputs[name] ?? ingredientProportions[name]}
                                             onChange={(e) => handleAdditiveChange(name, e.target.value)}
+                                            onBlur={(e) => handleAdditiveBlur(name, e.target.value)}
                                             style={{ width: '100%' }}
                                         />
                                     ) : (
