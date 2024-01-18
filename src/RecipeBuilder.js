@@ -22,25 +22,42 @@ function RecipeBuilder() {
 
     const redistributeProportions = (adjustedIngredient, adjustedValue) => {
         const totalAdditiveProportion = Object.keys(ingredientProportions)
-            .filter(name => isAdditive(name) && name !== adjustedIngredient)
-            .reduce((acc, name) => acc + ingredientProportions[name], 0);
-
-        const remainingProportion = 100 - totalAdditiveProportion - adjustedValue;
-        const nonAdditiveIngredients = selectedIngredients.filter(name => !isAdditive(name) && name !== adjustedIngredient);
-        const totalNonAdditiveProportion = nonAdditiveIngredients.reduce((acc, name) => acc + ingredientProportions[name], 0);
-
-        const scaleFactor = totalNonAdditiveProportion === 0 ? 0 : remainingProportion / totalNonAdditiveProportion;
-
-        const newProportions = { ...ingredientProportions };
-        nonAdditiveIngredients.forEach(name => {
-            newProportions[name] = ingredientProportions[name] * scaleFactor;
-        });
-        if (adjustedIngredient !== "null") {
-            newProportions[adjustedIngredient] = adjustedValue;
+          .filter(name => isAdditive(name))
+          .reduce((acc, name) => acc + ingredientProportions[name], 0);
+      
+        let remainingProportion = 100 - totalAdditiveProportion;
+        const nonAdditiveIngredients = selectedIngredients.filter(name => !isAdditive(name));
+      
+        // First, set the adjusted ingredient's value and subtract it from the remaining proportion
+        const newProportions = { ...ingredientProportions, [adjustedIngredient]: adjustedValue };
+        remainingProportion -= adjustedValue;
+      
+        // Then, distribute the remaining proportion among the other non-additive ingredients
+        const totalCurrentNonAdditive = nonAdditiveIngredients
+          .filter(name => name !== adjustedIngredient)
+          .reduce((acc, name) => acc + newProportions[name], 0);
+      
+        // Prevent negative values during redistribution
+        if (totalCurrentNonAdditive > 0) {
+          const scaleFactor = remainingProportion / totalCurrentNonAdditive;
+          nonAdditiveIngredients.forEach(name => {
+            if (name !== adjustedIngredient) {
+              let adjustedProportion = newProportions[name] * scaleFactor;
+              newProportions[name] = adjustedProportion < 0 ? 0 : adjustedProportion;
+            }
+          });
+        } else {
+          // If there are no other non-additives, set their proportions to 0
+          nonAdditiveIngredients.forEach(name => {
+            if (name !== adjustedIngredient) {
+              newProportions[name] = 0;
+            }
+          });
         }
-
+      
         setIngredientProportions(newProportions);
-    };
+      };
+      
 
 
 
@@ -70,16 +87,16 @@ function RecipeBuilder() {
         const maxPercent = ingredients[ingredientName].max_percent || 100; // Default to 100 if not specified
         const boundedValue = newValue > maxPercent ? maxPercent : newValue;
         if (!isNaN(boundedValue)) {
-          // Update the real proportions and redistribute
-          const newProportions = { ...ingredientProportions, [ingredientName]: boundedValue };
-          setIngredientProportions(newProportions);
-          redistributeProportions(ingredientName, boundedValue);
-          if(newValue > maxPercent) {
-            // Update the temporary input state
-            setTemporaryInputs({ ...temporaryInputs, [ingredientName]: maxPercent });
-          }
+            // Update the real proportions and redistribute
+            const newProportions = { ...ingredientProportions, [ingredientName]: boundedValue };
+            setIngredientProportions(newProportions);
+            redistributeProportions(ingredientName, boundedValue);
+            if (newValue > maxPercent) {
+                // Update the temporary input state
+                setTemporaryInputs({ ...temporaryInputs, [ingredientName]: maxPercent });
+            }
         }
-      };
+    };
 
 
 
@@ -105,13 +122,16 @@ function RecipeBuilder() {
             roundedTotal += newProportions[key];
         });
 
-        // Adjust if the rounded total is not 100%
+        // Adjust if the rounded total is not 100%, only adjusting non-additives
         if (roundedTotal !== 100) {
             const adjustment = roundedTotal > 100 ? -1 : 1;
-            for (const key in newProportions) {
+            const nonAdditiveKeys = Object.keys(newProportions).filter(key => !isAdditive(key));
+            for (let i = 0; i < nonAdditiveKeys.length; i++) {
+                const key = nonAdditiveKeys[i];
                 if (newProportions[key] > 0) {
                     newProportions[key] += adjustment;
-                    if (roundedTotal + adjustment === 100) break;
+                    roundedTotal += adjustment;
+                    if (roundedTotal === 100) break;
                 }
             }
         }
@@ -215,17 +235,17 @@ function RecipeBuilder() {
                                 <td colSpan="2">
                                     {isAdditive(name) ? (
                                         <div style={{ position: 'relative' }}>
-                                        <input
-                                          type="text"
-                                          value={temporaryInputs[name] ?? ingredientProportions[name]}
-                                          onChange={(e) => handleAdditiveChange(name, e.target.value)}
-                                          onBlur={(e) => handleAdditiveBlur(name, e.target.value)}
-                                          style={{ width: '100%', borderColor: ingredientProportions[name] === ingredients[name].max_percent ? 'red' : 'initial' }}
-                                        />
-                                        {ingredientProportions[name] === ingredients[name].max_percent && (
-                                          <span style={{ position: 'absolute', right: 0, top: 0, color: 'red' }}>Max</span>
-                                        )}
-                                      </div>
+                                            <input
+                                                type="text"
+                                                value={temporaryInputs[name] ?? ingredientProportions[name]}
+                                                onChange={(e) => handleAdditiveChange(name, e.target.value)}
+                                                onBlur={(e) => handleAdditiveBlur(name, e.target.value)}
+                                                style={{ width: '100%', borderColor: ingredientProportions[name] === ingredients[name].max_percent ? 'red' : 'initial' }}
+                                            />
+                                            {ingredientProportions[name] === ingredients[name].max_percent && (
+                                                <span style={{ position: 'absolute', right: 0, top: 0, color: 'red' }}>Max</span>
+                                            )}
+                                        </div>
                                     ) : (
                                         <input
                                             type="range"
