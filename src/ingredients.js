@@ -144,6 +144,7 @@ const ingredients = {
         comedogenic: 0,
         viscosity: 5,
         hlb: 0,
+        max_percent: 25,
         description: "Adds SPF"
     },
     "Hyaluronic Acid": {
@@ -151,6 +152,7 @@ const ingredients = {
         comedogenic: 0,
         viscosity: 8,
         hlb: 20,
+        max_percent: 2,
         description: "A powerful humectant, helps to hydrate and plump the skin by retaining moisture, making it a vital ingredient for maintaining a youthful, radiant complexion."
     },
     "Retinol": {
@@ -158,6 +160,7 @@ const ingredients = {
         comedogenic: 0,
         viscosity: 0,
         hlb: 0,
+        max_percent: 1,
         description: "A derivative of Vitamin A, is renowned for its anti-aging properties, as it boosts collagen production, accelerates skin renewal, and helps to reduce the appearance of fine lines, wrinkles, and uneven skin tone."
     },
     "Vitamin C": {
@@ -165,6 +168,7 @@ const ingredients = {
         comedogenic: 0,
         viscosity: 0,
         hlb: 20,
+        max_percent: 20,
         description: "A potent antioxidant that helps to reduce skin inflammation, irregular pigmentation, and promotes healthy collagen production."
     },
     "Vitamin E": {
@@ -172,6 +176,7 @@ const ingredients = {
         comedogenic: 0,
         viscosity: 0,
         hlb: 0,
+        max_percent: 1,
         description: "A powerful antioxidant that may be effective at reducing UV damage in skin. And vitamin E applied topically may help nourish and protect your skin from damage caused by free radicals."
     },
     "Niacinamide (Vitamin B3)": {
@@ -179,6 +184,7 @@ const ingredients = {
         comedogenic: 0,
         viscosity: 0,
         hlb: 20,
+        max_percent: 5,
         description: "Niacinamide is a water-soluble vitamin that works with the natural substances in your skin to help visibly improve the appearance of enlarged pores, uneven skin tone, fine lines and wrinkles, dullness, and a weakened surface."
     },
 };
