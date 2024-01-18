@@ -73,27 +73,33 @@ function RecipeBuilder() {
     const roundProportions = () => {
         const newProportions = { ...ingredientProportions };
         let roundedTotal = 0;
-      
+
         // Round each proportion
         Object.keys(newProportions).forEach(key => {
-          newProportions[key] = Math.round(newProportions[key]);
-          roundedTotal += newProportions[key];
+            newProportions[key] = Math.round(newProportions[key]);
+            roundedTotal += newProportions[key];
         });
-      
+
         // Adjust if the rounded total is not 100%
         if (roundedTotal !== 100) {
-          const adjustment = roundedTotal > 100 ? -1 : 1;
-          for (const key in newProportions) {
-            if (newProportions[key] > 0) {
-              newProportions[key] += adjustment;
-              if (roundedTotal + adjustment === 100) break;
+            const adjustment = roundedTotal > 100 ? -1 : 1;
+            for (const key in newProportions) {
+                if (newProportions[key] > 0) {
+                    newProportions[key] += adjustment;
+                    if (roundedTotal + adjustment === 100) break;
+                }
             }
-          }
         }
-      
+
         setIngredientProportions(newProportions);
+    };
+
+    const handleMouseUp = () => {
+        setTimeout(() => {
+          roundProportions();
+        }, 10); // Delay of 100 milliseconds
       };
-      
+
 
     const ingredientRowStyle = {
         display: 'flex',
@@ -119,7 +125,7 @@ function RecipeBuilder() {
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: '10px',
-      };
+    };
 
 
     useEffect(() => {
@@ -171,7 +177,6 @@ function RecipeBuilder() {
 
             <div style={headerStyle}>
                 <h3>Selected Ingredients:</h3>
-                <button onClick={roundProportions}>Round to Whole %</button>
             </div>
             <table style={tableStyle}>
                 <tbody>
@@ -198,6 +203,7 @@ function RecipeBuilder() {
                                             step="0.01"
                                             value={ingredientProportions[name]}
                                             onChange={(e) => handleSliderChange(name, e.target.value)}
+                                            onMouseUp={handleMouseUp}
                                             style={{ width: '100%' }}
                                         />
                                     )}
@@ -205,6 +211,7 @@ function RecipeBuilder() {
                             </tr>
                         </React.Fragment>
                     ))}
+
                 </tbody>
             </table>
         </div>
