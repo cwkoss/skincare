@@ -274,7 +274,7 @@ function RecipeBuilder() {
 
                     <div style={headerStyle}>
                         <button onClick={goBackToSelectIngredients}>Back to Ingredients</button>
-                        <h3>Ingredient Proportions:</h3>
+                        <h3>Proportions:</h3>
                         <span style={totalPercentageStyle}>{totalPercentage.toFixed(2)}%</span>
                     </div>
                     <table style={tableStyle}>
