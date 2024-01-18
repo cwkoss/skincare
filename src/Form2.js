@@ -49,7 +49,7 @@ function Form2({ setForm2Data }) {
                         </p>
                     </div>
                 ))}
-                <button type="submit" disabled={!selectedProduct}>Next</button>
+                <button class="submit" type="submit" disabled={!selectedProduct}>Next</button>
             </form>
         </div>
     );
