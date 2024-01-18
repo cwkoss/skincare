@@ -74,6 +74,10 @@ function RecipeBuilder() {
           const newProportions = { ...ingredientProportions, [ingredientName]: boundedValue };
           setIngredientProportions(newProportions);
           redistributeProportions(ingredientName, boundedValue);
+          if(newValue > maxPercent) {
+            // Update the temporary input state
+            setTemporaryInputs({ ...temporaryInputs, [ingredientName]: maxPercent });
+          }
         }
       };
 
