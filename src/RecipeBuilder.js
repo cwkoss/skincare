@@ -4,7 +4,6 @@ import ingredients from './ingredients';
 function RecipeBuilder() {
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});
-    const [showIngredientsList, setShowIngredientsList] = useState(false);
     const [currentStep, setCurrentStep] = useState('selectIngredients');
 
     // Function to move to the proportion adjustment step
