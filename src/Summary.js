@@ -22,13 +22,17 @@ function Summary({ form1Data, form2Data }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      return response.json();
+    })
     .then(data => {
         setLoading(false);
         console.log('Success:', data);
         const recipeResponse = data.reply.choices[0].message.content;
-        console.log("recipeResponse", recipeResponse);
-        navigate('/recipe-builder', { state: { recipeResponse } });
+        const parsedResponse = JSON.parse(recipeResponse);
+        console.log(parsedResponse);
+        navigate('/recipe-builder', { state: { recipe: parsedResponse } });
     })
     .catch((error) => {
         setLoading(false);

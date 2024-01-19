@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import ingredients from './ingredients';
+import { useLocation } from 'react-router-dom';
 
 function RecipeBuilder() {
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});
     const [currentStep, setCurrentStep] = useState('selectIngredients');
+    
+    const location = useLocation();
+    const initialRecipe = location.state?.recipe;
+    console.log(location.state);
+
+    console.log("initialRecipe", initialRecipe);
+
+    
 
     // Function to move to the proportion adjustment step
     const goToProportionAdjustment = () => {

@@ -76,8 +76,7 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                 messages: [
                     {
                       role: "system",
-                      content: ```
-                      You are an award winning cosmetic chemist. 
+                      content: `You are an award winning cosmetic chemist. 
 
                       Return a json-formatted skincare recipe in the following format:
                       
@@ -237,7 +236,7 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                           },
                       };
                       
-                    ```,
+                    `,
                     },
                     { role: "user", content: inputText },
                   ],
