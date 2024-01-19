@@ -7,10 +7,34 @@ function Summary({ form1Data, form2Data }) {
 
   const handleAIClick = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate('/recipe-builder'); // Replace with your actual route
-    }, 5000); // 5 seconds timeout for testing purposes
+    const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
+    const goals = form1Data.join(', ');
+    const productType = form2Data;
+
+    const data = {
+        text: `Hello, I am trying to formulate a ${productType} for ${goals}. Please suggest a recipe?`,
+    };
+
+    console.log('Sending OpenAI request: ', data.text);
+
+    fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        setLoading(false);
+        console.log('Success:', data);
+        const recipeResponse = data.reply.choices[0].message.content;
+        console.log("recipeResponse", recipeResponse);
+        navigate('/recipe-builder', { state: { recipeResponse } });
+    })
+    .catch((error) => {
+        setLoading(false);
+        console.error('Error:', error);
+        // Handle error state here, e.g., display an error message
+    });
   };
 
   const handleManualClick = () => {
