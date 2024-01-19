@@ -6,6 +6,7 @@ function RecipeBuilder() {
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});
     const [currentStep, setCurrentStep] = useState('selectIngredients');
+    const [recipeCommentary, setRecipeCommentary] = useState('');
     
     const location = useLocation();
     const initialRecipe = location.state?.recipe;
@@ -13,7 +14,7 @@ function RecipeBuilder() {
 
     console.log("initialRecipe", initialRecipe);
 
-    
+
 
     // Function to move to the proportion adjustment step
     const goToProportionAdjustment = () => {
@@ -253,6 +254,27 @@ function RecipeBuilder() {
     const totalPercentageStyle = {
         color: Math.abs(totalPercentage - 100) < 0.01 ? 'black' : 'red',
     };
+    
+    useEffect(() => {
+        if (initialRecipe) {
+            const ingredientsFromResponse = {};
+            const selectedIngredientsFromResponse = [];
+    
+            Object.keys(initialRecipe).forEach(key => {
+                if (key !== "commentary" && ingredients[key]) {
+                    ingredientsFromResponse[key] = initialRecipe[key];
+                    selectedIngredientsFromResponse.push(key);
+                } else if (key === "commentary") {
+                    setRecipeCommentary(initialRecipe[key]);
+                }
+            });
+    
+            setIngredientProportions(ingredientsFromResponse);
+            setSelectedIngredients(selectedIngredientsFromResponse);
+
+            goToProportionAdjustment();
+        }
+    }, [initialRecipe]);
 
     return (
         <div>
@@ -328,6 +350,12 @@ function RecipeBuilder() {
 
                         </tbody>
                     </table>
+                    {recipeCommentary && (
+                        <div>
+                            <h3>Commentary:</h3>
+                            <p>{recipeCommentary}</p>
+                        </div>
+                    )}
                 </div>
             )}
 
