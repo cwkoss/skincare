@@ -88,10 +88,15 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                             ingredientKey1: percentage
                             ingredientKey2:percentage
                             ingredientKey3:percentage.... (repeat for as many ingredient keys as ingredients in your formulation)
-                           commentary: "Reasoning why you selected ingredients, how it will help accomplish goals, additional useful information and provide a specific estimate of shelf life.  Do not suggest adding synthetic preservatives."
+                            commentary: "your commentary here"
+                            shelfLifeEstimate: "A specific estimate of shelf life.  Its ok to be conservative, but don't be too conservative.  If you think a product will last 6 months, don't say '6 months to a year' - just say 6 months."
                       }
 
-                      Make sure the percentage of all ingredients adds up to 100.  Do not include any commentatry or text outside of the json object.  Ingredients with a default and maximum percentage should typically use the default unless there is a good reason to exceed them.  If a product will have fragrance, the sum of essential oils should usually not exceed 1% of the total formulation.
+                      Commentary should include your reasoning why you selected ingredients, how it will help accomplish goals, additional useful information.
+
+                      IngredientKeysN should exclude the parenthetical default and maximum percentages if present, ex. ""Rosemary Oil (default: 1, max: 2)" should be "Rosemary Oil".
+
+                      Make sure the percentage of all ingredients adds up to exactly 100.  Do not include any commentatry or text outside of the json object.  Ingredients with a default and maximum percentage should typically use the default unless there is a good reason to exceed them.  If a product will have fragrance, the sum of essential oils should usually not exceed 1% of the total formulation.
                       
                       You may only use ingredients from this list: ${inputIngredients}. Parentheticals represent the default and maximum percentages for each ingredient if present."
                     `,

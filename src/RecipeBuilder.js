@@ -7,6 +7,7 @@ function RecipeBuilder() {
     const [ingredientProportions, setIngredientProportions] = useState({});
     const [currentStep, setCurrentStep] = useState('selectIngredients');
     const [recipeCommentary, setRecipeCommentary] = useState('');
+    const [shelfLifeEstimate, setShelfLifeEstimate] = useState('');
     
     const location = useLocation();
     const initialRecipe = location.state?.recipe;
@@ -256,19 +257,24 @@ function RecipeBuilder() {
     };
     
     useEffect(() => {
+        console.log("useeffectinitialRecipe", initialRecipe);
         if (initialRecipe) {
             const ingredientsFromResponse = {};
             const selectedIngredientsFromResponse = [];
     
             Object.keys(initialRecipe).forEach(key => {
-                if (key !== "commentary" && ingredients[key]) {
+                if (key === "commentary") {
+                    setRecipeCommentary(initialRecipe["commentary"]);
+                }
+                else if (key === "shelfLifeEstimate") {
+                    setShelfLifeEstimate(initialRecipe["shelfLifeEstimate"]);
+                }
+                else if ( ingredients[key]) {
                     ingredientsFromResponse[key] = initialRecipe[key];
                     selectedIngredientsFromResponse.push(key);
-                } else if (key === "commentary") {
-                    setRecipeCommentary(initialRecipe[key]);
-                }
+                } 
             });
-    
+            console.log("ingredientsfromresponse", ingredientsFromResponse);
             setIngredientProportions(ingredientsFromResponse);
             setSelectedIngredients(selectedIngredientsFromResponse);
 
@@ -354,6 +360,7 @@ function RecipeBuilder() {
                         <div>
                             <h3>Commentary:</h3>
                             <p>{recipeCommentary}</p>
+                            <p>Estimated Shelf Life: {shelfLifeEstimate}</p>
                         </div>
                     )}
                 </div>
