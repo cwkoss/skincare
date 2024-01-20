@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 
-function Summary({ goalsData, form2Data }) {
+function Summary({ goalsData, productData }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -10,7 +10,7 @@ function Summary({ goalsData, form2Data }) {
     setLoading(true);
     const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
     const goals = goalsData.join(', ');
-    const productType = form2Data;
+    const productType = productData;
 
     const data = {
         text: `Hello, I am trying to formulate a ${productType} for ${goals}. Please suggest a recipe?`,
@@ -58,7 +58,7 @@ function Summary({ goalsData, form2Data }) {
       </ul>
 
       <h3>Selected Skincare Product:</h3>
-      <p>{form2Data}</p>
+      <p>{productData}</p>
 
       {loading ? (
         <p>Loading...</p> // Placeholder for loading spinner

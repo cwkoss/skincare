@@ -28,7 +28,7 @@ function Goals({ setGoalsData }) {
     e.preventDefault();
     setGoalsData(selectedOptions); 
     // Navigate to the next form
-    navigate('/form2'); // Replace '/form2' with the path of your next form
+    navigate('/product'); 
   };
 
   return (

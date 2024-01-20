@@ -1,10 +1,10 @@
-/* Form2.css */
-.form2-container {
+/* Product.css */
+.product-container {
     text-align: center;
     margin-top: 20px;
   }
   
-  .form2-container button {
+  .product-container button {
     padding: 10px 20px;
     border: 1px solid #ddd;
     background-color: #e7e7e7;
@@ -15,22 +15,22 @@
     font-size: 1.1em; /* Increase font size */
   }
   
-  .form2-container button.selected {
+  .product-container button.selected {
     background-color: #4caf50;
     color: white;
   }
   
-  .form2-container button.submit {
+  .product-container button.submit {
     background-color: #007bff;
     color: white;
   }
   
-  .form2-container button.submit:disabled {
+  .product-container button.submit:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
   
-  .form2-container p {
+  .product-container p {
     margin: 10px;
     padding: 5px;
     background-color: #f0f0f0;
@@ -41,7 +41,7 @@
     font-size: 0.85em; /* Decrease font size */
   }
   
-  .form2-container .selected + p {
+  .product-container .selected + p {
     color: #000;
   }
   

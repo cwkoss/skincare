@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Form2.css';
+import './Product.css';
 
-function Form2({ setForm2Data }) {
+function Product({ setProductData }) {
     const navigate = useNavigate();
     const [selectedProduct, setSelectedProduct] = useState('');
 
@@ -29,13 +29,13 @@ function Form2({ setForm2Data }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setForm2Data(selectedProduct); 
+        setProductData(selectedProduct); 
         // Navigate to the next form or a summary page
         navigate('/summary'); // Replace '/summary' with the path of your next step
     };
 
     return (
-        <div className="form2-container">
+        <div className="product-container">
             <h2>Select a Skincare Product</h2>
             <form onSubmit={handleSubmit}>
                 {Object.entries(skincareProducts).map(([key, description]) => (
@@ -55,4 +55,4 @@ function Form2({ setForm2Data }) {
     );
 }
 
-export default Form2;
+export default Product;
