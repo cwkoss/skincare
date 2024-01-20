@@ -49,7 +49,7 @@ function Product({ setProductData }) {
                         </p>
                     </div>
                 ))}
-                <button class="submit" type="submit" disabled={!selectedProduct}>Next</button>
+                <button className="submit" type="submit" disabled={!selectedProduct}>Next</button>
             </form>
         </div>
     );
