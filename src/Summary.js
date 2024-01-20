@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ingredients from './ingredients';
 
 function Summary({ form1Data, form2Data }) {
   const navigate = useNavigate();
@@ -13,9 +14,10 @@ function Summary({ form1Data, form2Data }) {
 
     const data = {
         text: `Hello, I am trying to formulate a ${productType} for ${goals}. Please suggest a recipe?`,
+        ingredients: Object.keys(ingredients).join(', '),
     };
 
-    console.log('Sending OpenAI request: ', data.text);
+    console.log('Sending OpenAI request: ', data.text, data.ingredients);
 
     fetch(endpoint, {
         method: 'POST',
