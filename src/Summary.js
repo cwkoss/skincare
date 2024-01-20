@@ -14,7 +14,7 @@ function Summary({ goalsData, productData }) {
 
     const data = {
         text: `Hello, I am trying to formulate a ${productType} for ${goals}. Please suggest a recipe?`,
-        ingredients: formatIngredientsList(ingredients) + " - Parentheticals represent the default and maximum percentages for each ingredient if present."
+        ingredients: formatIngredientsList(ingredients)
     };
 
     console.log('Sending OpenAI request: ', data.text, data.ingredients);

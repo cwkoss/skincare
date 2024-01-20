@@ -85,15 +85,15 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                       Return a json-formatted skincare recipe in the following format:
                       
                       { 
-                            ingredientKey1: parts
-                            ingredientKey2:parts
-                            ingredientKey3:parts.... (repeat for as many ingredient keys as ingredients in your formulation)
-                           commentary: "Reasoning why you selected ingredients, how it will help accomplish goals, additional useful information"
+                            ingredientKey1: percentage
+                            ingredientKey2:percentage
+                            ingredientKey3:percentage.... (repeat for as many ingredient keys as ingredients in your formulation)
+                           commentary: "Reasoning why you selected ingredients, how it will help accomplish goals, additional useful information and provide a specific estimate of shelf life.  Do not suggest adding synthetic preservatives."
                       }
 
-                      Do not include any commentatry or text outside of the json object.
+                      Make sure the percentage of all ingredients adds up to 100.  Do not include any commentatry or text outside of the json object.  Ingredients with a default and maximum percentage should typically use the default unless there is a good reason to exceed them.  If a product will have fragrance, the sum of essential oils should usually not exceed 1% of the total formulation.
                       
-                      You may only use ingredients from this list: ${inputIngredients}
+                      You may only use ingredients from this list: ${inputIngredients}. Parentheticals represent the default and maximum percentages for each ingredient if present."
                     `,
                     },
                     { role: "user", content: inputText },
