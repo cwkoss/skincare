@@ -84,6 +84,26 @@ const ingredients = {
         hlb: 20,
         description: "A humectant that draws moisture into the skin, suitable for all skin types."
     },
+    "Honey": {
+        phase: "aqueous",
+        hlb: 20,
+        description: "Natural humectant, known for its soothing and antibacterial properties."
+    },
+    "Apple Cider Vinegar": {
+        phase: "aqueous",
+        hlb: 20,
+        description: "Balances skin's pH, has natural astringent properties, and can help clear skin."
+    },
+    "Cucumber Juice": {
+        phase: "aqueous",
+        hlb: 20,
+        description: "Rich in vitamins and minerals, hydrating, and soothing for the skin."
+    },
+    "Oat Milk": {
+        phase: "aqueous",
+        hlb: 20,
+        description: "Contains lipids and water-absorbing substances, providing moisturizing and soothing benefits."
+    },
     "Beeswax": {
         phase: "emulsifier",
         hlb: 12,
