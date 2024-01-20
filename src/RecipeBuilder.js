@@ -183,6 +183,10 @@ function RecipeBuilder() {
         setIngredientProportions(newProportions);
     };
 
+    const getRecipeAdvice = () => {
+        console.log("boop");
+    };
+
     const handleMouseUp = () => {
         setTimeout(() => {
             roundProportions();
@@ -358,7 +362,10 @@ function RecipeBuilder() {
                     </table>
                     {recipeCommentary && (
                         <div>
-                            <h3>Commentary:</h3>
+                            <div style={headerWithButtonStyle}>
+                                <h3>Commentary:</h3>
+                                <button onClick={getRecipeAdvice}>Get Recipe Advice (Coming Soon!)</button>
+                            </div>
                             <p>{recipeCommentary}</p>
                             <p>Estimated Shelf Life: {shelfLifeEstimate}</p>
                         </div>
