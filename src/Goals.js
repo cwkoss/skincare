@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Form1.css';
+import './Goals.css';
 
-function Form1({ setForm1Data }) {
+function Goals({ setGoalsData }) {
   const navigate = useNavigate();
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -26,7 +26,7 @@ function Form1({ setForm1Data }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setForm1Data(selectedOptions); 
+    setGoalsData(selectedOptions); 
     // Navigate to the next form
     navigate('/form2'); // Replace '/form2' with the path of your next form
   };
@@ -40,7 +40,7 @@ function Form1({ setForm1Data }) {
                 key={index}
                 type="button"
                 onClick={() => toggleOption(goal)}
-                className={`form1-button ${isOptionSelected(goal) ? 'selected' : ''}`}
+                className={`goals-button ${isOptionSelected(goal) ? 'selected' : ''}`}
             >
                 {goal}
             </button>
@@ -51,4 +51,4 @@ function Form1({ setForm1Data }) {
   );
 }
 
-export default Form1;
+export default Goals;

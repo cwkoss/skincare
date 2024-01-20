@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 
-function Summary({ form1Data, form2Data }) {
+function Summary({ goalsData, form2Data }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const handleAIClick = () => {
     setLoading(true);
     const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
-    const goals = form1Data.join(', ');
+    const goals = goalsData.join(', ');
     const productType = form2Data;
 
     const data = {
@@ -52,7 +52,7 @@ function Summary({ form1Data, form2Data }) {
       <h2>Your Selections</h2>
       <h3>Skincare Goals/Concerns:</h3>
       <ul>
-        {form1Data.map((item, index) => (
+        {goalsData.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
       </ul>
