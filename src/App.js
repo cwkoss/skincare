@@ -8,7 +8,17 @@ import './App.css';
 
 function App() {
   const [goalsData, setGoalsData] = useState([]);
+  const [includeFragrance, setIncludeFragrance] = useState('no');
+  const [selectedMoods, setSelectedMoods] = useState([]);
   const [productData, setProductData] = useState('');
+
+  const setIncludeFragranceApp = (fragrance) => {
+    setIncludeFragrance(fragrance);
+  };
+
+  const setSelectedMoodsApp = (moods) => {
+    setSelectedMoods(moods);
+  };
 
   return (
     <Router>
@@ -19,9 +29,16 @@ function App() {
             <Link to="/goals"><button>Start Form</button></Link>
           </div>
         } />
-        <Route path="/goals" element={<Goals setGoalsData={setGoalsData} />} />
+        <Route path="/goals" element={
+          <Goals setGoalsData={setGoalsData} 
+                 setIncludeFragranceApp={setIncludeFragranceApp}
+                 setSelectedMoodsApp={setSelectedMoodsApp}/>
+        } />
         <Route path="/product" element={<Product setProductData={setProductData} />} />
-        <Route path="/summary" element={<Summary goalsData={goalsData} productData={productData} />} />
+        <Route path="/summary" element={<Summary goalsData={goalsData} 
+                                                 productData={productData} 
+                                                 includeFragrance={includeFragrance} 
+                                                 selectedMoods={selectedMoods} />} />
         <Route path="/recipe-builder" element={<RecipeBuilder />} />
       </Routes>
     </Router>

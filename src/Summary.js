@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 
-function Summary({ goalsData, productData }) {
+function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -90,6 +90,18 @@ function Summary({ goalsData, productData }) {
 
       <h3>Selected Skincare Product:</h3>
       <p>{productData}</p>
+
+      <h3>Include Fragrance: {includeFragrance}</h3>
+      {includeFragrance === 'yes' && (
+        <>
+          <h3>Selected Moods:</h3>
+          <ul>
+            {selectedMoods.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </>
+      )}
 
       {loading ? (
         <p>Loading...</p> // Placeholder for loading spinner
