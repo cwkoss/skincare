@@ -1,23 +1,33 @@
 const ingredients = {
-    "Coconut oil": {
+    "Sunflower oil": {
         phase: "oil",
-        hlb: 8,
-        description: "Moisturizes skin and hair, rich in fatty acids and antioxidants."
+        hlb: 0,
+        description: "Lightweight, non-comedogenic oil, suitable for sensitive skin."
+    },
+    "Jojoba Oil": {
+        phase: "oil",
+        hlb: 0,
+        description: "Mimics natural skin oils, balances skin's sebum production."
     },
     "Argan oil": {
         phase: "oil",
         hlb: 11,
         description: "Enhances skin elasticity and hair shine, rich in vitamin E."
     },
-    "Sunflower oil": {
+    "Shea Butter": {
         phase: "oil",
-        hlb: 0,
-        description: "Lightweight, non-comedogenic oil, suitable for sensitive skin."
+        hlb: 8,
+        description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins."
     },
     "Cocoa butter": {
         phase: "oil",
         hlb: 8,
         description: "Nourishes skin, reduces scars, and offers a chocolaty aroma."
+    },
+    "Coconut oil": {
+        phase: "oil",
+        hlb: 8,
+        description: "Moisturizes skin and hair, rich in fatty acids and antioxidants."
     },
     "Pecan oil": {
         phase: "oil",
@@ -44,16 +54,6 @@ const ingredients = {
         hlb: 0,
         description: "Moisturizes skin, rich in vitamins, and promotes hair health."
     },
-    "Shea Butter": {
-        phase: "oil",
-        hlb: 8,
-        description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins."
-    },
-    "Jojoba Oil": {
-        phase: "oil",
-        hlb: 0,
-        description: "Mimics natural skin oils, balances skin's sebum production."
-    },
     "Almond Oil": {
         phase: "oil",
         hlb: 0,
@@ -72,7 +72,7 @@ const ingredients = {
     "Sea Salt": {
         phase: "aqueous",
         hlb: 20,
-        description: "Research is mixed. Some sources suggest that salt water might have beneficial effects on the skin, including potential antimicrobial properties and the ability to dry out pimples. Salt water could also irritate sensitive skin or exacerbate conditions like eczema or dermatitis."
+        description: "Sea salt, rich in minerals like magnesium, calcium, and potassium, is known for its exfoliating and detoxifying properties. It helps to cleanse pores deeply, balance oil production, and thwart bacteria that can instigate breakouts and acne. Its gentle abrasive texture aids in removing dead skin cells, promoting rejuvenated and smoother skin. Ideal for use in scrubs and bath soaks, sea salt can also help to relieve sore muscles and reduce inflammation when used in bath products."
     },
     "Aloe Vera Gel": {
         phase: "aqueous",
