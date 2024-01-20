@@ -67,9 +67,9 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
 
         {/* Fragrance selection */}
         <div>
-          <h3>Include fragrance?</h3>
-          <button type="button" onClick={() => setIncludeFragrance('yes')} className={`fragrance-button ${includeFragrance === 'yes' ? 'selected' : ''}`}>Yes</button>
-          <button type="button" onClick={() => setIncludeFragrance('no')} className={`fragrance-button ${includeFragrance === 'no' ? 'selected' : ''}`}>No</button>
+          <h3>Include natural fragrances?</h3>
+          <button type="button" onClick={() => setIncludeFragrance('yes')} className={`goals-button ${includeFragrance === 'yes' ? 'selected' : ''}`}>Yes</button>
+          <button type="button" onClick={() => setIncludeFragrance('no')} className={`goals-button ${includeFragrance === 'no' ? 'selected' : ''}`}>No</button>
         </div>
 
         {/* Mood selection, shown if fragrance is 'yes' */}

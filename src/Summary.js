@@ -12,8 +12,10 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
     const goals = goalsData.join(', ');
     const productType = productData;
 
+    const fragranceSentence = includeFragrance === 'yes' ? `Essential oils should be added that will make me feel  ${selectedMoods.join(' and ')} .` : 'It should not have fragrance added.';
+
     const data = {
-        text: `Hello, I am trying to formulate a ${productType} for ${goals}. Please suggest a recipe?`,
+        text: `Hello, I am trying to formulate a ${productType} for ${goals}. ${fragranceSentence} Please suggest a recipe?`,
         ingredients: formatIngredientsList(ingredients)
     };
 
