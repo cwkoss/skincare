@@ -14,7 +14,7 @@ function Summary({ goalsData, productData }) {
 
     const data = {
         text: `Hello, I am trying to formulate a ${productType} for ${goals}. Please suggest a recipe?`,
-        ingredients: Object.keys(ingredients).join(', '),
+        ingredients: formatIngredientsList(ingredients) + " - Parentheticals represent the default and maximum percentages for each ingredient if present."
     };
 
     console.log('Sending OpenAI request: ', data.text, data.ingredients);
@@ -46,6 +46,37 @@ function Summary({ goalsData, productData }) {
   const handleManualClick = () => {
     navigate('/recipe-builder'); // Replace with your actual route
   };
+
+  function formatIngredientsList(ingredients) {
+    let formattedString = "";
+
+    Object.keys(ingredients).forEach((key, index, array) => {
+        formattedString += key;
+
+        if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
+            formattedString += " (";
+
+            if (ingredients[key].hasOwnProperty('default_percent')) {
+                formattedString += `default: ${ingredients[key].default_percent}`;
+                if (ingredients[key].hasOwnProperty('max_percent')) {
+                    formattedString += ", ";
+                }
+            }
+
+            if (ingredients[key].hasOwnProperty('max_percent')) {
+                formattedString += `max: ${ingredients[key].max_percent}`;
+            }
+
+            formattedString += ")";
+        }
+
+        if (index < array.length - 1) {
+            formattedString += ", ";
+        }
+    });
+
+    return formattedString;
+}
 
   return (
     <div>
