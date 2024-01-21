@@ -120,9 +120,9 @@ const ingredients = {
         description: "This is a waxy fatty alcohol derived from natural sources like coconut and palm oils. It's used not only as an emulsifier but also as a thickener and stabilizer in creams and lotions."
     },
     "Castille Soap": {
-        "phase": "surfactant",
-        "hlb": "10",
-        "description": "Castille Soap is a gentle and versatile cleanser used in a variety of personal care products. It's known for its mild, skin-friendly properties, making it suitable for sensitive skin."
+        phase: "surfactant",
+        hlb: "10",
+        description: "Castille Soap is a gentle and versatile cleanser used in a variety of personal care products. It's known for its mild, skin-friendly properties, making it suitable for sensitive skin."
     },
     "Zinc Oxide": {
         phase: "additive",
