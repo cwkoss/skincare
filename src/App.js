@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import './App.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Goals from './Goals';
 import Product from './Product';
 import Summary from './Summary'; 
 import RecipeBuilder from './RecipeBuilder';
-import './App.css';
+
 
 function App() {
   const [goalsData, setGoalsData] = useState([]);
@@ -22,13 +23,11 @@ function App() {
 
     // Style for background image
     const homePageStyle = {
-      backgroundImage: 'url("/bgimg.png")',
-      backgroundSize: 'cover',
+      backgroundImage: 'url("bgimg.png")',
+      backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center top',
-      textAlign: 'center',
-      paddingTop: '10%',
-      height: '1200px',
+      height: '100vh',
       color: '#61685f',
     };
 
@@ -36,9 +35,12 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={
-          <div style={homePageStyle}>
-            <h1>Welcome to the Skincare Formulation App!</h1>
+          <div style={homePageStyle} className="homePageContainer">
+            <h1>Welcome to the Skincare <br /> Formulation App!</h1>
             <Link to="/goals"><button className="startbutton">Design Custom <br /> Skincare Recipe</button></Link>
+            <p>Plant based, Cruelty Free, Custom made to order</p>
+            <p>Our AI-powered assistant will help you create </p>
+            <p>the perfect formulation for your skin's needs</p>
           </div>
         } />
         <Route path="/goals" element={
