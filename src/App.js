@@ -20,13 +20,25 @@ function App() {
     setSelectedMoods(moods);
   };
 
+    // Style for background image
+    const homePageStyle = {
+      backgroundImage: 'url("/bgimg.png")',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center top',
+      textAlign: 'center',
+      paddingTop: '10%',
+      height: '1200px',
+      color: '#61685f',
+    };
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={
-          <div style={{ textAlign: 'center', marginTop: '20%' }}>
+          <div style={homePageStyle}>
             <h1>Welcome to the Skincare Formulation App!</h1>
-            <Link to="/goals"><button>Start Form</button></Link>
+            <Link to="/goals"><button className="startbutton">Design Custom <br /> Skincare Recipe</button></Link>
           </div>
         } />
         <Route path="/goals" element={
