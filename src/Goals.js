@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Goals.css';
+import './App.css';
 
 function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Product.css';
+import './App.css';
 
 function Product({ setProductData }) {
     const navigate = useNavigate();
