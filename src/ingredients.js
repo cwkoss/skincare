@@ -1,5 +1,5 @@
 const ingredients = {
-    "Sunflower oil": {
+    "Sunflower Oil": {
         phase: "oil",
         hlb: 0,
         description: "Lightweight, non-comedogenic oil, suitable for sensitive skin."
@@ -9,7 +9,7 @@ const ingredients = {
         hlb: 0,
         description: "Mimics natural skin oils, balances skin's sebum production."
     },
-    "Argan oil": {
+    "Argan Oil": {
         phase: "oil",
         hlb: 11,
         description: "Enhances skin elasticity and hair shine, rich in vitamin E."
@@ -19,37 +19,37 @@ const ingredients = {
         hlb: 8,
         description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins."
     },
-    "Cocoa butter": {
+    "Cocoa Butter": {
         phase: "oil",
         hlb: 8,
         description: "Nourishes skin, reduces scars, and offers a chocolaty aroma."
     },
-    "Coconut oil": {
+    "Coconut Oil": {
         phase: "oil",
         hlb: 8,
         description: "Moisturizes skin and hair, rich in fatty acids and antioxidants."
     },
-    "Pecan oil": {
+    "Pecan Oil": {
         phase: "oil",
         hlb: 0,
         description: "Rich in antioxidants, moisturizes skin, and promotes hair health."
     },
-    "Pumpkin seed oil": {
+    "Pumpkin Seed Oil": {
         phase: "oil",
         hlb: 0,
         description: "Improves skin tone, fights acne, and soothes sensitive skin."
     },
-    "Benne seed oil": {
+    "Benne Seed Oil": {
         phase: "oil",
         hlb: 0,
         description: "Rich in linoleic acid, nourishes skin and strengthens hair."
     },
-    "Okra seed oil": {
+    "Okra Seed Oil": {
         phase: "oil",
         hlb: 0,
         description: "Promotes a healthy scalp and is rich in unsaturated fats. (comedogenic rating estimated)"
     },
-    "Olive oil": {
+    "Olive Oil": {
         phase: "oil",
         hlb: 0,
         description: "Moisturizes skin, rich in vitamins, and promotes hair health."
@@ -59,12 +59,12 @@ const ingredients = {
         hlb: 0,
         description: "Gentle on skin, rich in vitamin E, and excellent for dry skin."
     },
-    "Distilled water": {
+    "Distilled Water": {
         phase: "aqueous",
         hlb: 20,
         description: "Hydrates and serves as a base for water-soluble ingredients."
     },
-    "Green tea": {
+    "Green Tea": {
         phase: "aqueous",
         hlb: 20,
         description: "Rich in antioxidants, reduces inflammation, and promotes skin healing."
