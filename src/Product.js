@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
 
 function Product({ setProductData }) {
     const navigate = useNavigate();
@@ -15,11 +14,11 @@ function Product({ setProductData }) {
         // exfoliant: "Removes dead skin cells from the surface of the skin, promoting a smoother and clearer complexion.",
         //eyeCream: "Specifically formulated for the delicate eye area, it targets concerns like dark circles, puffiness, and wrinkles.",
         //mask: "Used occasionally to address specific skin concerns. Masks can hydrate, detoxify, or provide anti-aging benefits.",
-        lotion: "A lightweight moisturizer, often used for normal to oily skin, providing hydration without being too heavy.",
-        cream: "Thicker than lotion, creams are ideal for dry skin as they provide more intensive moisturization.",
-        butter: "Even thicker than creams, butters are used for very dry skin areas, providing deep nourishment and hydration.",
-        balm: "A dense, oil-based product, balms are used for intense healing and protection, often in specific areas.",
-        faceOil: "Provides intensive hydration and nourishment, especially beneficial for dry or mature skin.",
+        "Lotion" : "A lightweight moisturizer, often used for normal to oily skin, providing hydration without being too heavy.",
+        "Cream": "Thicker than lotion, creams are ideal for dry skin as they provide more intensive moisturization.",
+        "Butter": "Even thicker than creams, butters are used for very dry skin areas, providing deep nourishment and hydration.",
+        "Balm": "A dense, oil-based product, balms are used for intense healing and protection, often in specific areas.",
+        "Face Oil": "Provides intensive hydration and nourishment, especially beneficial for dry or mature skin.",
         //cleanser: "Used to remove dirt, oil, and makeup from the skin. It helps in keeping the pores clear and the skin clean.",
     };
 
