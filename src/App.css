@@ -46,9 +46,8 @@ button:hover {
 }
 
 button.startbutton {
-  top:17vh;
-  margin: 14vh 2vh;
-  padding: 7vh 2vh;
+  margin: 10vh 2vh 12vh;
+  padding: 4vh 1vh;
   border-radius: 15vh;
   background-color: #eeddc7;
   color: #61685f;
