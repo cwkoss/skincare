@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
+
 
 function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
   const navigate = useNavigate();
@@ -89,7 +89,7 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
           </div>
         )}
 
-        <button type="submit" disabled={selectedOptions.length === 0 || (includeFragrance === 'yes' && selectedMoods.length === 0)}>Next</button>
+        <button className="submit" type="submit" disabled={selectedOptions.length === 0 || (includeFragrance === 'yes' && selectedMoods.length === 0)}>Next</button>
       </form>
     </div>
   );

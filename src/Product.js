@@ -20,7 +20,7 @@ function Product({ setProductData }) {
         butter: "Even thicker than creams, butters are used for very dry skin areas, providing deep nourishment and hydration.",
         balm: "A dense, oil-based product, balms are used for intense healing and protection, often in specific areas.",
         faceOil: "Provides intensive hydration and nourishment, especially beneficial for dry or mature skin.",
-        cleanser: "Used to remove dirt, oil, and makeup from the skin. It helps in keeping the pores clear and the skin clean.",
+        //cleanser: "Used to remove dirt, oil, and makeup from the skin. It helps in keeping the pores clear and the skin clean.",
     };
 
     const handleSelection = (product) => {

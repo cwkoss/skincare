@@ -91,9 +91,10 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
       </ul>
 
       <h3>Selected Skincare Product:</h3>
-      <p>{productData}</p>
+      <ul><li>{productData}</li></ul>
 
-      <h3>Include Fragrance: {includeFragrance}</h3>
+      <h3>Include Fragrance: </h3>
+      <ul><li>{includeFragrance}</li></ul>
       {includeFragrance === 'yes' && (
         <>
           <h3>Selected Moods:</h3>

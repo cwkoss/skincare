@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ingredients from './ingredients';
 import { useLocation } from 'react-router-dom';
 
+
 function RecipeBuilder() {
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});
@@ -198,20 +199,6 @@ function RecipeBuilder() {
     };
 
 
-    const ingredientRowStyle = {
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '10px',
-        margin: '5px',
-        border: '1px solid #ddd',
-        borderRadius: '4px',
-        cursor: 'pointer',
-    };
-
-    const selectedStyle = {
-        backgroundColor: '#e0f7fa',
-    };
-
     const tableStyle = {
         width: '95%', // Ensure the table takes full width
         borderCollapse: 'collapse',
@@ -297,9 +284,8 @@ function RecipeBuilder() {
                             <span></span>
                         </div>
                         {Object.entries(ingredients).map(([name, details]) => (
-                            <div
+                            <div className={ (isIngredientSelected(name) ? 'selected' : '') + " ingredient-row"}
                                 key={name}
-                                style={{ ...ingredientRowStyle, ...(isIngredientSelected(name) ? selectedStyle : {}) }}
                                 onClick={() => handleIngredientSelect(name)}
                             >
                                 <strong>{name}</strong>
