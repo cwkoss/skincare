@@ -89,7 +89,20 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                             ingredientKey2:percentage
                             ingredientKey3:percentage.... (repeat for as many ingredient keys as ingredients in your formulation)
                             commentary: "your commentary here"
-                            shelfLifeEstimate: "A specific estimate of shelf life.  Its ok to be conservative, but don't be too conservative.  If you think a product will last 6 months, don't say '6 months to a year' - just say 6 months."
+                            shelfLifeEstimate: "A specific estimate of shelf life.  Be conservative.  If you think a product will last 2 months, don't say '2 months to 6 months' - just say 2 months."
+                      }
+
+                      Example response:
+                      {
+                            "Argan Oil": 10,
+                            "Sunflower Oil": 20,
+                            "Cetearyl Alcohol": 5,
+                            "Distilled Water": 59,
+                            "Glycerin": 5,
+                            "Tea Tree Oil": 0.5,
+                            "Rosemary Oil": 0.5,
+                            "commentary": "This is a great formulation for dry skin.  It will be very moisturizing and will help with acne. It will be a little greasy, so if you want to reduce the greasiness, you can reduce the amount of sunflower oil and increase the amount of water.  If you want to make it more moisturizing, you can increase the amount of argan oil and decrease the amount of water.  If you want to make it more anti-acne, you can increase the amount of tea tree oil and decrease the amount of rosemary oil",
+                            "shelfLifeEstimate": "3 months"
                       }
 
                       Commentary should include your reasoning why you selected ingredients, how it will help accomplish goals, additional useful information.
