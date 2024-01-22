@@ -303,13 +303,14 @@ function RecipeBuilder() {
                 </div>
             )}
             {currentStep === 'adjustProportions' && (
-                <div>
+                <div className="recipe-builder-container">
 
                     <div style={headerStyle}>
                         <button onClick={goBackToSelectIngredients}>Back to Ingredients</button>
                         <h3>Proportions:</h3>
                         <span style={totalPercentageStyle} onClick={roundProportions}>{totalPercentage.toFixed(2)}%</span>
                     </div>
+                    <div className="scrollable-content">
                     <table style={tableStyle}>
                         <tbody>
                             {selectedIngredients.map(name => (
@@ -354,7 +355,7 @@ function RecipeBuilder() {
                         </tbody>
                     </table>
                     {recipeCommentary && (
-                        <div>
+                        <div className="commentary">
                             <div style={headerWithButtonStyle}>
                                 <h3>Commentary:</h3>
                                 <button onClick={getRecipeAdvice}>Get Recipe Advice (Coming Soon!)</button>
@@ -363,6 +364,7 @@ function RecipeBuilder() {
                             <p>Estimated Shelf Life: {shelfLifeEstimate}</p>
                         </div>
                     )}
+                    </div>
                     <button className='submit' onClick={finalizeRecipe}>Finalize Recipe</button>
                 </div>
             )}

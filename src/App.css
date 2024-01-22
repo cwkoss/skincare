@@ -179,3 +179,18 @@ div.ingredient-row {
 .ingredient-row small{
   opacity: 1;
 }
+
+.recipe-builder-container {
+  width: 70vw; /* Adjust width as needed */
+  margin-bottom: 60px; /* Space for the submit button */
+}
+
+.scrollable-content {
+  max-height: calc(100vh - 120px); /* Adjust the height */
+  overflow-y: auto; /* Make it scrollable */
+  padding-bottom: 20px; /* Space at the bottom inside the scrollable area */
+}
+
+div.commentary {
+  padding-bottom: 20px;
+}
