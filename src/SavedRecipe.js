@@ -52,7 +52,6 @@ function SavedRecipe() {
 
     const handleOrderFormulation = () => {
         navigate('/order-formulation', { state: { recipeId } });
-        // Or another logic for ordering the formulation
     };
 
     if (!recipeData) return <div>Loading...</div>;
