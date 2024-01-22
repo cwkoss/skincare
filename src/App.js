@@ -5,6 +5,7 @@ import Goals from './Goals';
 import Product from './Product';
 import Summary from './Summary'; 
 import RecipeBuilder from './RecipeBuilder';
+import FinalizeRecipe from './FinalizeRecipe';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                                                  includeFragrance={includeFragrance} 
                                                  selectedMoods={selectedMoods} />} />
         <Route path="/recipe-builder" element={<RecipeBuilder />} />
+        <Route path="/finalize-recipe" element={<FinalizeRecipe />} />
       </Routes>
     </Router>
   );

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { useLocation } from 'react-router-dom';
 
 
 function RecipeBuilder() {
+    const navigate = useNavigate();
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});
     const [currentStep, setCurrentStep] = useState('selectIngredients');
@@ -198,6 +200,11 @@ function RecipeBuilder() {
         return Object.values(ingredientProportions).reduce((acc, value) => acc + value, 0);
     };
 
+    const finalizeRecipe = () => {
+        roundProportions();
+        navigate('/finalize-recipe', { state: { recipe: ingredientProportions } });
+    }
+
 
     const tableStyle = {
         width: '95%', // Ensure the table takes full width
@@ -356,6 +363,7 @@ function RecipeBuilder() {
                             <p>Estimated Shelf Life: {shelfLifeEstimate}</p>
                         </div>
                     )}
+                    <button className='submit' onClick={finalizeRecipe}>Finalize Recipe</button>
                 </div>
             )}
 
