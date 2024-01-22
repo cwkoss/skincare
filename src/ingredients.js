@@ -142,7 +142,7 @@ const ingredients = {
         phase: "additive",
         hlb: 0,
         max_percent: 1,
-        default_percent: 0.25,
+        default_percent: 0.1,
         description: "A derivative of Vitamin A, is renowned for its anti-aging properties, as it boosts collagen production, accelerates skin renewal, and helps to reduce the appearance of fine lines, wrinkles, and uneven skin tone."
     },
     "Vitamin C": {

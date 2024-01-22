@@ -1,49 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
+
+const loadingMessages = [
+  "AI is preparing a recipe for you...",
+  "Considering which ingredients will work best for your concerns...",
+  "Balancing proportions to ensure proper texture...",
+  "Optimizing for your skin type...",
+  "Finalizing the perfect skincare formula...",
+  "Almost there, just adding the finishing touches..."
+];
 
 function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState(loadingMessages[0]);
+
 
   const handleAIClick = () => {
     setLoading(true);
+    setCurrentMessage(loadingMessages[0]);
     const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
     const goals = goalsData.join(', ');
     const productType = productData;
 
+
     const fragranceSentence = includeFragrance === 'yes' ? `Essential oils should be added that will make me feel  ${selectedMoods.join(' and ')} .` : 'It should not have fragrance added.';
 
     const data = {
-        text: `Hello, I am trying to formulate a ${productType} for ${goals}. ${fragranceSentence} Please suggest a recipe?`,
-        ingredients: formatIngredientsList(ingredients)
+      text: `Hello, I am trying to formulate a ${productType} for ${goals}. ${fragranceSentence} Please suggest a recipe?`,
+      ingredients: formatIngredientsList(ingredients)
     };
 
     console.log('Sending OpenAI request: ', data.text, data.ingredients);
 
     fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     })
-    .then(response => {
-      console.log(response);
-      return response.json();
-    })
-    .then(data => {
+      .then(response => {
+        console.log(response);
+        return response.json();
+      })
+      .then(data => {
         setLoading(false);
         console.log('Success:', data);
         const recipeResponse = data.reply.choices[0].message.content;
         const parsedResponse = JSON.parse(recipeResponse);
         console.log(parsedResponse);
         navigate('/recipe-builder', { state: { recipe: parsedResponse } });
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         setLoading(false);
         console.error('Error:', error);
         // Handle error state here, e.g., display an error message
-    });
+      });
   };
+
+
+
+  useEffect(() => {
+    if (loading) {
+        const interval = setInterval(() => {
+            setCurrentMessage(prevMessage => {
+                const index = loadingMessages.indexOf(prevMessage);
+                const nextIndex = (index + 1) % loadingMessages.length;
+                return loadingMessages[nextIndex];
+            });
+        }, 4000); // Change message every 4 seconds
+
+        return () => clearInterval(interval);
+    }
+  }, [loading]);
 
   const handleManualClick = () => {
     navigate('/recipe-builder'); // Replace with your actual route
@@ -53,32 +82,32 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
     let formattedString = "";
 
     Object.keys(ingredients).forEach((key, index, array) => {
-        formattedString += key;
+      formattedString += key;
 
-        if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
-            formattedString += " (";
+      if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
+        formattedString += " (";
 
-            if (ingredients[key].hasOwnProperty('default_percent')) {
-                formattedString += `default: ${ingredients[key].default_percent}`;
-                if (ingredients[key].hasOwnProperty('max_percent')) {
-                    formattedString += ", ";
-                }
-            }
-
-            if (ingredients[key].hasOwnProperty('max_percent')) {
-                formattedString += `max: ${ingredients[key].max_percent}`;
-            }
-
-            formattedString += ")";
-        }
-
-        if (index < array.length - 1) {
+        if (ingredients[key].hasOwnProperty('default_percent')) {
+          formattedString += `default: ${ingredients[key].default_percent}`;
+          if (ingredients[key].hasOwnProperty('max_percent')) {
             formattedString += ", ";
+          }
         }
+
+        if (ingredients[key].hasOwnProperty('max_percent')) {
+          formattedString += `max: ${ingredients[key].max_percent}`;
+        }
+
+        formattedString += ")";
+      }
+
+      if (index < array.length - 1) {
+        formattedString += ", ";
+      }
     });
 
     return formattedString;
-}
+  }
 
   return (
     <div>
@@ -107,7 +136,10 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
       )}
 
       {loading ? (
-        <p>Loading...</p> // Placeholder for loading spinner
+        <div className="loading-container">
+          <div className="loader"></div> 
+          <p className="loading-message">{currentMessage}</p>
+        </div>
       ) : (
         <>
           <button onClick={handleAIClick}>AI Recipe Generation</button>
