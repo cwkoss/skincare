@@ -8,6 +8,7 @@ function SavedRecipe() {
     const location = useLocation();
     const navigate = useNavigate();
     const recipeId = location.state?.recipeId;
+    const [shareButtonText, setShareButtonText] = useState('Share this Recipe');
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -46,8 +47,16 @@ function SavedRecipe() {
     const handleShareRecipe = () => {
         const currentUrl = window.location.href;
         const shareUrl = `${currentUrl}?recipeId=${recipeId}`;
-        navigator.clipboard.writeText(shareUrl);
-        alert('Recipe URL copied to clipboard!');
+        navigator.clipboard.writeText(shareUrl).then( () => {
+            console.log('Recipe URL copied to clipboard!');
+            setShareButtonText('Copied!'); // Change button text to 'Copied!'
+
+            setTimeout(() => {
+                setShareButtonText('Share this Recipe');
+            }, 3000);
+        }).catch( () => {
+            console.log('Error copying to clipboard');
+        });
     };
 
     const handleOrderFormulation = () => {
@@ -66,7 +75,7 @@ function SavedRecipe() {
                     </div>
                 ))}
             </div>
-            <button onClick={handleShareRecipe}>Share this Recipe</button>
+            <button onClick={handleShareRecipe}>{shareButtonText}</button>
             <button onClick={handleOrderFormulation}>Order Formulation of this Recipe</button>
         </div>
     );
