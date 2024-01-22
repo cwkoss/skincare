@@ -182,7 +182,7 @@ div.ingredient-row {
 
 .recipe-builder-container {
   width: 95vw;
-  margin-bottom: 120px; 
+
 }
 
 .scrollable-content {
@@ -192,5 +192,5 @@ div.ingredient-row {
 }
 
 div.commentary {
-  padding-bottom: 20px;
+  padding-bottom: 50px;
 }
