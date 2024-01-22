@@ -8,6 +8,7 @@ import RecipeBuilder from './RecipeBuilder';
 import FinalizeRecipe from './FinalizeRecipe';
 import SavedRecipe from './SavedRecipe';
 import OrderFormulation from './OrderFormulation';
+import OrderSuccess from './OrderSuccess';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
         <Route path="/finalize-recipe" element={<FinalizeRecipe />} />
         <Route path="/saved-recipe" element={<SavedRecipe />} />
         <Route path="/order-formulation" element={<OrderFormulation />} />
+        <Route path="/order-success" element={<OrderSuccess />} />
       </Routes>
     </Router>
   );

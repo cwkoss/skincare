@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './firebase-config';
 import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
 
 function OrderFormulation() {
+    const navigate = useNavigate();
     const [recipeData, setRecipeData] = useState(null);
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -40,7 +41,7 @@ function OrderFormulation() {
                 address: pickup ? null : address
             });
             console.log("Order submitted");
-            // Navigate to a success page or display a success message
+            navigate('/order-success');
         } catch (e) {
             console.error("Error submitting order: ", e);
             // Show an error message or handle the error as needed
