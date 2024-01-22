@@ -6,6 +6,7 @@ import Product from './Product';
 import Summary from './Summary'; 
 import RecipeBuilder from './RecipeBuilder';
 import FinalizeRecipe from './FinalizeRecipe';
+import SavedRecipe from './SavedRecipe';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
                                                  selectedMoods={selectedMoods} />} />
         <Route path="/recipe-builder" element={<RecipeBuilder />} />
         <Route path="/finalize-recipe" element={<FinalizeRecipe />} />
+        <Route path="/saved-recipe" element={<SavedRecipe />} />
       </Routes>
     </Router>
   );

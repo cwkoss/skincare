@@ -18,7 +18,7 @@ function FinalizeRecipe() {
                 ingredients: recipe
             });
             console.log("Document written with ID: ", docRef.id);
-            navigate('/success'); // Navigate to a success page or similar
+            navigate('/saved-recipe', { state: { recipeId: docRef.id } }); 
         } catch (e) {
             console.error("Error adding document: ", e);
             // Show an error message or handle the error as needed
