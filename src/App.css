@@ -181,8 +181,8 @@ div.ingredient-row {
 }
 
 .recipe-builder-container {
-  width: 70vw; /* Adjust width as needed */
-  margin-bottom: 60px; /* Space for the submit button */
+  width: 95vw;
+  margin-bottom: 60px; 
 }
 
 .scrollable-content {
