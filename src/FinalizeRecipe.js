@@ -1,26 +1,35 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { db } from './firebase-config'; 
+import { collection, addDoc } from 'firebase/firestore'
 
 function FinalizeRecipe() {
-    const location = useLocation();
-    const recipe = location.state?.recipe;
     const [recipeName, setRecipeName] = useState('');
+    const location = useLocation();
     const navigate = useNavigate();
+    const recipe = location.state?.recipe;
 
+    // Handler to save the recipe
+    const handleConfirmAndSave = async () => {
+        try {
+            const docRef = await addDoc(collection(db, "formulations"), {
+                name: recipeName,
+                ingredients: recipe
+            });
+            console.log("Document written with ID: ", docRef.id);
+            navigate('/success'); // Navigate to a success page or similar
+        } catch (e) {
+            console.error("Error adding document: ", e);
+            // Show an error message or handle the error as needed
+        }
+    };
     const handleChangeIngredients = () => {
         navigate('/change-ingredients'); // Navigate to the change ingredients page
     };
 
     const handleChangeProportions = () => {
         navigate('/recipe-builder'); // Navigate to the change proportions page
-    };
-
-    const handleConfirmAndSave = () => {
-        // Logic to save the recipe
-        const savedRecipe = { name: recipeName, ingredients: recipe };
-        console.log('Recipe confirmed and saved:', savedRecipe);
-        // Navigate to a confirmation page or display a success message
     };
 
     return (
