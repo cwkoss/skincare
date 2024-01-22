@@ -202,7 +202,7 @@ function RecipeBuilder() {
 
     const finalizeRecipe = () => {
         roundProportions();
-        navigate('/finalize-recipe', { state: { recipe: ingredientProportions } });
+        navigate('/finalize-recipe', { state: { recipe: ingredientProportions, commentary: recipeCommentary } });
     }
 
 

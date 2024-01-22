@@ -9,13 +9,16 @@ function FinalizeRecipe() {
     const location = useLocation();
     const navigate = useNavigate();
     const recipe = location.state?.recipe;
+    const commentary = location.state?.commentary;
 
     // Handler to save the recipe
     const handleConfirmAndSave = async () => {
         try {
+            console.log(location.state);
             const docRef = await addDoc(collection(db, "formulations"), {
                 name: recipeName,
-                ingredients: recipe
+                ingredients: recipe,
+                commentary: commentary
             });
             console.log("Document written with ID: ", docRef.id);
             navigate('/saved-recipe', { state: { recipeId: docRef.id } }); 

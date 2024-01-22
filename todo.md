@@ -1,4 +1,3 @@
-- better loading spinner
 - pass goals, product, fragrance and commentary into saved recipe
 - Ingredient selector update - pick exclude, maybe, include
 - build page that computes weights from target weight and proportions "prep assist" tool
