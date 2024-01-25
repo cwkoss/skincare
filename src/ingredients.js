@@ -55,7 +55,7 @@ const ingredients = {
         good_for: ["Adult acne", "Sensitive Skin"],
         bad_for: []
     },
-    "Benne Seed Oil": {
+    /*"Benne Seed Oil": {
         phase: "oil",
         hlb: 0,
         description: "Rich in linoleic acid, nourishes skin and strengthens hair.",
@@ -68,7 +68,7 @@ const ingredients = {
         description: "Promotes a healthy scalp and is rich in unsaturated fats. (comedogenic rating estimated)",
         good_for: ["Sensitive Skin"],
         bad_for: ["Adult acne"]
-    },
+    },*/
     "Olive Oil": {
         phase: "oil",
         hlb: 0,
@@ -76,13 +76,13 @@ const ingredients = {
         good_for: ["Dry skin"],
         bad_for: ["Adult acne"]
     },
-    "Almond Oil": {
+    /*"Almond Oil": {
         phase: "oil",
         hlb: 0,
         description: "Gentle on skin, rich in vitamin E, and excellent for dry skin.",
         good_for: ["Dry skin", "Sensitive Skin"],
         bad_for: []
-    },
+    },*/
     "Distilled Water": {
         phase: "aqueous",
         hlb: 20,
@@ -272,6 +272,15 @@ const ingredients = {
         description: "Eucalyptus oil has a refreshing scent and is known for its antibacterial, anti-inflammatory properties.",
         good_for: ["Adult acne"],
         bad_for: ["Sensitive Skin", "Dry skin"] // can be irritating and drying
+    },
+    "Peppermint Oil": {
+        phase: "additive",
+        hlb: 0,
+        max_percent: 1,
+        default_percent: 0.5,
+        description: "Peppermint oil is known for its cooling sensation and refreshing scent. It has antiseptic and antimicrobial properties, making it useful in skincare for its cleansing and soothing effects.",
+        good_for: ["Adult acne", "Puffiness"],
+        bad_for: ["Sensitive Skin", "Redness"] // can be irritating and cause a burning sensation for sensitive skin types
     },
     /*"Cedarwood Oil": {
         phase: "additive",
