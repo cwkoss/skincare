@@ -2,56 +2,56 @@ const ingredients = {
     "Sunflower Oil": {
         phase: "oil",
         hlb: 0,
-        description: "Lightweight, non-comedogenic oil, suitable for sensitive skin.",
+        description: "Moisturizer, rich in Vitamin E, non-comedogenic, suitable for sensitive skin.",
         good_for: ["Sensitive Skin", "Dry skin"],
         bad_for: []
     },
     "Jojoba Oil": {
         phase: "oil",
         hlb: 0,
-        description: "Mimics natural skin oils, balances skin's sebum production.",
+        description: "Moisturizer, mimics natural skin oils, balances sebum production, good for acne-prone skin.",
         good_for: ["Adult acne", "Dry skin", "Sensitive Skin"],
         bad_for: []
     },
     "Argan Oil": {
         phase: "oil",
         hlb: 11,
-        description: "Enhances skin elasticity and hair shine, rich in vitamin E.",
+        description: "Rich in antioxidants and Vitamin E, moisturizes, reduces signs of aging, improves skin elasticity and enhances hair shine.",
         good_for: ["Aging or age spots", "Dry skin", "Wrinkles"],
         bad_for: []
     },
     "Shea Butter": {
         phase: "oil",
         hlb: 8,
-        description: "Moisturizes deeply, reduces inflammation, and is rich in vitamins.",
+        description: "Moisturizer, rich in fatty acids and vitamins, anti-inflammatory, helps with skin healing.",
         good_for: ["Dry skin", "Atopic dermatitis"],
         bad_for: ["Adult acne"] // due to its comedogenic properties
     },
     "Cocoa Butter": {
         phase: "oil",
         hlb: 8,
-        description: "Nourishes skin, reduces scars, and offers a chocolaty aroma.",
+        description: "Moisturizer, high in fatty acids, helps to hydrate and nourish the skin, reduces the appearance of scars.",
         good_for: ["Dry skin", "Wrinkles"],
         bad_for: ["Adult acne"]
     },
     "Coconut Oil": {
         phase: "oil",
         hlb: 8,
-        description: "Moisturizes skin and hair, rich in fatty acids and antioxidants.",
+        description: "Moisturizes skin and hair, rich in fatty acids and antioxidants. Can be comedogenic (acne-causing) for some.",
         good_for: ["Dry skin"],
         bad_for: ["Adult acne"] // high comedogenic rating
     },
     "Pecan Oil": {
         phase: "oil",
         hlb: 0,
-        description: "Rich in antioxidants, moisturizes skin, and promotes hair health.",
+        description: "Moisturizer, rich in antioxidants, promotes skin and hair health, hydrating properties.",
         good_for: ["Dry skin"],
         bad_for: []
     },
     "Pumpkin Seed Oil": {
         phase: "oil",
         hlb: 0,
-        description: "Improves skin tone, fights acne, and soothes sensitive skin.",
+        description: "Rich in zinc and vitamins, improves skin tone, fights acne, and soothes sensitive skin.",
         good_for: ["Adult acne", "Sensitive Skin"],
         bad_for: []
     },
@@ -72,7 +72,7 @@ const ingredients = {
     "Olive Oil": {
         phase: "oil",
         hlb: 0,
-        description: "Moisturizes skin, rich in vitamins, and promotes hair health.",
+        description: "Moisturizer, rich in vitamins and antioxidants, promotes skin and hair health, but can be comedogenic (acne-causing) for some.",
         good_for: ["Dry skin"],
         bad_for: ["Adult acne"]
     },
@@ -93,63 +93,63 @@ const ingredients = {
     "Green Tea": {
         phase: "aqueous",
         hlb: 20,
-        description: "Rich in antioxidants, reduces inflammation, and promotes skin healing.",
+        description: "Antioxidant-rich, reduces inflammation and redness, can protect against environmental stressors and promotes skin healing.",
         good_for: ["Redness", "Puffiness", "Sensitive Skin"],
         bad_for: []
     },
     "Sea Salt": {
         phase: "aqueous",
         hlb: 20,
-        description: "Rich in minerals, exfoliating, detoxifying, and promotes skin rejuvenation.",
+        description: "Rich in minerals, helps in detoxifying and cleansing the skin, can balance oil production.",
         good_for: ["Large pores", "Atopic dermatitis"],
         bad_for: ["Dry skin"] // can be drying
     },
     "Aloe Vera Gel": {
         phase: "aqueous",
         hlb: 20,
-        description: "Soothes skin irritations, hydrates, and has healing properties.",
+        description: "Soothes skin irritations, hydrates, promotes healing, good for sunburns and inflammation",
         good_for: ["Sensitive Skin", "Sun Protection", "Redness"],
         bad_for: []
     },
     "Glycerin": {
         phase: "aqueous",
         hlb: 20,
-        description: "A humectant that draws moisture into the skin, suitable for all skin types.",
+        description: "Humectant, draws moisture into the skin, suitable for all skin types, enhances skin hydration.",
         good_for: ["Dry skin"],
         bad_for: []
     },
     "Honey": {
         phase: "aqueous",
         hlb: 20,
-        description: "Natural humectant, known for its soothing and antibacterial properties.",
+        description: "Natural humectant, antibacterial, great for acne treatment and hydration, soothing for the skin.",
         good_for: ["Dry skin", "Adult acne"],
         bad_for: []
     },
     "Apple Cider Vinegar": {
         phase: "aqueous",
         hlb: 20,
-        description: "Balances skin's pH, has natural astringent properties, and can help clear skin.",
+        description: "Balances skin's pH, astringent properties, good for acne-prone skin but can be drying.",
         good_for: ["Adult acne", "Large pores"],
         bad_for: ["Dry skin"] // can be drying
     },
     "Cucumber Juice": {
         phase: "aqueous",
         hlb: 20,
-        description: "Rich in vitamins and minerals, hydrating, and soothing for the skin.",
+        description: " Hydrating, soothing, rich in vitamins and minerals, good for puffiness and calming irritated skin.",
         good_for: ["Puffiness", "Sensitive Skin"],
         bad_for: []
     },
     "Oat Milk": {
         phase: "aqueous",
         hlb: 20,
-        description: "Contains lipids and water-absorbing substances, providing moisturizing and soothing benefits.",
+        description: "Contains lipids and water-absorbing substances, providing moisturizing and soothing benefits. Helps in reducing inflammation",
         good_for: ["Dry skin", "Sensitive Skin"],
         bad_for: []
     },
     "Beeswax": {
         phase: "emulsifier",
         hlb: 12,
-        description: "Natural stabilizer, thickens formulas and creates protective barrier on skin.",
+        description: " Emulsifier and stabilizer in formulations, creates a protective barrier on the skin, retains moisture.",
         good_for: ["Dry skin"],
         bad_for: []
     },
@@ -163,14 +163,14 @@ const ingredients = {
     "Cetearyl Alcohol": {
         phase: "emulsifier",
         hlb: 16,
-        description: "A waxy fatty alcohol used as an emulsifier, thickener and stabilizer in creams and lotions.",
+        description: "A waxy fatty alcohol used as an emulsifier, thickener and stabilizer in creams and lotions. Extracted from Coconut and Palm Kernel oils",
         good_for: [],
         bad_for: ["Sensitive Skin"] // can be irritating for some sensitive skins
     },
     "Castille Soap": {
         phase: "surfactant",
         hlb: "10",
-        description: "Gentle and versatile cleanser, suitable for sensitive skin.",
+        description: "Gentle and versatile cleanser, made from olive and hemp oils, suitable for sensitive skin.",
         good_for: ["Sensitive Skin"],
         bad_for: []
     },
@@ -179,7 +179,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 25,
         default_percent: 10,
-        description: "Adds SPF",
+        description: "Sunscreen agent, provides broad-spectrum UV protection, also known for its soothing and astringent properties.",
         good_for: ["Sun Protection"],
         bad_for: []
     },
@@ -188,7 +188,7 @@ const ingredients = {
         hlb: 20,
         max_percent: 2,
         default_percent: 0.5,
-        description: "Hydrates and plumps the skin by retaining moisture.",
+        description: "Powerful humectant, helps to hydrate and plump the skin by retaining moisture, reduces the appearance of fine lines and wrinkles.",
         good_for: ["Dry skin", "Wrinkles", "Aging or age spots"],
         bad_for: []
     },
@@ -197,7 +197,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.1,
-        description: "Boosts collagen production, accelerates skin renewal.",
+        description: "A form of Vitamin A, helps in skin renewal, boosts collagen production, effective against aging signs. Should be used intermittently until skin aclimates to it. Sun sensitizing, so should only be used at night.",
         good_for: ["Wrinkles", "Aging or age spots"],
         bad_for: ["Sensitive Skin"] // can be irritating
     },
@@ -206,7 +206,7 @@ const ingredients = {
         hlb: 20,
         max_percent: 20,
         default_percent: 5,
-        description: "Reduces skin inflammation, irregular pigmentation, promotes collagen production.",
+        description: "Antioxidant, aids in skin repair and regeneration, can help in reducing pigmentation and promoting collagen production.",
         good_for: ["Aging or age spots", "Sun Protection"],
         bad_for: []
     },
@@ -215,7 +215,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
-        description: "Reduces UV damage in skin.",
+        description: "Antioxidant, helps in protecting the skin from environmental damage, moisturizes, and heals. Extends shelf life of oils.",
         good_for: ["Sun Protection", "Aging or age spots"],
         bad_for: []
     },
@@ -224,7 +224,7 @@ const ingredients = {
         hlb: 20,
         max_percent: 5,
         default_percent: 2,
-        description: "Improves appearance of enlarged pores, uneven skin tone, fine lines.",
+        description: "Improves appearance of enlarged pores, uneven skin tone, fine lines. Reduces redness and irritation.",
         good_for: ["Large pores", "Wrinkles", "Redness"],
         bad_for: []
     },
@@ -233,7 +233,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
-        description: "Lavender oil is known for its calming and relaxing properties and can be used to soothe irritated skin.",
+        description: "Calming and relaxing, and can be used to soothe irritated skin. Anti-inflammatory and antimicrobial properties.",
         good_for: ["Sensitive Skin", "Redness"],
         bad_for: []
     },
@@ -242,7 +242,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 2,
         default_percent: 1,
-        description: "Rosemary oil is reputed to rejuvenate skin, improve hair growth and scalp health, and has antioxidant properties.",
+        description: "Rejuvenates skin, improves hair growth and scalp health, and has antioxidant properties. Improves circulation and can help with puffiness.",
         good_for: ["Aging or age spots"],
         bad_for: ["Sensitive Skin"] // can be irritating for some people
     },
@@ -251,7 +251,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 2,
         default_percent: 1,
-        description: "Tea tree oil is known for its anti-inflammatory and antimicrobial properties, making it a popular choice for treating acne.",
+        description: "Antimicrobial and anti-inflammatory, very effective against acne, helps in cleansing the skin.",
         good_for: ["Adult acne"],
         bad_for: ["Dry skin"] // can be drying if overused
     },
@@ -260,7 +260,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
-        description: "Jasmine oil is valued for its soothing, moisturizing properties and a rich, floral fragrance.",
+        description: "Moisturizes, soothes, often used for its fragrance and hydrating properties.",
         good_for: ["Dry skin"],
         bad_for: []
     },
@@ -269,7 +269,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 2,
         default_percent: 1,
-        description: "Eucalyptus oil has a refreshing scent and is known for its antibacterial, anti-inflammatory properties.",
+        description: "Antiseptic and anti-inflammatory properties, good for healing. Refreshing scent.",
         good_for: ["Adult acne"],
         bad_for: ["Sensitive Skin", "Dry skin"] // can be irritating and drying
     },
@@ -278,7 +278,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
-        description: "Peppermint oil is known for its cooling sensation and refreshing scent. It has antiseptic and antimicrobial properties, making it useful in skincare for its cleansing and soothing effects.",
+        description: "Cooling sensation and refreshing scent. It has antiseptic and antimicrobial properties. Can help with acne and oily skin, but can be irritating.",
         good_for: ["Adult acne", "Puffiness"],
         bad_for: ["Sensitive Skin", "Redness"] // can be irritating and cause a burning sensation for sensitive skin types
     },
@@ -314,7 +314,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
-        description: "Turmeric is known for its anti-inflammatory, antimicrobial properties, and ability to improve skin tone and reduce scarring.",
+        description: " Anti-inflammatory, antimicrobial, helps in improving skin tone and reducing scars.",
         good_for: ["Redness", "Adult acne", "Atopic dermatitis"],
         bad_for: []
     },
@@ -323,7 +323,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 0.5,
         default_percent: 0.2,
-        description: "Cinnamon is used for its antimicrobial properties and warming sensation, but should be used with caution as it can be irritating to the skin.",
+        description: "Antimicrobial, stimulates blood flow, but can be irritating to the skin so should be used cautiously.",
         good_for: ["Adult acne"],
         bad_for: ["Sensitive Skin", "Dry skin"] // potential irritant
     },
@@ -332,7 +332,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 0.5,
         default_percent: 0.2,
-        description: "Black Pepper is known for its antioxidant properties and stimulating effect, which can enhance blood circulation to the skin.",
+        description: "Antioxidant, stimulating, enhances blood circulation, but can be irritating to sensitive skin.",
         good_for: ["Aging or age spots"],
         bad_for: ["Sensitive Skin"] // can be irritating
     },
@@ -344,6 +344,15 @@ const ingredients = {
         description: "Nutmeg, with its anti-inflammatory and antibacterial properties, is used in small amounts to soothe skin and improve its appearance.",
         good_for: ["Redness", "Atopic dermatitis"],
         bad_for: ["Sensitive Skin"] // can be irritating in higher concentrations
+    },
+    "Tepezcohuite Mimosa Tenuiflora Infusion": {
+        phase: "aqueous",
+        hlb: 0, // Typically, herbal infusions do not have an HLB value
+        max_percent: 10,
+        default_percent: 5,
+        description: "Rich in tannins and antioxidants, known for its healing, regenerative, and antimicrobial properties. Used to soothe skin conditions, promote wound healing, and provide anti-aging benefits. Also known as Jurema.",
+        good_for: ["Atopic dermatitis", "Wrinkles", "Redness"],
+        bad_for: ["Sensitive Skin"] // can be irritating due to tannins
     }
 
 
