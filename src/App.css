@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
-  --button-active: #4ba04e; 
-  --button-clickable: #657c62;  
+  --button-active: #adf7a4; 
+  --button-clickable: #e7ffe4;
+  --button-clickable-lines : #657c62; 
+  --button-active-lines: #507c4a; 
   --text-color: #333; 
 }
 
@@ -26,7 +28,7 @@ html, body {
 
 button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: var(--button-clickable);
   color: white;
   border: none;
   border-radius: 5px;
@@ -34,7 +36,8 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: var(--button-active);
+  color: var(--button-active-lines)
 }
 
 .homePageContainer {
@@ -85,10 +88,11 @@ p {
 
 button {
   margin: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid;
   background-color: var(--button-clickable);
+  border-color: var(--button-clickable-lines);
   padding: 10px 20px;
-  color: #fff;
+  color: var(--button-clickable-lines);
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
@@ -100,17 +104,16 @@ button {
 
 button.selected {
   background-color: var(--button-active);
-  color: white;
 }
 
 button.submit {
   align-items: center;
   width: 70vw;
   padding: 10px 20px;
-  border: 1px solid #ddd;
+
   border-radius: 5px;
   background-color: var(--button-active);
-  color: white;
+
   font-size: 1.1em;
 
   position: absolute;
@@ -120,8 +123,7 @@ button.submit {
 }
 
 button.submit:hover {
-  background-color: var(--button-active);
-  color: white;
+  color: var(--button-active-lines);
 }
 
 button.submit:disabled {
