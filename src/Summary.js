@@ -142,8 +142,8 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
         </div>
       ) : (
         <>
-          <button onClick={handleAIClick}>AI Recipe Generation</button>
-          <button onClick={handleManualClick}>Build Recipe Manually</button>
+          <button onClick={handleAIClick}>Generate a Formulation with AI</button>
+          <button onClick={handleManualClick}>Choose Ingredients Manually</button>
         </>
       )}
     </div>

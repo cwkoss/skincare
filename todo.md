@@ -1,4 +1,5 @@
 - pass goals, product, fragrance and commentary into saved recipe
 - Ingredient selector update - pick exclude, maybe, include
+- Update product list to Cleanser, daytime moisturizer with SPF, nighttime moisturizer, scalp oil
 - build page that computes weights from target weight and proportions "prep assist" tool
 - Build review page
