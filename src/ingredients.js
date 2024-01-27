@@ -282,6 +282,25 @@ const ingredients = {
         good_for: ["Adult acne", "Puffiness"],
         bad_for: ["Sensitive Skin", "Redness"] // can be irritating and cause a burning sensation for sensitive skin types
     },
+    "Pine Oil": {
+        phase: "additive",
+        hlb: 0,
+        max_percent: 1,
+        default_percent: 0.5,
+        description: "Known for its invigorating and refreshing scent, has antimicrobial and anti-inflammatory properties. It's often used in skincare for its soothing effects on the skin and its ability to help with respiratory issues.",
+        good_for: ["Atopic dermatitis", "Adult acne"],
+        bad_for: ["Sensitive Skin"] // can be irritating due to its potent nature
+    },
+    "Cedar Oil": {
+        phase: "additive",
+        hlb: 0,
+        max_percent: 1,
+        default_percent: 0.5,
+        description: "With its woodsy aroma, is known for its calming and grounding effects. It has antiseptic, anti-inflammatory, and astringent properties, making it beneficial for skin conditions like acne and aiding in soothing irritated skin.",
+        good_for: ["Adult acne", "Atopic dermatitis"],
+        bad_for: ["Sensitive Skin"] // may cause irritation in higher concentrations or sensitive individuals
+    },
+
     /*"Cedarwood Oil": {
         phase: "additive",
         hlb: 0,
