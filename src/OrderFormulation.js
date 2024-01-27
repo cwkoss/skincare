@@ -38,7 +38,8 @@ function OrderFormulation() {
                 recipeId,
                 phoneNumber,
                 pickup,
-                address: pickup ? null : address
+                address: pickup ? null : address,
+                createdAt: new Date()
             });
             console.log("Order submitted");
             navigate('/order-success');

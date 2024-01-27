@@ -59,7 +59,7 @@ function App() {
               <p><strong>Join the Skincremental Revolution:</strong> Where skincare is more than a routine – it's a dynamic, personalized journey. Be a part of a community that chooses sustainability, customization, and innovation.</p>
             </div>
             <Link to="/goals"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
-            <Link to="/contact"><a>Contact us</a></Link>
+            <Link to="/contact"><a href="/contact">Contact us</a></Link>
           </div>
         } />
         <Route path="/goals" element={

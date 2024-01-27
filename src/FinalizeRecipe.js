@@ -18,7 +18,8 @@ function FinalizeRecipe() {
             const docRef = await addDoc(collection(db, "formulations"), {
                 name: recipeName,
                 ingredients: recipe,
-                commentary: commentary
+                commentary: commentary,
+                createdAt: new Date()
             });
             console.log("Document written with ID: ", docRef.id);
             navigate('/saved-recipe', { state: { recipeId: docRef.id } }); 
