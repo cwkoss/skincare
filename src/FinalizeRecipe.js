@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { db } from './firebase-config'; 
-import { collection, addDoc } from 'firebase/firestore'
+import { db } from './firebase-config';
+import { doc, setDoc } from 'firebase/firestore'
 
 function FinalizeRecipe() {
     const [recipeName, setRecipeName] = useState('');
@@ -14,15 +14,21 @@ function FinalizeRecipe() {
     // Handler to save the recipe
     const handleConfirmAndSave = async () => {
         try {
+            const recipeId = recipeName
+                .toLowerCase()
+                .replace(/[^a-z0-9]/gi, '') // Strip out all non-alphanumeric characters
+                .replace(/ /g, '-') + "-" + new Date().getTime();
+
+            console.log(recipeId);
             console.log(location.state);
-            const docRef = await addDoc(collection(db, "formulations"), {
+            const docRef = await setDoc(doc(db, "formulations", recipeId), {
                 name: recipeName,
                 ingredients: recipe,
                 commentary: commentary,
                 createdAt: new Date()
             });
-            console.log("Document written with ID: ", docRef.id);
-            navigate('/saved-recipe', { state: { recipeId: docRef.id } }); 
+            console.log("Document written with ID: ", recipeId);
+            navigate('/saved-recipe', { state: { recipeId: recipeId } });
         } catch (e) {
             console.error("Error adding document: ", e);
             // Show an error message or handle the error as needed
