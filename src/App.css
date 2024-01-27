@@ -14,7 +14,9 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #e6fad2 0%, #ffffff 50%, #eeddc7 100%);
+  background: linear-gradient(to bottom, #e8ece4 0%, #e6ece3 10%, #eaf0e7 30%, #ead9c4 60%, #ead9c4 80%,#fff 100%);
+  background-attachment: fixed;
+  background-size: cover;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -48,8 +50,39 @@ button:hover {
 
 }
 
-button.startbutton {
-  margin: 10vh 2vh 12vh;
+button.startbutton:hover {
+  background-color: #ebd3b3;
+}
+
+h1, h2, h3 {
+  font-family: "Playfair Display", serif;
+  font-weight:300;
+  text-align: center;
+}
+
+.homePageContainer .title {
+  display: flex;
+  flex-direction: column;
+  text-align:left;
+  margin-bottom:8vh;
+}
+
+.homePageContainer .title h1{
+  text-align:left;
+  font-size: 2.5em;
+  font-weight: 600;
+  margin:0;
+}
+
+.homePageContainer .title h4{
+  text-align:left;
+  font-size: 1em;
+  font-weight: 400;
+  margin:0;
+}
+
+.homePageContainer .startbutton {
+  margin: 10vh 2vh 20vh;
   padding: 4vh 1vh;
   border-radius: 15vh;
   background-color: #eeddc7;
@@ -60,14 +93,30 @@ button.startbutton {
   font-weight: 600;
 }
 
-button.startbutton:hover {
-  background-color: #ebd3b3;
+.homePageContainer .bottomstartbutton {
+  background-color: var(--button-clickable);
+  color: #61685f;
+  width: 323px;
+  height: 10vh;
+  font-size: 1.1em;
+  border: 1px solid #6d655a;
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
 }
 
-h1, h2, h3 {
-  font-family: "Playfair Display", serif;
-  font-weight:300;
+.homePageContainer p {
+  width: 323px;
+}
+
+.homePageContainer a {
+  width: 323px;
   text-align: center;
+  padding-bottom:10px;
+}
+
+.homePageContainer .homepageText p{
+  background-color: #fff;
+  padding: 2vh 2vh;
 }
 
 h1 { 
