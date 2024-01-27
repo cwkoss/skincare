@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/skincremental.com/static/css/main.c40cf308.chunk.css",
-    "main.js": "/skincremental.com/static/js/main.a8c970da.chunk.js",
-    "main.js.map": "/skincremental.com/static/js/main.a8c970da.chunk.js.map",
-    "runtime-main.js": "/skincremental.com/static/js/runtime-main.7dc358f3.js",
-    "runtime-main.js.map": "/skincremental.com/static/js/runtime-main.7dc358f3.js.map",
-    "static/js/2.70a6957e.chunk.js": "/skincremental.com/static/js/2.70a6957e.chunk.js",
-    "static/js/2.70a6957e.chunk.js.map": "/skincremental.com/static/js/2.70a6957e.chunk.js.map",
-    "static/js/3.c7482093.chunk.js": "/skincremental.com/static/js/3.c7482093.chunk.js",
-    "static/js/3.c7482093.chunk.js.map": "/skincremental.com/static/js/3.c7482093.chunk.js.map",
-    "index.html": "/skincremental.com/index.html",
-    "precache-manifest.ab75f9ceef5cd91347dbcfc61edbea97.js": "/skincremental.com/precache-manifest.ab75f9ceef5cd91347dbcfc61edbea97.js",
-    "service-worker.js": "/skincremental.com/service-worker.js",
-    "static/css/main.c40cf308.chunk.css.map": "/skincremental.com/static/css/main.c40cf308.chunk.css.map",
-    "static/js/2.70a6957e.chunk.js.LICENSE.txt": "/skincremental.com/static/js/2.70a6957e.chunk.js.LICENSE.txt"
+    "main.css": "./static/css/main.c40cf308.chunk.css",
+    "main.js": "./static/js/main.a8c970da.chunk.js",
+    "main.js.map": "./static/js/main.a8c970da.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.565bf1d9.js",
+    "runtime-main.js.map": "./static/js/runtime-main.565bf1d9.js.map",
+    "static/js/2.5b9abcd2.chunk.js": "./static/js/2.5b9abcd2.chunk.js",
+    "static/js/2.5b9abcd2.chunk.js.map": "./static/js/2.5b9abcd2.chunk.js.map",
+    "static/js/3.c7482093.chunk.js": "./static/js/3.c7482093.chunk.js",
+    "static/js/3.c7482093.chunk.js.map": "./static/js/3.c7482093.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.c15a3e08b52f8440c3930c00eb3ad5f5.js": "./precache-manifest.c15a3e08b52f8440c3930c00eb3ad5f5.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.c40cf308.chunk.css.map": "./static/css/main.c40cf308.chunk.css.map",
+    "static/js/2.5b9abcd2.chunk.js.LICENSE.txt": "./static/js/2.5b9abcd2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.7dc358f3.js",
-    "static/js/2.70a6957e.chunk.js",
+    "static/js/runtime-main.565bf1d9.js",
+    "static/js/2.5b9abcd2.chunk.js",
     "static/css/main.c40cf308.chunk.css",
     "static/js/main.a8c970da.chunk.js"
   ]
