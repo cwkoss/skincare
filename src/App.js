@@ -9,6 +9,7 @@ import FinalizeRecipe from './FinalizeRecipe';
 import SavedRecipe from './SavedRecipe';
 import OrderFormulation from './OrderFormulation';
 import OrderSuccess from './OrderSuccess';
+import Contact from './Contact';
 
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
         <Route path="/saved-recipe" element={<SavedRecipe />} />
         <Route path="/order-formulation" element={<OrderFormulation />} />
         <Route path="/order-success" element={<OrderSuccess />} />
+        <Route path="/contact" element={<Contact />}/>
       </Routes>
     </Router>
   );

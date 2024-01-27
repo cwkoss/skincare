@@ -64,7 +64,7 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   text-align:left;
-  margin-bottom:8vh;
+  margin-bottom:3vh;
 }
 
 .homePageContainer .title h1{
@@ -82,7 +82,7 @@ h1, h2, h3 {
 }
 
 .homePageContainer .startbutton {
-  margin: 10vh 2vh 20vh;
+  margin: 10vh 2vh 12vh;
   padding: 4vh 1vh;
   border-radius: 15vh;
   background-color: #eeddc7;
@@ -274,4 +274,41 @@ div.commentary {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.contact-us-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  margin-top: 20px;
+}
+
+.contact-us-form textarea {
+  width: 100%;
+  height: 300px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1em;
+}
+
+.contact-us-form input {
+  font-size: 1.1em;
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.contact-us-form label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
 }
