@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './firebase-config';
-import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 function OrderFormulation() {
     const navigate = useNavigate();
@@ -33,7 +33,8 @@ function OrderFormulation() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await addDoc(collection(db, "orders"), {
+            const orderId = new Date().getTime() + "=" + recipeId;
+            await await setDoc(doc(db, "orders", orderId), {
                 name,
                 recipeId,
                 phoneNumber,
