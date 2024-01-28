@@ -14,7 +14,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom, #e8ece4 0%, #e6ece3 10%, #eaf0e7 30%, #ead9c4 60%, #ead9c4 80%,#fff 100%);
+  background: linear-gradient(to bottom, #e8ebe6 0%, #e7ebe6 10%, #ebeee9 30%, #ebe2d8 60%, #ece5db 80%);
   background-attachment: fixed;
   background-size: cover;
   height: 100%;
