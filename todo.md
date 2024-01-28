@@ -1,4 +1,6 @@
+- Make AI drop user on finalizeRecipe instead of proportion seletor, automatically round to 100%
 - pass goals, product, fragrance and commentary into saved recipe
+- Build variation selector
 - Ingredient selector update - pick exclude, maybe, include
 - Update product list to Cleanser, daytime moisturizer with SPF, nighttime moisturizer, scalp oil
 - build page that computes weights from target weight and proportions "prep assist" tool
