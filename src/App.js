@@ -42,7 +42,7 @@ function App() {
         <Route path="/" element={
           <div style={homePageStyle} className="homePageContainer">
             <div className="title">
-              <h1>Skincremental</h1>
+              <h1><img src="/logo.png" className="logo"></img> Skincremental</h1>
               <h4>Revolutionizing Skincare, One Batch at a Time!</h4>
             </div>
             <Link to="/goals"><button className="startbutton">Design Custom <br /> Skincare Recipe</button></Link>

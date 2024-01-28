@@ -108,6 +108,12 @@ h1, h2, h3 {
   width: 323px;
 }
 
+.homePageContainer .logo {
+  width: 35x;
+  height: 35px;
+}
+
+
 .homePageContainer a {
   width: 323px;
   text-align: center;
