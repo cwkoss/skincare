@@ -300,7 +300,35 @@ const ingredients = {
         good_for: ["Adult acne", "Atopic dermatitis"],
         bad_for: ["Sensitive Skin"] // may cause irritation in higher concentrations or sensitive individuals
     },
+    "Rosehip Seed Oil": {
+        phase: "oil",
+        hlb: 0,
+        max_percent: 10,
+        default_percent: 2,
+        description: "Rosehip Seed Oil is rich in essential fatty acids and antioxidants. It's renowned for its skin-regenerative properties, aiding in reducing scars and fine lines. High in vitamins A and C, it helps in evening out skin tone and improving hydration.",
+        good_for: ["Wrinkles", "Dry skin", "Sun Protection", "Aging or age spots"],
+        bad_for: [] // Generally well-tolerated, but always patch test
+    },
 
+    "Geranium Oil": {
+        phase: "additive",
+        hlb: 0,
+        max_percent: 1,
+        default_percent: 0.5,
+        description: "Geranium Oil, known for its floral scent, is used for its astringent, antiseptic, and anti-inflammatory properties. It helps in balancing sebum production, enhancing skin elasticity, and promoting the healing of scars and spots.",
+        good_for: ["Adult acne", "Large pores", "Wrinkles"],
+        bad_for: ["Sensitive Skin"] // Can be irritating for some sensitive skin types
+    },
+
+    "Carrot Seed Oil": {
+        phase: "additive",
+        hlb: 0,
+        max_percent: 1,
+        default_percent: 0.5,
+        description: "Carrot Seed Oil is valued for its antioxidant properties and high vitamin A content. It's considered excellent for sun protection, rejuvenating aged skin, and promoting skin healing. Also known for its ability to rejuvenate and regenerate skin tissues.",
+        good_for: ["Aging or age spots", "Sun Protection", "Wrinkles"],
+        bad_for: ["Sensitive Skin"] // Can be potent; patch test recommended
+    },
     /*"Cedarwood Oil": {
         phase: "additive",
         hlb: 0,
