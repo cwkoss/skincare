@@ -313,7 +313,7 @@ const ingredients = {
     "Geranium Oil": {
         phase: "additive",
         hlb: 0,
-        max_percent: 1,
+        max_percent: 2,
         default_percent: 0.5,
         description: "Geranium Oil, known for its floral scent, is used for its astringent, antiseptic, and anti-inflammatory properties. It helps in balancing sebum production, enhancing skin elasticity, and promoting the healing of scars and spots.",
         good_for: ["Adult acne", "Large pores", "Wrinkles"],
@@ -323,8 +323,8 @@ const ingredients = {
     "Carrot Seed Oil": {
         phase: "additive",
         hlb: 0,
-        max_percent: 1,
-        default_percent: 0.5,
+        max_percent: 5,
+        default_percent: 1,
         description: "Carrot Seed Oil is valued for its antioxidant properties and high vitamin A content. It's considered excellent for sun protection, rejuvenating aged skin, and promoting skin healing. Also known for its ability to rejuvenate and regenerate skin tissues.",
         good_for: ["Aging or age spots", "Sun Protection", "Wrinkles"],
         bad_for: ["Sensitive Skin"] // Can be potent; patch test recommended
