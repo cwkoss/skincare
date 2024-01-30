@@ -125,6 +125,16 @@ h1, h2, h3 {
   padding: 2vh 2vh;
 }
 
+.body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 333px;
+  background-color: #fff9;
+  height: 100vh;
+  padding: 5px;
+}
+
 h1 { 
   font-size: 1.5em;
 }
@@ -163,7 +173,7 @@ button.selected {
 
 button.submit {
   align-items: center;
-  width: 70vw;
+  width: 323px;
   padding: 10px 20px;
 
   border-radius: 5px;

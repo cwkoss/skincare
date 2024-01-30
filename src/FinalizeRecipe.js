@@ -43,7 +43,7 @@ function FinalizeRecipe() {
     };
 
     return (
-        <div>
+        <div className="body-container">
             <h2>Name Your Custom Skincare Recipe</h2>
             <input
                 type="text"
