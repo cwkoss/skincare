@@ -196,6 +196,15 @@ button.submit:disabled {
   cursor: not-allowed;
 }
 
+p.why-disabled {
+  color: red;
+  position: absolute;
+  width: 333px;
+  text-align: center;
+  font-size: 0.6em;
+  bottom: 0%;
+}
+
 /* Product.css */
 .product-container {
   text-align: center;

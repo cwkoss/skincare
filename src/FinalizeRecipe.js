@@ -11,6 +11,8 @@ function FinalizeRecipe() {
     const recipe = location.state?.recipe;
     const commentary = location.state?.commentary;
 
+    const isRecipeNameValid = recipeName.trim().length > 0;
+
     // Handler to save the recipe
     const handleConfirmAndSave = async () => {
         try {
@@ -51,7 +53,7 @@ function FinalizeRecipe() {
                 value={recipeName}
                 onChange={(e) => setRecipeName(e.target.value)}
             />
-            <h2>Your Recipe</h2>
+            <h2>Your Base Recipe</h2>
             <div className="recipe">
                 {recipe && Object.keys(recipe).map((key, index) => (
                     <div key={index}>
@@ -63,8 +65,11 @@ function FinalizeRecipe() {
             <div className="actions">
                 <button onClick={handleChangeIngredients}>Change Ingredients</button>
                 <button onClick={handleChangeProportions}>Change Proportions</button>
-                <button className="submit" onClick={handleConfirmAndSave}>Confirm and Save</button>
+                <button className="submit" onClick={handleConfirmAndSave} disabled={!isRecipeNameValid}>Confirm and Save</button>
             </div>
+            {!isRecipeNameValid && (
+                <p className="why-disabled">Please enter a recipe name.</p>
+            )}
         </div>
     );
 }
