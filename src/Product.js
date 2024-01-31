@@ -31,17 +31,23 @@ function Product({ setProductData }) {
         },
         "Before Bed Face Moisturizing Cream": {
             description: "A deeply nourishing cream that will hydrate your skin while you sleep, leaving it feeling soft and refreshed in the morning.",
+            bannedIngredients: [],
+            mustIncludeIngredients: [],
         },
         "Body Moisturizing Cream or Body Butter": {
             description: "Build a deeply hydrading and nourishing to lock in moisture and rejuvenate the skin. Body moisturizers are typically richer and thicker in texture than facial moisturizers, designed to hydrate the less sensitive, more robust skin of the body.",
+            bannedIngredients: [],
+            mustIncludeIngredients: [],
         },
         "Face Oil": {
             description: "Formulate an oil to deeply nourish and rejuvenate your skin, best used in combination with a separate SPF product during the day to ensure full sun protection while maintaining radiant skin.",
             bannedIngredients: aqueousIngredients,
+            mustIncludeIngredients: [],
         },
         "Hair and Scalp Oil": {
             description: "Formulate a soothing and revitalizing hair and scalp oil to nourish your scalp, strengthen hair roots, and add a healthy shine to your hair.  Use as a pre-shampoo treatment or as a leave-in conditioner.",
             bannedIngredients: aqueousIngredients,
+            mustIncludeIngredients: [],
         },
     };
 
