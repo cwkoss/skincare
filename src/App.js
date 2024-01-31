@@ -10,6 +10,7 @@ import SavedRecipe from './SavedRecipe';
 import OrderFormulation from './OrderFormulation';
 import OrderSuccess from './OrderSuccess';
 import Contact from './Contact';
+import OrderPricing from './OrderPricing';
 
 
 function App() {
@@ -59,7 +60,7 @@ function App() {
               <p><strong>Join the Skincremental Revolution:</strong> Where skincare is more than a routine – it's a dynamic, personalized journey. Be a part of a community that chooses sustainability, customization, and innovation.</p>
             </div>
             <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
-            <Link to="/contact"><a href="/contact">Contact us</a></Link>
+            <Link to="/contact"><span>Contact us</span></Link>
           </div>
         } />
         <Route path="/goals" element={
@@ -78,6 +79,7 @@ function App() {
         <Route path="/order-formulation" element={<OrderFormulation />} />
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/contact" element={<Contact />}/>
+        <Route path="/order-pricing" element={<OrderPricing />} />
       </Routes>
     </Router>
   );
