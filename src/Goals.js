@@ -14,6 +14,7 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
     "Atopic dermatitis"
   ];
 
+  /*
   const goalsToIngredients = {
     "Adult acne": ["Tea Tree Oil", "Green Tea", "Honey", "Apple Cider Vinegar", "Zinc Oxide"],
     "Dry skin": ["Shea Butter", "Cocoa Butter", "Hyaluronic Acid", "Olive Oil", "Coconut Oil"],
@@ -25,7 +26,7 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
     "Aging or age spots": ["Vitamin C", "Retinol", "Hyaluronic Acid", "Argan Oil", "Niacinamide (Vitamin B3)"],
     "Large pores": ["Apple Cider Vinegar", "Green Tea", "Clay (if available, not in list)", "Honey", "Tea Tree Oil"],
     "Atopic dermatitis": ["Oat Milk", "Sunflower Oil", "Shea Butter", "Aloe Vera Gel", "Cocoa Butter"]
-};
+};*/
 
 
   const moods = [
