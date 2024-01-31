@@ -39,7 +39,7 @@ function Product({ setProductData }) {
     return (
         <div className="product-container">
             <h2>Select a Skincare Product Type</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="scrollable-content">
                 {Object.entries(skincareProducts).map(([key, description]) => (
                     <div key={key}>
                         <button type="button" onClick={() => handleSelection(key)}
