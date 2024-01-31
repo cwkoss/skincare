@@ -14,9 +14,6 @@ function RecipeBuilder() {
     
     const location = useLocation();
     const initialRecipe = location.state?.recipe;
-    console.log(location.state);
-
-    console.log("initialRecipe", initialRecipe);
 
 
 
