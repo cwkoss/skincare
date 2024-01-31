@@ -61,7 +61,7 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
     setGoalsData(selectedOptions);
     setSelectedMoodsApp(selectedMoods);
     setIncludeFragranceApp(includeFragrance);
-    navigate('/product');
+    navigate('/summary');
   };
 
   return (

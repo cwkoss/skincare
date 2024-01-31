@@ -7,7 +7,7 @@ function Product({ setProductData }) {
 
     const skincareProducts = {
         "Daytime Face Moisturizing Cream with SPF": "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
-        "Face Moisturizing Cream (No SPF)": "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, design a cream that will deeply moisturizes your skin, leaving it feeling smooth and refreshed",
+        "AM/PM Face Moisturizing Cream (No SPF)": "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, design a cream that will deeply moisturizes your skin, leaving it feeling smooth and refreshed",
         "Body Moisturizing Cream or Body Butter": "Build a deeply hydrading and nourishing to lock in moisture and rejuvenate the skin. Body moisturizers are typically richer and thicker in texture than facial moisturizers, designed to hydrate the less sensitive, more robust skin of the body.",
         //toner: "Applied after cleansing, toner helps to remove any remaining impurities and balances the pH of the skin.",
         //serum: "Highly concentrated with active ingredients, serums target specific skin concerns such as aging, hydration, or brightening.",
@@ -33,7 +33,7 @@ function Product({ setProductData }) {
         e.preventDefault();
         setProductData(selectedProduct); 
         // Navigate to the next form or a summary page
-        navigate('/summary'); // Replace '/summary' with the path of your next step
+        navigate('/goals');
     };
 
     return (

@@ -45,7 +45,7 @@ function App() {
               <h1><img src="/logo.png" className="logo"></img> Skincremental</h1>
               <h4>Revolutionizing Skincare, One Batch at a Time!</h4>
             </div>
-            <Link to="/goals"><button className="startbutton">Design Custom <br /> Skincare Recipe</button></Link>
+            <Link to="/product"><button className="startbutton">Design Custom <br /> Skincare Recipe</button></Link>
             <div className="homepageText">
               <p><strong>Tailored to You, Evolving with You:</strong> <br /> Small batch custom-crafted skincare that adapts to your unique needs, lifestyle, and environmental changes.</p>
               <p><strong>Double the Discovery, Double the Impact:</strong> <br /> Embark on a skincare adventure with every order as you try two variations of your custom formulation. Use, assess, and let us know your favorite. Our AI assistant will refine your choice into two new exploratory batches for your next order. Your skincare journey is an ongoing adventure of discovery and optimization.</p>
@@ -58,7 +58,7 @@ function App() {
               <p><strong>Conscious, Clean, and Community-Driven:</strong> We're not just about great skincare; we're about a healthier planet. Our packaging? Recycled, sterilized, and reused for future orders. Our ingredients? We strive to source from local Pacific Northwest small and family-owned businesses whenever possible. For each jar you return for recycling, we’ll donate $1 to a local charity.</p>
               <p><strong>Join the Skincremental Revolution:</strong> Where skincare is more than a routine – it's a dynamic, personalized journey. Be a part of a community that chooses sustainability, customization, and innovation.</p>
             </div>
-            <Link to="/goals"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
+            <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
             <Link to="/contact"><a href="/contact">Contact us</a></Link>
           </div>
         } />
