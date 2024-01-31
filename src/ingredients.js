@@ -208,7 +208,7 @@ const ingredients = {
     },
     "Castille Soap": {
         phase: "surfactant",
-        hlb: "10",
+        hlb: 10,
         description: "Gentle and versatile cleanser, made from olive and hemp oils, suitable for sensitive skin.",
         good_for: ["Sensitive Skin"],
         bad_for: [],
@@ -217,7 +217,7 @@ const ingredients = {
     },
     "Zinc Oxide": {
         phase: "additive",
-        hlb: 0,
+        hlb: 20,
         max_percent: 25,
         default_percent: 10,
         description: "Sunscreen agent, provides broad-spectrum UV protection, also known for its soothing and astringent properties.",
@@ -424,17 +424,17 @@ const ingredients = {
         description: "Ponderosa Pine oil, with its fresh forest scent, is used for its invigorating properties and potential skin benefits.",
         good_for: [],
         bad_for: []
-    },*/
+    },
     "Turmeric": {
         phase: "additive",
-        hlb: 0,
+        hlb: 20,
         max_percent: 1,
         default_percent: 0.5,
         description: " Anti-inflammatory, antimicrobial, helps in improving skin tone and reducing scars.",
         good_for: ["Redness", "Adult acne", "Atopic dermatitis"],
         bad_for: []
     },
-    /* "Cinnamon": {
+     "Cinnamon": {
         phase: "additive",
         hlb: 0,
         max_percent: 0.5,
@@ -463,7 +463,7 @@ const ingredients = {
     },*/
     "Tepezcohuite Mimosa Tenuiflora Infusion": {
         phase: "aqueous",
-        hlb: 0, // Typically, herbal infusions do not have an HLB value
+        hlb: 20, 
         max_percent: 10,
         default_percent: 5,
         description: "Rich in tannins and antioxidants, known for its healing, regenerative, and antimicrobial properties. Used to soothe skin conditions, promote wound healing, and provide anti-aging benefits. Also known as Jurema.",
