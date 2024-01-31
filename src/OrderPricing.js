@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { db } from './firebase-config'; // Adjust with your actual firebase config import
 import { doc, getDoc } from 'firebase/firestore';
@@ -33,21 +33,23 @@ function OrderPricing() {
     }, [location.search]);
 
 
-    const calculateIngredients = () => {
-        const totalParts = Object.values(recipeData.ingredients).reduce((sum, part) => sum + part, 0);
-        const newIngredientList = Object.entries(recipeData.ingredients).map(([name, parts]) => {
-            const ingredientGrams = (targetGrams / totalParts) * parts;
-            const ingredientCost = ingredients[name].cost_per_g * ingredientGrams;
-            return { name, grams: ingredientGrams, cost: ingredientCost };
-        });
-        setIngredientList(newIngredientList);
-    };
+    const calculateIngredients = useCallback(() => {
+        if (recipeData) {
+            const totalParts = Object.values(recipeData.ingredients).reduce((sum, part) => sum + part, 0);
+            const newIngredientList = Object.entries(recipeData.ingredients).map(([name, parts]) => {
+                const ingredientGrams = (targetGrams / totalParts) * parts;
+                const ingredientCost = ingredients[name].cost_per_g * ingredientGrams;
+                return { name, grams: ingredientGrams, cost: ingredientCost };
+            });
+            setIngredientList(newIngredientList);
+        }
+    }, [recipeData, targetGrams]);
 
     useEffect(() => {
         if (recipeData && targetGrams > 0) {
             calculateIngredients();
         }
-    }, [recipeData, targetGrams]);
+    }, [recipeData, targetGrams, calculateIngredients]);
 
 
     return (

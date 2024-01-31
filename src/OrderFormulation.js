@@ -33,7 +33,7 @@ function OrderFormulation() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const orderId = new Date().getTime() + "=" + recipeId;
+            const orderId = new Date().getTime() + "-" + recipeId;
             await await setDoc(doc(db, "orders", orderId), {
                 name,
                 recipeId,
