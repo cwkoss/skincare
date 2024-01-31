@@ -12,6 +12,7 @@ function OrderPricing() {
 
     const totalGrams = ingredientList.reduce((sum, ingredient) => sum + ingredient.grams, 0);
     const totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.cost, 0);
+    const totalParts = Object.values(recipeData?.ingredients || {}).reduce((sum, part) => sum + part, 0);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -20,7 +21,6 @@ function OrderPricing() {
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                console.log(docSnap.data());
                 setRecipeData(docSnap.data());
             } else {
                 console.log("No such document!");
@@ -39,7 +39,7 @@ function OrderPricing() {
             const newIngredientList = Object.entries(recipeData.ingredients).map(([name, parts]) => {
                 const ingredientGrams = (targetGrams / totalParts) * parts;
                 const ingredientCost = ingredients[name].cost_per_g * ingredientGrams;
-                return { name, grams: ingredientGrams, cost: ingredientCost };
+                return { name, parts: parts, grams: ingredientGrams, cost: ingredientCost };
             });
             setIngredientList(newIngredientList);
         }
@@ -65,6 +65,7 @@ function OrderPricing() {
                 <thead>
                     <tr>
                         <th>Ingredient</th>
+                        <th>Parts</th>
                         <th>Grams</th>
                         <th>Cost</th>
                     </tr>
@@ -73,12 +74,14 @@ function OrderPricing() {
                     {ingredientList.map((ingredient, index) => (
                         <tr key={index}>
                             <td>{ingredient.name}</td>
+                            <td>{ingredient.parts}</td>
                             <td>{ingredient.grams.toFixed(3)}</td>
                             <td>${ingredient.cost.toFixed(2)}</td>
                         </tr>
                     ))}
                     <tr>
                         <td><strong>Total</strong></td>
+                        <td>{totalParts}</td>
                         <td>{totalGrams.toFixed(3)}</td>
                         <td>${totalCost.toFixed(2)}</td>
                     </tr>
