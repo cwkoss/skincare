@@ -53,7 +53,7 @@ function OrderPricing() {
 
 
     return (
-        <div>
+        <div className="order-pricing">
             <h1>Order Pricing</h1>
             <input
                 type="number"
