@@ -23,7 +23,7 @@ function FinalizeRecipe() {
 
             console.log(recipeId);
             console.log(location.state);
-            const docRef = await setDoc(doc(db, "formulations", recipeId), {
+            await setDoc(doc(db, "formulations", recipeId), {
                 name: recipeName,
                 ingredients: recipe,
                 commentary: commentary,
