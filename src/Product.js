@@ -6,8 +6,8 @@ function Product({ setProductData }) {
     const [selectedProduct, setSelectedProduct] = useState('');
 
     const skincareProducts = {
-        "Daytime Moisturizing Cream with SPF": "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
-        "Moisturizing Cream (No SPF)": "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, this cream deeply moisturizes your skin, leaving it feeling smooth and refreshed",
+        "Daytime Face Moisturizing Cream with SPF": "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
+        "Face Moisturizing Cream (No SPF)": "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, this cream deeply moisturizes your skin, leaving it feeling smooth and refreshed",
         //toner: "Applied after cleansing, toner helps to remove any remaining impurities and balances the pH of the skin.",
         //serum: "Highly concentrated with active ingredients, serums target specific skin concerns such as aging, hydration, or brightening.",
         //moisturizer: "Hydrates the skin and locks in moisture. It can come in various forms like lotions, creams, and gels.",
