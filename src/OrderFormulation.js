@@ -53,8 +53,9 @@ function OrderFormulation() {
     if (!recipeData) return <div>Loading...</div>;
 
     return (
-        <div>
+        <div className="body-container">
             <h2>{recipeData.name}</h2>
+            <div className="scrollable-content">
             <div className="recipe">
                 {Object.keys(recipeData.ingredients).map((key, index) => (
                     <div key={index}>
@@ -66,15 +67,15 @@ function OrderFormulation() {
             <p>We currently are only serving people in the Seattle area. <a href="#">Click here</a> to be put on a waiting list for us to formulate and ship your recipe once we have that set up.</p>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Your Name:</label>
+                    <label>Your Name:</label><br />
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div>
-                    <label>Mobile phone number (We'll text with you to coordinate delivery):</label>
+                    <label>Mobile phone number (We'll text with you to coordinate delivery):</label><br />
                     <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                 </div>
                 <div>
-                    <label>Are you willing to pick it up from Chris Koss's house?</label>
+                    <label>Are you willing to pick it up from Chris Koss's house?</label><br />
                     <select value={pickup} onChange={(e) => setPickup(e.target.value === 'true')}>
                         <option value="true">Yes</option>
                         <option value="false">No</option>
@@ -82,16 +83,18 @@ function OrderFormulation() {
                 </div>
                 {!pickup && (
                     <div>
-                        <label>Delivery Address:</label>
-                        <input type="text" placeholder="Street 1" value={address.street1} onChange={(e) => setAddress({ ...address, street1: e.target.value })} />
-                        <input type="text" placeholder="Street 2" value={address.street2} onChange={(e) => setAddress({ ...address, street2: e.target.value })} />
-                        <input type="text" value="Seattle" readOnly />
-                        <input type="text" value="WA" readOnly />
+                        <label>Delivery Address:</label><br />
+                        <input type="text" placeholder="Street 1" value={address.street1} onChange={(e) => setAddress({ ...address, street1: e.target.value })} /><br />
+                        <input type="text" placeholder="Street 2" value={address.street2} onChange={(e) => setAddress({ ...address, street2: e.target.value })} /><br />
+                        <input type="text" value="Seattle" readOnly /><br />
+                        <input type="text" value="WA" readOnly /><br />
                         <input type="text" placeholder="Zip Code" value={address.zip} onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
                     </div>
                 )}
-                <button type="submit" className="submit">Submit Order</button>
             </form>
+            <div className="bottom-spacer"></div>
+            </div>
+            <button type="submit" className="submit">Submit Order</button>
         </div>
     );
 }
