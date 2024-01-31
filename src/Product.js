@@ -100,6 +100,7 @@ function Product({ setProductData }) {
                         </p>
                     </div>
                 ))}
+                <div className="bottom-spacer"></div>
                 <button className="submit" type="submit" disabled={!selectedProduct}>Next</button>
             </form>
         </div>

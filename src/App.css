@@ -262,9 +262,13 @@ div.ingredient-row {
 }
 
 .scrollable-content {
-  max-height: calc(100vh - 120px); /* Adjust the height */
-  overflow-y: auto; /* Make it scrollable */
+  max-height: calc(100vh - 120px); 
+  overflow-y: auto;
   padding-bottom: 20px; /* Space at the bottom inside the scrollable area */
+}
+
+.bottom-spacer {
+  height: 50px; 
 }
 
 div.commentary {
