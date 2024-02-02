@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
+import { updateSession } from './sessionUtils';
 
 const loadingMessages = [
   "AI is preparing a recipe for you...",
@@ -39,17 +40,17 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
-      .then(response => {
-        console.log(response);
-        return response.json();
-      })
+    .then(response => response.json())
       .then(data => {
         setLoading(false);
         console.log('Success:', data);
         const recipeResponse = data.reply.choices[0].message.content;
         const parsedResponse = JSON.parse(recipeResponse);
         console.log(parsedResponse);
-        navigate('/recipe-builder', { state: { recipe: parsedResponse } });
+        // Update the session with the AI response
+        updateSession({ aiRecipeResponse: parsedResponse }).then(() => {
+          navigate('/recipe-builder', { state: { recipe: parsedResponse } });
+        });
       })
       .catch((error) => {
         setLoading(false);

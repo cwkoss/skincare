@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
+import { updateSession } from './sessionUtils';
 
 function Product({ setProductData }) {
     const navigate = useNavigate();
@@ -81,8 +82,10 @@ function Product({ setProductData }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setProductData(selectedProduct);
-        // Navigate to the next form or a summary page
-        navigate('/goals');
+        // Use updateSession to send selectedProduct and update lastDateTime
+        updateSession({ selectedProduct }).then(() => {
+            navigate('/goals'); // Navigate after session is updated
+        });
     };
 
     return (

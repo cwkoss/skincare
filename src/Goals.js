@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { updateSession } from './sessionUtils';
 
 
 function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
@@ -59,11 +60,22 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setGoalsData(selectedOptions);
-    setSelectedMoodsApp(selectedMoods);
-    setIncludeFragranceApp(includeFragrance);
-    navigate('/summary');
+    // Prepare the data to send to Firestore
+    const sessionData = {
+      selectedOptions,
+      includeFragrance,
+      selectedMoods,
+    };
+  
+    // Call updateSession to update Firestore document and navigate upon completion
+    updateSession(sessionData).then(() => {
+      setGoalsData(selectedOptions); // Assuming you still want to do this for local state
+      setSelectedMoodsApp(selectedMoods); // Assuming you still want to do this for local state
+      setIncludeFragranceApp(includeFragrance); // Assuming you still want to do this for local state
+      navigate('/summary');
+    });
   };
+  
 
   return (
     <div>

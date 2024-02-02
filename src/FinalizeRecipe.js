@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { db } from './firebase-config';
 import { doc, setDoc } from 'firebase/firestore'
+import { updateSession } from './sessionUtils';
 
 function FinalizeRecipe() {
     const [recipeName, setRecipeName] = useState('');
@@ -30,6 +31,10 @@ function FinalizeRecipe() {
                 createdAt: new Date()
             });
             console.log("Document written with ID: ", recipeId);
+
+            // Update the session with the new recipeId
+            await updateSession({ recipeId: recipeId });
+
             navigate('/saved-recipe', { state: { recipeId: recipeId } });
         } catch (e) {
             console.error("Error adding document: ", e);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Goals from './Goals';
@@ -11,6 +11,7 @@ import OrderFormulation from './OrderFormulation';
 import OrderSuccess from './OrderSuccess';
 import Contact from './Contact';
 import OrderPricing from './OrderPricing';
+import { pushFirstPageLoadInfo  } from './sessionUtils';
 
 
 function App() {
@@ -18,6 +19,11 @@ function App() {
   const [includeFragrance, setIncludeFragrance] = useState('no');
   const [selectedMoods, setSelectedMoods] = useState([]);
   const [productData, setProductData] = useState('');
+  
+  useEffect(() => {
+    pushFirstPageLoadInfo();
+  }, []); // The empty array ensures this effect runs only once after the initial render
+  
 
   const setIncludeFragranceApp = (fragrance) => {
     setIncludeFragrance(fragrance);

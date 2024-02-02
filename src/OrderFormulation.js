@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './firebase-config';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { updateSession } from './sessionUtils';
 
 function OrderFormulation() {
     const navigate = useNavigate();
@@ -51,6 +52,10 @@ function OrderFormulation() {
                 note
             });
             console.log("Order submitted");
+
+            // Update the session with the new orderId
+            await updateSession({ orderId });
+
             navigate('/order-success');
         } catch (e) {
             console.error("Error submitting order: ", e);
