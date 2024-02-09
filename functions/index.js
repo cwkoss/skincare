@@ -144,7 +144,7 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
                     role: "system",
                     content: `You are an award-winning cosmetic chemist. 
 
-                  Return an array containing 5 json-formatted skincare recipe variations following the specified format:
+                  Return an array containing 10 json-formatted skincare recipe variations following the specified format:
                   
                   [
                     { 
@@ -155,7 +155,7 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
                       "tagline": "A brief description of the variation's purpose, ~3 words",
                       "description": "Explain the variation's purpose and its differences from the original formulation. Highlight benefits and any potential risks, concisely in 2 sentences."
                     },
-                    // ... (repeat for a total of 5 variations)
+                    // ... (repeat for a total of 10 variations)
                   ]
 
                   Example response:
@@ -180,7 +180,7 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
                         "Jojoba ": 10,
                         "description": "This variation boosts Jojoba Oil for unmatched hydration and scalp balance, reducing Sunflower Oil to focus on regulating natural oil production. Ideal for deep nourishment, it promotes a healthier scalp and hair texture with enhanced moisture and balance."
                     }
-                    // ... (repeat for a total of variations)
+                    // ... (repeat for a total of 10 variations)
                   ]
 
                   How to reason through this problem:
@@ -199,7 +199,7 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
               
                   Note: When exceeding default percentages for ingredients, provide a compelling reason within the variation's description.`,
                 },
-                { role: "user", content: "Please make 5 variation options for the following recipe: " + JSON.stringify(inputRecipe) + " .  You may use the ingredients already in the recipe or draw from this list of ingredients: "  + JSON.stringify(inputIngredients) + ".  Make sure the sum of all percentageDeltas within each variation equals 0." },
+                { role: "user", content: "Please make 10 variation options for the following recipe: " + JSON.stringify(inputRecipe.ingredients) + "(only ingredients from this recipe can have negative percentageDeltas).  You may use the ingredients already in the recipe or draw from this list of ingredients: "  + JSON.stringify(inputIngredients) + ".  Make sure the sum of all percentageDeltas within each variation equals 0." },
             ];
             console.log(messageBody);
             const gptResponse = await openai.chat.completions.create({

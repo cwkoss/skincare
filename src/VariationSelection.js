@@ -98,7 +98,15 @@ function VariationSelection() {
             ) : (
                 <div>
                     <button onClick={() => handleSelectionChange('original')}>Original Recipe</button>
-                    {variations.map((variation, index) => (
+                    {variations
+                      .filter(variation => {
+                        // Calculate the sum of numerical values, ignoring non-numeric properties
+                        const sum = Object.keys(variation)
+                          .filter(key => key !== 'tagline' && key !== 'description')
+                          .reduce((acc, key) => acc + variation[key], 0);
+                        return sum === 0;
+                      })
+                    .map((variation, index) => (
                         <div key={index} onClick={() => handleSelectionChange(index)} style={{ marginBottom: '20px', cursor: 'pointer' }}>
                             <h3>{variation.tagline}</h3>
                             <p>{variation.description}</p>
