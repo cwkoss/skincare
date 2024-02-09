@@ -61,8 +61,8 @@ function FinalizeRecipe() {
             <h2>Your Base Recipe</h2>
             <div className="recipe">
                 {recipe && Object.keys(recipe).map((key, index) => (
-                    <div key={index}>
-                        <strong>{key}</strong>: {recipe[key]}
+                    <div className="recipe-row" key={index}>
+                        <strong>{key}:</strong> <span className="align-right">{recipe[key].toFixed(2)}</span>
                     </div>
                 ))}
             </div>
@@ -70,7 +70,7 @@ function FinalizeRecipe() {
             <div className="actions">
                 <button onClick={handleChangeIngredients}>Change Ingredients</button>
                 <button onClick={handleChangeProportions}>Change Proportions</button>
-                <button className="submit" onClick={handleConfirmAndSave} disabled={!isRecipeNameValid}>Confirm and Save</button>
+                <button className="submit" onClick={handleConfirmAndSave} disabled={!isRecipeNameValid}>Save Base Recipe</button>
             </div>
             {!isRecipeNameValid && (
                 <p className="why-disabled">Please enter a recipe name.</p>

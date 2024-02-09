@@ -353,3 +353,14 @@ div.commentary {
   background-color: #f0f0f0;
   border: 1px solid #ddd;
 }
+
+.recipe-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.align-right {
+  text-align: right;
+
+}

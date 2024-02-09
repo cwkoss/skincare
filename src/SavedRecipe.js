@@ -70,8 +70,8 @@ function SavedRecipe() {
             <h2>{recipeData.name}</h2>
             <div className="recipe">
                 {Object.keys(recipeData.ingredients).map((key, index) => (
-                    <div key={index}>
-                        <strong>{key}</strong>: {recipeData.ingredients[key]}
+                    <div className="recipe-row" key={index}>
+                        <strong>{key}:</strong> <span className="align-right">{recipeData.ingredients[key].toFixed(2)}</span>
                     </div>
                 ))}
             </div>
