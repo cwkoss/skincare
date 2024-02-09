@@ -11,6 +11,7 @@ import OrderFormulation from './OrderFormulation';
 import OrderSuccess from './OrderSuccess';
 import Contact from './Contact';
 import OrderPricing from './OrderPricing';
+import VariationSelection from './VariationSelection';
 import { pushFirstPageLoadInfo  } from './sessionUtils';
 
 
@@ -86,6 +87,7 @@ function App() {
         <Route path="/order-success" element={<OrderSuccess />} />
         <Route path="/contact" element={<Contact />}/>
         <Route path="/order-pricing" element={<OrderPricing />} />
+        <Route path="/variation-selection" element={<VariationSelection />} />
       </Routes>
     </Router>
   );

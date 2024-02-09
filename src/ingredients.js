@@ -474,4 +474,38 @@ const ingredients = {
 
 };
 
+export const getFormatedIngredientsList = () => {
+        let formattedString = "";
+    
+        Object.keys(ingredients).forEach((key, index, array) => {
+          formattedString += key;
+    
+          if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
+            formattedString += " (";
+    
+            if (ingredients[key].hasOwnProperty('default_percent')) {
+              formattedString += `default: ${ingredients[key].default_percent}`;
+              if (ingredients[key].hasOwnProperty('max_percent')) {
+                formattedString += ", ";
+              }
+            }
+    
+            if (ingredients[key].hasOwnProperty('max_percent')) {
+              formattedString += `max: ${ingredients[key].max_percent}`;
+            }
+    
+            formattedString += ")";
+          }
+    
+          if (index < array.length - 1) {
+            formattedString += ", ";
+          }
+        });
+    
+        return formattedString;
+      
+}
+
 export default ingredients;
+
+

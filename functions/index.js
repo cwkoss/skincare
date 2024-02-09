@@ -126,3 +126,89 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
         }
     });
 });
+
+exports.getRecipeVariations = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        try {
+            const inputRecipe = request.body.recipe;
+            const inputIngredients = request.body.ingredients;
+
+            if (!inputRecipe) {
+                throw new Error("No recipe provided");
+            }
+            if(!inputIngredients) {
+                throw new Error("No ingredients provided");
+            }
+            const messageBody = [
+                {
+                  role: "system",
+                  content: `You are an award winning cosmetic chemist. 
+
+                  Return a array containing 3 json-formatted skincare recipe variations in the following format:
+                  
+                  { 
+                        ingredientKey1: percentageDelta, (positive values indicate "increase this ingredient by this many parts", negative values indicate "decrease this ingredient by this many parts")
+                        ingredientKey2: percentageDelta,
+                        ingredientKey3: percentageDelta.... (repeat for as many ingredients are changed in this variation)
+                        tagline: "~3 words describing the purpose of the variation",
+                        description: "Describe the purpose of the variation and how it differs from the original formulation.  Include any potential benefits and risks of the variation.  Keep your response concise and to the point, and you don't have to mention every ingredient. Should be about two sentences long."
+                  }
+
+                  Example response:
+                [
+                  {
+                    "tagline": "Enhanced Elasticity and Shine",
+                    "Argan Oil": -2,
+                    "Vitamin E": 1,
+                    "Rosemary Oil": 1,
+                    "description": "Vitamin E and rosemary oil are introduced to improve hair's elasticity and shine. This variation focuses on enhancing the hair's natural luster and strength, complementing the existing benefits of argan and jojoba oils."
+                  },
+                  {
+                    "tagline": "Fragrance and Radiance",
+                    "Sunflower Oil": -1,
+                    "Jasmine Oil": 0.5,
+                    "Geranium Oil": 0.5,
+                    "description": "By adding jasmine and geranium oils, this variation introduces a natural, floral fragrance to the blend. These oils not only offer a delightful scent but also contribute to the radiance and health of the scalp and hair."
+                  },
+                  {
+                    "tagline": "Deep Hydration and Balance",
+                    "Sunflower Oil": -10,
+                    "Jojoba ": 10,
+                    "description": "This variation boosts Jojoba Oil for unmatched hydration and scalp balance, reducing Sunflower Oil to focus on regulating natural oil production. Ideal for deep nourishment, it promotes a healthier scalp and hair texture with enhanced moisture and balance."
+                  }
+                ]
+
+                  You may only use ingredients from this list: ${JSON.stringify(inputIngredients)}. Parentheticals represent the default and maximum percentages for each ingredient if present.
+
+                  "description" should be about 2 sentences, never more than 3.  Do not mention patch testing or shelf life in your commentary - that will be covered elsewhere.
+
+                  IngredientKeysN should exclude the parenthetical default and maximum percentages if present, ex. ""Rosemary Oil (default: 1, max: 2)" should be "Rosemary Oil".
+
+                  Make sure the sum of all percentageDeltas equals exactly 0.  Ex. values of IngredientsKeysN could be [10, -5, -5] or [0.5, 0.5, -1].  Within each variation they all must add up to exactly 0. 
+                  
+                  Do not include any commentatry or text outside of the json object.  
+                  
+                  Ingredients with a default and maximum percentage should typically use the default unless there is a very good reason to exceed them. 
+
+                "
+                `,
+                },
+                { role: "user", content: "Please make 3 variation options for the following recipe: " + JSON.stringify(inputRecipe) },
+              ];
+            console.log(messageBody);
+            const gptResponse = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                temperature: 0.9,
+                n: 1,
+                stream: false,
+                messages: messageBody,
+            });
+            console.log("Request: " + request.body.text);
+            console.log("GPT Response: ", gptResponse.choices[0].message.content);
+            response.send({ reply: gptResponse });
+        } catch (error) {
+            console.error("Error calling OpenAI: ", error);
+            response.status(500).send("Error processing your request: " + error);
+        }
+    });
+});
