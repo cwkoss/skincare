@@ -43,11 +43,11 @@ exports.chatWithOpenAI = functions.https.onRequest((request, response) => {
                 stream: false,
                 messages: [
                     {
-                      role: "system",
-                      content: "You are a helpful assistant designed to help people create skincare forumulations that are safe and effective.  You will receive a potential skincare recipe and should give advice on whether the recipe looks like it will be successful, what the benefits and risks of the recipe are, and suggest potential modifications. Keep your response concise and to the point - it should only include a numbered list of modifications and suggestions.",
+                        role: "system",
+                        content: "You are a helpful assistant designed to help people create skincare forumulations that are safe and effective.  You will receive a potential skincare recipe and should give advice on whether the recipe looks like it will be successful, what the benefits and risks of the recipe are, and suggest potential modifications. Keep your response concise and to the point - it should only include a numbered list of modifications and suggestions.",
                     },
                     { role: "user", content: inputText },
-                  ],
+                ],
             });
             console.log("Request: " + request.body.text);
             console.log("GPT Response: ", gptResponse.choices[0].message.content);
@@ -68,7 +68,7 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
             if (!inputText) {
                 throw new Error("No text provided");
             }
-            if(!inputIngredients) {
+            if (!inputIngredients) {
                 throw new Error("No ingredients provided");
             }
 
@@ -79,8 +79,8 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                 stream: false,
                 messages: [
                     {
-                      role: "system",
-                      content: `You are an award winning cosmetic chemist. 
+                        role: "system",
+                        content: `You are an award winning cosmetic chemist. 
 
                       Return a json-formatted skincare recipe in the following format:
                       
@@ -115,7 +115,7 @@ exports.getInitialRecipe = functions.https.onRequest((request, response) => {
                     `,
                     },
                     { role: "user", content: inputText },
-                  ],
+                ],
             });
             console.log("Request: " + request.body.text);
             console.log("GPT Response: ", gptResponse.choices[0].message.content);
@@ -136,65 +136,64 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
             if (!inputRecipe) {
                 throw new Error("No recipe provided");
             }
-            if(!inputIngredients) {
+            if (!inputIngredients) {
                 throw new Error("No ingredients provided");
             }
             const messageBody = [
                 {
-                  role: "system",
-                  content: `You are an award winning cosmetic chemist. 
+                    role: "system",
+                    content: `You are an award-winning cosmetic chemist. 
 
-                  Return a array containing 3 json-formatted skincare recipe variations in the following format:
+                  Return an array containing 3 json-formatted skincare recipe variations following the specified format:
                   
-                  { 
-                        ingredientKey1: percentageDelta, (positive values indicate "increase this ingredient by this many parts", negative values indicate "decrease this ingredient by this many parts")
-                        ingredientKey2: percentageDelta,
-                        ingredientKey3: percentageDelta.... (repeat for as many ingredients are changed in this variation)
-                        tagline: "~3 words describing the purpose of the variation",
-                        description: "Describe the purpose of the variation and how it differs from the original formulation.  Include any potential benefits and risks of the variation.  Keep your response concise and to the point, and you don't have to mention every ingredient. Should be about two sentences long."
-                  }
+                  [
+                    { 
+                      "ingredientKey1": percentageDelta,
+                      "ingredientKey2": percentageDelta,
+                      // Include changes for as many ingredients as are modified in this variation.
+                      // Positive values for percentageDelta indicate an increase, negative values a decrease.
+                      "tagline": "A brief description of the variation's purpose, ~3 words",
+                      "description": "Explain the variation's purpose and its differences from the original formulation. Highlight benefits and any potential risks, concisely in 2 sentences."
+                    }
+                    // Include 2 more variations following the same format.
+                  ]
 
                   Example response:
-                [
-                  {
-                    "tagline": "Enhanced Elasticity and Shine",
-                    "Argan Oil": -2,
-                    "Vitamin E": 1,
-                    "Rosemary Oil": 1,
-                    "description": "Vitamin E and rosemary oil are introduced to improve hair's elasticity and shine. This variation focuses on enhancing the hair's natural luster and strength, complementing the existing benefits of argan and jojoba oils."
-                  },
-                  {
-                    "tagline": "Fragrance and Radiance",
-                    "Sunflower Oil": -1,
-                    "Jasmine Oil": 0.5,
-                    "Geranium Oil": 0.5,
-                    "description": "By adding jasmine and geranium oils, this variation introduces a natural, floral fragrance to the blend. These oils not only offer a delightful scent but also contribute to the radiance and health of the scalp and hair."
-                  },
-                  {
-                    "tagline": "Deep Hydration and Balance",
-                    "Sunflower Oil": -10,
-                    "Jojoba ": 10,
-                    "description": "This variation boosts Jojoba Oil for unmatched hydration and scalp balance, reducing Sunflower Oil to focus on regulating natural oil production. Ideal for deep nourishment, it promotes a healthier scalp and hair texture with enhanced moisture and balance."
-                  }
-                ]
-
-                  You may only use ingredients from this list: ${JSON.stringify(inputIngredients)}. Parentheticals represent the default and maximum percentages for each ingredient if present.
-
-                  "description" should be about 2 sentences, never more than 3.  Do not mention patch testing or shelf life in your commentary - that will be covered elsewhere.
-
-                  IngredientKeysN should exclude the parenthetical default and maximum percentages if present, ex. ""Rosemary Oil (default: 1, max: 2)" should be "Rosemary Oil".
-
-                  Make sure the sum of all percentageDeltas equals exactly 0.  Ex. values of IngredientsKeysN could be [10, -5, -5] or [0.5, 0.5, -1].  Within each variation they all must add up to exactly 0. 
-                  
-                  Do not include any commentatry or text outside of the json object.  
-                  
-                  Ingredients with a default and maximum percentage should typically use the default unless there is a very good reason to exceed them. 
-
-                "
-                `,
+                  [
+                    {
+                        "tagline": "Enhanced Elasticity and Shine",
+                        "Argan Oil": -2,
+                        "Vitamin E": 1,
+                        "Rosemary Oil": 1,
+                        "description": "Vitamin E and rosemary oil are introduced to improve hair's elasticity and shine. This variation focuses on enhancing the hair's natural luster and strength, complementing the existing benefits of argan and jojoba oils."
+                    },
+                    {
+                        "tagline": "Purifying and Refreshing",
+                        "Sunflower Oil": -2,
+                        "Tea Tree Oil": 1,
+                        "Eucalyptus Oil": 1,
+                        "description": "Introducing Tea Tree and Eucalyptus Oils, this variation focuses on purifying the scalp and providing a refreshing sensation. Ideal for promoting scalp health and clarity, it combines the antimicrobial and invigorating properties of these essential oils to enhance cleanliness and vitality."
+                    },
+                    {
+                        "tagline": "Deep Hydration and Balance",
+                        "Sunflower Oil": -10,
+                        "Jojoba ": 10,
+                        "description": "This variation boosts Jojoba Oil for unmatched hydration and scalp balance, reducing Sunflower Oil to focus on regulating natural oil production. Ideal for deep nourishment, it promotes a healthier scalp and hair texture with enhanced moisture and balance."
+                    }
+                  ]
+              
+                  Rules:
+                  1. The sum of all percentageDeltas within each variation must equal exactly 0.
+                  2. Exclude ingredients with a 0 delta from the variation.
+                  3. Each response must include at least one variation that introduces an ingredient not present in the original recipe. 
+                  4. At least one variation should not introduce any new ingredients but adjust the quantities of existing ones.
+                  5. IngredientKeys should not include default or maximum percentages.
+                  6. Description should be concise, 2-3 sentences max, without mentioning patch testing or shelf life.
+              
+                  Note: When exceeding default percentages for ingredients, provide a compelling reason within the variation's description.`,
                 },
-                { role: "user", content: "Please make 3 variation options for the following recipe: " + JSON.stringify(inputRecipe) },
-              ];
+                { role: "user", content: "Please make 3 variation options for the following recipe: " + JSON.stringify(inputRecipe) + " using the following ingredients: " + JSON.stringify(inputIngredients) },
+            ];
             console.log(messageBody);
             const gptResponse = await openai.chat.completions.create({
                 model: "gpt-3.5-turbo",

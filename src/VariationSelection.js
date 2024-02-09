@@ -99,15 +99,21 @@ function VariationSelection() {
                 <div>
                     <button onClick={() => handleSelectionChange('original')}>Original Recipe</button>
                     {variations.map((variation, index) => (
-                        <button key={index} onClick={() => handleSelectionChange(index)}>
-                            {variation.tagline}
-                            {variation.description && <p>{variation.description}</p>}
-                        </button>
+                        <div key={index} onClick={() => handleSelectionChange(index)} style={{ marginBottom: '20px', cursor: 'pointer' }}>
+                            <h3>{variation.tagline}</h3>
+                            <p>{variation.description}</p>
+                            <ul>
+                                {Object.keys(variation).filter(key => key !== 'tagline' && key !== 'description' && variation[key] !== 0).map(key => (
+                                    <li key={key}>{`${key}: ${variation[key] > 0 ? '+' : ''}${variation[key]}`}</li>
+                                ))}
+                            </ul>
+                        </div>
                     ))}
                 </div>
+
             )}
-            <button 
-                onClick={handleSubmit} 
+            <button
+                onClick={handleSubmit}
                 disabled={selectedVariations.size !== 2}
             >
                 Submit
