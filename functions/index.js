@@ -154,8 +154,8 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
                       // Positive values for percentageDelta indicate an increase, negative values a decrease.
                       "tagline": "A brief description of the variation's purpose, ~3 words",
                       "description": "Explain the variation's purpose and its differences from the original formulation. Highlight benefits and any potential risks, concisely in 2 sentences."
-                    }
-                    // Include 2 more variations following the same format.
+                    },
+                    ... (repeat for 2 more variations)
                   ]
 
                   Example response:
@@ -181,6 +181,12 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
                         "description": "This variation boosts Jojoba Oil for unmatched hydration and scalp balance, reducing Sunflower Oil to focus on regulating natural oil production. Ideal for deep nourishment, it promotes a healthier scalp and hair texture with enhanced moisture and balance."
                     }
                   ]
+
+                  How to reason through this problem:
+                   - First, decide which ingredients you'd like to add or increase, and what ingredientDeltas you want to use for each of them.
+                   - Second, decide which ingredients you'd like to decrease or remove, and set their ingredientDeltas so the sum of all percentageDeltas equals 0.
+                   - Third, double-check that the sum of all percentageDeltas equals 0.
+                   - Fourth, write a brief tagline and description for each variation, highlighting the purpose and benefits of the changes.
               
                   Rules:
                   1. The sum of all percentageDeltas within each variation must equal exactly 0.
@@ -188,11 +194,11 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
                   3. Each response must include at least one variation that introduces an ingredient not present in the original recipe. 
                   4. At least one variation should not introduce any new ingredients but adjust the quantities of existing ones.
                   5. IngredientKeys should not include default or maximum percentages.
-                  6. Description should be concise, 2-3 sentences max, without mentioning patch testing or shelf life.
+                  6. Description should be concise, 2-3 sentences max, without mentioning patch testing or shelf life. Description should focus on the purpose and benefits of the variation rather than describing the specific changes made.
               
                   Note: When exceeding default percentages for ingredients, provide a compelling reason within the variation's description.`,
                 },
-                { role: "user", content: "Please make 3 variation options for the following recipe: " + JSON.stringify(inputRecipe) + " using the following ingredients: " + JSON.stringify(inputIngredients) },
+                { role: "user", content: "Please make 3 variation options for the following recipe: " + JSON.stringify(inputRecipe) + " .  You may use the ingredients already in the recipe or draw from this list of ingredients: "  + JSON.stringify(inputIngredients) + ".  Make sure the sum of all percentageDeltas within each variation equals 0." },
             ];
             console.log(messageBody);
             const gptResponse = await openai.chat.completions.create({
