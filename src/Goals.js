@@ -14,7 +14,7 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
   if (productData === "Hair and Scalp Oil") {
     skincareGoals = ["Dry scalp", "Hair growth", "Hair shine", "Hair strength"];
   } else if (productData === "Body Moisturizing Cream or Body Butter") {
-    skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Stretch marks", "Eczema", "Aging or age spots"];
+    skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Calloused Skin", "Stretch marks", "Eczema", "Aging or age spots"];
   } else {
     skincareGoals = [
       "Adult acne", "Dry skin", "Sensitive Skin", "Wrinkles",
