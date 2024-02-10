@@ -80,7 +80,7 @@ function App() {
           productData={productData}
           includeFragrance={includeFragrance}
           selectedMoods={selectedMoods} />} />
-        <Route path="/recipe-builder" element={<RecipeBuilder />} />
+        <Route path="/recipe-builder" element={<RecipeBuilder productData={productData}/>} />
         <Route path="/finalize-recipe" element={<FinalizeRecipe />} />
         <Route path="/saved-recipe" element={<SavedRecipe />} />
         <Route path="/order-formulation" element={<OrderFormulation />} />

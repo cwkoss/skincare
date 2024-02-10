@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ingredients from './ingredients';
+import {getFilteredIngredientList} from './ingredients';
 import { useLocation } from 'react-router-dom';
 
 
-function RecipeBuilder() {
+function RecipeBuilder({productData}) {
     const navigate = useNavigate();
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});
     const [currentStep, setCurrentStep] = useState('selectIngredients');
     const [recipeCommentary, setRecipeCommentary] = useState('');
     const [shelfLifeEstimate, setShelfLifeEstimate] = useState('');
+    const ingredients = getFilteredIngredientList(productData);
     
     const location = useLocation();
     const initialRecipe = location.state?.recipe;

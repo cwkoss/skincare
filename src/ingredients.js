@@ -1,3 +1,5 @@
+import { skincareProducts } from "./Product";
+
 const ingredients = {
     "Sunflower Oil": {
         phase: "oil",
@@ -240,7 +242,7 @@ const ingredients = {
         hlb: 0,
         max_percent: 1,
         default_percent: 0.1,
-        description: "A form of Vitamin A, helps in skin renewal, boosts collagen production, effective against aging signs. Should be used intermittently until skin aclimates to it. Sun sensitizing, so should only be used at night.",
+        description: "Retinyl Palmitate is an ester of Retinol (Vitamin A) and Palmitic Acid.  It is a powerful antioxidant that may help boosts collagen in the skin, minimizes fine lines and wrinkles, as well as smooths the texture of the skin. Should be used intermittently until skin aclimates to it. Sun sensitizing, so should only be used at night.",
         good_for: ["Wrinkles", "Aging or age spots"],
         bad_for: ["Sensitive Skin"], // can be 
         cost_per_g: 0.4282,
@@ -473,6 +475,16 @@ const ingredients = {
 
 
 };
+
+export const getFilteredIngredientList = (productName) => {
+    return Object.keys(ingredients) // Get the keys of the object.
+        .filter(ingredient => !skincareProducts[productName].bannedIngredients.includes(ingredient)) // Filter keys based on their values.
+        .reduce((acc, key) => {
+            acc[key] = ingredients[key]; // Add the filtered keys to a new object.
+            return acc;
+        }, {});
+    //return ingredients.filter(ingredient => skincareProducts[productName].bannedIngredients.includes(ingredient));
+}
 
 export const getFormatedIngredientsList = () => {
         let formattedString = "";

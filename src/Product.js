@@ -3,54 +3,58 @@ import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { updateSession } from './sessionUtils';
 
+const getAqueousIngredients = () => {
+    const aqueousIngredients = [];
+    Object.entries(ingredients).forEach(([key, ingredient]) => {
+        if (ingredient.hlb > 16) {
+            aqueousIngredients.push(key);
+        }
+    });
+    return aqueousIngredients;
+};
+
+export const skincareProducts = {
+    "Daytime Face Moisturizing Cream with SPF": {
+        description: "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
+        bannedIngredients: ["Retinol"],
+        mustIncludeIngredients: ["Zinc Oxide"],
+    },
+    "AM/PM Face Moisturizing Cream (No SPF)": {
+        description: "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, design a cream that will deeply moisturizes your skin, leaving it feeling smooth and refreshed",
+        bannedIngredients: ["Retinol"],
+        mustIncludeIngredients: [],
+    },
+    "Before Bed Face Moisturizing Cream": {
+        description: "A deeply nourishing cream that will hydrate your skin while you sleep, leaving it feeling soft and refreshed in the morning.",
+        bannedIngredients: [],
+        mustIncludeIngredients: [],
+    },
+    "Body Moisturizing Cream or Body Butter": {
+        description: "Build a deeply hydrading and nourishing to lock in moisture and rejuvenate the skin. Body moisturizers are typically richer and thicker in texture than facial moisturizers, designed to hydrate the less sensitive, more robust skin of the body.",
+        bannedIngredients: [],
+        mustIncludeIngredients: [],
+    },
+    "Face Oil": {
+        description: "Formulate an oil to deeply nourish and rejuvenate your skin, best used in combination with a separate SPF product during the day to ensure full sun protection while maintaining radiant skin.",
+        bannedIngredients: getAqueousIngredients(),
+        mustIncludeIngredients: [],
+    },
+    "Hair and Scalp Oil": {
+        description: "Formulate a soothing and revitalizing hair and scalp oil to nourish your scalp, strengthen hair roots, and add a healthy shine to your hair.  Use as a pre-shampoo treatment or as a leave-in conditioner.",
+        bannedIngredients: getAqueousIngredients(),
+        mustIncludeIngredients: [],
+    },
+};
+
 function Product({ setProductData }) {
     const navigate = useNavigate();
     const [selectedProduct, setSelectedProduct] = useState('');
 
     const aqueousIngredients = getAqueousIngredients();
 
-    function getAqueousIngredients() {
-        const aqueousIngredients = [];
-        Object.entries(ingredients).forEach(([key, ingredient]) => {
-            if (ingredient.hlb > 16) {
-                aqueousIngredients.push(key);
-            }
-        });
-        return aqueousIngredients;
-    }
 
-    const skincareProducts = {
-        "Daytime Face Moisturizing Cream with SPF": {
-            description: "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
-            bannedIngredients: ["Retinol"],
-            mustIncludeIngredients: ["Zinc Oxide"],
-        },
-        "AM/PM Face Moisturizing Cream (No SPF)": {
-            description: "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, design a cream that will deeply moisturizes your skin, leaving it feeling smooth and refreshed",
-            bannedIngredients: ["Retinol"],
-            mustIncludeIngredients: [],
-        },
-        "Before Bed Face Moisturizing Cream": {
-            description: "A deeply nourishing cream that will hydrate your skin while you sleep, leaving it feeling soft and refreshed in the morning.",
-            bannedIngredients: [],
-            mustIncludeIngredients: [],
-        },
-        "Body Moisturizing Cream or Body Butter": {
-            description: "Build a deeply hydrading and nourishing to lock in moisture and rejuvenate the skin. Body moisturizers are typically richer and thicker in texture than facial moisturizers, designed to hydrate the less sensitive, more robust skin of the body.",
-            bannedIngredients: [],
-            mustIncludeIngredients: [],
-        },
-        "Face Oil": {
-            description: "Formulate an oil to deeply nourish and rejuvenate your skin, best used in combination with a separate SPF product during the day to ensure full sun protection while maintaining radiant skin.",
-            bannedIngredients: aqueousIngredients,
-            mustIncludeIngredients: [],
-        },
-        "Hair and Scalp Oil": {
-            description: "Formulate a soothing and revitalizing hair and scalp oil to nourish your scalp, strengthen hair roots, and add a healthy shine to your hair.  Use as a pre-shampoo treatment or as a leave-in conditioner.",
-            bannedIngredients: aqueousIngredients,
-            mustIncludeIngredients: [],
-        },
-    };
+
+    
 
     console.log(aqueousIngredients);
 
