@@ -93,7 +93,7 @@ function Product({ setProductData }) {
     };
 
     return (
-        <div className="product-container">
+        <div className="product-container body-container">
             <h2>Select a Skincare Product Type</h2>
             <form onSubmit={handleSubmit} className="scrollable-content">
                 {Object.entries(skincareProducts).map(([key, value]) => (

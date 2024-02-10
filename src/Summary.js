@@ -111,7 +111,7 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
   }
 
   return (
-    <div>
+    <div className="body-container">
       <h2>Your Selections</h2>
       <h3>Skincare Goals/Concerns:</h3>
       <ul>

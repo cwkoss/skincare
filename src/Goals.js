@@ -78,7 +78,7 @@ function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
   
 
   return (
-    <div>
+    <div className="body-container">
       <h2>Select Your Skincare Goals/Concerns</h2>
       <form onSubmit={handleSubmit}>
         {skincareGoals.map((goal, index) => (
