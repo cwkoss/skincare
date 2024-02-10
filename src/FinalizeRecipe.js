@@ -62,7 +62,7 @@ function FinalizeRecipe() {
             <div className="recipe">
                 {recipe && Object.keys(recipe).map((key, index) => (
                     <div className="recipe-row" key={index}>
-                        <strong>{key}:</strong> <span className="align-right">{recipe[key].toFixed(2)}</span>
+                        <strong>{key}:</strong> <span className="align-right">{recipe[key].toFixed(2)}%</span>
                     </div>
                 ))}
             </div>

@@ -33,6 +33,10 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
       ingredients: formatIngredientsList(ingredients)
     };
 
+    if (productData === "Daytime Face Moisturizing Cream with SPF") {
+      data.text += " I would like to include Zinc Oxide for SPF in the formulation."
+    }
+
     console.log('Sending OpenAI request: ', data.text, data.ingredients);
 
     fetch(endpoint, {
