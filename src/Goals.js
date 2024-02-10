@@ -3,17 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { updateSession } from './sessionUtils';
 
 
-function Goals({ setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
+function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
   const navigate = useNavigate();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [includeFragrance, setIncludeFragrance] = useState('no');
   const [selectedMoods, setSelectedMoods] = useState([]);
 
-  const skincareGoals = [
-    "Adult acne", "Dry skin", "Sensitive Skin", "Wrinkles",
-    "Puffiness", "Redness", "Sun Protection", "Aging or age spots", "Large pores",
-    "Atopic dermatitis"
-  ];
+  var skincareGoals = [];
+
+  if (productData === "Hair and Scalp Oil") {
+    skincareGoals = ["Dry scalp", "Hair growth", "Hair shine", "Hair strength"];
+  } else if (productData === "Body Moisturizing Cream or Body Butter") {
+    skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Stretch marks", "Eczema", "Aging or age spots"];
+  } else {
+    skincareGoals = [
+      "Adult acne", "Dry skin", "Sensitive Skin", "Wrinkles",
+      "Puffiness", "Redness", "Sun Protection", "Aging or age spots", "Large pores",
+      "Eczema"
+    ];
+  }
+
+
 
   /*
   const goalsToIngredients = {

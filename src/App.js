@@ -71,7 +71,8 @@ function App() {
           </div>
         } />
         <Route path="/goals" element={
-          <Goals setGoalsData={setGoalsData}
+          <Goals productData={productData}
+            setGoalsData={setGoalsData}
             setIncludeFragranceApp={setIncludeFragranceApp}
             setSelectedMoodsApp={setSelectedMoodsApp} />
         } />
