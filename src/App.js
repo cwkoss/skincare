@@ -12,6 +12,7 @@ import OrderSuccess from './OrderSuccess';
 import Contact from './Contact';
 import OrderPricing from './OrderPricing';
 import VariationSelection from './VariationSelection';
+import OrderSurvey from './OrderSurvey';
 import { pushFirstPageLoadInfo  } from './sessionUtils';
 
 
@@ -89,6 +90,7 @@ function App() {
         <Route path="/contact" element={<Contact />}/>
         <Route path="/order-pricing" element={<OrderPricing />} />
         <Route path="/variation-selection" element={<VariationSelection />} />
+        <Route path="/order-survey" element={<OrderSurvey />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,100 @@
+[
+    {
+      "section": "Introduction",
+      "content": "Thank you for choosing our AI-driven skincare solution! Your feedback is crucial for us to improve and tailor our products more closely to your needs. Please take a few moments to share your thoughts with us.",
+      "type": "text"
+    },
+    {
+      "section": "Product Experience Feedback",
+      "questions": [
+        {
+          "id": "product_preference",
+          "question": "Which product variation did you prefer, A or B?",
+          "type": "choice",
+          "options": ["A", "B"]
+        },
+        {
+          "id": "preference_reason",
+          "question": "Please share why this variation worked better for you.",
+          "type": "open_text"
+        },
+        {
+          "id": "ai_satisfaction_rating",
+          "question": "On a scale of 1-5, how satisfied are you with the AI's product recommendation?",
+          "type": "rating",
+          "scale": 5
+        }
+      ]
+    },
+    {
+      "section": "AI Effectiveness",
+      "questions": [
+        {
+          "id": "ai_effectiveness_rating",
+          "question": "On a scale of 1-5, how effectively did our AI understand and address your skin concerns?",
+          "type": "rating",
+          "scale": 5
+        },
+        {
+          "id": "ai_effectiveness_comments",
+          "question": "Do you have any specific feedback or suggestions for our AI's functionality?",
+          "type": "open_text",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "section": "Web Interface Feedback",
+      "questions": [
+        {
+          "id": "web_interface_improvement",
+          "question": "We're always looking to improve our website's usability. Do you have any suggestions for making our web interface more user-friendly?",
+          "type": "open_text"
+        }
+      ]
+    },
+    {
+      "section": "Pricing Feedback",
+      "questions": [
+        {
+          "id": "expected_price",
+          "question": "If we were to charge for our personalized skincare service, what price would you consider fair and why?",
+          "type": "open_text"
+        }
+      ]
+    },
+    {
+      "section": "Future Engagement",
+      "questions": [
+        {
+          "id": "repeat_order_interest",
+          "question": "Would you be interested in ordering from us again?",
+          "type": "yes_no"
+        },
+        {
+          "id": "notification_signup",
+          "question": "Would you like to sign up for notifications about new or improved formulas?",
+          "type": "yes_no",
+          "conditional": true, 
+          "depends_on": "repeat_order_interest",
+          "depends_value": "yes"
+        }
+      ]
+    },
+    {
+      "section": "General Comments",
+      "questions": [
+        {
+          "id": "additional_comments",
+          "question": "Is there anything else you'd like to share about your experience with us?",
+          "type": "open_text",
+          "optional": true
+        }
+      ]
+    },
+    {
+      "section": "Submission",
+      "content": "Please review your answers before submitting. Thank you for your valuable feedback!",
+      "type": "text"
+    }
+  ]
