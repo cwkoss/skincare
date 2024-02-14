@@ -120,6 +120,7 @@ const ingredients = {
         good_for: [],
         bad_for: [],
         cost_per_g: 0.0001,
+        endogenous: true,
     },
     "Green Tea": {
         phase: "aqueous",
@@ -154,7 +155,8 @@ const ingredients = {
         bad_for: [],
         cost: "3.66/4oz",
         density: 1.26,
-        cost_per_g: 0.0246 
+        cost_per_g: 0.0246,
+        endogenous: true,
     },
     "Honey": {
         phase: "aqueous",
@@ -182,7 +184,8 @@ const ingredients = {
         hlb: 20,
         description: "Contains lipids and water-absorbing substances, providing moisturizing and soothing benefits. Helps in reducing inflammation",
         good_for: ["Dry skin", "Sensitive Skin"],
-        bad_for: []
+        bad_for: [],
+        cost_per_g: 0.0008,
     },
     "Beeswax": {
         phase: "emulsifier",
@@ -199,6 +202,7 @@ const ingredients = {
         good_for: [],
         bad_for: [],
         cost_per_g: 0.0884,
+        endogenous: true,
     },
     "Cetearyl Alcohol": {
         phase: "emulsifier",
@@ -236,6 +240,7 @@ const ingredients = {
         good_for: ["Dry skin", "Wrinkles", "Aging or age spots"],
         bad_for: [],
         cost_per_g: 0.4639,
+        endogenous: true,
     },
     "Retinol": {
         phase: "additive",
@@ -246,6 +251,18 @@ const ingredients = {
         good_for: ["Wrinkles", "Aging or age spots"],
         bad_for: ["Sensitive Skin"], // can be 
         cost_per_g: 0.4282,
+        deprecated: true,
+    },
+    "Retinyl Palmitate": {
+        phase: "additive",
+        hlb: 0,
+        max_percent: 1,
+        default_percent: 0.1,
+        description: "An ester of Retinol (Vitamin A) and Palmitic Acid, it is the weakest form of Retinol. It is a powerful antioxidant that may help boosts collagen in the skin, minimizes fine lines and wrinkles, as well as smooths the texture of the skin. Should be used intermittently until skin aclimates to it. Sun sensitizing, so should only be used at night.",
+        good_for: ["Wrinkles", "Aging or age spots"],
+        bad_for: ["Sensitive Skin"], // can be 
+        cost_per_g: 0.4282,
+        endogenous: true,
     },
     "Vitamin C": {
         phase: "additive",
@@ -256,6 +273,7 @@ const ingredients = {
         good_for: ["Aging or age spots", "Sun Protection"],
         bad_for: [],
         cost_per_g: 0.0288,
+        endogenous: true,
     },
     "Vitamin E": {
         phase: "additive",
@@ -267,6 +285,7 @@ const ingredients = {
         bad_for: [],
         density: 0.95,
         cost_per_g: 0.3505,
+        endogenous: true,
     },
     "Niacinamide (Vitamin B3)": {
         phase: "additive",
@@ -277,6 +296,7 @@ const ingredients = {
         good_for: ["Large pores", "Wrinkles", "Redness"],
         bad_for: [],
         cost_per_g: 0.3567,
+        endogenous: true,
     },
     "Lavender Oil": {
         phase: "additive",
@@ -479,6 +499,7 @@ const ingredients = {
 export const getFilteredIngredientList = (productName) => {
     return Object.keys(ingredients) // Get the keys of the object.
         .filter(ingredient => !skincareProducts[productName].bannedIngredients.includes(ingredient)) // Filter keys based on their values.
+        .filter(ingredient => ingredients[ingredient].deprecated !== true) // Filter out deprecated ingredients
         .reduce((acc, key) => {
             acc[key] = ingredients[key]; // Add the filtered keys to a new object.
             return acc;

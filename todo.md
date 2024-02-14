@@ -1,3 +1,4 @@
+- enforce emulsifier requirement
 - Make AI drop user on finalizeRecipe instead of proportion seletor, automatically round to 100%
 - Style other pages so they all have a center column with fixed width like the homepage. 
 - pass goals, product, fragrance and commentary into saved recipe

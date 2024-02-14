@@ -16,12 +16,12 @@ const getAqueousIngredients = () => {
 export const skincareProducts = {
     "Daytime Face Moisturizing Cream with SPF": {
         description: "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
-        bannedIngredients: ["Retinol"],
+        bannedIngredients: ["Retinyl Palmitate"],
         mustIncludeIngredients: ["Zinc Oxide"],
     },
     "AM/PM Face Moisturizing Cream (No SPF)": {
         description: "Ideal for night-time nourishment or for daytime use under your preferred sunscreen, design a cream that will deeply moisturizes your skin, leaving it feeling smooth and refreshed",
-        bannedIngredients: ["Retinol"],
+        bannedIngredients: ["Retinyl Palmitate"],
         mustIncludeIngredients: [],
     },
     "Before Bed Face Moisturizing Cream": {
