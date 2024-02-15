@@ -119,7 +119,7 @@ const OrderSurvey = () => {
     };
 
     return (
-        <div style={{ width: '100%', height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="body-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ margin: '0 auto', textAlign: 'center' }}>
                 <h2>{currentSection.section}</h2>
                 {renderSectionContent(currentSection)}
