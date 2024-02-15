@@ -44,6 +44,29 @@
       ]
     },
     {
+        "section": "Product Consistency",
+        "questions": [
+          {
+              "id": "texture",
+              "question": "What do you think about the product's consistency/texture?  ",
+              "type":"choice",
+              "options": ["Too thick", "Too thin", "Just right"]
+          },
+          {
+            "id": "product_longevity",
+            "question": "Have you noticed any signs of the product splitting or going bad?",
+            "type": "choice",
+            "options": ["Yes", "No"]
+          },
+          {
+            "id": "product_longevity_comments",
+            "question": "If yes, please share any details about how the product has changed over time.",
+            "type": "open_text",
+              "optional": true
+          }
+        ]
+      },
+    {
       "section": "AI Effectiveness",
       "questions": [
         {
