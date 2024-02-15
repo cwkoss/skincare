@@ -87,7 +87,8 @@
           "id": "repeat_order_interest",
           "question": "Would you be interested in placing another order?",
           "type": "choice",
-            "options": ["Yes, I'd like to evolve this recipe", "Yes, but I'd like to try a different recipe",  "Ask me later", "No, I'm not interested in ordering again"]
+            "options": ["Yes, I'd like to evolve this recipe", "Yes, but I'd like to try a different recipe",  "Ask me later", "No, I'm not interested in ordering again"],
+            "shouldAddLineBreak": true
         }
       ]
     },

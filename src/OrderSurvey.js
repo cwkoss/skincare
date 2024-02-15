@@ -67,6 +67,7 @@ const OrderSurvey = () => {
                                     onChange={(e) => handleInputChange(question.id, e.target.value)}
                                 />
                                 {option}
+                                {question.shouldAddLineBreak && index !== question.options.length - 1 ? <br /> : null}
                             </label>
                         ))}
                     </div>
@@ -143,7 +144,7 @@ const OrderSurvey = () => {
     };
 
     return (
-        <div className="body-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="body-container survey" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <div style={{ margin: '0 auto', textAlign: 'center' }}>
                 <h2>{currentSection.section}</h2>
                 {renderSectionContent(currentSection)}
