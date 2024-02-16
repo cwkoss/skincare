@@ -1,134 +1,176 @@
 [
     {
-      "section": "Introduction",
-      "content": "Thank you trying Skincremental! Your feedback is crucial for us to improve and tailor our products more closely to your needs. Please take a few moments to share your thoughts with us.",
-      "type": "text"
+        "section": "Introduction",
+        "content": "Thank you trying Skincremental! Your feedback is crucial for us to improve and tailor our products more closely to your needs. Please take a few moments to share your thoughts with us.",
+        "type": "text"
     },
     {
         "section": "Product Usage",
         "questions": [
-          {
-            "id": "product_frequency",
-            "question": "Roughly how many times have you used the product since you recieved it?",
-            "type": "open_text"
-          },
-          {
-            "id": "overall_satisfaction_rating",
-            "question": "On a scale of 1-5, how satisfied are you with the products you received?",
-            "type": "rating",
-            "scale": 5
-          }
+            {
+                "id": "product_frequency",
+                "question": "Roughly how many times have you used the product since you recieved it?",
+                "type": "open_text"
+            },
+            {
+                "id": "overall_satisfaction_rating",
+                "question": "On a scale of 1-5, how satisfied are you with the products you received?",
+                "type": "rating",
+                "scale": 5
+            }
         ]
-      },
+    },
     {
-      "section": "Product Experience Feedback",
-      "questions": [
-        {
-            "id": "discrimanation",
-            "question": "How easily were you able to tell the difference between the two variations?",
-            "type":"choice",
-            "options": ["Very easily", "Somewhat", "Not much"]
-        },
-        {
-          "id": "product_preference",
-          "question": "Which product variation did you prefer, A or B?",
-          "type": "choice",
-          "options": ["A", "B"]
-        },
-        {
-          "id": "preference_reason",
-          "question": "Please share why this variation worked better for you.",
-          "type": "open_text",
-            "optional": true
-        }
-      ]
+        "section": "Product Experience Feedback",
+        "questions": [
+            {
+                "id": "can_tell_difference",
+                "question": "How easily were you able to tell the difference between the two variations?",
+                "type": "choice",
+                "options": [
+                    "Very easily",
+                    "Somewhat",
+                    "Not much"
+                ]
+            },
+            {
+                "id": "variation_preference",
+                "question": "Which product variation did you prefer, A or B?",
+                "type": "choice",
+                "options": [
+                    "A",
+                    "B"
+                ]
+            },
+            {
+                "id": "variation_preference_why",
+                "question": "Why did you prefer that variation?",
+                "type": "open_text",
+                "optional": true
+            }
+        ]
     },
     {
         "section": "Product Consistency",
         "questions": [
-          {
-              "id": "texture",
-              "question": "What do you think about the product's consistency/texture?  ",
-              "type":"choice",
-              "options": ["Too thick", "Too thin", "Just right"]
-          },
-          {
-            "id": "product_longevity",
-            "question": "Have you noticed any signs of the product splitting or going bad?",
-            "type": "choice",
-            "options": ["Yes", "No"]
-          },
-          {
-            "id": "product_longevity_comments",
-            "question": "If yes, please share any details about how the product has changed over time.",
-            "type": "open_text",
-              "optional": true
-          }
+            {
+                "id": "consistency",
+                "question": "What do you think about your product's consistency/texture?  ",
+                "type": "choice",
+                "options": [
+                    "Too thick",
+                    "Too thin",
+                    "Just right"
+                ]
+            },
+            {
+                "id": "consistency_issues",
+                "question": "Have you noticed any signs of the product splitting or going bad?",
+                "type": "choice",
+                "options": [
+                    "Yes",
+                    "No"
+                ]
+            },
+            {
+                "id": "consistency_comments",
+                "question": "Please share any thoughts about the product consistency",
+                "type": "open_text",
+                "optional": true
+            }
         ]
-      },
-    {
-      "section": "AI Effectiveness",
-      "questions": [
-        {
-          "id": "ai_effectiveness_rating",
-          "question": "On a scale of 1-5, how effectively did our AI understand and address your skin concerns?",
-          "type": "rating",
-          "scale": 5
-        },
-        {
-          "id": "ai_effectiveness_comments",
-          "question": "Do you have any specific feedback or suggestions for our AI's functionality?  What would you like to see improved?",
-          "type": "open_text",
-          "optional": true
-        }
-      ]
     },
     {
-      "section": "Web Interface Feedback",
-      "questions": [
-        {
-          "id": "web_interface_improvement",
-          "question": "We're always looking to improve our website's usability. Do you have any suggestions for making our web interface more user-friendly?",
-          "type": "open_text"
-        }
-      ]
+        "section": "AI Effectiveness",
+        "questions": [
+            {
+                "id": "ai_effectiveness_rating",
+                "question": "On a scale of 1-5, how effectively did our AI understand and address your skin concerns?",
+                "type": "rating",
+                "scale": 5
+            },
+            {
+                "id": "ai_effectiveness_comments",
+                "question": "Do you have any specific feedback or suggestions for our AI's functionality?  What would you like to see improved?",
+                "type": "open_text",
+                "optional": true
+            }
+        ]
     },
     {
-      "section": "Pricing Feedback",
-      "questions": [
-        {
-          "id": "expected_price",
-          "question": "If we were to charge for our personalized skincare service, what price would you expect to pay for the experience and products you recieved?",
-          "type": "open_text"
-        }
-      ]
+        "section": "Web Interface Feedback",
+        "questions": [
+            {
+                "id": "web_interface_improvement",
+                "question": "We're always looking to improve our website's usability. Do you have any suggestions for making our web interface more user-friendly?",
+                "type": "open_text"
+            }
+        ]
     },
     {
-      "section": "Future Engagement",
-      "questions": [
-        {
-          "id": "repeat_order_interest",
-          "question": "Would you be interested in placing another order?",
-          "type": "choice",
-            "options": ["Yes, I'd like to evolve this recipe", "Yes, but I'd like to try a different recipe",  "Ask me later", "No, I'm not interested in ordering again"],
-            "shouldAddLineBreak": true
-        }
-      ]
+        "section": "Pricing Feedback",
+        "questions": [
+            {
+                "id": "expected_price",
+                "question": "If we were to charge for our personalized skincare service, what price would you expect to pay for the experience and products you recieved?",
+                "type": "open_text"
+            }
+        ]
     },
     {
-      "section": "General Comments",
-      "questions": [
-        {
-          "id": "additional_comments",
-          "question": "Is there anything else you'd like to share about your experience with us?",
-          "type": "open_text",
-          "optional": true
-        }
-      ]
+        "section": "Future Orders",
+        "questions": [
+            {
+                "id": "repeat_order_interest",
+                "question": "Would you be interested in placing another order?",
+                "type": "choice",
+                "options": [
+                    "Yes, I'd like to evolve this recipe",
+                    "Yes, but I'd like to try a different recipe",
+                    "Ask me later",
+                    "No, I'm not interested in ordering again"
+                ],
+                "shouldAddLineBreak": true
+            }
+        ]
     },
     {
-      "section": "Submission",
-      "content": "Thank you for your feedback.  If you've selected that you're interested in placing another order, we'll be in touch with you soon to build your next recipe, or you can build a new recipe from scratch using the homepage at your convenience.",
-      "type": "text"
+        "section": "Next Order Recipe Request",
+        "content": "We are still working some kinks out of the AI integration for order variation.  We'll be in touch with you soon to build your next recipe.",
+        "questions": [
+            {
+                "id": "repeat_order_variation_amount",
+                "question": "How much do you want your variation to differ from your current preferred recipe?",
+                "type": "choice",
+                "options": [
+                    "Subtle tweak",
+                    "Moderate change",
+                    "Significant change"
+                ],
+                "shouldAddLineBreak": true
+            },
+            {
+                "id": "repeat_order_interest_comments",
+                "question": "What are your goals for the next variations?  What qualities of your formula would you like to improve upon?",
+                "type": "open_text",
+                "optional": true
+            }
+        ]
+    },
+    {
+        "section": "General Comments",
+        "questions": [
+            {
+                "id": "z_closing_comments",
+                "question": "Is there anything else you'd like to share about your experience with us?",
+                "type": "open_text",
+                "optional": true
+            }
+        ]
+    },
+    {
+        "section": "Submission",
+        "content": "Thank you for your feedback.  If you've selected that you're interested in placing another order, we'll be in touch with you soon to build your next recipe, or you can build a new recipe from scratch using the homepage at your convenience.",
+        "type": "text"
     }
-  ]
+]

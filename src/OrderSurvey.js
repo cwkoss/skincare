@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import surveyData from './SurveyQs.json';
 import { db } from './firebase-config';
-import { collection, addDoc, doc, updateDoc } from 'firebase/firestore'
+import { collection, setDoc, doc, updateDoc } from 'firebase/firestore'
 
 const OrderSurvey = () => {
     const navigate = useNavigate();
@@ -12,31 +12,52 @@ const OrderSurvey = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const orderId = searchParams.get('orderId');
-    const [responseId, setResponseId] = useState(null);
+    const [docId, setDocId] = useState('');
+
+
+
+    useEffect(() => {
+        if(orderId) {
+        var now = new Date();
+        setDocId(now.getTime() + "-" + orderId);
+    }
+    }, []);
 
     useEffect(() => {
         const pushEmptyResponse = async () => {
-            const docRef = await addDoc(collection(db, "survey"), {
-                orderId: orderId,
-                responses: {} // Initially empty
-            });
-            setResponseId(docRef.id); // Save the generated document ID
+            if (docId) {
+                const docRef = doc(db, "survey", docId);
+                await setDoc(docRef, {
+                    orderId: orderId,
+                    startTime: new Date(),
+                    responses: {} // Initially empty
+                });
+            }
         };
 
         pushEmptyResponse();
-    }, []);
+    }, [docId]);
+
 
     const handleNextClick = async () => {
         const updateResponses = async () => {
-            const docRef = doc(db, "survey", responseId);
+            const docRef = doc(db, "survey", docId);
             await updateDoc(docRef, {
-                responses: { ...responses }
+                responses: { ...responses },
+                lastTime: new Date()
             });
         };
 
         await updateResponses();
 
-        if (currentSectionIndex < surveyData.length - 1) {
+        if (surveyData[currentSectionIndex].section === "Future Orders") {
+            if (responses["repeat_order_interest"] === "Yes, I'd like to evolve this recipe") {
+                setCurrentSectionIndex(currentSectionIndex + 1);
+            }
+            else {
+                setCurrentSectionIndex(currentSectionIndex + 2);
+            }
+        } else if (currentSectionIndex < surveyData.length - 1) {
             setCurrentSectionIndex(currentSectionIndex + 1);
         } else {
             navigate('/');
