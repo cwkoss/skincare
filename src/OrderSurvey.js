@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import surveyData from './SurveyQs.json';
 import { db } from './firebase-config';
-import { collection, setDoc, doc, updateDoc } from 'firebase/firestore'
+import { setDoc, doc, updateDoc } from 'firebase/firestore'
 
 const OrderSurvey = () => {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const OrderSurvey = () => {
         var now = new Date();
         setDocId(now.getTime() + "-" + orderId);
     }
-    }, []);
+    }, [orderId]);
 
     useEffect(() => {
         const pushEmptyResponse = async () => {
@@ -36,7 +36,7 @@ const OrderSurvey = () => {
         };
 
         pushEmptyResponse();
-    }, [docId]);
+    }, [docId, orderId]);
 
 
     const handleNextClick = async () => {
