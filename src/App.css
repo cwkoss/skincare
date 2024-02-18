@@ -396,8 +396,8 @@ div.commentary {
 }
 
 /* Example intensity classes - adjust colors as needed */
-.intensity-0 { background-color: #adf7a4; } /* Base color */
-.intensity-1 { background-color: #9ce493; }
+.intensity-4 { background-color: #adf7a4; } /* Base color */
+.intensity-3 { background-color: #9ce493; }
 .intensity-2 { background-color: #8bd182; }
-.intensity-3 { background-color: #7abe71; }
-.intensity-4 { background-color: #69ab60; }
+.intensity-1 { background-color: #7abe71; }
+.intensity-0 { background-color: #69ab60; }
