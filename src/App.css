@@ -1,18 +1,18 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
-  --button-active: #adf7a4; 
+  --button-active: #adf7a4;
   --button-hover: #d8fdd4;
   --button-clickable: #e7ffe4;
-  --button-clickable-lines : #657c62; 
-  --button-active-lines: #507c4a; 
-  --text-color: #333; 
+  --button-clickable-lines: #657c62;
+  --button-active-lines: #507c4a;
+  --text-color: #333;
 }
 
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -28,7 +28,9 @@ html, body {
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-};
+}
+
+;
 
 button {
   padding: 10px 20px;
@@ -61,22 +63,22 @@ button.startbutton:hover {
 .homePageContainer .title {
   display: flex;
   flex-direction: column;
-  text-align:left;
-  margin-bottom:3vh;
+  text-align: left;
+  margin-bottom: 3vh;
 }
 
-.homePageContainer .title h1{
-  text-align:left;
+.homePageContainer .title h1 {
+  text-align: left;
   font-size: 2.5em;
   font-weight: 600;
-  margin:0;
+  margin: 0;
 }
 
-.homePageContainer .title h4{
-  text-align:left;
+.homePageContainer .title h4 {
+  text-align: left;
   font-size: 1em;
   font-weight: 400;
-  margin:0;
+  margin: 0;
 }
 
 .homePageContainer .startbutton {
@@ -115,16 +117,17 @@ button.startbutton:hover {
 .homePageContainer a {
   width: 323px;
   text-align: center;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
-.homePageContainer .homepageText p{
+.homePageContainer .homepageText p {
   font-family: "Noto Sans";
   font-weight: 300;
-  background-color:#fff;
+  background-color: #fff;
   padding: 2vh 2vh;
 }
 
+/* TODO once layout migration complete this can be deleted */
 .body-container {
   display: flex;
   flex-direction: column;
@@ -135,12 +138,50 @@ button.startbutton:hover {
   padding: 0px 10px;
 }
 
-h1, h2, h3 {
-  font-weight:300;
+.layout .body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 353px;
+  background-color: #fff9;
+  height: 90vh;
+  padding: 0px 10px;
+}
+
+.layout .button-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 353px;
+  background-color: #fff9;
+  height: 10vh;
+  padding: 0px 10px;
+}
+
+.layout .button-footer .footer-submit {
+  width: 323px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: var(--button-active);
+  font-size: 1.1em;
+}
+
+.layout .scroller {
+  max-height: calc(80vh);
+  overflow-y: auto;
+  padding-bottom: 20px;
+  /* Space at the bottom inside the scrollable area */
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 300;
   text-align: center;
 }
 
-h1 { 
+h1 {
   font-family: "Playfair Display", serif;
   font-size: 1.5em;
 }
@@ -168,7 +209,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   font-size: 1.1em;
-  font-weight:400;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -210,10 +251,8 @@ p.why-disabled {
   bottom: 0%;
 }
 
-/* Product.css */
 .product-container {
   text-align: center;
-  margin-top: 20px;
 }
 
 .product-container p {
@@ -224,11 +263,12 @@ p.why-disabled {
   border-radius: 5px;
   color: #666;
   transition: color 0.3s;
-  font-size: 0.85em; /* Decrease font size */
-  opacity:0.9;
+  font-size: 0.85em;
+  /* Decrease font size */
+  opacity: 0.9;
 }
 
-.product-container .selected + p {
+.product-container .selected+p {
   color: #000;
   background-color: #fff;
   opacity: 1;
@@ -251,13 +291,13 @@ div.ingredient-row {
   opacity: 1;
 }
 
-.ingredient-row strong{
+.ingredient-row strong {
   width: 120px;
   padding-right: 10px;
   opacity: 1;
 }
 
-.ingredient-row small{
+.ingredient-row small {
   opacity: 1;
 }
 
@@ -267,13 +307,14 @@ div.ingredient-row {
 }
 
 .scrollable-content {
-  max-height: calc(100vh - 120px); 
+  max-height: calc(100vh - 120px);
   overflow-y: auto;
-  padding-bottom: 20px; /* Space at the bottom inside the scrollable area */
+  padding-bottom: 20px;
+  /* Space at the bottom inside the scrollable area */
 }
 
 .bottom-spacer {
-  height: 50px; 
+  height: 50px;
 }
 
 div.commentary {
@@ -285,20 +326,24 @@ div.commentary {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px; /* Adjust the height as needed */
+  min-height: 200px;
+  /* Adjust the height as needed */
 }
 
 .loading-message {
-  margin-top: 20px; /* Space between loader and message */
+  margin-top: 20px;
+  /* Space between loader and message */
   text-align: center;
-  width:25vh;
+  width: 25vh;
   word-wrap: break-word;
 }
 
 
 .loader {
-  border: 5px solid #f3f3f3; /* Light grey */
-  border-top: 5px solid #3498db; /* Blue */
+  border: 5px solid #f3f3f3;
+  /* Light grey */
+  border-top: 5px solid #3498db;
+  /* Blue */
   border-radius: 50%;
   width: 150px;
   height: 150px;
@@ -306,8 +351,13 @@ div.commentary {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .contact-us-form {
@@ -380,24 +430,44 @@ div.commentary {
 /*score bar */
 .score-bar {
   display: flex;
-  border: 1px solid black; /* Border around the entire bar */
-  width: 180px; /* Example width */
+  border: 1px solid black;
+  /* Border around the entire bar */
+  width: 180px;
+  /* Example width */
   height: 5px;
 }
 
 .segment {
   flex: 1;
-  height: 5px; /* Example height */
-  background-color: #ccc; /* Default non-highlighted color */
+  height: 5px;
+  /* Example height */
+  background-color: #ccc;
+  /* Default non-highlighted color */
 }
 
 .highlighted {
-  background-color: #888; /* Base highlighted color */
+  background-color: #888;
+  /* Base highlighted color */
 }
 
 /* Example intensity classes - adjust colors as needed */
-.intensity-4 { background-color: #adf7a4; } /* Base color */
-.intensity-3 { background-color: #9ce493; }
-.intensity-2 { background-color: #8bd182; }
-.intensity-1 { background-color: #7abe71; }
-.intensity-0 { background-color: #69ab60; }
+.intensity-4 {
+  background-color: #adf7a4;
+}
+
+/* Base color */
+.intensity-3 {
+  background-color: #9ce493;
+}
+
+.intensity-2 {
+  background-color: #8bd182;
+}
+
+.intensity-1 {
+  background-color: #7abe71;
+}
+
+.intensity-0 {
+  background-color: #69ab60;
+}

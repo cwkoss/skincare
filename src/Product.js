@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { updateSession } from './sessionUtils';
+import Layout from './Layout';
 
 const getAqueousIngredients = () => {
     const aqueousIngredients = [];
@@ -93,24 +94,23 @@ function Product({ setProductData }) {
     };
 
     return (
-        <div className="product-container body-container">
-            <h2>Select a Skincare Product Type</h2>
-            <form onSubmit={handleSubmit} className="scrollable-content">
-                {Object.entries(skincareProducts).map(([key, value]) => (
-                    <div key={key}>
-                        <button type="button" onClick={() => handleSelection(key)}
-                            className={selectedProduct === key ? 'selected' : ''}>
-                            {key.charAt(0).toUpperCase() + key.slice(1)}
-                        </button>
-                        <p className={selectedProduct === key ? 'selected' : ''}>
-                            {value.description}
-                        </p>
-                    </div>
-                ))}
-                <div className="bottom-spacer"></div>
-                <button className="submit" type="submit" disabled={!selectedProduct}>Next</button>
-            </form>
-        </div>
+        <Layout title="Select a Skincare Product Type" handleSubmit={handleSubmit} isSubmitDisabled={!selectedProduct}>
+            <div className="product-container">
+                <form onSubmit={handleSubmit}>
+                    {Object.entries(skincareProducts).map(([key, value]) => (
+                        <div key={key}>
+                            <button type="button" onClick={() => handleSelection(key)}
+                                className={selectedProduct === key ? 'selected' : ''}>
+                                {key.charAt(0).toUpperCase() + key.slice(1)}
+                            </button>
+                            <p className={selectedProduct === key ? 'selected' : ''}>
+                                {value.description}
+                            </p>
+                        </div>
+                    ))}
+                </form>
+            </div>
+        </Layout>
     );
 }
 
