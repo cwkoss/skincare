@@ -10,6 +10,10 @@ const ingredients = {
         cost: "$20/half gallon",
         density: 0.92,
         cost_per_g: 0.01148,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 2,
+        gentle_active: 5,
     },
     "Jojoba Oil": {
         phase: "oil",
@@ -20,6 +24,10 @@ const ingredients = {
         cost: "$9.99/8oz",
         density: 0.87,
         cost_per_g: 0.0485,
+        light_heavy: 4,
+        penetrating_occlusive: 5,
+        soothing_stimulating: 2,
+        gentle_active: 5,
     },
     "Argan Oil": {
         phase: "oil",
@@ -31,6 +39,10 @@ const ingredients = {
         density: 0.91,
         cost_per_g: 0.0639,
         buy_again_url:"https://www.organicpureoil.com/product/pure-1-oz-organic-argan-oil-extra-virgin-unrefined-cold-pressed/",
+        light_heavy: 4,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 4,
+        gentle_active: 3,
     },
     "Shea Butter": {
         phase: "oil",
@@ -41,6 +53,10 @@ const ingredients = {
         cost: "$9.99/16oz",
         density: 0.927,
         cost_per_g: 0.0228,
+        light_heavy: 8,
+        penetrating_occlusive: 7,
+        soothing_stimulating: 5,
+        gentle_active: 3,
     },
     "Cocoa Butter": {
         phase: "oil",
@@ -51,6 +67,10 @@ const ingredients = {
         cost: "$1/oz",
         cost_per_g: 0.0338,
         buy_again_url: "https://simply-ingredients.com/collections/butters-waxes/products/fair-trade-cocoa-butter?variant=37889946484922",
+        light_heavy: 8,
+        penetrating_occlusive: 8,
+        soothing_stimulating: 5,
+        gentle_active: 3,
     },
     "Coconut Oil": {
         phase: "oil",
@@ -61,6 +81,10 @@ const ingredients = {
         cost: "$6.96/15oz",
         density: 0.924,
         cost_per_g: 0.0170,
+        light_heavy: 7,
+        penetrating_occlusive: 7,
+        soothing_stimulating: 4,
+        gentle_active: 4,
     },
     "Pecan Oil": {
         phase: "oil",
@@ -71,6 +95,10 @@ const ingredients = {
         cost: "$17/8oz",
         density: 0.95,
         cost_per_g: 0.0756,
+        light_heavy: 6,
+        penetrating_occlusive: 5,
+        soothing_stimulating: 4,
+        gentle_active: 3,
     },
     "Pumpkin Seed Oil": {
         phase: "oil",
@@ -80,7 +108,11 @@ const ingredients = {
         bad_for: [],
         cost: "$3/2oz",
         density: 0.95,
-        cost_per_g: 0.0534
+        cost_per_g: 0.0534,
+        light_heavy: 5,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 4,
+        gentle_active: 5, 
     },
     /*"Benne Seed Oil": {
         phase: "oil",
@@ -105,6 +137,11 @@ const ingredients = {
         cost: "$18.99/68oz",
         density: 0.9,
         cost_per_g: 0.0105,
+        light_heavy: 6,
+        penetrating_occlusive: 5,
+        soothing_stimulating: 3,
+        gentle_active: 6,
+        nourishing_acnefighting: 3,
     },
     /*"Almond Oil": {
         phase: "oil",
@@ -121,6 +158,10 @@ const ingredients = {
         bad_for: [],
         cost_per_g: 0.0001,
         endogenous: true,
+        light_heavy: 1,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 2,
+        gentle_active: 1,
     },
     "Green Tea": {
         phase: "aqueous",
@@ -129,13 +170,21 @@ const ingredients = {
         good_for: ["Redness", "Puffiness", "Sensitive Skin"],
         bad_for: [],
         cost_per_g: 0.0070,
+        light_heavy: 2,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 2,
+        gentle_active: 8,
     },
     "Sea Salt": {
         phase: "aqueous",
         hlb: 20,
         description: "Rich in minerals, helps in detoxifying and cleansing the skin, can balance oil production.",
         good_for: ["Large pores", "Atopic dermatitis"],
-        bad_for: ["Dry skin"] // can be drying
+        bad_for: ["Dry skin"], // can be drying,
+        light_heavy: 1,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 9,
+        gentle_active: 7,
     },
     "Aloe Vera Gel": {
         phase: "aqueous",
@@ -145,7 +194,11 @@ const ingredients = {
         bad_for: [],
         cost: "9.99/300ml",
         density: 1.2,
-        cost_per_g: 0.02775 
+        cost_per_g: 0.02775,
+        light_heavy: 2,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 1,
+        gentle_active: 2,
     },
     "Glycerin": {
         phase: "aqueous",
@@ -157,27 +210,43 @@ const ingredients = {
         density: 1.26,
         cost_per_g: 0.0246,
         endogenous: true,
+        light_heavy: 3,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 2,
+        gentle_active: 3,
     },
     "Honey": {
         phase: "aqueous",
         hlb: 20,
         description: "Natural humectant, antibacterial, great for acne treatment and hydration, soothing for the skin.",
         good_for: ["Dry skin", "Adult acne"],
-        bad_for: []
+        bad_for: [],
+        light_heavy: 6,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 2,
+        gentle_active: 4,
     },
     "Apple Cider Vinegar": {
         phase: "aqueous",
         hlb: 20,
         description: "Balances skin's pH, astringent properties, good for acne-prone skin but can be drying.",
         good_for: ["Adult acne", "Large pores"],
-        bad_for: ["Dry skin"] // can be drying
+        bad_for: ["Dry skin"], // can be drying
+        light_heavy: 1,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 9,
+        gentle_active: 7,
     },
     "Cucumber Juice": {
         phase: "aqueous",
         hlb: 20,
         description: " Hydrating, soothing, rich in vitamins and minerals, good for puffiness and calming irritated skin.",
         good_for: ["Puffiness", "Sensitive Skin"],
-        bad_for: []
+        bad_for: [],
+        light_heavy: 2,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 1,
+        gentle_active: 2,
     },
     "Oat Milk": {
         phase: "aqueous",
@@ -186,6 +255,10 @@ const ingredients = {
         good_for: ["Dry skin", "Sensitive Skin"],
         bad_for: [],
         cost_per_g: 0.0008,
+        light_heavy: 3,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 1,
+        gentle_active: 3,
     },
     "Beeswax": {
         phase: "emulsifier",
@@ -193,7 +266,11 @@ const ingredients = {
         description: " Emulsifier and stabilizer in formulations, creates a protective barrier on the skin, retains moisture.",
         good_for: ["Dry skin"],
         bad_for: [],
-        cost_per_g: 0.1706
+        cost_per_g: 0.1706,
+        light_heavy: 8,
+        penetrating_occlusive: 9,
+        soothing_stimulating: 3,
+        gentle_active: 4,
     },
     "Lecithin": {
         phase: "emulsifier",
@@ -203,6 +280,10 @@ const ingredients = {
         bad_for: [],
         cost_per_g: 0.0884,
         endogenous: true,
+        light_heavy: 6,
+        penetrating_occlusive: 5,
+        soothing_stimulating: 4,
+        gentle_active: 5,
     },
     "Cetearyl Alcohol": {
         phase: "emulsifier",
@@ -211,8 +292,12 @@ const ingredients = {
         good_for: [],
         bad_for: ["Sensitive Skin"], // can be irritating for some sensitive skins
         cost_per_g: 0.0439,
+        light_heavy: 7,
+        penetrating_occlusive: 6,
+        soothing_stimulating: 2,
+        gentle_active: 3,
     },
-    "Castille Soap": {
+    /*"Castille Soap": {
         phase: "surfactant",
         hlb: 10,
         description: "Gentle and versatile cleanser, made from olive and hemp oils, suitable for sensitive skin.",
@@ -220,7 +305,7 @@ const ingredients = {
         bad_for: [],
         density: 1.04,
         cost_per_g: 0.0172,
-    },
+    },*/
     "Zinc Oxide": {
         phase: "additive",
         hlb: 20,
@@ -230,6 +315,10 @@ const ingredients = {
         good_for: ["Sun Protection"],
         bad_for: [],
         cost_per_g: 0.0958,
+        light_heavy: 7,
+        penetrating_occlusive: 8,
+        soothing_stimulating: 1,
+        gentle_active: 2,
     },
     "Hyaluronic Acid": {
         phase: "additive",
@@ -241,6 +330,10 @@ const ingredients = {
         bad_for: [],
         cost_per_g: 0.4639,
         endogenous: true,
+        light_heavy: 2,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 1,
+        gentle_active: 2,
     },
     "Retinol": {
         phase: "additive",
@@ -252,6 +345,10 @@ const ingredients = {
         bad_for: ["Sensitive Skin"], // can be 
         cost_per_g: 0.4282,
         deprecated: true,
+        light_heavy: 4,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 7,
+        gentle_active: 6,
     },
     "Retinyl Palmitate": {
         phase: "additive",
@@ -263,6 +360,10 @@ const ingredients = {
         bad_for: ["Sensitive Skin"], // can be 
         cost_per_g: 0.4282,
         endogenous: true,
+        light_heavy: 4,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 9,
+        gentle_active: 9,
     },
     "Vitamin C": {
         phase: "additive",
@@ -274,6 +375,10 @@ const ingredients = {
         bad_for: [],
         cost_per_g: 0.0288,
         endogenous: true,
+        light_heavy: 3,
+        penetrating_occlusive: 2,
+        soothing_stimulating: 6,
+        gentle_active: 7,
     },
     "Vitamin E": {
         phase: "additive",
@@ -286,6 +391,10 @@ const ingredients = {
         density: 0.95,
         cost_per_g: 0.3505,
         endogenous: true,
+        light_heavy: 4,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 3,
+        gentle_active: 4,
     },
     "Niacinamide (Vitamin B3)": {
         phase: "additive",
@@ -297,6 +406,10 @@ const ingredients = {
         bad_for: [],
         cost_per_g: 0.3567,
         endogenous: true,
+        light_heavy: 2,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 3,
+        gentle_active: 6,
     },
     "Lavender Oil": {
         phase: "additive",
@@ -308,6 +421,10 @@ const ingredients = {
         bad_for: [],
         density: 0.885,
         cost_per_g: 1.1578,
+        light_heavy: 5,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 6,
+        gentle_active: 5,
     },
     "Rosemary Oil": {
         phase: "additive",
@@ -318,7 +435,11 @@ const ingredients = {
         good_for: ["Aging or age spots"],
         bad_for: ["Sensitive Skin"], // can be irritating for some people
         density: 0.895,
-        cost_per_g: 0.1214
+        cost_per_g: 0.1214,
+        light_heavy: 5,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 7,
+        gentle_active: 6,
     },
     "Tea Tree Oil": {
         phase: "additive",
@@ -330,6 +451,10 @@ const ingredients = {
         bad_for: ["Dry skin"], // can be drying if overused
         density: 0.878,
         cost_per_g: 0.3792,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 8,
+        gentle_active: 7,
     },
     "Jasmine Oil": {
         phase: "additive",
@@ -340,7 +465,11 @@ const ingredients = {
         good_for: ["Dry skin"],
         bad_for: [],
         density: 0.947,
-        cost_per_g: 2.7434, // expensive
+        cost_per_g: 2.7434, // expensive,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 5,
+        gentle_active: 5,
     },
     "Eucalyptus Oil": {
         phase: "additive",
@@ -352,6 +481,10 @@ const ingredients = {
         bad_for: ["Sensitive Skin", "Dry skin"], // can be irritating and drying
         densitY: 0.914 ,
         cost_per_g: 0.1530,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 7,
+        gentle_active: 6,
     },
     "Peppermint Oil": {
         phase: "additive",
@@ -363,6 +496,10 @@ const ingredients = {
         bad_for: ["Sensitive Skin", "Redness"], // can be irritating and cause a burning sensation for sensitive skin types
         density: 0.898,
         cost_per_g: 0.0942,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 9,
+        gentle_active: 6,
     },
     "Pine Oil": {
         phase: "additive",
@@ -373,6 +510,10 @@ const ingredients = {
         good_for: ["Atopic dermatitis", "Adult acne"],
         bad_for: ["Sensitive Skin"], // can be irritating due to its potent nature
         cost_per_g: 1.155,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 8,
+        gentle_active: 7,
     },
     "Cedar Oil": {
         phase: "additive",
@@ -383,7 +524,11 @@ const ingredients = {
         good_for: ["Adult acne", "Atopic dermatitis"],
         bad_for: ["Sensitive Skin"], // may cause irritation in higher concentrations or sensitive individuals
         density: 0.952,
-        cost_per_g: 1.7507
+        cost_per_g: 1.7507,
+        light_heavy: 5,
+        penetrating_occlusive: 5,
+        soothing_stimulating: 7,
+        gentle_active: 6,
     },
     "Rosehip Seed Oil": {
         phase: "oil",
@@ -395,6 +540,10 @@ const ingredients = {
         bad_for: [], // Generally well-tolerated, but always patch test
         density: 0.92,
         cost_per_g: 0.6159,
+        light_heavy: 3,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 4,
+        gentle_active: 4,
     },
 
     "Geranium Oil": {
@@ -407,6 +556,10 @@ const ingredients = {
         bad_for: ["Sensitive Skin"], // Can be irritating for some sensitive skin types
         density: 0.887,
         cost_per_g: 1.5031,
+        light_heavy: 4,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 6,
+        gentle_active: 5,
     },
 
     "Carrot Seed Oil": {
@@ -418,7 +571,11 @@ const ingredients = {
         good_for: ["Aging or age spots", "Sun Protection", "Wrinkles"],
         bad_for: ["Sensitive Skin"], // Can be potent; patch test recommended
         density: 0.92,
-        cost_per_g: 1.5942
+        cost_per_g: 1.5942,
+        light_heavy: 5,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 4,
+        gentle_active: 5,
     },
     /*"Cedarwood Oil": {
         phase: "additive",
@@ -482,7 +639,7 @@ const ingredients = {
         description: "Nutmeg, with its anti-inflammatory and antibacterial properties, is used in small amounts to soothe skin and improve its appearance.",
         good_for: ["Redness", "Atopic dermatitis"],
         bad_for: ["Sensitive Skin"] // can be irritating in higher concentrations
-    },*/
+    },
     "Tepezcohuite Mimosa Tenuiflora Infusion": {
         phase: "aqueous",
         hlb: 20, 
@@ -491,7 +648,7 @@ const ingredients = {
         description: "Rich in tannins and antioxidants, known for its healing, regenerative, and antimicrobial properties. Used to soothe skin conditions, promote wound healing, and provide anti-aging benefits. Also known as Jurema.",
         good_for: ["Atopic dermatitis", "Wrinkles", "Redness"],
         bad_for: ["Sensitive Skin"] // can be irritating due to tannins
-    }
+    }*/
 
 
 };
