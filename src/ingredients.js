@@ -41,7 +41,7 @@ const ingredients = {
         buy_again_url:"https://www.organicpureoil.com/product/pure-1-oz-organic-argan-oil-extra-virgin-unrefined-cold-pressed/",
         light_heavy: 4,
         penetrating_occlusive: 3,
-        soothing_stimulating: 4,
+        soothing_stimulating: 3,
         gentle_active: 3,
     },
     "Shea Butter": {
@@ -81,7 +81,7 @@ const ingredients = {
         cost: "$6.96/15oz",
         density: 0.924,
         cost_per_g: 0.0170,
-        light_heavy: 6,
+        light_heavy: 7,
         penetrating_occlusive: 4,
         soothing_stimulating: 4,
         gentle_active: 4,
@@ -112,7 +112,7 @@ const ingredients = {
         light_heavy: 5,
         penetrating_occlusive: 4,
         soothing_stimulating: 4,
-        gentle_active: 5, 
+        gentle_active: 4, 
     },
     /*"Benne Seed Oil": {
         phase: "oil",
@@ -172,7 +172,7 @@ const ingredients = {
         cost_per_g: 0.0070,
         light_heavy: 2,
         penetrating_occlusive: 2,
-        soothing_stimulating: 2,
+        soothing_stimulating: 3,
         gentle_active: 6,
     },
     /*"Sea Salt": {
