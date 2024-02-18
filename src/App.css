@@ -376,3 +376,28 @@ div.commentary {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.1em;
 }
+
+/*score bar */
+.score-bar {
+  display: flex;
+  border: 1px solid black; /* Border around the entire bar */
+  width: 180px; /* Example width */
+  height: 5px;
+}
+
+.segment {
+  flex: 1;
+  height: 5px; /* Example height */
+  background-color: #ccc; /* Default non-highlighted color */
+}
+
+.highlighted {
+  background-color: #888; /* Base highlighted color */
+}
+
+/* Example intensity classes - adjust colors as needed */
+.intensity-0 { background-color: #adf7a4; } /* Base color */
+.intensity-1 { background-color: #9ce493; }
+.intensity-2 { background-color: #8bd182; }
+.intensity-3 { background-color: #7abe71; }
+.intensity-4 { background-color: #69ab60; }

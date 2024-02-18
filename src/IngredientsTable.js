@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import {getFilteredIngredientList} from './ingredients';
-console.log('hi"') ;
+import ScoreBar from './ScoreBar';
+
 
 const ingredientsData = getFilteredIngredientList("Before Bed Face Moisturizing Cream");
-console.log(ingredientsData);
+
 
 const IngredientsTable = () => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
@@ -52,10 +53,10 @@ const IngredientsTable = () => {
                     {sortedIngredients.map((ingredient) => (
                         <tr key={ingredient.name}>
                             <td>{ingredient.name}</td>
-                            <td>{ingredient.light_heavy}</td>
-                            <td>{ingredient.penetrating_occlusive}</td>
-                            <td>{ingredient.soothing_stimulating}</td>
-                            <td>{ingredient.gentle_active}</td>
+                            <td>{ingredient.light_heavy} <ScoreBar score={ingredient.light_heavy}></ScoreBar></td>
+                            <td>{ingredient.penetrating_occlusive}<ScoreBar score={ingredient.penetrating_occlusive}></ScoreBar></td>
+                            <td>{ingredient.soothing_stimulating}<ScoreBar score={ingredient.soothing_stimulating}></ScoreBar></td>
+                            <td>{ingredient.gentle_active}<ScoreBar score={ingredient.gentle_active}></ScoreBar></td>
                         </tr>
                     ))}
                 </tbody>
