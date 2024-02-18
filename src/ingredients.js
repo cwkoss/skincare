@@ -25,7 +25,7 @@ const ingredients = {
         density: 0.87,
         cost_per_g: 0.0485,
         light_heavy: 4,
-        penetrating_occlusive: 5,
+        penetrating_occlusive: 3,
         soothing_stimulating: 2,
         gentle_active: 5,
     },
@@ -53,7 +53,7 @@ const ingredients = {
         cost: "$9.99/16oz",
         density: 0.927,
         cost_per_g: 0.0228,
-        light_heavy: 8,
+        light_heavy: 7,
         penetrating_occlusive: 7,
         soothing_stimulating: 5,
         gentle_active: 3,
@@ -81,8 +81,8 @@ const ingredients = {
         cost: "$6.96/15oz",
         density: 0.924,
         cost_per_g: 0.0170,
-        light_heavy: 7,
-        penetrating_occlusive: 7,
+        light_heavy: 6,
+        penetrating_occlusive: 4,
         soothing_stimulating: 4,
         gentle_active: 4,
     },
@@ -173,9 +173,9 @@ const ingredients = {
         light_heavy: 2,
         penetrating_occlusive: 2,
         soothing_stimulating: 2,
-        gentle_active: 8,
+        gentle_active: 6,
     },
-    "Sea Salt": {
+    /*"Sea Salt": {
         phase: "aqueous",
         hlb: 20,
         description: "Rich in minerals, helps in detoxifying and cleansing the skin, can balance oil production.",
@@ -185,7 +185,7 @@ const ingredients = {
         penetrating_occlusive: 1,
         soothing_stimulating: 9,
         gentle_active: 7,
-    },
+    },*/
     "Aloe Vera Gel": {
         phase: "aqueous",
         hlb: 20,
@@ -226,7 +226,7 @@ const ingredients = {
         soothing_stimulating: 2,
         gentle_active: 4,
     },
-    "Apple Cider Vinegar": {
+    /*"Apple Cider Vinegar": {
         phase: "aqueous",
         hlb: 20,
         description: "Balances skin's pH, astringent properties, good for acne-prone skin but can be drying.",
@@ -236,7 +236,7 @@ const ingredients = {
         penetrating_occlusive: 1,
         soothing_stimulating: 9,
         gentle_active: 7,
-    },
+    },*/
     "Cucumber Juice": {
         phase: "aqueous",
         hlb: 20,
@@ -267,7 +267,7 @@ const ingredients = {
         good_for: ["Dry skin"],
         bad_for: [],
         cost_per_g: 0.1706,
-        light_heavy: 8,
+        light_heavy: 9,
         penetrating_occlusive: 9,
         soothing_stimulating: 3,
         gentle_active: 4,
@@ -331,7 +331,7 @@ const ingredients = {
         cost_per_g: 0.4639,
         endogenous: true,
         light_heavy: 2,
-        penetrating_occlusive: 2,
+        penetrating_occlusive: 1,
         soothing_stimulating: 1,
         gentle_active: 2,
     },
@@ -377,7 +377,7 @@ const ingredients = {
         endogenous: true,
         light_heavy: 3,
         penetrating_occlusive: 2,
-        soothing_stimulating: 6,
+        soothing_stimulating: 7,
         gentle_active: 7,
     },
     "Vitamin E": {
@@ -408,7 +408,7 @@ const ingredients = {
         endogenous: true,
         light_heavy: 2,
         penetrating_occlusive: 1,
-        soothing_stimulating: 3,
+        soothing_stimulating: 6,
         gentle_active: 6,
     },
     "Lavender Oil": {
@@ -498,7 +498,7 @@ const ingredients = {
         cost_per_g: 0.0942,
         light_heavy: 4,
         penetrating_occlusive: 4,
-        soothing_stimulating: 9,
+        soothing_stimulating: 8,
         gentle_active: 6,
     },
     "Pine Oil": {

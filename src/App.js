@@ -14,6 +14,7 @@ import OrderPricing from './OrderPricing';
 import VariationSelection from './VariationSelection';
 import OrderSurvey from './OrderSurvey';
 import { pushFirstPageLoadInfo  } from './sessionUtils';
+import IngredientsTable from './IngredientsTable';
 
 
 function App() {
@@ -91,6 +92,7 @@ function App() {
         <Route path="/order-pricing" element={<OrderPricing />} />
         <Route path="/variation-selection" element={<VariationSelection />} />
         <Route path="/order-survey" element={<OrderSurvey />} />
+        <Route path="/ingredients-table" element={<IngredientsTable />} />
       </Routes>
     </Router>
   );
