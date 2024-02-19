@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from './firebase-config';
 import { doc, setDoc } from 'firebase/firestore'
 import { updateSession } from './sessionUtils';
+import Layout from './Layout';
 
 function FinalizeRecipe() {
     const [recipeName, setRecipeName] = useState('');
@@ -50,8 +51,10 @@ function FinalizeRecipe() {
     };
 
     return (
-        <div className="body-container">
-            <h2>Name Your Custom Skincare Recipe</h2>
+        <Layout title="Name Your Custom Skincare Recipe"
+                isSubmitDisabled={!isRecipeNameValid}
+                whyDisabled="Please enter a recipe name."
+                handleSubmit={handleConfirmAndSave}>
             <input
                 type="text"
                 placeholder="Enter recipe name"
@@ -70,12 +73,9 @@ function FinalizeRecipe() {
             <div className="actions">
                 <button onClick={handleChangeIngredients}>Change Ingredients</button>
                 <button onClick={handleChangeProportions}>Change Proportions</button>
-                <button className="submit" onClick={handleConfirmAndSave} disabled={!isRecipeNameValid}>Save Base Recipe</button>
             </div>
-            {!isRecipeNameValid && (
-                <p className="why-disabled">Please enter a recipe name.</p>
-            )}
-        </div>
+
+        </Layout>
     );
 }
 

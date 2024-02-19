@@ -386,9 +386,10 @@ div.commentary {
   font-size: 1.1em;
 }
 
-.contact-us-form input {
+input[type="text"] {
   font-size: 1.1em;
-  width: 100%;
+  width: 98%;
+  margin:2px;
   padding: 12px 20px;
   box-sizing: border-box;
   border: 1px solid #ccc;
