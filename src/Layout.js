@@ -1,6 +1,9 @@
 import React from 'react';
 
-const Layout = ({ children, title, handleSubmit, isSubmitDisabled }) => {
+const Layout = ({ children, title, handleSubmit, isSubmitDisabled, buttonText }) => {
+    if (!buttonText) {
+        buttonText = "Next";
+    }
     return (
         <div className="layout">
             <div className="body-container">
@@ -10,10 +13,11 @@ const Layout = ({ children, title, handleSubmit, isSubmitDisabled }) => {
                 </div>
             </div>
             <div className="button-footer">
-                <button className="footer-submit" type="submit" disabled={isSubmitDisabled} onClick={handleSubmit}>Next</button>
+                <button className={"footer-submit" + (isSubmitDisabled ? " disabled" : "")} type="submit" onClick={handleSubmit}>{buttonText}</button>
+                {isSubmitDisabled && <p className="why-disabled">Please make a selection</p>}
             </div>
         </div>
     );
-};
+}; 
 
 export default Layout;

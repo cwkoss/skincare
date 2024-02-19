@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateSession } from './sessionUtils';
+import Layout from './Layout';
 
 
 function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
@@ -23,22 +24,7 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
     ];
   }
 
-
-
-  /*
-  const goalsToIngredients = {
-    "Adult acne": ["Tea Tree Oil", "Green Tea", "Honey", "Apple Cider Vinegar", "Zinc Oxide"],
-    "Dry skin": ["Shea Butter", "Cocoa Butter", "Hyaluronic Acid", "Olive Oil", "Coconut Oil"],
-    "Sensitive Skin": ["Aloe Vera Gel", "Oat Milk", "Sunflower Oil", "Jojoba Oil", "Cucumber Juice"],
-    "Wrinkles": ["Argan Oil", "Retinol", "Hyaluronic Acid", "Vitamin C", "Rosemary Oil"],
-    "Puffiness": ["Cucumber Juice", "Green Tea", "Aloe Vera Gel", "Peppermint Oil", "Tea Tree Oil"],
-    "Redness": ["Aloe Vera Gel", "Cucumber Juice", "Green Tea", "Niacinamide (Vitamin B3)", "Oat Milk"],
-    "Sun Protection": ["Zinc Oxide", "Vitamin C", "Vitamin E", "Coconut Oil", "Shea Butter"],
-    "Aging or age spots": ["Vitamin C", "Retinol", "Hyaluronic Acid", "Argan Oil", "Niacinamide (Vitamin B3)"],
-    "Large pores": ["Apple Cider Vinegar", "Green Tea", "Clay (if available, not in list)", "Honey", "Tea Tree Oil"],
-    "Atopic dermatitis": ["Oat Milk", "Sunflower Oil", "Shea Butter", "Aloe Vera Gel", "Cocoa Butter"]
-};*/
-
+  console.log(selectedOptions.length === 0, includeFragrance, selectedMoods);
 
   const moods = [
     "Fresh", "Relaxing", "Invigorated", "Pampered", "Focused", "Beautiful", "Confident", "Rejuvenated", "Empowered"
@@ -88,9 +74,11 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
   
 
   return (
-    <div className="body-container">
-      <h2>Select Your Skincare Goals/Concerns</h2>
-      <form onSubmit={handleSubmit}>
+    <Layout title="Select Your Skincare Goals/Concerns"
+            isSubmitDisabled={selectedOptions.length === 0 || (includeFragrance === 'yes' && selectedMoods.length === 0)}
+            handleSubmit={handleSubmit}
+            buttonText="Next">
+      <form>
         {skincareGoals.map((goal, index) => (
           <button
             key={index}
@@ -125,10 +113,8 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
             ))}
           </div>
         )}
-
-        <button className="submit" type="submit" disabled={selectedOptions.length === 0 || (includeFragrance === 'yes' && selectedMoods.length === 0)}>Next</button>
       </form>
-    </div>
+    </Layout>
   );
 }
 

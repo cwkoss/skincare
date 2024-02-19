@@ -94,7 +94,10 @@ function Product({ setProductData }) {
     };
 
     return (
-        <Layout title="Select a Skincare Product Type" handleSubmit={handleSubmit} isSubmitDisabled={!selectedProduct}>
+        <Layout title="Select a Skincare Product Type" 
+                handleSubmit={handleSubmit} 
+                isSubmitDisabled={!selectedProduct}
+                buttonText="Next">
             <div className="product-container">
                 <form onSubmit={handleSubmit}>
                     {Object.entries(skincareProducts).map(([key, value]) => (

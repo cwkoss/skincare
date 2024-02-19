@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { updateSession } from './sessionUtils';
+import Layout from './Layout';
 
 const loadingMessages = [
   "AI is preparing a recipe for you...",
@@ -115,8 +116,13 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
   }
 
   return (
-    <div className="body-container">
-      <h2>Your Selections</h2>
+    <Layout title="Your Selections"
+            handleSubmit={handleAIClick}
+            buttonText="Generate a Formulation with AI">
+
+      <h3>Selected Skincare Product:</h3>
+      <ul><li>{productData.charAt(0).toUpperCase() + productData.slice(1)}</li></ul>
+
       <h3>Skincare Goals/Concerns:</h3>
       <ul>
         {goalsData.map((item, index) => (
@@ -124,8 +130,7 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
         ))}
       </ul>
 
-      <h3>Selected Skincare Product:</h3>
-      <ul><li>{productData.charAt(0).toUpperCase() + productData.slice(1)}</li></ul>
+
 
       <h3>Include Fragrance: </h3>
       <ul><li>{includeFragrance.charAt(0).toUpperCase() + includeFragrance.slice(1)}</li></ul>
@@ -147,11 +152,10 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
         </div>
       ) : (
         <>
-          <button onClick={handleAIClick}>Generate a Formulation with AI</button>
           <button onClick={handleManualClick}>Choose Ingredients Manually</button>
         </>
       )}
-    </div>
+    </Layout>
   );
 }
 

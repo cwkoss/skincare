@@ -167,6 +167,12 @@ button.startbutton:hover {
   font-size: 1.1em;
 }
 
+.layout .button-footer .footer-submit.disabled {
+
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 .layout .scroller {
   max-height: calc(80vh);
   overflow-y: auto;
@@ -248,7 +254,7 @@ p.why-disabled {
   width: 333px;
   text-align: center;
   font-size: 0.6em;
-  bottom: 0%;
+  bottom: -5px;
 }
 
 .product-container {
