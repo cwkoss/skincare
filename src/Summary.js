@@ -118,7 +118,9 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
   return (
     <Layout title="Your Selections"
             handleSubmit={handleAIClick}
-            buttonText="Generate a Formulation with AI">
+            buttonText="Generate a Formulation with AI"
+            isSubmitDisabled={loading}
+            whyDisabled="Loading...">
 
       <h3>Selected Skincare Product:</h3>
       <ul><li>{productData.charAt(0).toUpperCase() + productData.slice(1)}</li></ul>
@@ -152,7 +154,7 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
         </div>
       ) : (
         <>
-          <button onClick={handleManualClick}>Choose Ingredients Manually</button>
+          {/*<button onClick={handleManualClick}>Choose Ingredients Manually</button>*/}
         </>
       )}
     </Layout>
