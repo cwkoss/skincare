@@ -124,6 +124,7 @@ const ingredients = {
     },
     "Rosehip Seed Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 0,
         max_percent: 10,
         default_percent: 2,
@@ -682,6 +683,15 @@ export const getFilteredIngredientList = (productName) => {
             return acc;
         }, {});
     //return ingredients.filter(ingredient => skincareProducts[productName].bannedIngredients.includes(ingredient));
+}
+
+export const getIngredientsByType = (type) => {
+    return Object.keys(ingredients)
+        .filter(ingredient => ingredients[ingredient].type === type)
+        .reduce((acc, key) => {
+            acc[key] = ingredients[key];
+            return acc;
+        }, {});
 }
 
 export const getFormatedIngredientsList = () => {
