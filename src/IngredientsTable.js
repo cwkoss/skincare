@@ -43,6 +43,8 @@ const IngredientsTable = () => {
                 <thead>
                     <tr>
                         <th onClick={() => requestSort('name')}>Ingredient Name</th>
+                        <th onClick={() => requestSort('phase')}>Phase</th>
+                        <th onClick={() => requestSort('cost_per_g')}>Cost per g</th>
                         <th onClick={() => requestSort('light_heavy')}>Light/Heavy</th>
                         <th onClick={() => requestSort('penetrating_occlusive')}>Penetrating/Occlusive</th>
                         <th onClick={() => requestSort('soothing_stimulating')}>Soothing/Stimulating</th>
@@ -53,6 +55,8 @@ const IngredientsTable = () => {
                     {sortedIngredients.map((ingredient) => (
                         <tr key={ingredient.name}>
                             <td>{ingredient.name}</td>
+                            <td>{ingredient.phase}</td>
+                            <td>{ingredient.cost_per_g}</td>
                             <td>{ingredient.light_heavy} <ScoreBar score={ingredient.light_heavy}></ScoreBar></td>
                             <td>{ingredient.penetrating_occlusive}<ScoreBar score={ingredient.penetrating_occlusive}></ScoreBar></td>
                             <td>{ingredient.soothing_stimulating}<ScoreBar score={ingredient.soothing_stimulating}></ScoreBar></td>
