@@ -3,6 +3,7 @@ import { skincareProducts } from "./Product";
 const ingredients = {
     "Sunflower Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 0,
         description: "Moisturizer, rich in Vitamin E, non-comedogenic, suitable for sensitive skin.",
         good_for: ["Sensitive Skin", "Dry skin"],
@@ -17,6 +18,7 @@ const ingredients = {
     },
     "Jojoba Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 0,
         description: "Moisturizer, mimics natural skin oils, balances sebum production, good for acne-prone skin.",
         good_for: ["Adult acne", "Dry skin", "Sensitive Skin"],
@@ -31,6 +33,7 @@ const ingredients = {
     },
     "Argan Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 11,
         description: "Rich in antioxidants and Vitamin E, moisturizes, reduces signs of aging, improves skin elasticity and enhances hair shine.",
         good_for: ["Aging or age spots", "Dry skin", "Wrinkles"],
@@ -46,6 +49,7 @@ const ingredients = {
     },
     "Shea Butter": {
         phase: "oil",
+        type: "carrier",
         hlb: 8,
         description: "Moisturizer, rich in fatty acids and vitamins, anti-inflammatory, helps with skin healing.",
         good_for: ["Dry skin", "Atopic dermatitis"],
@@ -60,6 +64,7 @@ const ingredients = {
     },
     "Cocoa Butter": {
         phase: "oil",
+        type: "carrier",
         hlb: 8,
         description: "Moisturizer, high in fatty acids, helps to hydrate and nourish the skin, reduces the appearance of scars.",
         good_for: ["Dry skin", "Wrinkles"],
@@ -74,6 +79,7 @@ const ingredients = {
     },
     "Coconut Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 8,
         description: "Moisturizes skin and hair, rich in fatty acids and antioxidants. Can be comedogenic (acne-causing) for some.",
         good_for: ["Dry skin"],
@@ -88,6 +94,7 @@ const ingredients = {
     },
     "Pecan Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 0,
         description: "Moisturizer, rich in antioxidants, promotes skin and hair health, hydrating properties.",
         good_for: ["Dry skin"],
@@ -102,6 +109,7 @@ const ingredients = {
     },
     "Pumpkin Seed Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 0,
         description: "Rich in zinc and vitamins, improves skin tone, fights acne, and soothes sensitive skin.",
         good_for: ["Adult acne", "Sensitive Skin"],
@@ -113,6 +121,21 @@ const ingredients = {
         penetrating_occlusive: 4,
         soothing_stimulating: 4,
         gentle_active: 4, 
+    },
+    "Rosehip Seed Oil": {
+        phase: "oil",
+        hlb: 0,
+        max_percent: 10,
+        default_percent: 2,
+        description: "Rosehip Seed Oil is rich in essential fatty acids and antioxidants. It's renowned for its skin-regenerative properties, aiding in reducing scars and fine lines. High in vitamins A and C, it helps in evening out skin tone and improving hydration.",
+        good_for: ["Wrinkles", "Dry skin", "Sun Protection", "Aging or age spots"],
+        bad_for: [], // Generally well-tolerated, but always patch test
+        density: 0.92,
+        cost_per_g: 0.6159,
+        light_heavy: 3,
+        penetrating_occlusive: 3,
+        soothing_stimulating: 4,
+        gentle_active: 4,
     },
     /*"Benne Seed Oil": {
         phase: "oil",
@@ -130,6 +153,7 @@ const ingredients = {
     },*/
     "Olive Oil": {
         phase: "oil",
+        type: "carrier",
         hlb: 0,
         description: "Moisturizer, rich in vitamins and antioxidants, promotes skin and hair health, but can be comedogenic (acne-causing) for some.",
         good_for: ["Dry skin"],
@@ -152,6 +176,7 @@ const ingredients = {
     },*/
     "Distilled Water": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: "Hydrates and serves as a base for water-soluble ingredients.",
         good_for: [],
@@ -165,6 +190,7 @@ const ingredients = {
     },
     "Green Tea": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: "Antioxidant-rich, reduces inflammation and redness, can protect against environmental stressors and promotes skin healing.",
         good_for: ["Redness", "Puffiness", "Sensitive Skin"],
@@ -188,6 +214,7 @@ const ingredients = {
     },*/
     "Aloe Vera Gel": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: "Soothes skin irritations, hydrates, promotes healing, good for sunburns and inflammation",
         good_for: ["Sensitive Skin", "Sun Protection", "Redness"],
@@ -202,6 +229,7 @@ const ingredients = {
     },
     "Glycerin": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: "Humectant, draws moisture into the skin, suitable for all skin types, enhances skin hydration.",
         good_for: ["Dry skin"],
@@ -217,6 +245,7 @@ const ingredients = {
     },
     "Honey": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: "Natural humectant, antibacterial, great for acne treatment and hydration, soothing for the skin.",
         good_for: ["Dry skin", "Adult acne"],
@@ -239,6 +268,7 @@ const ingredients = {
     },*/
     "Cucumber Juice": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: " Hydrating, soothing, rich in vitamins and minerals, good for puffiness and calming irritated skin.",
         good_for: ["Puffiness", "Sensitive Skin"],
@@ -250,6 +280,7 @@ const ingredients = {
     },
     "Oat Milk": {
         phase: "aqueous",
+        type: "aqueous",
         hlb: 20,
         description: "Contains lipids and water-absorbing substances, providing moisturizing and soothing benefits. Helps in reducing inflammation",
         good_for: ["Dry skin", "Sensitive Skin"],
@@ -262,6 +293,7 @@ const ingredients = {
     },
     "Beeswax": {
         phase: "emulsifier",
+        type: "emulsifier",
         hlb: 12,
         description: " Emulsifier and stabilizer in formulations, creates a protective barrier on the skin, retains moisture.",
         good_for: ["Dry skin"],
@@ -274,6 +306,7 @@ const ingredients = {
     },
     "Lecithin": {
         phase: "emulsifier",
+        type: "emulsifier",
         hlb: 8,
         description: "Natural stabilizer, thickens formulas and creates protective barrier on skin.",
         good_for: [],
@@ -287,6 +320,7 @@ const ingredients = {
     },
     "Cetearyl Alcohol": {
         phase: "emulsifier",
+        type: "emulsifier",
         hlb: 16,
         description: "A waxy fatty alcohol used as an emulsifier, thickener and stabilizer in creams and lotions. Extracted from Coconut and Palm Kernel oils",
         good_for: [],
@@ -530,21 +564,7 @@ const ingredients = {
         soothing_stimulating: 7,
         gentle_active: 6,
     },
-    "Rosehip Seed Oil": {
-        phase: "oil",
-        hlb: 0,
-        max_percent: 10,
-        default_percent: 2,
-        description: "Rosehip Seed Oil is rich in essential fatty acids and antioxidants. It's renowned for its skin-regenerative properties, aiding in reducing scars and fine lines. High in vitamins A and C, it helps in evening out skin tone and improving hydration.",
-        good_for: ["Wrinkles", "Dry skin", "Sun Protection", "Aging or age spots"],
-        bad_for: [], // Generally well-tolerated, but always patch test
-        density: 0.92,
-        cost_per_g: 0.6159,
-        light_heavy: 3,
-        penetrating_occlusive: 3,
-        soothing_stimulating: 4,
-        gentle_active: 4,
-    },
+
 
     "Geranium Oil": {
         phase: "additive",
