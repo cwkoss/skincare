@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import surveyData from './SurveyQs.json';
 import { db } from './firebase-config';
-import { setDoc, doc, updateDoc } from 'firebase/firestore'
+import { getDoc, setDoc, doc, updateDoc } from 'firebase/firestore'
 
 const OrderSurvey = () => {
     const navigate = useNavigate();
@@ -13,15 +13,37 @@ const OrderSurvey = () => {
     const searchParams = new URLSearchParams(location.search);
     const orderId = searchParams.get('orderId');
     const [docId, setDocId] = useState('');
+    const [order, setOrder] = useState({});
+    const [orderInitialized, setOrderInitialized] = useState(false);
+    const [surveyInitialized, setSurveyInitialized] = useState(false);
 
 
 
     useEffect(() => {
-        if(orderId) {
-        var now = new Date();
-        setDocId(now.getTime() + "-" + orderId);
-    }
+        if (orderId) {
+            var now = new Date();
+            setDocId(now.getTime() + "-" + orderId);
+        }
     }, [orderId]);
+
+    useEffect(() => {
+        const getOrder = async (orderId) => {
+            const docRef = doc(db, "orders", orderId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists() && !orderInitialized) {
+                setOrder(docSnap.data());
+                setOrderInitialized(true);
+            } else {
+                console.log("No such document!");
+            }
+        }
+
+        if (orderInitialized === false) {   
+            getOrder(orderId);
+        }
+
+    }, [orderId, orderInitialized]);
 
     useEffect(() => {
         const pushEmptyResponse = async () => {
@@ -32,11 +54,13 @@ const OrderSurvey = () => {
                     startTime: new Date(),
                     responses: {} // Initially empty
                 });
+                setSurveyInitialized(true);
             }
         };
-
-        pushEmptyResponse();
-    }, [docId, orderId]);
+        if (!surveyInitialized && orderInitialized && docId) {
+            pushEmptyResponse();
+        }
+    }, [docId, orderId, surveyInitialized, orderInitialized]);
 
 
     const handleNextClick = async () => {
@@ -50,6 +74,8 @@ const OrderSurvey = () => {
 
         await updateResponses();
 
+        console.log([surveyData[currentSectionIndex].section, order]);
+
         if (surveyData[currentSectionIndex].section === "Future Orders") {
             if (responses["repeat_order_interest"] === "Yes, I'd like to evolve this recipe") {
                 setCurrentSectionIndex(currentSectionIndex + 1);
@@ -57,6 +83,9 @@ const OrderSurvey = () => {
             else {
                 setCurrentSectionIndex(currentSectionIndex + 2);
             }
+        } else if (surveyData[currentSectionIndex].section ===  "Product Experience Feedback" && order.type === "oil") {
+            // skip consistency question for oil orders
+            setCurrentSectionIndex(currentSectionIndex + 2);
         } else if (currentSectionIndex < surveyData.length - 1) {
             setCurrentSectionIndex(currentSectionIndex + 1);
         } else {
