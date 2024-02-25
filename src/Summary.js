@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { updateSession } from './sessionUtils';
 import Layout from './Layout';
+import { useRecipe } from './RecipeContext'; 
 
 const loadingMessages = [
   "AI is preparing a recipe for you...",
@@ -13,7 +14,8 @@ const loadingMessages = [
   "Almost there, just adding the finishing touches..."
 ];
 
-function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
+function Summary() {
+  const { state } = useRecipe();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [currentMessage, setCurrentMessage] = useState(loadingMessages[0]);
@@ -23,18 +25,17 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
     setLoading(true);
     setCurrentMessage(loadingMessages[0]);
     const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
-    const goals = goalsData.join(', ');
-    const productType = productData;
+    const goals = state.goalsData.join(', ');
+    const productType = state.productData;
 
-
-    const fragranceSentence = includeFragrance === 'yes' ? `Essential oils should be added that will make me feel  ${selectedMoods.join(' and ')} .` : 'It should not have fragrance added.';
+    const fragranceSentence = state.includeFragrance === 'yes' ? `Essential oils should be added that will make me feel  ${state.selectedMoods.join(' and ')} .` : 'It should not have fragrance added.';
 
     const data = {
       text: `Hello, I am trying to formulate a ${productType} for ${goals}. ${fragranceSentence} Please suggest a recipe?`,
       ingredients: formatIngredientsList(ingredients)
     };
 
-    if (productData === "Daytime Face Moisturizing Cream with SPF") {
+    if (state.productData === "Daytime Face Moisturizing Cream with SPF") {
       data.text += " I would like to include Zinc Oxide for SPF in the formulation."
     }
 
@@ -123,11 +124,11 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
             whyDisabled="Loading...">
 
       <h3>Selected Skincare Product:</h3>
-      <ul><li>{productData.charAt(0).toUpperCase() + productData.slice(1)}</li></ul>
+      <ul><li>{state.productData.charAt(0).toUpperCase() + state.productData.slice(1)}</li></ul>
 
       <h3>Skincare Goals/Concerns:</h3>
       <ul>
-        {goalsData.map((item, index) => (
+        {state.goalsData.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
       </ul>
@@ -135,12 +136,12 @@ function Summary({ goalsData, productData, includeFragrance, selectedMoods }) {
 
 
       <h3>Include Fragrance: </h3>
-      <ul><li>{includeFragrance.charAt(0).toUpperCase() + includeFragrance.slice(1)}</li></ul>
-      {includeFragrance === 'yes' && (
+      <ul><li>{state.includeFragrance.charAt(0).toUpperCase() + state.includeFragrance.slice(1)}</li></ul>
+      {state.includeFragrance === 'yes' && (
         <>
           <h3>Selected Moods:</h3>
           <ul>
-            {selectedMoods.map((item, index) => (
+            {state.selectedMoods.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>

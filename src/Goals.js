@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateSession } from './sessionUtils';
 import Layout from './Layout';
+import { useRecipe } from './RecipeContext';
 
 
-function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragranceApp }) {
+function Goals() {
+  const { state, dispatch } = useRecipe();
   const navigate = useNavigate();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [includeFragrance, setIncludeFragrance] = useState('no');
@@ -12,9 +14,9 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
 
   var skincareGoals = [];
 
-  if (productData === "Hair and Scalp Oil") {
+  if (state.productData === "Hair and Scalp Oil") {
     skincareGoals = ["Dry scalp", "Hair growth", "Hair shine", "Hair strength"];
-  } else if (productData === "Body Moisturizing Cream or Body Butter") {
+  } else if (state.productData === "Body Moisturizing Cream or Body Butter") {
     skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Calloused Skin", "Stretch marks", "Eczema", "Aging or age spots"];
   } else {
     skincareGoals = [
@@ -29,6 +31,18 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
   const moods = [
     "Fresh", "Relaxing", "Invigorated", "Pampered", "Focused", "Beautiful", "Confident", "Rejuvenated", "Empowered"
   ];
+
+  const updateGoalsData = (newGoalsData) => {
+    dispatch({ type: 'SET_GOALS_DATA', payload: newGoalsData });
+  };
+
+  const updateIncludeFragrance = (fragrance) => {
+    dispatch({ type: 'SET_INCLUDE_FRAGRANCE', payload: fragrance });
+  };
+
+  const updateSelectedMoods = (moods) => {
+    dispatch({ type: 'SET_SELECTED_MOODS', payload: moods });
+  }
 
   const toggleOption = (option) => {
     const newSelectedOptions = selectedOptions.includes(option)
@@ -65,9 +79,9 @@ function Goals({ productData, setGoalsData, setSelectedMoodsApp, setIncludeFragr
   
     // Call updateSession to update Firestore document and navigate upon completion
     updateSession(sessionData).then(() => {
-      setGoalsData(selectedOptions); // Assuming you still want to do this for local state
-      setSelectedMoodsApp(selectedMoods); // Assuming you still want to do this for local state
-      setIncludeFragranceApp(includeFragrance); // Assuming you still want to do this for local state
+      updateGoalsData(selectedOptions); 
+      updateIncludeFragrance(includeFragrance);
+      updateSelectedMoods(selectedMoods);
       navigate('/summary');
     });
   };

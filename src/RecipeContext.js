@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 // Assuming you have a utility function for Firebase operations
-import { sendDataToFirebase } from './firebaseUtils';
+import { updateRecipeInFirebase } from './FirebaseUtils';
 
 const RecipeContext = createContext();
 
@@ -34,7 +34,8 @@ export const RecipeProvider = ({ children }) => {
 
   // Effect to send state changes to Firebase
   useEffect(() => {
-    sendDataToFirebase(state);
+    console.log(state);
+    updateRecipeInFirebase(state);
   }, [state]); // Re-run this effect whenever the state changes
 
   return (

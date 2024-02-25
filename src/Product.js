@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { updateSession } from './sessionUtils';
 import Layout from './Layout';
+import { useRecipe } from './RecipeContext';
 
 const getAqueousIngredients = () => {
     const aqueousIngredients = [];
@@ -53,17 +54,18 @@ export const skincareProducts = {
     },
 };
 
-function Product({ setProductData }) {
+function Product() {
+    const { state, dispatch } = useRecipe();
     const navigate = useNavigate();
     const [selectedProduct, setSelectedProduct] = useState('');
 
     const aqueousIngredients = getAqueousIngredients();
 
+    const updateProductData = (newProductData) => {
+        dispatch({ type: 'SET_PRODUCT_DATA', payload: newProductData });
+      };
 
 
-    
-
-    console.log(aqueousIngredients);
 
     /*
         "Daytime Face Moisturizing Cream with SPF": "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
@@ -92,7 +94,7 @@ function Product({ setProductData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setProductData(selectedProduct);
+        updateProductData(selectedProduct);
         // Use updateSession to send selectedProduct and update lastDateTime
         updateSession({ selectedProduct }).then(() => {
             navigate('/goals'); // Navigate after session is updated
