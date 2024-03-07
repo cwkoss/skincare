@@ -6,7 +6,7 @@ import Layout from './Layout';
 import { skincareProducts } from './Product';
 
 /*
-This file will replae RecipeBuilder.  Instead of building the whole recipe, 
+This file will replace RecipeBuilder.  Instead of building the whole recipe, 
 users will customize each phase and then have a final step where they adjust the proportions between the phases.  
 
 */

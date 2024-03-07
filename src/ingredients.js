@@ -670,7 +670,46 @@ const ingredients = {
         good_for: ["Atopic dermatitis", "Wrinkles", "Redness"],
         bad_for: ["Sensitive Skin"] // can be irritating due to tannins
     }*/
-
+    "Phenoxyethanol": {
+        phase: "preservative",
+        hlb: 20,
+        max_percent: 1,
+        default_percent: 0.5,
+        description: "Broad-spectrum preservative, effective against bacteria, yeast, and mold. It is used in concentrations of 0.5% to 1%.",
+        good_for: [],
+        bad_for: [],
+        light_heavy: 1,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 1,
+        gentle_active: 1,
+    },
+    "AntiMicro Banana": {
+        phase: "preservative",
+        hlb: 20,
+        max_percent: 4,
+        default_percent: 2,
+        description: "Broad-spectrum preservative, 100% plant derived - made of parts of the banana tree that would go to waste. Water soluble, concentrated plant extract.",
+        good_for: [],
+        bad_for: [],
+        light_heavy: 1,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 1,
+        gentle_active: 1,
+    },
+    "AntiMicro Root Blend": {
+        phase: "preservative",
+        hlb: 20,
+        max_percent: 2,
+        default_percent: 1,
+        description: "Unique blend of garlic, ginger & wasabi extracts dissolved in hydrating glycols providing effective microbial growth prevention.",
+        good_for: [],
+        bad_for: [],
+        light_heavy: 1,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 1,
+        gentle_active: 1,
+    },
+    }
 
 };
 
