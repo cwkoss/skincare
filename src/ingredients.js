@@ -708,8 +708,8 @@ const ingredients = {
         penetrating_occlusive: 1,
         soothing_stimulating: 1,
         gentle_active: 1,
-    },
     }
+
 
 };
 
