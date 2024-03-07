@@ -9,6 +9,8 @@ function OrderPricing() {
     const [recipeData, setRecipeData] = useState(null);
     const [targetGrams, setTargetGrams] = useState(60);
     const [ingredientList, setIngredientList] = useState([]);
+    const [ingredientsText, setIngredientsText] = useState('');
+
 
     const totalGrams = ingredientList.reduce((sum, ingredient) => sum + ingredient.grams, 0);
     const totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.cost, 0);
@@ -31,6 +33,21 @@ function OrderPricing() {
             fetchData();
         }
     }, [location.search]);
+
+    useEffect(() => {
+        if (recipeData && totalParts > 0) {
+            const ingredientsText = Object.entries(recipeData.ingredients)
+                .sort((a, b) => b[1] - a[1])
+                .map(([name, parts]) => {
+                    const percentage = ((parts / totalParts) * 100); // Keeping 3 decimal places
+                    return `${name} (${percentage}%)`;
+                })
+                .join(', ');
+            
+            setIngredientsText(`Base Recipe Ingredients: ${ingredientsText}`);
+        }
+    }, [recipeData, totalParts]);
+    
 
 
     const calculateIngredients = useCallback(() => {
@@ -87,6 +104,7 @@ function OrderPricing() {
                     </tr>
                 </tbody>
             </table>
+            <p>{ingredientsText}</p>
         </div>
     );
 }
