@@ -132,7 +132,7 @@ const ingredients = {
         good_for: ["Wrinkles", "Dry skin", "Sun Protection", "Aging or age spots"],
         bad_for: [], // Generally well-tolerated, but always patch test
         density: 0.92,
-        cost_per_g: 0.6159,
+        cost_per_g: 0.19,
         light_heavy: 3,
         penetrating_occlusive: 3,
         soothing_stimulating: 4,
@@ -189,7 +189,7 @@ const ingredients = {
         soothing_stimulating: 2,
         gentle_active: 1,
     },
-    "Green Tea": {
+    /*"Green Tea": {
         phase: "aqueous",
         type: "aqueous",
         hlb: 20,
@@ -201,7 +201,7 @@ const ingredients = {
         penetrating_occlusive: 2,
         soothing_stimulating: 3,
         gentle_active: 6,
-    },
+    },*/
     /*"Sea Salt": {
         phase: "aqueous",
         hlb: 20,
@@ -676,6 +676,7 @@ const ingredients = {
         max_percent: 1,
         default_percent: 0.5,
         description: "Broad-spectrum preservative, effective against bacteria, yeast, and mold. It is used in concentrations of 0.5% to 1%.",
+        cost_per_g: 0.0712,
         good_for: [],
         bad_for: [],
         light_heavy: 1,
