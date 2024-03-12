@@ -81,9 +81,9 @@ function Summary() {
     }
   }, [loading]);
 
-  const handleManualClick = () => {
+  /*const handleManualClick = () => {
     navigate('/recipe-builder'); // Replace with your actual route
-  };
+  };*/
 
   function formatIngredientsList(ingredients) {
     let formattedString = "";

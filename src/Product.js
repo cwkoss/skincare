@@ -55,11 +55,9 @@ export const skincareProducts = {
 };
 
 function Product() {
-    const { state, dispatch } = useRecipe();
+    const { dispatch } = useRecipe();
     const navigate = useNavigate();
     const [selectedProduct, setSelectedProduct] = useState('');
-
-    const aqueousIngredients = getAqueousIngredients();
 
     const updateProductData = (newProductData) => {
         dispatch({ type: 'SET_PRODUCT_DATA', payload: newProductData });

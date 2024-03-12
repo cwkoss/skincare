@@ -6,7 +6,7 @@ import { useRecipe } from './RecipeContext';
 
 
 function RecipeBuilder() {
-    const { state, dispatch } = useRecipe();
+    const { state } = useRecipe();
     const navigate = useNavigate();
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [ingredientProportions, setIngredientProportions] = useState({});

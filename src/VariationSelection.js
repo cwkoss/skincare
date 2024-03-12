@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getFormatedIngredientsList } from './ingredients';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebase-config';
 
 function VariationSelection() {
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const location = useLocation();
 
     const [variations, setVariations] = useState([]);
