@@ -1,3 +1,15 @@
+- finish out phaseselection
+-- Add additive mode for proportions
+-- switch proportions from percentages to 'parts' and compute percentages
+-- Should ingredient selection and proportion management be two different pages?
+-- How should the user flow work? Should there be back and forward buttons?  
+-- Should there be a way to get further AI input while a user has made changes?
+-- Build way to convert all phases into a single unified recipe that adds up to 100% and uses sane proportions every time (even if AI suggests something wacky)
+-- Improve the design of phaseselection components
+-- Have phase selection replace recipebuilder
+-- clean up recipebuilder 
+
+
 - enforce emulsifier requirement
 - Make AI drop user on finalizeRecipe instead of proportion seletor, automatically round to 100%
 - Style other pages so they all have a center column with fixed width like the homepage. 
