@@ -20,19 +20,19 @@ const mockedRecipe = {
 
     },
     "aqueous": {
-        "Aloe Vera": 5,
+        "Aloe Vera Gel": 5,
         "Distilled Water": 5,
         "commentary": "The aqueous phase adds water-based ingredients to the recipe, ensuring hydration. Aloe Vera is renowned for its soothing and healing properties, making it ideal for sensitive skin. Distilled Water serves as a pure, clean base, helping to blend the ingredients effectively."
     },
     "emulsifier": {
-        "Cetaryl Alcohol": 5,
+        "Cetearyl Alcohol": 5,
         "commentary": "Emulsifiers are crucial for combining oil and water-based ingredients into a stable mixture. Cetaryl Alcohol, a fatty alcohol, is gentle on the skin and helps to create a creamy texture in the final product."
     },
     "active": {
         "Niacinamide": 2,
         "commentary": "Active ingredients target specific skin concerns. Niacinamide is chosen for its versatility; it helps to improve skin texture, brighten the complexion, and strengthen the skin barrier."
     },
-    "essential": {
+    "fragrance": {
         "Lavender Oil": 1,
         "Germanium Oil": 1,
         "commentary": "Essential oils provide the product with natural fragrances and therapeutic benefits. Lavender Oil offers calming properties, making it ideal for use in skincare. Germanium Oil is known for its ability to reduce the appearance of wrinkles and fine lines, promoting a youthful glow."
