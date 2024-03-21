@@ -53,6 +53,7 @@ function PhaseSelection() {
     const [mode, setMode] = useState("review"); // review, ingredientSelection, and proporitonSelection
 
     const handleSubmit = () => {
+        setMode("review");
         const nextIndex = phaseOrder.indexOf(currentPhase) + 1;
         if (nextIndex < phaseOrder.length) {
             setCurrentPhase(phaseOrder[nextIndex]);
@@ -68,7 +69,10 @@ function PhaseSelection() {
                 <h4>Ingredients</h4>
                 <ul>
                     {Object.entries(recipeIngredients).map(([ingredient, amount]) => (
-                        <li key={ingredient}>{ingredient}: {amount} <br /> {ingredients[ingredient].description}</li>
+                        <li key={ingredient}>
+                            {ingredient}: {amount} <br />
+                            {ingredients[ingredient] ? ingredients[ingredient].description : 'Description not available'}
+                        </li>
                     ))}
                 </ul>
                 <h4>Commentary</h4>
@@ -87,7 +91,7 @@ function PhaseSelection() {
         // Add or remove ingredient from recipe based on the new selected state
         if (selectedIngredients[ingredientName]) {
             // If ingredient was selected, remove it from recipe
-            const {[ingredientName]: removed, ...rest} = recipe[currentPhase];
+            const { [ingredientName]: removed, ...rest } = recipe[currentPhase];
             setRecipe({ ...recipe, [currentPhase]: rest });
         } else {
             // If ingredient was not selected, add it back with a default amount
@@ -104,22 +108,22 @@ function PhaseSelection() {
     };
 
 
-        // Function to update selectedIngredients based on the current phase's ingredients in the recipe
-        const updateSelectedIngredients = () => {
-            const currentIngredients = recipe[currentPhase];
-            const ingredientSelection = Object.keys(currentIngredients)
-                .filter(key => key !== 'commentary') // Exclude 'commentary'
-                .reduce((acc, ingredient) => {
-                    acc[ingredient] = true; // Assume all existing ingredients are selected
-                    return acc;
-                }, {});
-    
-            setSelectedIngredients(ingredientSelection);
-        };
-    
-        useEffect(() => {
-            updateSelectedIngredients();
-        }, [currentPhase, recipe, mode]); // Now it also updates when recipe or mode changes
+    // Function to update selectedIngredients based on the current phase's ingredients in the recipe
+    const updateSelectedIngredients = () => {
+        const currentIngredients = recipe[currentPhase];
+        const ingredientSelection = Object.keys(currentIngredients)
+            .filter(key => key !== 'commentary') // Exclude 'commentary'
+            .reduce((acc, ingredient) => {
+                acc[ingredient] = true; // Assume all existing ingredients are selected
+                return acc;
+            }, {});
+
+        setSelectedIngredients(ingredientSelection);
+    };
+
+    useEffect(() => {
+        updateSelectedIngredients();
+    }, [currentPhase, recipe, mode]); // Now it also updates when recipe or mode changes
 
     useEffect(() => {
         // Function to initialize selectedIngredients based on the current phase's ingredients
@@ -142,21 +146,21 @@ function PhaseSelection() {
         return recipe[phase] && recipe[phase].hasOwnProperty(ingredient);
     };
 
-        // Use this function to adjust proportions, similar logic to handleIngredientSelect
-        const adjustProportions = (phase, ingredientName, newAmount) => {
-            if (recipe[phase] && recipe[phase][ingredientName]) {
-                setRecipe(prev => ({
-                    ...prev,
-                    [phase]: {
-                        ...prev[phase],
-                        [ingredientName]: {
-                            ...prev[phase][ingredientName],
-                            amount: newAmount
-                        }
+    // Use this function to adjust proportions, similar logic to handleIngredientSelect
+    const adjustProportions = (phase, ingredientName, newAmount) => {
+        if (recipe[phase] && recipe[phase][ingredientName]) {
+            setRecipe(prev => ({
+                ...prev,
+                [phase]: {
+                    ...prev[phase],
+                    [ingredientName]: {
+                        ...prev[phase][ingredientName],
+                        amount: newAmount
                     }
-                }));
-            }
-        };
+                }
+            }));
+        }
+    };
 
     const goToProportionAdjustment = () => {
         setMode("changeProportions");
