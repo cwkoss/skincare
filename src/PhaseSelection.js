@@ -26,7 +26,7 @@ const mockedRecipe = {
     },
     "emulsifier": {
         "Cetearyl Alcohol": 5,
-        "commentary": "Emulsifiers are crucial for combining oil and water-based ingredients into a stable mixture. Cetaryl Alcohol, a fatty alcohol, is gentle on the skin and helps to create a creamy texture in the final product."
+        "commentary": "Emulsifiers are crucial for combining oil and water-based ingredients into a stable mixture. Cetearyl Alcohol, a fatty alcohol, is gentle on the skin and helps to create a creamy texture in the final product."
     },
     "active": {
         "Niacinamide": 2,
