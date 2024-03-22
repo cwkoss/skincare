@@ -218,3 +218,45 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
         }
     });
 });
+
+exports.getProportionSuggestion = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        try {
+            const phaseProportions = request.body.phaseProportions;
+
+            const messageBody = [
+                {
+                    role: "system",
+                    content: `You are an award-winning cosmetic chemist. 
+
+                  Return a json-formatted object suggesting proportions for a single phase of a skincare recipe in this specified format:
+                
+                  {
+                    "Argan Oil": 10,
+                    "Sunflower Oil": 5,
+                    "Shea Butter": 5,
+                    "commentary": "Argan Oil is very light and thin, Sunflower Oil is medium, and Shea Butter is heavier and will add thickness, so overall these proprotions will make a light, moisturizing cream that is not too heavy.  If you want a heavier cream, you can increase the amount of Shea Butter and decrease the amount of Sunflower Oil.  If you want a lighter cream, you can decrease the amount of Shea Butter and increase the amount of Sunflower Oil.  If you want a more moisturizing cream, you can increase the amount of Argan Oil and decrease the amount of Sunflower Oil."
+                  }
+
+                  Values must be between 1-10 Parts. Commentary should give the user an idea of what the proportions will do to the final product.  Do not mention patch testing or shelf life in your commentary - that will be covered elsewhere. Do not include any text outside of the json object. 
+                  `,
+                },
+                { role: "user", content: "Please suggest the ideal proportions to use for these ingredients, here are my initial ingredients and number of parts of each: " + JSON.stringify(phaseProportions)},
+            ];
+            console.log(messageBody);
+            const gptResponse = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                temperature: 0.9,
+                n: 1,
+                stream: false,
+                messages: messageBody,
+            });
+            console.log("Request: " + request.body.text);
+            console.log("GPT Response: ", gptResponse.choices[0].message.content);
+            response.send({ reply: gptResponse });
+        } catch (error) {
+            console.error("Error calling OpenAI: ", error);
+            response.status(500).send("Error processing your request: " + error);
+        }
+    });
+});
