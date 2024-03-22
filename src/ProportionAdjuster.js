@@ -36,6 +36,7 @@ function ProportionAdjuster({ initialIngredients, updateRecipe, onSaveChanges })
                     </div>
                 ))}
             </div>
+            <button>Get AI Proportion Suggestion</button><br />
             <button onClick={handleSaveChanges}>Save Changes</button>
         </div>
     );

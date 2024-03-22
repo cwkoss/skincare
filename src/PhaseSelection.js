@@ -54,19 +54,8 @@ const mockedRecipe = {
 function PhaseSelection() {
     const [currentPhase, setCurrentPhase] = useState("carrier");
     const phaseOrder = skincareProducts["Daytime Face Moisturizing Cream with SPF"].typeOrder; ///TODO get phase order from productData
-    const [selectedIngredients, setSelectedIngredients] = useState({});
     const [recipe, setRecipe] = useState(mockedRecipe);
     const [mode, setMode] = useState("review"); // review, ingredientSelection, and proporitonSelection
-
-    const handleSubmit = () => {
-        setMode("review");
-        const nextIndex = phaseOrder.indexOf(currentPhase) + 1;
-        if (nextIndex < phaseOrder.length) {
-            setCurrentPhase(phaseOrder[nextIndex]);
-        } else {
-            // Handle final submission or review
-        }
-    };
 
     const handleNextPhase = () => {
         const nextIndex = phaseOrder.indexOf(currentPhase) + 1;
@@ -82,82 +71,6 @@ function PhaseSelection() {
         }
     };
 
-
-    const handleIngredientSelect = (ingredientName) => {
-        // Toggle selection in the selectedIngredients state directly
-        setSelectedIngredients(prev => ({
-            ...prev,
-            [ingredientName]: !prev[ingredientName]
-        }));
-
-        // Add or remove ingredient from recipe based on the new selected state
-        if (selectedIngredients[ingredientName]) {
-            // If ingredient was selected, remove it from recipe
-            const { [ingredientName]: removed, ...rest } = recipe[currentPhase];
-            setRecipe({ ...recipe, [currentPhase]: rest });
-        } else {
-            // If ingredient was not selected, add it back with a default amount
-            const newAmount = 1; // Default amount, adjust as needed
-            const ingredientDetail = ingredients[ingredientName] || {}; // Fallback to an empty object if not found
-            setRecipe(prev => ({
-                ...prev,
-                [currentPhase]: {
-                    ...prev[currentPhase],
-                    [ingredientName]: { amount: newAmount, ...ingredientDetail }
-                }
-            }));
-        }
-    };
-
-
-    // Function to update selectedIngredients based on the current phase's ingredients in the recipe
-    const updateSelectedIngredients = () => {
-        const currentIngredients = recipe[currentPhase];
-        const ingredientSelection = Object.keys(currentIngredients)
-            .filter(key => key !== 'commentary') // Exclude 'commentary'
-            .reduce((acc, ingredient) => {
-                acc[ingredient] = true; // Assume all existing ingredients are selected
-                return acc;
-            }, {});
-
-        setSelectedIngredients(ingredientSelection);
-    };
-
-    useEffect(() => {
-        updateSelectedIngredients();
-    }, [currentPhase, recipe, mode]); // Now it also updates when recipe or mode changes
-
-    useEffect(() => {
-        // Function to initialize selectedIngredients based on the current phase's ingredients
-        const initializeSelectedIngredients = () => {
-            const phaseIngredients = mockedRecipe[currentPhase];
-            const initialSelection = Object.keys(phaseIngredients).reduce((acc, ingredient) => {
-                if (ingredient !== 'commentary') { // Ensure commentary is not included as an ingredient
-                    acc[ingredient] = true; // Set true to indicate selection
-                }
-                return acc;
-            }, {});
-
-            setSelectedIngredients(initialSelection);
-        };
-
-        initializeSelectedIngredients();
-    }, [currentPhase]); // Re-run when the current phase changes
-
-    const isIngredientSelected = (phase, ingredient) => {
-        return recipe[phase] && recipe[phase].hasOwnProperty(ingredient);
-    };
-
-    const goToProportionAdjustment = () => {
-        setMode("changeProportions");
-    };
-
-    const headerWithButtonStyle = {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    };
-
     const updateRecipeProportions = (newProportions) => {
         setRecipe(prev => ({
             ...prev,
@@ -167,8 +80,6 @@ function PhaseSelection() {
             }
         }));
     };
-
-
 
     return (
         <Layout title="Your Selections">
@@ -189,8 +100,14 @@ function PhaseSelection() {
             {mode === "changeIngredients" && (
                 <IngredientSelector
                     ingredients={getIngredientsByType(currentPhase)}
-                    selectedIngredients={selectedIngredients}
-                    onIngredientSelect={handleIngredientSelect}
+                    initialSelectedIngredients={recipe[currentPhase]}
+                    onSave={updatedIngredients => {
+                        setRecipe({
+                            ...recipe,
+                            [currentPhase]: updatedIngredients
+                        });
+                        setMode("changeProportions");
+                    }}
                 />
             )}
 
