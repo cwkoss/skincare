@@ -6,6 +6,12 @@ import ingredients, { getIngredientsByType } from './ingredients';
 import Layout from './Layout';
 import { skincareProducts } from './Product';
 
+import PhaseNavigationControl from './PhaseNavigationControl';
+import PhaseDetails from './PhaseDetails';
+import IngredientSelector from './IngredientSelector';
+import ProportionAdjuster from './ProportionAdjuster';
+
+
 /*
 This file will replace RecipeBuilder.  Instead of building the whole recipe, 
 users will customize each phase and then have a final step where they adjust the proportions between the phases.  
@@ -62,24 +68,20 @@ function PhaseSelection() {
         }
     };
 
-    const renderPhaseDetails = (phase) => {
-        const { commentary, ...recipeIngredients } = phase;
-        return (
-            <>
-                <h4>Ingredients</h4>
-                <ul>
-                    {Object.entries(recipeIngredients).map(([ingredient, amount]) => (
-                        <li key={ingredient}>
-                            {ingredient}: {amount} <br />
-                            {ingredients[ingredient] ? ingredients[ingredient].description : 'Description not available'}
-                        </li>
-                    ))}
-                </ul>
-                <h4>Commentary</h4>
-                <p>{commentary}</p>
-            </>
-        );
+    const handleNextPhase = () => {
+        const nextIndex = phaseOrder.indexOf(currentPhase) + 1;
+        if (nextIndex < phaseOrder.length) {
+            setCurrentPhase(phaseOrder[nextIndex]);
+        }
     };
+
+    const handlePrevPhase = () => {
+        const prevIndex = phaseOrder.indexOf(currentPhase) - 1;
+        if (prevIndex >= 0) {
+            setCurrentPhase(phaseOrder[prevIndex]);
+        }
+    };
+
 
     const handleIngredientSelect = (ingredientName) => {
         // Toggle selection in the selectedIngredients state directly
@@ -146,22 +148,6 @@ function PhaseSelection() {
         return recipe[phase] && recipe[phase].hasOwnProperty(ingredient);
     };
 
-    // Use this function to adjust proportions, similar logic to handleIngredientSelect
-    const adjustProportions = (phase, ingredientName, newAmount) => {
-        if (recipe[phase] && recipe[phase][ingredientName]) {
-            setRecipe(prev => ({
-                ...prev,
-                [phase]: {
-                    ...prev[phase],
-                    [ingredientName]: {
-                        ...prev[phase][ingredientName],
-                        amount: newAmount
-                    }
-                }
-            }));
-        }
-    };
-
     const goToProportionAdjustment = () => {
         setMode("changeProportions");
     };
@@ -172,81 +158,53 @@ function PhaseSelection() {
         alignItems: 'center',
     };
 
-    const renderChangeIngredientsMode = () => (
-        <div>
-            <div>
-                <div style={headerWithButtonStyle}>
-                    <h3>Available Ingredients:</h3>
-                    <button onClick={goToProportionAdjustment}>Adjust Proportions</button>
-                </div>
-                {Object.entries(getIngredientsByType(currentPhase)).map(([name, details]) => (
-                    <div className={(selectedIngredients[name] ? 'selected' : '') + " ingredient-row"}
-                        key={name}
-                        onClick={() => handleIngredientSelect(name)}>
-                        <strong>{name}</strong>: <small>{details.description}</small>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-
-    const renderAdjustProportions = (phase) => {
-        const phaseIngredients = recipe[phase];
-        // Exclude commentary when rendering ingredient sliders
-        const { commentary, ...ingredients } = phaseIngredients;
-
-        console.log(phaseIngredients);
-
-        return (
-            <div className="recipe-builder-container">
-                <h3>Adjust Proportions for {phase} Phase</h3>
-                <div className="scrollable-content">
-                    {Object.entries(ingredients).map(([name, value]) => (
-                        <div key={name} className="ingredient-slider">
-                            <label>
-                                {name}: {value.toFixed(2)}%
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max="100" // You might want a different max based on your application's logic
-                                    value={value}
-                                    onChange={(e) => handleProportionChange(phase, name, e.target.value)}
-                                    style={{ width: '100%' }}
-                                />
-                            </label>
-                        </div>
-                    ))}
-                </div>
-                <button onClick={() => setMode("review")}>Back to Review</button>
-            </div>
-        );
+    const updateRecipeProportions = (newProportions) => {
+        setRecipe(prev => ({
+            ...prev,
+            [currentPhase]: {
+                ...prev[currentPhase],
+                ...newProportions
+            }
+        }));
     };
 
-    const handleProportionChange = (phase, ingredientName, newValue) => {
-        const newAmount = parseFloat(newValue);
-        const updatedRecipe = { ...recipe };
-        updatedRecipe[phase][ingredientName] = newAmount;
-
-        setRecipe(updatedRecipe);
-    };
 
 
     return (
-        <Layout title="Your Selections"
-            handleSubmit={handleSubmit}
-            buttonText="Save and Continue"
-        >
-            <h3>Current Phase: {currentPhase}</h3>
-            {mode === "review" &&
-                <div>
-                    {renderPhaseDetails(recipe[currentPhase])}
-                    <button onClick={() => setMode("changeIngredients")}>Change Ingredients</button>
-                    <button onClick={() => setMode("changeProportions")}>Change Proportions</button>
-                </div>
-            }
+        <Layout title="Your Selections">
+            <PhaseNavigationControl
+                currentPhase={currentPhase}
+                phaseOrder={phaseOrder} // Pass phaseOrder to the component
+                onNextPhase={handleNextPhase}
+                onPrevPhase={handlePrevPhase}
+                setMode={setMode}
+            />
 
-            {mode === "changeIngredients" && renderChangeIngredientsMode()}
-            {mode === "changeProportions" && renderAdjustProportions(currentPhase)}
+            {mode === "review" && (
+                <PhaseDetails
+                    phaseData={recipe[currentPhase]}
+                />
+            )}
+
+            {mode === "changeIngredients" && (
+                <IngredientSelector
+                    ingredients={getIngredientsByType(currentPhase)}
+                    selectedIngredients={selectedIngredients}
+                    onIngredientSelect={handleIngredientSelect}
+                />
+            )}
+
+            {mode === "changeProportions" && (
+                <ProportionAdjuster
+                    initialIngredients={(() => {
+                        const { commentary, ...ingredients } = recipe[currentPhase];
+                        return ingredients;
+                    })()}
+                    updateRecipe={updateRecipeProportions}
+                    onSaveChanges={() => setMode("review")}
+                />
+            )}
+
         </Layout>
     );
 }
