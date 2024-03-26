@@ -47,6 +47,21 @@ const ingredients = {
         soothing_stimulating: 3,
         gentle_active: 3,
     },
+    "Sweet Almond Oil": {
+        phase: "oil",
+        type: "carrier",
+        hlb: 6,
+        description: "Lightweight, moisturizing oil that easily absorbs into the skin, rich in Vitamin E, helps improve skin tone and texture, ideal for sensitive skin.",
+        good_for: ["Sensitive skin", "Dry skin", "Eczema"],
+        bad_for: [],
+        cost: "$12.99/16oz",
+        density: 0.91,
+        cost_per_g: 0.0391,
+        light_heavy: 3,
+        penetrating_occlusive: 4,
+        soothing_stimulating: 5,
+        gentle_active: 5
+    },    
     "Shea Butter": {
         phase: "oil",
         type: "carrier",
