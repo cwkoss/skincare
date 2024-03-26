@@ -47,7 +47,7 @@ function ProportionAdjuster({ initialIngredients, updateRecipe, onSaveChanges })
             <h3>Adjust Proportions</h3>
             <div className="scrollable-content">
                 {Object.entries(ingredients).map(([name, amount]) => (
-                    <div key={name} className="ingredient-slider">
+                    <div key={name}>
                         <label>
                             {name}: {amount.toFixed(0)}
                             <input
