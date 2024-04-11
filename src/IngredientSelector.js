@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function IngredientSelector({ ingredients, initialSelectedIngredients, onSave }) {
+function IngredientSelector({ ingredients, initialSelectedIngredients, updateRecipe, onSaveChanges }) {
     const [selectedIngredients, setSelectedIngredients] = useState(initialSelectedIngredients);
 
     const toggleIngredientSelection = (name) => {
@@ -18,19 +18,13 @@ function IngredientSelector({ ingredients, initialSelectedIngredients, onSave })
         });
 
         setSelectedIngredients(newSelectedIngredients);
+
+    newSelectedIngredients.commentary = "Changed ingredients";
+    updateRecipe(newSelectedIngredients);
     };
 
     const handleSave = () => {
-        const updatedIngredients = Object.keys(ingredients)
-            .filter(name => selectedIngredients[name])
-            .reduce((acc, name) => {
-                // Use existing amount if available, otherwise default to 5
-                const amount = selectedIngredients[name];
-                acc[name] = amount;
-                return acc;
-            }, {});
-        updatedIngredients.commentary = "Changed ingredients";
-        onSave(updatedIngredients);
+        onSaveChanges();
     };
 
     return (

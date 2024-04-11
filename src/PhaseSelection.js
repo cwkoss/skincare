@@ -101,13 +101,14 @@ function PhaseSelection() {
                 <IngredientSelector
                     ingredients={getIngredientsByType(currentPhase)}
                     initialSelectedIngredients={recipe[currentPhase]}
-                    onSave={updatedIngredients => {
+                    updateRecipe={updatedIngredients => {
+                        console.log("updatedIngredients", updatedIngredients);
                         setRecipe({
                             ...recipe,
                             [currentPhase]: updatedIngredients
                         });
-                        setMode("changeProportions");
                     }}
+                    onSaveChanges={() => setMode("changeProportions")}
                 />
             )}
 
