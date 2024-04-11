@@ -82,7 +82,7 @@ function PhaseSelection() {
     };
 
     return (
-        <Layout title="Your Selections">
+        <Layout title={"Phase: " + currentPhase[0].toUpperCase() + currentPhase.slice(1)}>
             <PhaseNavigationControl
                 currentPhase={currentPhase}
                 phaseOrder={phaseOrder} // Pass phaseOrder to the component
