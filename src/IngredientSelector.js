@@ -19,8 +19,8 @@ function IngredientSelector({ ingredients, initialSelectedIngredients, updateRec
 
         setSelectedIngredients(newSelectedIngredients);
 
-    newSelectedIngredients.commentary = "Changed ingredients";
-    updateRecipe(newSelectedIngredients);
+        newSelectedIngredients.commentary = "Changed ingredients";
+        updateRecipe(newSelectedIngredients);
     };
 
     const handleSave = () => {
