@@ -11,8 +11,7 @@ function ProportionAdjuster({ initialIngredients, updateRecipe, onSaveChanges })
                 ...prevIngredients,
                 [ingredientName]: newAmount
             };
-    
-            // Update the recipe with the newly computed state directly
+
             updateRecipe(updatedIngredients);
             return updatedIngredients;
         });
@@ -20,7 +19,6 @@ function ProportionAdjuster({ initialIngredients, updateRecipe, onSaveChanges })
     
 
     const handleSaveChanges = () => {
-        updateRecipe(ingredients);
         onSaveChanges();
     };
 
