@@ -35,12 +35,12 @@ const mockedRecipe = {
         "commentary": "Emulsifiers are crucial for combining oil and water-based ingredients into a stable mixture. Cetearyl Alcohol, a fatty alcohol, is gentle on the skin and helps to create a creamy texture in the final product."
     },
     "active": {
-        "Niacinamide": 2,
+        "Niacinamide (Vitamin B3)": 2,
         "commentary": "Active ingredients target specific skin concerns. Niacinamide is chosen for its versatility; it helps to improve skin texture, brighten the complexion, and strengthen the skin barrier."
     },
     "fragrance": {
         "Lavender Oil": 1,
-        "Germanium Oil": 1,
+        "Geranium Oil": 1,
         "commentary": "Essential oils provide the product with natural fragrances and therapeutic benefits. Lavender Oil offers calming properties, making it ideal for use in skincare. Germanium Oil is known for its ability to reduce the appearance of wrinkles and fine lines, promoting a youthful glow."
     },
     "preservative": {

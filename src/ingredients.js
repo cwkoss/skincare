@@ -358,6 +358,7 @@ const ingredients = {
     },*/
     "Zinc Oxide": {
         phase: "additive",
+        type: "active",
         hlb: 20,
         max_percent: 25,
         default_percent: 10,
@@ -372,6 +373,7 @@ const ingredients = {
     },
     "Hyaluronic Acid": {
         phase: "additive",
+        type: "active",
         hlb: 20,
         max_percent: 2,
         default_percent: 0.5,
@@ -387,6 +389,7 @@ const ingredients = {
     },
     "Retinol": {
         phase: "additive",
+        type: "active",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.1,
@@ -402,6 +405,7 @@ const ingredients = {
     },
     "Retinyl Palmitate": {
         phase: "additive",
+        type: "active",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.1,
@@ -417,6 +421,7 @@ const ingredients = {
     },
     "Vitamin C": {
         phase: "additive",
+        type: "active",
         hlb: 20,
         max_percent: 20,
         default_percent: 5,
@@ -429,9 +434,11 @@ const ingredients = {
         penetrating_occlusive: 2,
         soothing_stimulating: 7,
         gentle_active: 7,
+        deprecated: true,
     },
     "Vitamin E": {
         phase: "additive",
+        type: "active",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
@@ -448,6 +455,7 @@ const ingredients = {
     },
     "Niacinamide (Vitamin B3)": {
         phase: "additive",
+        type: "active",
         hlb: 20,
         max_percent: 5,
         default_percent: 2,
@@ -463,6 +471,7 @@ const ingredients = {
     },
     "Lavender Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
@@ -478,6 +487,7 @@ const ingredients = {
     },
     "Rosemary Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 2,
         default_percent: 1,
@@ -493,6 +503,7 @@ const ingredients = {
     },
     "Tea Tree Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 2,
         default_percent: 1,
@@ -508,6 +519,7 @@ const ingredients = {
     },
     "Jasmine Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
@@ -523,6 +535,7 @@ const ingredients = {
     },
     "Eucalyptus Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 2,
         default_percent: 1,
@@ -538,6 +551,7 @@ const ingredients = {
     },
     "Peppermint Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
@@ -553,6 +567,7 @@ const ingredients = {
     },
     "Pine Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
@@ -567,6 +582,7 @@ const ingredients = {
     },
     "Cedar Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 1,
         default_percent: 0.5,
@@ -580,10 +596,9 @@ const ingredients = {
         soothing_stimulating: 7,
         gentle_active: 6,
     },
-
-
     "Geranium Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 2,
         default_percent: 0.5,
@@ -600,6 +615,7 @@ const ingredients = {
 
     "Carrot Seed Oil": {
         phase: "additive",
+        type: "fragrance",
         hlb: 0,
         max_percent: 5,
         default_percent: 1,
@@ -687,6 +703,7 @@ const ingredients = {
     }*/
     "Phenoxyethanol": {
         phase: "preservative",
+        type: "preservative",
         hlb: 20,
         max_percent: 1,
         default_percent: 0.5,
@@ -701,6 +718,7 @@ const ingredients = {
     },
     "AntiMicro Banana": {
         phase: "preservative",
+        type: "preservative",
         hlb: 20,
         max_percent: 4,
         default_percent: 2,
@@ -714,6 +732,7 @@ const ingredients = {
     },
     "AntiMicro Root Blend": {
         phase: "preservative",
+        type: "preservative",
         hlb: 20,
         max_percent: 2,
         default_percent: 1,
