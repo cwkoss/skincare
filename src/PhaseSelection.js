@@ -23,7 +23,6 @@ const mockedRecipe = {
         "Sunflower Oil": 5,
         "Shea Butter": 5,
         "commentary": "Carrier oils serve as the base for the recipe, helping to dilute other concentrated ingredients. Jojoba Oil is chosen for its similarity to skin's natural oils, offering moisturizing properties. Sunflower Oil is rich in Vitamin E, promoting skin health. Shea Butter is included for its deep moisturizing and skin nourishing benefits."
-
     },
     "aqueous": {
         "Aloe Vera Gel": 5,

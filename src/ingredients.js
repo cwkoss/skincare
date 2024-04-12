@@ -41,7 +41,7 @@ const ingredients = {
         cost: "$54.99/32oz",
         density: 0.91,
         cost_per_g: 0.0639,
-        buy_again_url:"https://www.organicpureoil.com/product/pure-1-oz-organic-argan-oil-extra-virgin-unrefined-cold-pressed/",
+        buy_again_url: "https://www.organicpureoil.com/product/pure-1-oz-organic-argan-oil-extra-virgin-unrefined-cold-pressed/",
         light_heavy: 4,
         penetrating_occlusive: 3,
         soothing_stimulating: 3,
@@ -61,7 +61,7 @@ const ingredients = {
         penetrating_occlusive: 4,
         soothing_stimulating: 5,
         gentle_active: 5
-    },    
+    },
     "Shea Butter": {
         phase: "oil",
         type: "carrier",
@@ -135,7 +135,7 @@ const ingredients = {
         light_heavy: 5,
         penetrating_occlusive: 4,
         soothing_stimulating: 4,
-        gentle_active: 4, 
+        gentle_active: 4,
     },
     "Rosehip Seed Oil": {
         phase: "oil",
@@ -542,7 +542,7 @@ const ingredients = {
         description: "Antiseptic and anti-inflammatory properties, good for healing. Refreshing scent.",
         good_for: ["Adult acne"],
         bad_for: ["Sensitive Skin", "Dry skin"], // can be irritating and drying
-        densitY: 0.914 ,
+        densitY: 0.914,
         cost_per_g: 0.1530,
         light_heavy: 4,
         penetrating_occlusive: 4,
@@ -769,35 +769,35 @@ export const getIngredientsByType = (type) => {
 }
 
 export const getFormatedIngredientsList = () => {
-        let formattedString = "";
-    
-        Object.keys(ingredients).forEach((key, index, array) => {
-          formattedString += key;
-    
-          if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
+    let formattedString = "";
+
+    Object.keys(ingredients).forEach((key, index, array) => {
+        formattedString += key;
+
+        if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
             formattedString += " (";
-    
+
             if (ingredients[key].hasOwnProperty('default_percent')) {
-              formattedString += `default: ${ingredients[key].default_percent}`;
-              if (ingredients[key].hasOwnProperty('max_percent')) {
-                formattedString += ", ";
-              }
+                formattedString += `default: ${ingredients[key].default_percent}`;
+                if (ingredients[key].hasOwnProperty('max_percent')) {
+                    formattedString += ", ";
+                }
             }
-    
+
             if (ingredients[key].hasOwnProperty('max_percent')) {
-              formattedString += `max: ${ingredients[key].max_percent}`;
+                formattedString += `max: ${ingredients[key].max_percent}`;
             }
-    
+
             formattedString += ")";
-          }
-    
-          if (index < array.length - 1) {
+        }
+
+        if (index < array.length - 1) {
             formattedString += ", ";
-          }
-        });
-    
-        return formattedString;
-      
+        }
+    });
+
+    return formattedString;
+
 }
 
 export default ingredients;
