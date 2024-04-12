@@ -6,11 +6,18 @@ function ProportionAdjuster({ initialIngredients, updateRecipe, onSaveChanges })
 
     const handleProportionChange = (ingredientName, newValue) => {
         const newAmount = parseFloat(newValue);
-        setIngredients(prevIngredients => ({
-            ...prevIngredients,
-            [ingredientName]: newAmount
-        }));
+        setIngredients(prevIngredients => {
+            const updatedIngredients = {
+                ...prevIngredients,
+                [ingredientName]: newAmount
+            };
+    
+            // Update the recipe with the newly computed state directly
+            updateRecipe(updatedIngredients);
+            return updatedIngredients;
+        });
     };
+    
 
     const handleSaveChanges = () => {
         updateRecipe(ingredients);
