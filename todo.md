@@ -1,3 +1,15 @@
+Goals for launch
+
+- AI generates a recipe that is broken down by phase (could be multiple calls)
+- User is able to "chat" with AI to update rather than having to manually adjust recipe (though manual mode should still be an option).  This could either be freetext or with a 'suggestions' based button interface
+- Do a better job of explaining what the user should expect from their recipe.  This could be based on the scales I prototyped or something else, but I'd like something more illustrative than a paragraph of text. 
+
+
+
+
+----
+
+
 - finish out phaseselection
 -- Add additive mode for proportions
 -- switch proportions from percentages to 'parts' and compute percentages
@@ -16,6 +28,8 @@
 - pass goals, product, fragrance and commentary into saved recipe
 - Build variation selector
 - Ingredient selector update - pick exclude, maybe, include
-- Update product list to Cleanser, daytime moisturizer with SPF, nighttime moisturizer, scalp oil
+
+
+DONE
 - build page that computes weights from target weight and proportions "prep assist" tool
 - Build review page
