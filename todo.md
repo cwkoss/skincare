@@ -1,9 +1,12 @@
 Goals for launch
 
 - AI generates a recipe that is broken down by phase (could be multiple calls)
+- Normalize phase based recipe to ensure 
+--- Contains appropriate amount of emulsifier if has both water and oil phases
+--- Make sure proportions of each phase type are reasonably balanced
 - User is able to "chat" with AI to update rather than having to manually adjust recipe (though manual mode should still be an option).  This could either be freetext or with a 'suggestions' based button interface
 - Do a better job of explaining what the user should expect from their recipe.  This could be based on the scales I prototyped or something else, but I'd like something more illustrative than a paragraph of text. 
-
+- Revist design of site
 
 
 
@@ -24,7 +27,6 @@ Goals for launch
 
 - enforce emulsifier requirement
 - Make AI drop user on finalizeRecipe instead of proportion seletor, automatically round to 100%
-- Style other pages so they all have a center column with fixed width like the homepage. 
 - pass goals, product, fragrance and commentary into saved recipe
 - Build variation selector
 - Ingredient selector update - pick exclude, maybe, include
@@ -33,3 +35,4 @@ Goals for launch
 DONE
 - build page that computes weights from target weight and proportions "prep assist" tool
 - Build review page
+- Style other pages so they all have a center column with fixed width like the homepage. 
