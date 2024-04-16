@@ -7,7 +7,17 @@ Goals for launch
 - User is able to "chat" with AI to update rather than having to manually adjust recipe (though manual mode should still be an option).  This could either be freetext or with a 'suggestions' based button interface
 - Do a better job of explaining what the user should expect from their recipe.  This could be based on the scales I prototyped or something else, but I'd like something more illustrative than a paragraph of text. 
 - Revist design of site
+- Update new ingredients
 
+
+User choices for recipe dichotomies
+Gentle <> Active
+Prevents Acne <> Moisturizes Intensely
+Light <> Heavy or Penetrating <> Occlusive
+
+Boolean choice
+- Do you wish to only use plant derived ingredients? 
+- All fragrances options are from plant derived essential oils that offer skin benefits. Do you wish to include these fragrances or would you like to minimize fragrance? 
 
 
 ----
