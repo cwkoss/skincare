@@ -199,7 +199,7 @@ exports.getRecipeVariations = functions.https.onRequest((request, response) => {
               
                   Note: When exceeding default percentages for ingredients, provide a compelling reason within the variation's description.`,
                 },
-                { role: "user", content: "Please make 10 variation options for the following recipe: " + JSON.stringify(inputRecipe.ingredients) + "(only ingredients from this recipe can have negative percentageDeltas).  You may use the ingredients already in the recipe or draw from this list of ingredients: "  + JSON.stringify(inputIngredients) + ".  Make sure the sum of all percentageDeltas within each variation equals 0." },
+                { role: "user", content: "Please make 10 variation options for the following recipe: " + JSON.stringify(inputRecipe.ingredients) + "(only ingredients from this recipe can have negative percentageDeltas).  You may use the ingredients already in the recipe or draw from this list of ingredients: " + JSON.stringify(inputIngredients) + ".  Make sure the sum of all percentageDeltas within each variation equals 0." },
             ];
             console.log(messageBody);
             const gptResponse = await openai.chat.completions.create({
@@ -241,7 +241,7 @@ exports.getProportionSuggestion = functions.https.onRequest((request, response) 
                   Values must be between 1-10 Parts. Commentary should give the user an idea of what the proportions will do to the final product.  Do not mention patch testing or shelf life in your commentary - that will be covered elsewhere. Do not include any text outside of the json object. 
                   `,
                 },
-                { role: "user", content: "Please suggest the ideal proportions to use for these ingredients, here are my initial ingredients and number of parts of each: " + JSON.stringify(phaseProportions)},
+                { role: "user", content: "Please suggest the ideal proportions to use for these ingredients, here are my initial ingredients and number of parts of each: " + JSON.stringify(phaseProportions) },
             ];
             console.log(messageBody);
             const gptResponse = await openai.chat.completions.create({
@@ -250,6 +250,100 @@ exports.getProportionSuggestion = functions.https.onRequest((request, response) 
                 n: 1,
                 stream: false,
                 messages: messageBody,
+            });
+            console.log("Request: " + request.body.text);
+            console.log("GPT Response: ", gptResponse.choices[0].message.content);
+            response.send({ reply: gptResponse });
+        } catch (error) {
+            console.error("Error calling OpenAI: ", error);
+            response.status(500).send("Error processing your request: " + error);
+        }
+    });
+});
+
+exports.getPhasedRecipe = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        try {
+            const inputText = request.body.text;
+            const inputIngredients = request.body.ingredients;
+
+            if (!inputText) {
+                throw new Error("No text provided");
+            }
+            if (!inputIngredients) {
+                throw new Error("No ingredients provided");
+            }
+
+            const gptResponse = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                temperature: 0.9,
+                n: 1,
+                stream: false,
+                messages: [
+                    {
+                        role: "system",
+                        content: `You are an award winning cosmetic chemist. 
+
+                      Return a json-formatted skincare recipe in the following format:
+                    {
+                        phaseName1: { 
+                                ingredientKey1: percentage
+                                ingredientKey2:percentage
+                                ingredientKey3:percentage // (repeat for as many ingredient keys as ingredients in your formulation)
+                                commentary: "your commentary here"
+                        },
+                        phaseName2: {
+                            ingredientKey1:percentage
+                            ingredientKey2:percentage  // (repeat for as many ingredient keys as ingredients in your formulation)
+                            commentary: "your commentary here"
+                        }
+                        // Repeat for as many phases as you have in your formulation
+                    }
+
+                      Example response:
+                      {
+                        "carrier": {
+                            "Jojoba Oil": 5,
+                            "Sunflower Oil": 5,
+                            "Shea Butter": 5,
+                            "commentary": "Carrier oils serve as the base for the recipe, helping to dilute other concentrated ingredients. Jojoba Oil is chosen for its similarity to skin's natural oils, offering moisturizing properties. Sunflower Oil is rich in Vitamin E, promoting skin health. Shea Butter is included for its deep moisturizing and skin nourishing benefits."
+                        },
+                        "aqueous": {t
+                            "Aloe Vera Gel": 5,
+                            "Distilled Water": 5,
+                            "commentary": "The aqueous phase adds water-based ingredients to the recipe, ensuring hydration. Aloe Vera is renowned for its soothing and healing properties, making it ideal for sensitive skin. Distilled Water serves as a pure, clean base, helping to blend the ingredients effectively."
+                        },
+                        "emulsifier": {
+                            "Cetearyl Alcohol": 5,
+                            "commentary": "Emulsifiers are crucial for combining oil and water-based ingredients into a stable mixture. Cetearyl Alcohol, a fatty alcohol, is gentle on the skin and helps to create a creamy texture in the final product."
+                        },
+                        "active": {
+                            "Niacinamide (Vitamin B3)": 2,
+                            "commentary": "Active ingredients target specific skin concerns. Niacinamide is chosen for its versatility; it helps to improve skin texture, brighten the complexion, and strengthen the skin barrier."
+                        },
+                        "fragrance": {
+                            "Lavender Oil": 1,
+                            "Geranium Oil": 1,
+                            "commentary": "Essential oils provide the product with natural fragrances and therapeutic benefits. Lavender Oil offers calming properties, making it ideal for use in skincare. Germanium Oil is known for its ability to reduce the appearance of wrinkles and fine lines, promoting a youthful glow."
+                        },
+                        "preservative": {
+                            "AntiMicro Banana": 2,
+                            "commentary": "Preservatives ensure the longevity and safety of the skincare product by preventing microbial growth. AntiMicro Banana is a natural preservative option, offering effective protection against a broad spectrum of microbes."
+                        }
+                    
+                    }
+
+                      Commentary should include your reasoning why you selected ingredients, how it will help accomplish goals, additional useful information.  Do not mention patch testing or shelf life in your commentary - that will be covered elsewhere.
+
+                      IngredientKeysN should exclude the parenthetical default and maximum percentages if present, ex. ""Rosemary Oil (default: 1, max: 2)" should be "Rosemary Oil".
+
+                      Make sure the percentage of all ingredients adds up to exactly 100.  Do not include any commentatry or text outside of the json object.  Ingredients with a default and maximum percentage should typically use the default unless there is a very good reason to exceed them.  If a product will have fragrance, the sum of essential oils should never exceed 2% of the total formulation.
+                      
+                      You may only use ingredients from this list: ${inputIngredients}. Parentheticals represent the default and maximum percentages for each ingredient if present."
+                    `,
+                    },
+                    { role: "user", content: inputText },
+                ],
             });
             console.log("Request: " + request.body.text);
             console.log("GPT Response: ", gptResponse.choices[0].message.content);
