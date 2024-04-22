@@ -55,7 +55,7 @@ function OrderPricing() {
             const totalParts = Object.values(recipeData.ingredients).reduce((sum, part) => sum + part, 0);
             const newIngredientList = Object.entries(recipeData.ingredients).map(([name, parts]) => {
                 const ingredientGrams = (targetGrams / totalParts) * parts;
-                const ingredientCost = ingredients[name].cost_per_g * ingredientGrams;
+                const ingredientCost = ingredients[name].cost_per_g ? ingredients[name].cost_per_g * ingredientGrams : "N/A";
                 return { name, parts: parts, grams: ingredientGrams, cost: ingredientCost };
             });
             setIngredientList(newIngredientList);
