@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import ingredients from './ingredients';
 import { updateSession } from './sessionUtils';
 import Layout from './Layout';
-import { useRecipe } from './RecipeContext'; 
+import { useRecipe } from './RecipeContext';
+import { useFeatureFlag } from './FeatureFlagContext';
 
 const loadingMessages = [
   "AI is preparing a recipe for you...",
@@ -15,6 +16,7 @@ const loadingMessages = [
 ];
 
 function Summary() {
+  const { isDevFeatureEnabled } = useFeatureFlag();
   const { state } = useRecipe();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -46,7 +48,7 @@ function Summary() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     })
-    .then(response => response.json())
+      .then(response => response.json())
       .then(data => {
         setLoading(false);
         console.log('Success:', data);
@@ -69,15 +71,15 @@ function Summary() {
 
   useEffect(() => {
     if (loading) {
-        const interval = setInterval(() => {
-            setCurrentMessage(prevMessage => {
-                const index = loadingMessages.indexOf(prevMessage);
-                const nextIndex = (index + 1) % loadingMessages.length;
-                return loadingMessages[nextIndex];
-            });
-        }, 4000); // Change message every 4 seconds
+      const interval = setInterval(() => {
+        setCurrentMessage(prevMessage => {
+          const index = loadingMessages.indexOf(prevMessage);
+          const nextIndex = (index + 1) % loadingMessages.length;
+          return loadingMessages[nextIndex];
+        });
+      }, 4000); // Change message every 4 seconds
 
-        return () => clearInterval(interval);
+      return () => clearInterval(interval);
     }
   }, [loading]);
 
@@ -118,10 +120,10 @@ function Summary() {
 
   return (
     <Layout title="Your Selections"
-            handleSubmit={handleAIClick}
-            buttonText="Generate a Formulation with AI"
-            isSubmitDisabled={loading}
-            whyDisabled="Loading...">
+      handleSubmit={handleAIClick}
+      buttonText="Generate a Formulation with AI"
+      isSubmitDisabled={loading}
+      whyDisabled="Loading...">
 
       <h3>Selected Skincare Product:</h3>
       <ul><li>{state.productData.charAt(0).toUpperCase() + state.productData.slice(1)}</li></ul>
@@ -148,9 +150,15 @@ function Summary() {
         </>
       )}
 
+      {isDevFeatureEnabled ? (
+        <div>Dev Feature Enabled Content Here</div>
+      ) : (
+        <span></span>
+      )}
+
       {loading ? (
         <div className="loading-container">
-          <div className="loader"></div> 
+          <div className="loader"></div>
           <p className="loading-message">{currentMessage}</p>
         </div>
       ) : (
