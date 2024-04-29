@@ -11,9 +11,16 @@ Goals for launch
 
 
 User choices for recipe dichotomies
-Gentle <> Active
+Gentle <> Active OR Soothing <> Stimulating
 Prevents Acne <> Moisturizes Intensely
 Light <> Heavy or Penetrating <> Occlusive
+
+New user flow:
+- User makes the above choices then
+-- For each phase
+--- User is presented with 3 suggestions for the phase, each with a description.  
+--- User chooses one before moving to the next phase, or can reroll with a text area for a description of what they are looking for
+-- After all phases are complete, there is a final step for choosing proportions of the phases. 
 
 Boolean choice
 - Do you wish to only use plant derived ingredients? 
