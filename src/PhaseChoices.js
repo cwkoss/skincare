@@ -13,7 +13,7 @@ function PhaseChoices() {
 
   if (isLoading) {
     return (
-        <div>
+        <div style={{textAlign: "center"}}>
       <div className="loading-container">
         <div className="loader"></div>
       </div>
