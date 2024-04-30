@@ -27,6 +27,15 @@ Boolean choice
 - All fragrances options are from plant derived essential oils that offer skin benefits. Do you wish to include these fragrances or would you like to minimize fragrance? 
 
 
+--- Next steps --- 
+
+- DONE Make summary take user to a blank page, switched with devFeature
+- Replace that blank page with a "AI is working on options for your recipe" loading page
+- When page loads, show user with 3 phase options, user chooses one and then goes to next phase
+- if user makes choice fast, they get another loading page, but we should try to load the subsequent phase in the background, so if the user takes some time to think they don't have to wait for the next phase.
+- once all phases are chosen does the user need to choose phase proportions? maybe it is just automatic... 
+- How does the user pick their variation?  is that just a single 3-choice after the initial recipe is decided?
+
 ----
 
 

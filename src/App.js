@@ -18,6 +18,7 @@ import IngredientsTable from './IngredientsTable';
 import { RecipeProvider } from './RecipeContext'; // Adjust the path as needed
 import PhaseSelection from './PhaseSelection';
 import { FeatureFlagProvider } from './FeatureFlagContext';
+import PhaseChoices from './PhaseChoices';
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
             <Route path="/order-survey" element={<OrderSurvey />} />
             <Route path="/ingredients-table" element={<IngredientsTable />} />
             <Route path="/phase-selection" element={<PhaseSelection />} />
+            <Route path="/phase-choices" element={<PhaseChoices/>} />
           </Routes>
         </Router>
       </RecipeProvider>

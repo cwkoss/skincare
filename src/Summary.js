@@ -24,6 +24,11 @@ function Summary() {
 
 
   const handleAIClick = () => {
+    if (isDevFeatureEnabled) {
+      navigate('/phase-choices'); 
+      return;
+    }
+
     setLoading(true);
     setCurrentMessage(loadingMessages[0]);
     const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
