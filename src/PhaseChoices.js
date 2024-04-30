@@ -13,8 +13,11 @@ function PhaseChoices() {
 
   if (isLoading) {
     return (
+        <div>
       <div className="loading-container">
-        <div className="loader">Loading...</div>
+        <div className="loader"></div>
+      </div>
+      Loading...
       </div>
     );
   }
