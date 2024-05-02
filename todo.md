@@ -32,14 +32,15 @@ Boolean choice
 - DONE Make summary take user to a blank page, switched with devFeature
 - DONE Replace that blank page with a "AI is working on options for your recipe" loading page
 - DONE When page loads, show user with 3 phase options
-- Update recipe context to the new phase format. Have it initialize with an empty copy of each phase
+- Update recipe context to the new phase format for recipes. Have it initialize with an empty copy of each phase
 - Make recipecontext.getNextEmptyPhase
 - When user clicks a phase option and next, send the phase to recipecontext
 - When user clicks a phase option, go to nextEmptyPhase
 - Make actually AI call to load phase options (not just dummy copy)
-- if user makes choice fast, they get another loading page, but we should try to load the subsequent phase in the background, so if the user takes some time to think they don't have to wait for the next phase.
+
 - once all phases are chosen does the user need to choose phase proportions? maybe it is just automatic... 
 - How does the user pick their variation?  is that just a single 3-choice after the initial recipe is decided?
+- if user makes choice fast, they get another loading page, but we should try to load the subsequent phase in the background, so if the user takes some time to think they don't have to wait for the next phase.
 
 ----
 
