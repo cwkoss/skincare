@@ -23,7 +23,7 @@ function PhaseChoices() {
   }
 
   return (
-    <span title="Choose Your Oil Phase">
+    <Layout title="Choose Your Oil Phase">
       <div>
         <h2>Phase 1: Light Oils</h2>
         <p>Ingredients: Coconut Oil, Jojoba Oil</p>
@@ -42,7 +42,7 @@ function PhaseChoices() {
         <p>Description: Ideal for dry or mature skin, offering deep moisturization and protective benefits.</p>
         <button>Choose Phase 3</button>
       </div>
-    </span>
+    </Layout>
   );
 }
 

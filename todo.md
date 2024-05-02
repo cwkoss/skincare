@@ -30,7 +30,7 @@ Boolean choice
 --- Next steps --- 
 
 - DONE Make summary take user to a blank page, switched with devFeature
-- Replace that blank page with a "AI is working on options for your recipe" loading page
+- DONE Replace that blank page with a "AI is working on options for your recipe" loading page
 - When page loads, show user with 3 phase options, user chooses one and then goes to next phase
 - if user makes choice fast, they get another loading page, but we should try to load the subsequent phase in the background, so if the user takes some time to think they don't have to wait for the next phase.
 - once all phases are chosen does the user need to choose phase proportions? maybe it is just automatic... 
