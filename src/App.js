@@ -20,6 +20,10 @@ import PhaseSelection from './PhaseSelection';
 import { FeatureFlagProvider } from './FeatureFlagContext';
 import PhaseChoices from './PhaseChoices';
 
+import posthog from 'posthog-js';
+
+posthog.init('phc_pYiz1K4qlGNQD0HUMYzAwTQy2H67FhJvNJj3j4JtGw5', { api_host: 'https://us.i.posthog.com' });
+
 function App() {
 
   useEffect(() => {
