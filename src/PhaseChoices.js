@@ -4,7 +4,7 @@ import { useRecipe } from './RecipeContext';
 
 function PhaseChoices() {
   const [isLoading, setIsLoading] = useState(true);
-  const { dispatch } = useRecipe();
+  const { state, dispatch } = useRecipe();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,6 +26,7 @@ function PhaseChoices() {
         }
       }
     });
+    console.log(state);
   };
 
   if (isLoading) {
@@ -40,7 +41,7 @@ function PhaseChoices() {
   }
 
   return (
-    <Layout title="Choose Your Oil Phase">
+    <Layout title={ "Choose Your " + state.currentPhase + " Phase" } >
       <div>
         <h2>Phase 1: Light Oils</h2>
         <p>Ingredients: Coconut Oil, Jojoba Oil</p>
