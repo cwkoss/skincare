@@ -1,7 +1,9 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import { skincareProducts } from './Product';
 
 // Assuming you have a utility function for Firebase operations
 import { updateRecipeInFirebase } from './FirebaseUtils';
+import { act } from 'react';
 
 const RecipeContext = createContext();
 
@@ -10,12 +12,13 @@ const initialRecipeState = {
   productData: '',
   includeFragrance: 'no',
   selectedMoods: [],
+  productPhases: [],
 };
 
 const recipeReducer = (state, action) => {
   switch (action.type) {
     case 'SET_PRODUCT_DATA':
-      return { ...state, productData: action.payload };
+      return { ...state, productData: action.payload, productPhases: skincareProducts[action.payload].typeOrder};
     case 'SET_GOALS_DATA':
       return { ...state, goalsData: action.payload };
     case 'SET_INCLUDE_FRAGRANCE':
