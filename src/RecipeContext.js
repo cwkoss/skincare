@@ -13,13 +13,14 @@ const initialRecipeState = {
   includeFragrance: 'no',
   selectedMoods: [],
   phaseOrder: [],
+  currentPhase: "",
   recipe: {},
 };
 
 const recipeReducer = (state, action) => {
   switch (action.type) {
     case 'SET_PRODUCT_DATA':
-      return { ...state, productData: action.payload, phaseOrder: skincareProducts[action.payload].typeOrder};
+      return { ...state, productData: action.payload, phaseOrder: skincareProducts[action.payload].typeOrder, currentPhase: skincareProducts[action.payload].typeOrder[0]};
     case 'SET_GOALS_DATA':
       return { ...state, goalsData: action.payload };
     case 'SET_INCLUDE_FRAGRANCE':
