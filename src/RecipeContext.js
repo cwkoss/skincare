@@ -13,6 +13,7 @@ const initialRecipeState = {
   includeFragrance: 'no',
   selectedMoods: [],
   phaseOrder: [],
+  recipe: {},
 };
 
 const recipeReducer = (state, action) => {
@@ -25,6 +26,19 @@ const recipeReducer = (state, action) => {
       return { ...state, includeFragrance: action.payload };
     case 'SET_SELECTED_MOODS':
       return { ...state, selectedMoods: action.payload };
+      case "UPDATE_RECIPE":
+        const { phase, data } = action.payload;  
+        // Only update the specified phase with new data
+        return {
+          ...state,
+          recipe: {
+            ...state.recipe,
+            [phase]: {
+              ...state.recipe[phase],
+              ...data
+            }
+          }
+        };
     case 'RESET_RECIPE':
       return initialRecipeState;
     default:

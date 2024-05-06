@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout'; // Ensure this path is correct
+import { useRecipe } from './RecipeContext';
 
 function PhaseChoices() {
   const [isLoading, setIsLoading] = useState(true);
+  const { dispatch } = useRecipe();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -10,6 +12,21 @@ function PhaseChoices() {
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  const handlePhaseSelection = (phase) => {
+    dispatch({
+      type: "UPDATE_RECIPE",
+      payload: {
+        phase: "carrier",
+        data: {
+          "Jojoba Oil": 10,
+          "Sunflower Oil": 5,
+          "Shea Butter": 8,
+          "commentary": "Updated commentary for carrier oils."
+        }
+      }
+    });
+  };
 
   if (isLoading) {
     return (
@@ -28,7 +45,7 @@ function PhaseChoices() {
         <h2>Phase 1: Light Oils</h2>
         <p>Ingredients: Coconut Oil, Jojoba Oil</p>
         <p>Description: Best for oily skin types, absorbs quickly without leaving a residue.</p>
-        <button>Choose Phase 1</button>
+        <button onClick={() => handlePhaseSelection('carrier')}>Choose Phase 1</button>
       </div>
       <div>
         <h2>Phase 2: Medium Oils</h2>
