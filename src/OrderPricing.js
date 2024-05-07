@@ -40,7 +40,7 @@ function OrderPricing() {
                 .sort((a, b) => b[1] - a[1])
                 .map(([name, parts]) => {
                     const percentage = ((parts / totalParts) * 100); // Keeping 3 decimal places
-                    return `${name} (${percentage}%)`;
+                    return `${name} (${percentage.toFixed(1)}%)`;
                 })
                 .join(', ');
             
