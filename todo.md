@@ -33,7 +33,7 @@ Boolean choice
 - DONE Replace that blank page with a "AI is working on options for your recipe" loading page
 - DONE When page loads, show user with 3 phase options
 
-- Update recipe context to include the new phase format for recipes. Have it initialize with an empty copy of each phase
+- DONE Update recipe context to include the new phase format for recipes. Have it initialize with an empty copy of each phase
 - Make recipecontext.getNextEmptyPhase
 - When user clicks a phase option and next, send the phase to recipecontext
 - When user clicks a phase option, go to nextEmptyPhase
