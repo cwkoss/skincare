@@ -13,6 +13,18 @@ function PhaseChoices() {
     return () => clearTimeout(timer);
   }, []);
 
+  const getNextPhase = () => {
+    const currentIndex = state.phaseOrder.indexOf(state.currentPhase);
+    return state.phaseOrder[currentIndex + 1] || null;
+  };
+
+  const goToNextPhase = () => {
+    const nextPhase = getNextPhase();
+    if (nextPhase) {
+      dispatch({ type: "SET_CURRENT_PHASE", payload: nextPhase });
+    }
+  };
+
   const handlePhaseSelection = (phase) => {
     dispatch({
       type: "UPDATE_RECIPE",
@@ -31,17 +43,19 @@ function PhaseChoices() {
 
   if (isLoading) {
     return (
-        <div style={{textAlign: "center"}}>
-      <div className="loading-container">
-        <div className="loader"></div>
-      </div>
-      Loading...
+      <div style={{ textAlign: "center" }}>
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
+        Loading...
       </div>
     );
   }
 
   return (
-    <Layout title={ "Choose Your " + state.currentPhase + " Phase" } >
+    <Layout 
+      title={"Choose Your " + state.currentPhase + " Phase"}
+      handleSubmit={goToNextPhase} >
       <div>
         <h2>Phase 1: Light Oils</h2>
         <p>Ingredients: Coconut Oil, Jojoba Oil</p>
