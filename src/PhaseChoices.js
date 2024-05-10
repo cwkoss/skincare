@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Layout from './Layout'; // Ensure this path is correct
+import Layout from './Layout'; 
 import { useRecipe } from './RecipeContext';
+import { set } from 'firebase/database';
+import { getPhaseSuggestions } from './OpenAIUtils';
 
 function PhaseChoices() {
   const [isLoading, setIsLoading] = useState(true);
   const { state, dispatch } = useRecipe();
+  const [phaseSuggestions, setPhaseSuggestions] = useState([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,6 +15,23 @@ function PhaseChoices() {
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true);  
+      try {
+        const phaseSuggestions = await getPhaseSuggestions(state.currentPhase);
+        setPhaseSuggestions(phaseSuggestions);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        console.log(phaseSuggestions);
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [state.currentPhase]);
 
   const getNextPhase = () => {
     const currentIndex = state.phaseOrder.indexOf(state.currentPhase);
@@ -53,7 +73,7 @@ function PhaseChoices() {
   }
 
   return (
-    <Layout 
+    <Layout
       title={"Choose Your " + state.currentPhase + " Phase"}
       handleSubmit={goToNextPhase} >
       <div>
