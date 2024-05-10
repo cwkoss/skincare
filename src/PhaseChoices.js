@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from './Layout'; 
 import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
-import { getPhaseSuggestions } from './OpenAIUtils';
+import { getPhaseSuggestions } from './OpenAiUtils';
 
 function PhaseChoices() {
   const [isLoading, setIsLoading] = useState(true);
