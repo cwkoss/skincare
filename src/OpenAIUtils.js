@@ -53,7 +53,7 @@ const phaseExamples =
 };
 
 
-export const getPhaseSuggestions = (phase) => {
+export const getPhaseSuggestions = (phase, state) => {
   const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getPhaseSuggestions';
   const systemPrompt = ```You are an award winning cosmetic chemist helping the user formulate a 
   new skincare product customized to the particulars of their skin. This recipe is being written 
@@ -61,12 +61,17 @@ export const getPhaseSuggestions = (phase) => {
   Please provide three examples of ${phase} formulations with ingredients and proportions.
   
   Here are examples of ${phase} formulations: ${phaseExamples[phase]}.  
+
+  You may only use the ingredients found in this list: ${getIngredientsByType(phase).join(', ')}.
   
   Output your examples as an array
   of JSON formated including a title and 1-sentence description of the phase to help the user understand the 
   contrasting benefits of each phase option.  Do not include any commentary outside of array of JSON objects.```;
-  
-  const userPrompt = ```Hello please assist me in the formulation 
+
+  const userPrompt = ```Hello please assist me in the formulation of a customized skincare product for my individual skin type and concerns.
+  My skincare concerns are ${state.goalsData.join(', ')}. The product I would like to make is a ${state.productData}.
+
+  What are three possible phase formulations for the ${phase} phase of my skincare product?  Please include the ingredients and proportions for each formulation
   ```;
   return ["one", "two", "three"];
   fetch(endpoint, {
