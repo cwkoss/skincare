@@ -55,6 +55,19 @@ const phaseExamples =
 
 export const getPhaseSuggestions = (phase) => {
   const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getPhaseSuggestions';
+  const systemPrompt = ```You are an award winning cosmetic chemist helping the user formulate a 
+  new skincare product customized to the particulars of their skin. This recipe is being written 
+  one phase at a time, and you are currently working on the ${phase} phase of the formulation. 
+  Please provide three examples of ${phase} formulations with ingredients and proportions.
+  
+  Here are examples of ${phase} formulations: ${phaseExamples[phase]}.  
+  
+  Output your examples as an array
+  of JSON formated including a title and 1-sentence description of the phase to help the user understand the 
+  contrasting benefits of each phase option.  Do not include any commentary outside of array of JSON objects.```;
+  
+  const userPrompt = ```Hello please assist me in the formulation 
+  ```;
   return ["one", "two", "three"];
   fetch(endpoint, {
     method: 'POST',
