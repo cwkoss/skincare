@@ -1,56 +1,64 @@
 import { getIngredientsByType } from "./ingredients";
 
-const phaseExamples =
-{
-  "carrier": ```
-[{
-  "title": "Gentle Moisturizing",
-  "ingredients": {
-    "Argan Oil": 10,
-    "Jojoba Oil": 10,
-    "Sunflower Oil": 5
-  },
-  {
-    "title": "Soothing",
-    "ingredients": {
-      "Jojoba Oil": 10,
-      "Sweet Almond Oil": 5,
-      "Shea Butter": 8
+const phaseExamples = {
+  "carrier": [
+    {
+      "title": "Gentle Moisturizing",
+      "ingredients": {
+        "Argan Oil": 10,
+        "Jojoba Oil": 10,
+        "Sunflower Oil": 5
+      },
+      "description": "Offers a light, non-greasy feel ideal for daily use and suitable for most skin types, providing balanced hydration without clogging pores."
+    },
+    {
+      "title": "Soothing",
+      "ingredients": {
+        "Jojoba Oil": 10,
+        "Sweet Almond Oil": 5,
+        "Shea Butter": 8
+      },
+      "description": "Focuses on calming sensitive skin and reducing irritation, featuring a higher content of Shea Butter for enhanced soothing effects."
     },
     {
       "title": "Anti Aging Nourishment",
       "ingredients": {
         "Argan Oil": 10,
-        "Rosehip Seed oil": 5,
+        "Rosehip Seed Oil": 5,
         "Vitamin E": 2
-      }
+      },
+      "description": "Targets mature skin with active ingredients for regeneration and antioxidant protection, more potent in anti-aging properties compared to other options."
     }
-  }
-}]```,
-  "aqueous": ```
-[{
-  "title": "Hydrating",
-  "ingredients": {
-    "Aloe Vera Gel": 2,
-    "Distilled Water": 10,
-    "Glycerin": 2
-  },
-  {
-    "title": "Soothing",
-    "ingredients": {
-      "Aloe Vera Gel": 5,
-      "Distilled Water": 5
+  ],
+  "aqueous": [
+    {
+      "title": "Hydrating",
+      "ingredients": {
+        "Aloe Vera Gel": 2,
+        "Distilled Water": 10,
+        "Glycerin": 2
+      },
+      "description": "Maximizes hydration with a higher water content and glycerin to attract moisture, ideal for dehydrated skin."
+    },
+    {
+      "title": "Soothing",
+      "ingredients": {
+        "Aloe Vera Gel": 5,
+        "Distilled Water": 5
+      },
+      "description": "Enhances skin calming properties with a higher concentration of Aloe Vera, perfect for soothing irritation and redness."
     },
     {
       "title": "Balancing",
       "ingredients": {
         "Witch Hazel": 5,
         "Distilled Water": 5
-      }
+      },
+      "description": "Focuses on toning and balancing skin's pH with Witch Hazel, suitable for oily and acne-prone skin types."
     }
-  }
-}]```,
+  ]
 };
+
 
 
 export const getPhaseSuggestions = (phase, state) => {
