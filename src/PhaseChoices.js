@@ -21,8 +21,9 @@ function PhaseChoices() {
     async function fetchData() {
       setIsLoading(true);  
       try {
-        const phaseSuggestions = await getPhaseSuggestions(state.currentPhase, state);
-        setPhaseSuggestions(phaseSuggestions);
+        // turned off for debugging
+        //const phaseSuggestions = await getPhaseSuggestions(state.currentPhase, state);
+        //setPhaseSuggestions([phaseSuggestions]);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

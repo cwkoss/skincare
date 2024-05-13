@@ -59,9 +59,11 @@ const phaseExamples = {
   ]
 };
 
-
-
 export const getPhaseSuggestions = (phase, state) => {
+  if (!phase || !state) {
+    console.error("Invalid phase or state provided.");
+    return;
+  }
   console.log("Phase and state: ", phase, state);
   const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getPhaseSuggestions';
   const systemPrompt = `You are an award winning cosmetic chemist helping the user formulate a 
@@ -69,9 +71,10 @@ export const getPhaseSuggestions = (phase, state) => {
   one phase at a time, and you are currently working on the ${phase} phase of the formulation. 
   Please provide three examples of ${phase} formulations with ingredients and proportions.
   
-  Here are examples of ${phase} formulations: ${phaseExamples[phase]}.  
+  Here are examples of ${phase} formulations: ${JSON.stringify(phaseExamples[phase])}.  
+  The units after each ingredient represent the number of 'parts' of that ingredient to include in the formulation, and may be integers between 1-10.
 
-  You may only use the ingredients found in this list: ${JSON.stringify(getIngredientsByType(phase))}.
+  You may only use the ingredients found in this object: ${JSON.stringify(getIngredientsByType(phase))}.
   
   Output your examples as an array
   of JSON formated including a title and 1-sentence description of the phase to help the user understand the 
