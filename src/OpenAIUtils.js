@@ -95,6 +95,7 @@ export const getPhaseSuggestions = (phase, state) => {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      console.log("response: " + reply.choices[0].message.content);
       const recipeResponse = data.reply.choices[0].message.content;
       const parsedResponse = JSON.parse(recipeResponse);
       console.log(parsedResponse);
