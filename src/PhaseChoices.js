@@ -10,7 +10,7 @@ function PhaseChoices() {
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
 
   useEffect(() => {
-    console.log(getPhaseSuggestions("carrier"));
+    console.log(getPhaseSuggestions("carrier", state));
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -21,7 +21,7 @@ function PhaseChoices() {
     async function fetchData() {
       setIsLoading(true);  
       try {
-        const phaseSuggestions = await getPhaseSuggestions(state.currentPhase);
+        const phaseSuggestions = await getPhaseSuggestions(state.currentPhase, state);
         setPhaseSuggestions(phaseSuggestions);
       } catch (error) {
         console.error('Error fetching data:', error);
