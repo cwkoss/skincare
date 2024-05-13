@@ -82,6 +82,10 @@ export const getPhaseSuggestions = (phase, state) => {
   What are three possible phase formulations for the ${phase} phase of my skincare product?  Please include the ingredients and proportions for each formulation
   ```;
   return ["one", "two", "three"];
+  data = {
+    systemPrompt: systemPrompt,
+    userPrompt: userPrompt
+  };
   fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

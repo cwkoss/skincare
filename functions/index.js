@@ -354,3 +354,29 @@ exports.getPhasedRecipe = functions.https.onRequest((request, response) => {
         }
     });
 });
+
+exports.getPhaseSuggestions = functions.https.onRequest((request, response) => {
+    cors(request, response, async () => {
+        try {
+            const gptResponse = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                temperature: 0.9,
+                n: 1,
+                stream: false,
+                messages: [
+                    {
+                        role: "system",
+                        content: request.body.systemPrompt,
+                    },
+                    { role: "user", content: request.body.userPrompt },
+                ],
+            });
+            console.log("Request: " + request.body.text);
+            console.log("GPT Response: ", gptResponse.choices[0].message.content);
+            response.send({ reply: gptResponse });
+        } catch (error) {
+            console.error("Error calling OpenAI: ", error);
+            response.status(500).send("Error processing your request: " + error);
+        }
+    });
+});
