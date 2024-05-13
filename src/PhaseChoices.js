@@ -10,6 +10,7 @@ function PhaseChoices() {
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
 
   useEffect(() => {
+    console.log(getPhaseSuggestions("carrier"));
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
