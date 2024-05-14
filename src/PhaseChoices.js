@@ -46,12 +46,7 @@ function PhaseChoices() {
       type: "UPDATE_RECIPE",
       payload: {
         phase: "carrier",
-        data: {
-          "Jojoba Oil": 10,
-          "Sunflower Oil": 5,
-          "Shea Butter": 8,
-          "commentary": "Updated commentary for carrier oils."
-        }
+        data: phase
       }
     });
     console.log(state);
@@ -89,7 +84,7 @@ function PhaseChoices() {
           <h2>Phase {index + 1}: {item.title}</h2>
           <p>Ingredients: {Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
           <p>Description: {item.description}</p>
-          <button onClick={() => handlePhaseSelection(item.ingredients)}>Choose Phase {index + 1}</button>
+          <button onClick={() => handlePhaseSelection(phaseSuggestions[index])}>Choose Phase {index + 1}</button>
         </div>
       ))}
     </Layout>
