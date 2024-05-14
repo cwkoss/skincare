@@ -62,7 +62,7 @@ const phaseExamples = {
 export const getPhaseSuggestions = (phase, state) => {
   if (!phase || !state) {
     console.error("Invalid phase or state provided.");
-    return;
+    return Promise.reject("Invalid phase or state provided.");  // Return a rejected promise when inputs are invalid
   }
   console.log("Phase and state: ", phase, state);
   const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getPhaseSuggestions';
@@ -90,7 +90,7 @@ export const getPhaseSuggestions = (phase, state) => {
     userPrompt: userPrompt
   };
   console.log("Sending OpenAI request: ", data.systemPrompt, data.userPrompt);
-  fetch(endpoint, {
+  return fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)

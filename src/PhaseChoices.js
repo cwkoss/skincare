@@ -1,39 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import Layout from './Layout'; 
+import Layout from './Layout';
 import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
 import { getPhaseSuggestions } from './OpenAiUtils';
 
 function PhaseChoices() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useRecipe();
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
 
   useEffect(() => {
-    console.log(getPhaseSuggestions("carrier", state));
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);  
+    async function fetchPhaseSuggestions() {
+      let fetchedPhaseSuggestions = "dummy";
       try {
-        // turned off for debugging
-        //const phaseSuggestions = await getPhaseSuggestions(state.currentPhase, state);
-        //setPhaseSuggestions([phaseSuggestions]);
+        // Assuming that getPhaseSuggestions properly handles the 'phase' and 'state'
+        fetchedPhaseSuggestions = await getPhaseSuggestions("carrier", state);
+        setPhaseSuggestions(fetchedPhaseSuggestions);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching phase suggestions:', error);
       } finally {
-        console.log(phaseSuggestions);
         setIsLoading(false);
+        console.log("Phase suggestions:", fetchedPhaseSuggestions);
       }
     }
-
-    fetchData();
-  }, [state.currentPhase]);
+    if (phaseSuggestions && phaseSuggestions.length === 0 && isLoading === false) {
+      setIsLoading(true);
+      fetchPhaseSuggestions();
+    }
+  }, [state]);
 
   const getNextPhase = () => {
     const currentIndex = state.phaseOrder.indexOf(state.currentPhase);
@@ -74,28 +68,30 @@ function PhaseChoices() {
     );
   }
 
+
+  if (isLoading) {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <div className="loading-container">
+          <div className="loader"></div>
+        </div>
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <Layout
       title={"Choose Your " + state.currentPhase + " Phase"}
-      handleSubmit={goToNextPhase} >
-      <div>
-        <h2>Phase 1: Light Oils</h2>
-        <p>Ingredients: Coconut Oil, Jojoba Oil</p>
-        <p>Description: Best for oily skin types, absorbs quickly without leaving a residue.</p>
-        <button onClick={() => handlePhaseSelection('carrier')}>Choose Phase 1</button>
-      </div>
-      <div>
-        <h2>Phase 2: Medium Oils</h2>
-        <p>Ingredients: Almond Oil, Argan Oil</p>
-        <p>Description: A balanced blend that works for most skin types, providing hydration without heaviness.</p>
-        <button>Choose Phase 2</button>
-      </div>
-      <div>
-        <h2>Phase 3: Heavy Oils</h2>
-        <p>Ingredients: Olive Oil, Shea Butter</p>
-        <p>Description: Ideal for dry or mature skin, offering deep moisturization and protective benefits.</p>
-        <button>Choose Phase 3</button>
-      </div>
+      handleSubmit={() => { /* handle submission logic */ }}>
+      {phaseSuggestions.map((item, index) => (
+        <div key={index}>
+          <h2>Phase {index + 1}: {item.title}</h2>
+          <p>Ingredients: {Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
+          <p>Description: {item.description}</p>
+          <button onClick={() => handlePhaseSelection(item.ingredients)}>Choose Phase {index + 1}</button>
+        </div>
+      ))}
     </Layout>
   );
 }
