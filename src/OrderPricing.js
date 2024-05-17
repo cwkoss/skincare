@@ -93,14 +93,14 @@ function OrderPricing() {
                             <td>{ingredient.name}</td>
                             <td>{ingredient.parts}</td>
                             <td>{ingredient.grams.toFixed(3)}</td>
-                            <td>${ingredient.cost.toFixed(2)}</td>
+                            <td>${typeof(ingredient.cost) === "number" ? ingredient.cost.toFixed(2) : "NaN"}</td>
                         </tr>
                     ))}
                     <tr>
                         <td><strong>Total</strong></td>
                         <td>{totalParts}</td>
                         <td>{totalGrams.toFixed(3)}</td>
-                        <td>${totalCost.toFixed(2)}</td>
+                        <td>${typeof(totalCost) === "number" ? totalCost.toFixed(2) : "NaN"}</td>
                     </tr>
                 </tbody>
             </table>
