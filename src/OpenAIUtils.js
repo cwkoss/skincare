@@ -60,11 +60,11 @@ const phaseExamples = {
 };
 
 export const getPhaseSuggestions = (state) => {
-  let phase = state.currentPhase;
-  if (!phase || !state) {
-    console.error("Invalid phase or state provided.");
-    return Promise.reject("Invalid phase or state provided.");  // Return a rejected promise when inputs are invalid
+  if (!state.currentPhase || !state.productData || !state.goalsData) {
+    console.error("Invalid state data provided.");
+    return Promise.reject("Invalid state data provided.");  // Return a rejected promise when inputs are invalid
   }
+  let phase = state.currentPhase;
   console.log("Phase and state: ", phase, state);
   const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getPhaseSuggestions';
   const systemPrompt = `You are an award winning cosmetic chemist helping the user formulate a 
