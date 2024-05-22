@@ -779,6 +779,7 @@ export const getFilteredIngredientList = (productName) => {
 export const getIngredientsByType = (type) => {
     return Object.keys(ingredients)
         .filter(ingredient => ingredients[ingredient].type === type)
+        .filter(ingredient => ingredients[ingredient].deprecated !== true)
         .reduce((acc, key) => {
             acc[key] = ingredients[key];
             return acc;
