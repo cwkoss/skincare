@@ -14,7 +14,7 @@ function PhaseChoices() {
       let fetchedPhaseSuggestions = "dummy";
       try {
         // Assuming that getPhaseSuggestions properly handles the 'phase' and 'state'
-        fetchedPhaseSuggestions = await getPhaseSuggestions("carrier", state);
+        fetchedPhaseSuggestions = await getPhaseSuggestions(state);
         setPhaseSuggestions(fetchedPhaseSuggestions);
       } catch (error) {
         console.error('Error fetching phase suggestions:', error);

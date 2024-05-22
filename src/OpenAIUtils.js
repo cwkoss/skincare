@@ -59,7 +59,8 @@ const phaseExamples = {
   ]
 };
 
-export const getPhaseSuggestions = (phase, state) => {
+export const getPhaseSuggestions = (state) => {
+  let phase = state.currentPhase;
   if (!phase || !state) {
     console.error("Invalid phase or state provided.");
     return Promise.reject("Invalid phase or state provided.");  // Return a rejected promise when inputs are invalid
