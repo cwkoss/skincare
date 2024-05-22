@@ -39,6 +39,7 @@ function PhaseChoices() {
     if (nextPhase) {
       dispatch({ type: "SET_CURRENT_PHASE", payload: nextPhase });
     }
+    
   };
 
   const handlePhaseSelection = (phase) => {
@@ -78,7 +79,7 @@ function PhaseChoices() {
   return (
     <Layout
       title={"Choose Your " + state.currentPhase + " Phase"}
-      handleSubmit={() => { /* handle submission logic */ }}>
+      handleSubmit={() => { goToNextPhase() }}>
       {phaseSuggestions.map((item, index) => (
         <div key={index}>
           <h2>Phase {index + 1}: {item.title}</h2>
