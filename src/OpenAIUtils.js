@@ -1,4 +1,4 @@
-import { getIngredientsByType } from "./ingredients";
+import ingredients, { getIngredientsByType } from "./ingredients";
 
 const phaseExamples = {
   "carrier": [
@@ -39,18 +39,23 @@ const phaseExamples = {
       "description": "Provides intense hydration with a high concentration of Hyaluronic Acid, perfect for dry skin or as a boost of moisture in any skincare routine."
     },
     {
-      "title": "Soothing",
+      "title": "Skin Soothing",
       "ingredients": {
         "Aloe Vera Gel": 5,
         "Distilled Water": 5,
         "Oat Milk": 5
       },
-      "description": "Enhances skin calming properties with a higher concentration of Aloe Vera, perfect for soothing irritation and redness."
+      "description": "Focuses on calming and soothing irritated skin with Aloe Vera and Oat Milk, offering a gentle and hydrating formula suitable for sensitive skin types."
     },
     {
-      "title": "Balancing",
+      "title": "Cooling",
+      "ingredients": {
+        "Aloe Vera Gel": 4,
+        "Glycerin": 2,
+        "Cucumber Juice": 4
+      },
+      "description": "Delivers a refreshing and cooling sensation with Cucumber Juice and Aloe Vera, perfect for hot weather or as a post-sun exposure treatment."
     }
-
   ],
   "fragrance": [
     {
