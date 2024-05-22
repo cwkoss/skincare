@@ -81,8 +81,21 @@ const phaseExamples = {
         "Lavender Oil": 3
       },
       "description": "Focuses on relaxation and stress relief with Lavender essential oil, known for its calming and soothing effects on both the skin and mind."
+    },
+    {
+      "title": "Refreshing and Invigorating",
+      "ingredients": {
+        "Peppermint Oil": 2,
+        "Eucalyptus Oil": 2,
+        "Pine Oil": 1
+      },
+      "description": "Provides a cooling and refreshing sensation with Peppermint and Eucalyptus essential oils, perfect for revitalizing the senses and awakening the skin."
     }
   ],
+};
+
+const phaseSpecificInstructions = {
+  "fragrance": "Focus on the skin benefits over the aromatic profile of the fragrance phase, highlighting the sensory experience and therapeutic properties of essential oils to enhance the overall product appeal.",
 };
 
 export const getPhaseSuggestions = (state) => {
@@ -96,12 +109,12 @@ export const getPhaseSuggestions = (state) => {
   const systemPrompt = `You are an award winning cosmetic chemist helping the user formulate a 
   new skincare product customized to the particulars of their skin. This recipe is being written 
   one phase at a time, and you are currently working on the ${phase} phase of the formulation. 
-  Please provide three examples of ${phase} formulations with ingredients and proportions.
+  Please provide three examples of ${phase} formulations with ingredients and proportions. ${phaseSpecificInstructions[phase] || ""}
   
-  Here are examples of ${phase} formulations: ${JSON.stringify(phaseExamples[phase])}.  
+  Here are examples of ${phase} formulations: ${JSON.stringify(phaseExamples[phase])}.  con
   The units after each ingredient represent the number of 'parts' of that ingredient to include in the formulation, and may be integers between 1-10.
 
-  You may only use the ingredients found in this object: ${JSON.stringify(getIngredientsByType(phase))}.
+  You may only use the ingredients found in this object: ${JSON.stringify(getIngredientsByType(phase))}. 
   
   Output your examples as an array
   of JSON formated including a title and 1-sentence description of the phase to help the user understand the 
