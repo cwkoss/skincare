@@ -34,28 +34,23 @@ const phaseExamples = {
     {
       "title": "Hydrating",
       "ingredients": {
-        "Aloe Vera Gel": 2,
-        "Distilled Water": 10,
-        "Glycerin": 2
+        "Hyaluronic Acid Serum (2%)" : 2
       },
-      "description": "Maximizes hydration with a higher water content and glycerin to attract moisture, ideal for dehydrated skin."
+      "description": "Provides intense hydration with a high concentration of Hyaluronic Acid, perfect for dry skin or as a boost of moisture in any skincare routine."
     },
     {
       "title": "Soothing",
       "ingredients": {
         "Aloe Vera Gel": 5,
-        "Distilled Water": 5
+        "Distilled Water": 5,
+        "Oat Milk": 5
       },
       "description": "Enhances skin calming properties with a higher concentration of Aloe Vera, perfect for soothing irritation and redness."
     },
     {
       "title": "Balancing",
-      "ingredients": {
-        "Witch Hazel": 5,
-        "Distilled Water": 5
-      },
-      "description": "Focuses on toning and balancing skin's pH with Witch Hazel, suitable for oily and acne-prone skin types."
     }
+
   ],
   "fragrance": [
     {

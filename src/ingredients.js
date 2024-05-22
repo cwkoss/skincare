@@ -322,6 +322,20 @@ const ingredients = {
         soothing_stimulating: 1,
         gentle_active: 3,
     },
+    "Hyaluronic Acid Serum (2%)": {
+        phase: "aqueous",
+        type: "aqueous",
+        hlb: 20,
+        description: "Powerful humectant, helps to hydrate and plump the skin by retaining moisture, reduces the appearance of fine lines and wrinkles.  Includes Glycerin and Distilled water to form a gel serum.",
+        good_for: ["Dry skin", "Wrinkles", "Aging or age spots"],
+        bad_for: [],
+        cost_per_g: 0.4639,
+        endogenous: true,
+        light_heavy: 2,
+        penetrating_occlusive: 1,
+        soothing_stimulating: 1,
+        gentle_active: 2,
+    },
     "Beeswax": {
         phase: "emulsifier",
         type: "emulsifier",
@@ -401,6 +415,7 @@ const ingredients = {
         penetrating_occlusive: 1,
         soothing_stimulating: 1,
         gentle_active: 2,
+        deprecated: true,
     },
     "Retinol": {
         phase: "additive",
