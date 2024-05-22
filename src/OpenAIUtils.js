@@ -56,7 +56,33 @@ const phaseExamples = {
       },
       "description": "Focuses on toning and balancing skin's pH with Witch Hazel, suitable for oily and acne-prone skin types."
     }
-  ]
+  ],
+  "fragrance": [
+    {
+      "title": "Floral Elegance",
+      "ingredients": {
+        "Jasmine Oil": 1,
+        "Geranium Oil": 2
+      },
+      "description": "Offers a luxurious floral scent with Jasmine and Geranium essential oils, providing a sophisticated and elegant fragrance profile with skin balancing properties."
+    },
+    {
+      "title": "Forest Harmony",
+      "ingredients": {
+        "Rosemary Oil": 2,
+        "Cedarwood Oil": 2,
+        "Pine Oil": 1
+      },
+      "description": "Creates a grounding and calming aroma reminiscent of a forest setting, combining Rosemary, Cedarwood, and Pine essential oils for a refreshing and earthy scent."
+    },
+    {
+      "title": "Soothing Lavender",
+      "ingredients": {
+        "Lavender Oil": 3
+      },
+      "description": "Focuses on relaxation and stress relief with Lavender essential oil, known for its calming and soothing effects on both the skin and mind."
+    }
+  ],
 };
 
 export const getPhaseSuggestions = (state) => {
