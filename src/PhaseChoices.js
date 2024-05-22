@@ -39,7 +39,8 @@ function PhaseChoices() {
     if (nextPhase) {
       dispatch({ type: "SET_CURRENT_PHASE", payload: nextPhase });
     }
-    
+    // phase suggestion removal will be changed when we load multiple phases of suggestions and hold onto them all
+    setPhaseSuggestions([]);
   };
 
   const handlePhaseSelection = (phase) => {
