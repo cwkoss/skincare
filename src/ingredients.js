@@ -326,7 +326,7 @@ const ingredients = {
         phase: "aqueous",
         type: "aqueous",
         hlb: 20,
-        description: "Powerful humectant, helps to hydrate and plump the skin by retaining moisture, reduces the appearance of fine lines and wrinkles.  Includes Glycerin and Distilled water to form a gel serum.",
+        description: "Powerful humectant, helps to hydrate and plump the skin by retaining moisture, reduces the appearance of fine lines and wrinkles.  Mixed to order with 10% Glycerin and 88% Distilled water to form a ultra-hydrating gel.",
         good_for: ["Dry skin", "Wrinkles", "Aging or age spots"],
         bad_for: [],
         cost_per_g: 0.4639,
