@@ -737,7 +737,7 @@ const ingredients = {
         hlb: 20,
         max_percent: 1,
         default_percent: 0.5,
-        description: "Broad-spectrum synthetic preservative, effective against bacteria, yeast, and mold. It is used in concentrations of 0.5% to 1%. It is commonly found in ballpoint pen ink, many skincare products, and used as a solvent in injectable pharmaceuticals because its safety has been well established.",
+        description: "Broad-spectrum synthetic preservative, effective against bacteria, yeast, and mold. It is used in concentrations of 0.5% to 1%. It is commonly found in ballpoint pen ink, many skincare products, and used as a solvent in pharmaceutical injections because its safety has been well established.",
         cost_per_g: 0.0712,
         good_for: [],
         bad_for: [],

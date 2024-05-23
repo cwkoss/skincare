@@ -56,7 +56,7 @@ function OrderPricing() {
             const newIngredientList = Object.entries(recipeData.ingredients).map(([name, parts]) => {
                 const ingredientGrams = (targetGrams / totalParts) * parts;
                 const ingredientCost = ingredients[name].cost_per_g ? ingredients[name].cost_per_g * ingredientGrams : "N/A";
-                return { name, parts: parts, grams: ingredientGrams, cost: ingredientCost };
+                return { name, parts: parts, grams: ingredientGrams, cost: ingredientCost, type: ingredients[name].type };
             });
             setIngredientList(newIngredientList);
         }
@@ -82,15 +82,18 @@ function OrderPricing() {
                 <thead>
                     <tr>
                         <th>Ingredient</th>
+                        <th>Type</th>
                         <th>Parts</th>
                         <th>Grams</th>
                         <th>Cost</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {ingredientList.map((ingredient, index) => (
+                    {ingredientList.sort((a, b) => a.type.localeCompare(b.type) )
+                    .map((ingredient, index) => (
                         <tr key={index}>
                             <td>{ingredient.name}</td>
+                            <td>{ingredient.type}</td>
                             <td>{ingredient.parts}</td>
                             <td>{ingredient.grams.toFixed(3)}</td>
                             <td>${typeof(ingredient.cost) === "number" ? ingredient.cost.toFixed(2) : "NaN"}</td>
@@ -98,6 +101,7 @@ function OrderPricing() {
                     ))}
                     <tr>
                         <td><strong>Total</strong></td>
+                        <td></td>
                         <td>{totalParts}</td>
                         <td>{totalGrams.toFixed(3)}</td>
                         <td>${typeof(totalCost) === "number" ? totalCost.toFixed(2) : "NaN"}</td>
