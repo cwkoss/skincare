@@ -386,7 +386,7 @@ const ingredients = {
         cost_per_g: 0.0172,
     },*/
     "Zinc Oxide": {
-        phase: "additive",
+        phase: "oil",
         type: "active",
         hlb: 20,
         max_percent: 25,
@@ -418,7 +418,7 @@ const ingredients = {
         deprecated: true,
     },
     "Retinol": {
-        phase: "additive",
+        phase: "oil",
         type: "active",
         hlb: 0,
         max_percent: 1,
@@ -434,7 +434,7 @@ const ingredients = {
         gentle_active: 6,
     },
     "Retinyl Palmitate": {
-        phase: "additive",
+        phase: "oil",
         type: "active",
         hlb: 0,
         max_percent: 1,
@@ -467,7 +467,7 @@ const ingredients = {
         deprecated: true,
     },
     "Vitamin E": {
-        phase: "additive",
+        phase: "oil",
         type: "active",
         hlb: 0,
         max_percent: 1,
@@ -484,7 +484,7 @@ const ingredients = {
         gentle_active: 4,
     },
     "Niacinamide (Vitamin B3)": {
-        phase: "additive",
+        phase: "aqueous",
         type: "active",
         hlb: 20,
         max_percent: 5,
