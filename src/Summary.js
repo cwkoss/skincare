@@ -25,7 +25,7 @@ function Summary() {
 
   const handleAIClick = () => {
     if (isDevFeatureEnabled) {
-      navigate('/phase-choices'); 
+      navigate('/phase-choices');
       return;
     }
 
