@@ -17,7 +17,7 @@ const getAqueousIngredients = () => {
 
 
 export const skincareProducts = {
-    "Moisturizing Cream or Lotion": {
+    "Face Moisturizing Cream or Lotion": {
         description: "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
         bannedIngredients: ["Retinyl Palmitate"],
         mustIncludeIngredients: ["Zinc Oxide"],
