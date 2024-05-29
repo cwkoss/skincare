@@ -47,7 +47,7 @@ function PhaseChoices() {
     dispatch({
       type: "UPDATE_RECIPE",
       payload: {
-        phase: "carrier",
+        phase: state.currentPhase,
         data: phase
       }
     });
