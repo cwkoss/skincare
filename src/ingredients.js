@@ -783,6 +783,7 @@ const ingredients = {
 export const getFilteredIngredientList = (productName) => {
     return Object.keys(ingredients) // Get the keys of the object.
         //.filter(ingredient => !skincareProducts[productName].bannedIngredients.includes(ingredient)) // No longer using product based banned ingredients
+        //TODO: Add filter to remove 'bad_for' ingredients based on previous goals selections
         .filter(ingredient => ingredients[ingredient].deprecated !== true) // Filter out deprecated ingredients
         .reduce((acc, key) => {
             acc[key] = ingredients[key]; // Add the filtered keys to a new object.
