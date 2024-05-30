@@ -65,18 +65,6 @@ function PhaseChoices() {
     );
   }
 
-
-  if (isLoading) {
-    return (
-      <div style={{ textAlign: "center" }}>
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
-        Loading...
-      </div>
-    );
-  }
-
   return (
     <Layout
       title={"Choose Your " + state.currentPhase + " Phase"}
