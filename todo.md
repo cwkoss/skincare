@@ -34,11 +34,12 @@ Boolean choice
 - DONE When page loads, show user with 3 phase options
 
 - DONE Update recipe context to include the new phase format for recipes. Have it initialize with an empty copy of each phase
-- Make recipecontext.getNextEmptyPhase
-- When user clicks a phase option and next, send the phase to recipecontext
-- When user clicks a phase option, go to nextEmptyPhase
-- Write 3 example phase options for each phase type for AI examples. 
-- Make actually AI call to load phase options (not just dummy copy)
+- CHANGED - computed via currentphase at time of use - Make recipecontext.getNextEmptyPhase
+- DONE When user clicks a phase option and next, send the phase to recipecontext
+- DONE When user clicks a phase option, go to nextEmptyPhase
+? DECIDE - should preservatives be a static object rather than hitting AI?
+- DONE - Write 3 example phase options for each phase type for AI examples. 
+- DONE - Make actually AI call to load phase options (not just dummy copy)
 - Have recipecontext save to a session/user specific 
 
 - Create user login mechanism tied to google authentication

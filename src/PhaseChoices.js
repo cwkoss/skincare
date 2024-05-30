@@ -32,7 +32,7 @@ function PhaseChoices() {
   const getNextPhase = () => {
     const currentIndex = state.phaseOrder.indexOf(state.currentPhase);
     if (state.phaseOrder.length === currentIndex + 1) {
-      alert("done");
+      alert("done");  // TODO - handle completion
     }
     return state.phaseOrder[currentIndex + 1] || null;
   };
