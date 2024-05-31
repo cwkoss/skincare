@@ -41,6 +41,8 @@ Boolean choice
 - DONE - Write 3 example phase options for each phase type for AI examples. 
 - DONE - Make actually AI call to load phase options (not just dummy copy)
 - Have recipecontext save to a session/user specific 
+- CSS the PhaseChoices page
+- Make page for choosing emulsifier, proportion and consistency
 
 - Create user login mechanism tied to google authentication
 - once all phases are chosen does the user need to choose phase proportions? maybe it is just automatic... 
