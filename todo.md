@@ -52,13 +52,22 @@ Boolean choice
 ----
 
 New intake questionaire
+- What part of the body would you like your formula to work on? ( Face, Body, Hair and scalp)
 - Skin type (dry, oily, combination)
+-- Dry
+--- Dry skin feels tight and may appear flaky or rough. It often lacks natural oils, leading to a dull complexion and increased sensitivity. You may notice fine lines, a rough texture, or a tendency to peel. Your skin might feel uncomfortable after washing or in dry climates.
+-- Oily 
+--- Oily skin produces excess sebum, giving it a shiny or greasy appearance. This skin type is more prone to acne and enlarged pores. You might find that your face looks shiny, especially in the T-zone (forehead, nose, and chin). You may also experience frequent breakouts or clogged pores.
+-- Combination 
+--- Combination skin features both dry and oily areas. Typically, the T-zone is oily, while the cheeks are dry or normal. You may notice oiliness and shine in the T-zone but dryness or normal skin on the cheeks. Your skin care needs might vary across different areas of your face.
+
 - Do you have sensitive skin? (yes no)
 - Do you have any specific goals for your skincare routine (e.g., brightening, anti-aging, hydration)?
 - What are your primary skincare concerns (e.g., acne, wrinkles, dryness, dark spots)?
 - Do you have any known skin allergies or sensitivities? Are there any ingredients you prefer to avoid?
 - What is your age range?
 - How much time are you willing to spend on your skincare routine each day?
+- We only offer plant fragrances with active skincare benefits.  Would you like to: (Include beneficial fragrances / minimize fragrance)
 
 
 ---
