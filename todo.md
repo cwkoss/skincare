@@ -51,6 +51,18 @@ Boolean choice
 
 ----
 
+New intake questionaire
+- Skin type (dry, oily, combination)
+- Do you have sensitive skin? (yes no)
+- Do you have any specific goals for your skincare routine (e.g., brightening, anti-aging, hydration)?
+- What are your primary skincare concerns (e.g., acne, wrinkles, dryness, dark spots)?
+- Do you have any known skin allergies or sensitivities? Are there any ingredients you prefer to avoid?
+- What is your age range?
+- How much time are you willing to spend on your skincare routine each day?
+
+
+---
+
 
 - finish out phaseselection
 -- Add additive mode for proportions
