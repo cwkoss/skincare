@@ -29,17 +29,8 @@ Boolean choice
 
 --- Next steps --- 
 
-- DONE Make summary take user to a blank page, switched with devFeature
-- DONE Replace that blank page with a "AI is working on options for your recipe" loading page
-- DONE When page loads, show user with 3 phase options
-
-- DONE Update recipe context to include the new phase format for recipes. Have it initialize with an empty copy of each phase
-- CHANGED - computed via currentphase at time of use - Make recipecontext.getNextEmptyPhase
-- DONE When user clicks a phase option and next, send the phase to recipecontext
-- DONE When user clicks a phase option, go to nextEmptyPhase
-? DECIDE - should preservatives be a static object rather than hitting AI?
-- DONE - Write 3 example phase options for each phase type for AI examples. 
-- DONE - Make actually AI call to load phase options (not just dummy copy)
+- Make preservative selection a static object (doens't change enough for hitting AI)
+- 
 - Have recipecontext save to a session/user specific 
 - CSS the PhaseChoices page
 - Make page for choosing emulsifier, proportion and consistency (I think this should be before phase choices?)
@@ -70,7 +61,28 @@ New intake questionaire
 - We only offer plant fragrances with active skincare benefits.  Would you like to: (Include beneficial fragrances / minimize fragrance)
 
 
----
+
+-----
+COMPLETE
+----
+- DONE Make summary take user to a blank page, switched with devFeature
+- DONE Replace that blank page with a "AI is working on options for your recipe" loading page
+- DONE When page loads, show user with 3 phase options
+
+- DONE Update recipe context to include the new phase format for recipes. Have it initialize with an empty copy of each phase
+- CHANGED - computed via currentphase at time of use - Make recipecontext.getNextEmptyPhase
+- DONE When user clicks a phase option and next, send the phase to recipecontext
+- DONE When user clicks a phase option, go to nextEmptyPhase
+? DECIDE - should preservatives be a static object rather than hitting AI?
+- DONE - Write 3 example phase options for each phase type for AI examples. 
+- DONE - Make actually AI call to load phase options (not just dummy copy)
+
+
+-------
+
+OLD
+
+----
 
 
 - finish out phaseselection
