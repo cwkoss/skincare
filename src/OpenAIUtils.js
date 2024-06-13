@@ -119,6 +119,52 @@ const phaseExamples = {
       "description": "A natural plant-based, banana-derived antimicrobial blend, providing effective preservation with a mild sweet scent, ideal for those looking for natural preservation options with added sensory appeal."
     }
   ],
+  "active": [
+    {
+      "title": "Ultimate Sun Protection",
+      "ingredients": {
+        "Zinc Oxide": 10,
+        "Vitamin E": 0.5
+      },
+      "description": "Provides broad-spectrum UV protection with Zinc Oxide, enhanced with Vitamin E for its antioxidant properties, perfect for daily sun protection and skin health."
+    },
+    {
+      "title": "Anti-Aging Night Treatment",
+      "ingredients": {
+        "Retinyl Palmitate": 0.1,
+        "Vitamin E": 0.5,
+        "Niacinamide (Vitamin B3)": 2
+      },
+      "description": "A powerful night treatment combining Retinyl Palmitate, Vitamin E, and Niacinamide to target fine lines, wrinkles, and uneven skin tone, promoting smoother and younger-looking skin."
+    },
+    {
+      "title": "Calming and Protective",
+      "ingredients": {
+        "Niacinamide (Vitamin B3)": 2,
+        "Zinc Oxide": 5,
+        "Vitamin E": 0.5
+      },
+      "description": "A soothing formulation with Niacinamide to reduce redness and irritation, Zinc Oxide for protection, and Vitamin E for its moisturizing and healing properties, suitable for sensitive skin."
+    },
+    {
+      "title": "Brightening and Smoothing",
+      "ingredients": {
+        "Niacinamide (Vitamin B3)": 2,
+        "Vitamin E": 0.5
+      },
+      "description": "Enhances skin brightness and smoothness with Niacinamide and Vitamin E, targeting enlarged pores, uneven skin tone, and fine lines, leaving the skin radiant and smooth."
+    },
+    {
+      "title": "Youthful Glow",
+      "ingredients": {
+        "Retinyl Palmitate": 1,
+        "Zinc Oxide": 10,
+        "Vitamin E": 0.5
+      },
+      "description": "Combines the anti-aging benefits of Retinyl Palmitate, the protective qualities of Zinc Oxide, and the antioxidant power of Vitamin E to promote a youthful and glowing complexion."
+    }
+  ]
+  
   
 };
 
