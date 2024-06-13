@@ -92,6 +92,34 @@ const phaseExamples = {
       "description": "Provides a cooling and refreshing sensation with Peppermint and Eucalyptus essential oils, perfect for revitalizing the senses and awakening the skin."
     }
   ],
+  "preservative": [
+    {
+      "title": "No Preservative",
+      "description": "Ideal for formulations where the natural shelf life is sufficient, and where there's minimal risk of contamination, suitable for products meant for immediate use."
+    },
+    {
+      "title": "Phenoxyethanol",
+      "ingredients": {
+        "Phenoxyethanol": 1
+      },
+      "description": "A widely used synthetic preservative effective against a broad spectrum of bacteria and fungi, providing reliable protection and extending product shelf life."
+    },
+    {
+      "title": "AntiMicro Root Blend",
+      "ingredients": {
+        "AntiMicro Root Blend": 2
+      },
+      "description": "A natural plant-based preservative blend derived from root extracts, offering antimicrobial properties while being gentle on the skin, suitable for organic and natural formulations."
+    },
+    {
+      "title": "AntiMicro Banana",
+      "ingredients": {
+        "AntiMicro Banana": 2
+      },
+      "description": "A natural plant-based, banana-derived antimicrobial blend, providing effective preservation with a mild sweet scent, ideal for those looking for natural preservation options with added sensory appeal."
+    }
+  ],
+  
 };
 
 const phaseSpecificInstructions = {
@@ -102,6 +130,10 @@ export const getPhaseSuggestions = (state) => {
   if (!state.currentPhase || !state.productData || !state.goalsData) {
     console.error("Invalid state data provided.");
     return Promise.reject("Invalid state data provided.");  // Return a rejected promise when inputs are invalid
+  }
+  // Preservative phase has static phase suggestions
+  if (state.currentPhase === "preservative") { 
+    return Promise.resolve([phaseExamples["preservative"]]);  // No phase suggestions for preservative phase
   }
   let phase = state.currentPhase;
   console.log("Phase and state: ", phase, state);

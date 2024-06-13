@@ -75,7 +75,7 @@ function PhaseChoices() {
       {phaseSuggestions.map((item, index) => (
         <div key={index}>
           <h2>Phase {index + 1}: {item.title}</h2>
-          <p>Ingredients: {Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
+          <p>Ingredients:  {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
           <p>Description: {item.description}</p>
           <button onClick={() => handlePhaseSelection(phaseSuggestions[index])}>Choose Phase {index + 1}</button>
         </div>
