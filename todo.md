@@ -29,7 +29,8 @@ Boolean choice
 
 --- Next steps --- 
 
-- Make preservative selection a static object (doens't change enough for hitting AI)
+- Improve preservative descriptions
+- Improve active examples
 - 
 - Have recipecontext save to a session/user specific 
 - CSS the PhaseChoices page
@@ -66,6 +67,7 @@ New intake questionaire
 -----
 COMPLETE
 ----
+- DONE Make preservative selection a static object (doens't change enough for hitting AI)
 - DONE Make summary take user to a blank page, switched with devFeature
 - DONE Replace that blank page with a "AI is working on options for your recipe" loading page
 - DONE When page loads, show user with 3 phase options
