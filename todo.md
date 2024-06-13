@@ -54,14 +54,28 @@ New intake questionaire
 --- Combination skin features both dry and oily areas. Typically, the T-zone is oily, while the cheeks are dry or normal. You may notice oiliness and shine in the T-zone but dryness or normal skin on the cheeks. Your skin care needs might vary across different areas of your face.
 
 - Do you have sensitive skin? (yes no)
+
+
 - Do you have any specific goals for your skincare routine (e.g., brightening, anti-aging, hydration)?
 - What are your primary skincare concerns (e.g., acne, wrinkles, dryness, dark spots)?
+Should we condense these into:
+What are your skincare aspirations and primary concerns? (Select all that apply)
+Radiant, youthful skin
+Smooth texture
+Deep hydration
+Anti-aging
+Clear skin
+Even tone
+Dark spot reduction
+Oil control
+Calming sensitive skin
+
 - Do you have any known skin allergies or sensitivities? Are there any ingredients you prefer to avoid?
 - What is your age range?
-- How much time are you willing to spend on your skincare routine each day?
 - We only offer plant fragrances with active skincare benefits.  Would you like to: (Include beneficial fragrances / minimize fragrance)
 
-
+Save for later versions:
+- How much time are you willing to spend on your skincare routine each day?
 
 
 -----
