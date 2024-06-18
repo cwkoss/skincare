@@ -30,8 +30,7 @@ Boolean choice
 --- Next steps --- 
 
 
-- Make page for choosing emulsifier, proportion and consistency (I think this should be first page of  phase choices when formula contains aqueous ingredients)
-- Make final summary page for phased recipe
+- Improve ConfirmRecipe and have it calculate final percentages
 - Implement devmode switch to new questionaire
 - Improve preservative descriptions
 - Improve active examples
@@ -39,7 +38,7 @@ Boolean choice
 - Have recipecontext save to a session/user specific 
 - CSS the PhaseChoices page
 
-
+- Improve emulsifier selection (more options?)
 - Create user login mechanism tied to google authentication
 - once all phases are chosen does the user need to choose phase proportions? maybe it is just automatic... 
 - How does the user pick their variation?  is that just a single 3-choice after the initial recipe is decided?
@@ -85,6 +84,10 @@ Save for later versions:
 -----
 COMPLETE
 ----
+
+
+- DONE Make page for choosing emulsifier, proportion and consistency (I think this should be first page of  phase choices when formula contains aqueous ingredients)
+- DONE Make final summary page for phased recipe
 - DONE Make preservative selection a static object (doens't change enough for hitting AI)
 - DONE Make summary take user to a blank page, switched with devFeature
 - DONE Replace that blank page with a "AI is working on options for your recipe" loading page
