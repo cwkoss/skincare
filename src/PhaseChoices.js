@@ -23,7 +23,7 @@ function PhaseChoices() {
         console.log("Phase suggestions:", fetchedPhaseSuggestions);
       }
     }
-    if (phaseSuggestions && phaseSuggestions.length === 0 && isLoading === false) {
+    if (phaseSuggestions && phaseSuggestions.length === 0 && isLoading === false && state.currentPhase !== "emulsifier") {
       setIsLoading(true);
       fetchPhaseSuggestions();
     }
