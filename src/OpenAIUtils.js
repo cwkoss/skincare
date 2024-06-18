@@ -179,7 +179,7 @@ export const getPhaseSuggestions = (state) => {
   }
   // Preservative phase has static phase suggestions
   if (state.currentPhase === "preservative") { 
-    return Promise.resolve([phaseExamples["preservative"]]);  // No phase suggestions for preservative phase
+    return Promise.resolve(phaseExamples["preservative"]);  // No phase suggestions for preservative phase
   }
   let phase = state.currentPhase;
   console.log("Phase and state: ", phase, state);
