@@ -9,6 +9,7 @@ function ConfirmRecipe() {
     <Layout title="Confirm Your Recipe">
       <div>
         <h2>Recipe Confirmation</h2>
+        {JSON.stringify(state)}
         {state.recipe && Object.keys(state.recipe).length > 0 ? (
           Object.keys(state.recipe).map((phase, index) => (
             <div key={index}>
