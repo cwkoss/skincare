@@ -19,6 +19,7 @@ import { RecipeProvider } from './RecipeContext'; // Adjust the path as needed
 import PhaseSelection from './PhaseSelection';
 import { FeatureFlagProvider } from './FeatureFlagContext';
 import PhaseChoices from './PhaseChoices';
+import ConfirmRecipe from './ConfirmRecipe';
 
 import posthog from 'posthog-js';
 
@@ -87,6 +88,7 @@ function App() {
             <Route path="/ingredients-table" element={<IngredientsTable />} />
             <Route path="/phase-selection" element={<PhaseSelection />} />
             <Route path="/phase-choices" element={<PhaseChoices/>} />
+            <Route path="/confirm-recipe" element={<ConfirmRecipe/>} />
           </Routes>
         </Router>
       </RecipeProvider>

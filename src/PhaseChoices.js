@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
+import { useNavigate } from 'react-router-dom';
 import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
 import { getPhaseSuggestions } from './OpenAiUtils';
 
 function PhaseChoices() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useRecipe();
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
@@ -32,7 +34,7 @@ function PhaseChoices() {
   const getNextPhase = () => {
     const currentIndex = state.phaseOrder.indexOf(state.currentPhase);
     if (state.phaseOrder.length === currentIndex + 1) {
-      alert("done");  // TODO - handle completion
+      navigate('/confirm-recipe');
     }
     return state.phaseOrder[currentIndex + 1] || null;
   };
