@@ -29,12 +29,15 @@ Boolean choice
 
 --- Next steps --- 
 
+- Implement devmode switch to new questionaire
+- Make page for choosing emulsifier, proportion and consistency (I think this should be first page of  phase choices when formula contains aqueous ingredients)
+- Make final summary page for phased recipe
 - Improve preservative descriptions
 - Improve active examples
 - 
 - Have recipecontext save to a session/user specific 
 - CSS the PhaseChoices page
-- Make page for choosing emulsifier, proportion and consistency (I think this should be before phase choices?)
+
 
 - Create user login mechanism tied to google authentication
 - once all phases are chosen does the user need to choose phase proportions? maybe it is just automatic... 
