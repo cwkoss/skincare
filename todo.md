@@ -29,9 +29,10 @@ Boolean choice
 
 --- Next steps --- 
 
-- Implement devmode switch to new questionaire
+
 - Make page for choosing emulsifier, proportion and consistency (I think this should be first page of  phase choices when formula contains aqueous ingredients)
 - Make final summary page for phased recipe
+- Implement devmode switch to new questionaire
 - Improve preservative descriptions
 - Improve active examples
 - 

@@ -68,6 +68,51 @@ function PhaseChoices() {
     );
   }
 
+  if (state.currentPhase === "emulsifier") {
+    const lotionFormula = {
+      title: 'Lotion',
+      ingredients: {
+        aqueous: '60%',
+        carrier: '34%',
+        cetearyl_alcohol: '6%',
+      },
+      description: 'A lightweight formulation ideal for normal to oily skin types.'
+    };
+
+    const creamFormula = {
+      title: 'Cream',
+      ingredients: {
+        aqueous: '35%',
+        carrier: '57%',
+        lecithin: '4%',
+        cetearyl_alcohol: '4%',
+      },
+      description: 'A rich formulation suitable for dry and aging skin.'
+    };
+
+    return (
+      <Layout
+        title={"Choose Your " + state.currentPhase + " Phase"}
+        handleSubmit={() => { goToNextPhase() }}>
+        <div>
+          <h2>Choose Formula Consistency</h2>
+          <div>
+            <h3>{lotionFormula.title}</h3>
+            <p>Ingredients: {Object.entries(lotionFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
+            <p>Description: {lotionFormula.description}</p>
+            <button onClick={() => handlePhaseSelection(lotionFormula)}>Choose {lotionFormula.title}</button>
+          </div>
+          <div>
+            <h3>{creamFormula.title}</h3>
+            <p>Ingredients: {Object.entries(creamFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
+            <p>Description: {creamFormula.description}</p>
+            <button onClick={() => handlePhaseSelection(creamFormula)}>Choose {creamFormula.title}</button>
+          </div>
+        </div>
+      </Layout>
+    )
+  };
+
   return (
     <Layout
       title={"Choose Your " + state.currentPhase + " Phase"}
