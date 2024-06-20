@@ -17,21 +17,38 @@ function ConfirmRecipe() {
 
     const emulsifierPercentages = state.recipe.emulsifier.ingredients;
     const overallPercentages = {};
+    let totalAdditivePercent = 0;
 
     Object.keys(state.recipe).forEach(phase => {
       if (phase !== 'emulsifier') {
         const phaseIngredients = state.recipe[phase].ingredients;
         const totalParts = Object.values(phaseIngredients).reduce((total, part) => total + part, 0);
-        const phasePercentage = parseFloat(emulsifierPercentages[phase.replace('Phase', '')]);
 
         Object.keys(phaseIngredients).forEach(ingredient => {
-          const ingredientPercentage = (phaseIngredients[ingredient] / totalParts) * phasePercentage;
-          if (overallPercentages[ingredient]) {
-            overallPercentages[ingredient] += ingredientPercentage;
-          } else {
-            overallPercentages[ingredient] = ingredientPercentage;
+          const ingredientPhase = ingredients[ingredient]?.phase;
+
+          if (ingredientPhase === 'additive' && ingredients[ingredient]?.default_percent) {
+            const defaultPercent = ingredients[ingredient].default_percent;
+            overallPercentages[ingredient] = defaultPercent;
+            totalAdditivePercent += defaultPercent;
+          } else if (ingredientPhase && emulsifierPercentages[ingredientPhase]) {
+            const phasePercentage = parseFloat(emulsifierPercentages[ingredientPhase]);
+            const ingredientPercentage = (phaseIngredients[ingredient] / totalParts) * phasePercentage;
+            if (overallPercentages[ingredient]) {
+              overallPercentages[ingredient] += ingredientPercentage;
+            } else {
+              overallPercentages[ingredient] = ingredientPercentage;
+            }
           }
         });
+      }
+    });
+
+    // Adjust non-additive ingredients by the remaining percentage
+    const remainingPercentage = 100 - totalAdditivePercent;
+    Object.keys(overallPercentages).forEach(ingredient => {
+      if (ingredients[ingredient]?.phase !== 'additive') {
+        overallPercentages[ingredient] = (overallPercentages[ingredient] / (100 - totalAdditivePercent)) * remainingPercentage;
       }
     });
 

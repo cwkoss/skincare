@@ -386,7 +386,7 @@ const ingredients = {
         cost_per_g: 0.0172,
     },*/
     "Zinc Oxide": {
-        phase: "oil",
+        phase: "additive",
         type: "active",
         hlb: 20,
         max_percent: 25,
@@ -434,11 +434,11 @@ const ingredients = {
         gentle_active: 6,
     },
     "Retinyl Palmitate": {
-        phase: "oil",
+        phase: "additive",
         type: "active",
         hlb: 0,
-        max_percent: 1,
-        default_percent: 0.1,
+        max_percent: 2,
+        default_percent: 1,
         description: "An ester of Retinol (Vitamin A) and Palmitic Acid, it is the weakest form of Retinol. It is a powerful antioxidant that may help boosts collagen in the skin, minimizes fine lines and wrinkles, as well as smooths the texture of the skin. Should be used intermittently until skin aclimates to it. Sun sensitizing, so should only be used at night.",
         good_for: ["Wrinkles", "Aging or age spots"],
         bad_for: ["Sensitive Skin"], // can be 
@@ -467,7 +467,7 @@ const ingredients = {
         deprecated: true,
     },
     "Vitamin E": {
-        phase: "oil",
+        phase: "additive",
         type: "active",
         hlb: 0,
         max_percent: 1,
@@ -732,7 +732,7 @@ const ingredients = {
         bad_for: ["Sensitive Skin"] // can be irritating due to tannins
     }*/
     "Phenoxyethanol": {
-        phase: "preservative",
+        phase: "additive",
         type: "preservative",
         hlb: 20,
         max_percent: 1,
@@ -747,7 +747,7 @@ const ingredients = {
         gentle_active: 1,
     },
     "AntiMicro Banana": {
-        phase: "preservative",
+        phase: "additive",
         type: "preservative",
         hlb: 20,
         max_percent: 4,
@@ -762,7 +762,7 @@ const ingredients = {
         gentle_active: 1,
     },
     "AntiMicro Root Blend": {
-        phase: "preservative",
+        phase: "additive",
         type: "preservative",
         hlb: 20,
         max_percent: 2,

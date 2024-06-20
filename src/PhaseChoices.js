@@ -75,7 +75,7 @@ function PhaseChoices() {
       title: 'Lotion',
       ingredients: {
         aqueous: '60%',
-        carrier: '34%',
+        oil: '34%',
         cetearyl_alcohol: '6%',
       },
       description: 'A lightweight formulation ideal for normal to oily skin types.'
@@ -85,7 +85,7 @@ function PhaseChoices() {
       title: 'Cream',
       ingredients: {
         aqueous: '35%',
-        carrier: '57%',
+        oil: '57%',
         lecithin: '4%',
         cetearyl_alcohol: '4%',
       },
