@@ -19,6 +19,19 @@ function ConfirmRecipe() {
     const overallPercentages = {};
     let totalAdditivePercent = 0;
 
+        // Add emulsifier percentages directly to the overall percentages
+        Object.keys(emulsifierPercentages).forEach(emulsifier => {
+            if(emulsifier == "oil" || emulsifier == "aqueous") {
+                return;
+            }
+            const percentage = parseFloat(emulsifierPercentages[emulsifier]);
+            if (overallPercentages[emulsifier]) {
+              overallPercentages[emulsifier] += percentage;
+            } else {
+              overallPercentages[emulsifier] = percentage;
+            }
+          });
+
     Object.keys(state.recipe).forEach(phase => {
       if (phase !== 'emulsifier') {
         const phaseIngredients = state.recipe[phase].ingredients;
@@ -86,7 +99,6 @@ function ConfirmRecipe() {
           <p>No overall percentages available.</p>
         )}
 
-        <p>Debug dump: {JSON.stringify(state.recipe)}</p>
       </div>
     </Layout>
   );

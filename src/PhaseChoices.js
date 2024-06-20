@@ -76,7 +76,7 @@ function PhaseChoices() {
       ingredients: {
         aqueous: '60%',
         oil: '34%',
-        cetearyl_alcohol: '6%',
+        "Cetearyl Alcohol": '6%',
       },
       description: 'A lightweight formulation ideal for normal to oily skin types.'
     };
@@ -86,8 +86,8 @@ function PhaseChoices() {
       ingredients: {
         aqueous: '35%',
         oil: '57%',
-        lecithin: '4%',
-        cetearyl_alcohol: '4%',
+        "Lecithin": '4%',
+        "Cetearyl Alcohol": '4%',
       },
       description: 'A rich formulation suitable for dry and aging skin.'
     };
