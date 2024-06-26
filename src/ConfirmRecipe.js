@@ -91,7 +91,9 @@ function ConfirmRecipe() {
         <h2>Overall Percentages</h2>
         {Object.keys(overallPercentages).length > 0 ? (
           <ul>
-            {Object.entries(overallPercentages).map(([ingredient, percentage], index) => (
+            {Object.entries(overallPercentages)
+                          .sort(([, a], [, b]) => b - a)
+                          .map(([ingredient, percentage], index) => (
               <li key={index}>{ingredient}: {percentage.toFixed(2)}%</li>
             ))}
           </ul>
