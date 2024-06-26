@@ -19,18 +19,18 @@ function ConfirmRecipe() {
     const overallPercentages = {};
     let totalAdditivePercent = 0;
 
-        // Add emulsifier percentages directly to the overall percentages
-        Object.keys(emulsifierPercentages).forEach(emulsifier => {
-            if(emulsifier == "oil" || emulsifier == "aqueous") {
-                return;
-            }
-            const percentage = parseFloat(emulsifierPercentages[emulsifier]);
-            if (overallPercentages[emulsifier]) {
-              overallPercentages[emulsifier] += percentage;
-            } else {
-              overallPercentages[emulsifier] = percentage;
-            }
-          });
+    // Add emulsifier percentages directly to the overall percentages, filtering out "oil" and "aqueous"
+    Object.keys(emulsifierPercentages).forEach(emulsifier => {
+      if (emulsifier === "oil" || emulsifier === "aqueous") {
+        return;
+      }
+      const percentage = parseFloat(emulsifierPercentages[emulsifier]);
+      if (overallPercentages[emulsifier]) {
+        overallPercentages[emulsifier] += percentage;
+      } else {
+        overallPercentages[emulsifier] = percentage;
+      }
+    });
 
     Object.keys(state.recipe).forEach(phase => {
       if (phase !== 'emulsifier') {
@@ -59,9 +59,16 @@ function ConfirmRecipe() {
 
     // Adjust non-additive ingredients by the remaining percentage
     const remainingPercentage = 100 - totalAdditivePercent;
+    const totalNonAdditivePercentage = Object.keys(overallPercentages).reduce((total, ingredient) => {
+      if (ingredients[ingredient]?.phase !== 'additive') {
+        return total + overallPercentages[ingredient];
+      }
+      return total;
+    }, 0);
+
     Object.keys(overallPercentages).forEach(ingredient => {
       if (ingredients[ingredient]?.phase !== 'additive') {
-        overallPercentages[ingredient] = (overallPercentages[ingredient] / (100 - totalAdditivePercent)) * remainingPercentage;
+        overallPercentages[ingredient] = (overallPercentages[ingredient] / totalNonAdditivePercentage) * remainingPercentage;
       }
     });
 
@@ -69,6 +76,8 @@ function ConfirmRecipe() {
   };
 
   const overallPercentages = calculateOverallPercentages();
+
+  const totalPercentage = Object.values(overallPercentages).reduce((total, value) => total + value, 0);
 
   return (
     <Layout title="Confirm Your Recipe"
@@ -97,10 +106,11 @@ function ConfirmRecipe() {
               <li key={index}>{ingredient}: {percentage.toFixed(2)}%</li>
             ))}
           </ul>
+
         ) : (
           <p>No overall percentages available.</p>
         )}
-
+          <span>{ totalPercentage}</span>
       </div>
     </Layout>
   );
