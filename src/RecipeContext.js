@@ -8,7 +8,7 @@ import { act } from 'react';
 const RecipeContext = createContext();
 
 const initialRecipeState = {
-  recipeId: new Date().getTime(),
+  recipeId: new Date().getTime().toString(),
   goalsData: [],
   productData: '',
   includeFragrance: 'no',
