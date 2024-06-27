@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { useRecipe } from './RecipeContext';
 import ingredients from './ingredients';
 
 function ConfirmRecipe() {
   const { state, dispatch } = useRecipe();
+  const [recipeName, setRecipeName] = useState(state.recipeName || '');
+
+  useEffect(() => {
+    dispatch({ type: 'SET_RECIPE_NAME', payload: recipeName });
+  }, [recipeName, dispatch]);
 
   const goToNextPhase = () => {
     dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
@@ -85,6 +90,35 @@ function ConfirmRecipe() {
       buttonText="Confirm Recipe"
       handleSubmit={() => { goToNextPhase() }}>
       <div>
+        <label>
+          Recipe Name:
+          <input
+            type="text"
+            value={recipeName}
+            onChange={(e) => setRecipeName(e.target.value)}
+            placeholder="Enter recipe name"
+          />
+        </label>
+
+        <h2>Overall Percentages</h2>
+        {Object.keys(overallPercentages).length > 0 ? (
+          <ul>
+            {Object.entries(overallPercentages)
+              .sort(([, a], [, b]) => b - a)
+              .map(([ingredient, percentage], index) => (
+                <li key={index}>{ingredient}: {percentage.toFixed(2)}%</li>
+              ))}
+          </ul>
+
+        ) : (
+          <p>No overall percentages available.</p>
+        )}
+      </div>
+    </Layout>
+  );
+}
+
+/*
         {state.recipe && Object.keys(state.recipe).length > 0 ? (
           Object.keys(state.recipe).map((phase, index) => (
             <div key={index}>
@@ -97,24 +131,6 @@ function ConfirmRecipe() {
         ) : (
           <p>No recipe data available.</p>
         )}
-
-        <h2>Overall Percentages</h2>
-        {Object.keys(overallPercentages).length > 0 ? (
-          <ul>
-            {Object.entries(overallPercentages)
-                          .sort(([, a], [, b]) => b - a)
-                          .map(([ingredient, percentage], index) => (
-              <li key={index}>{ingredient}: {percentage.toFixed(2)}%</li>
-            ))}
-          </ul>
-
-        ) : (
-          <p>No overall percentages available.</p>
-        )}
-          <span>{ totalPercentage}</span>
-      </div>
-    </Layout>
-  );
-}
+          */
 
 export default ConfirmRecipe;

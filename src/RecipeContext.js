@@ -32,6 +32,8 @@ const recipeReducer = (state, action) => {
       return { ...state, currentPhase: action.payload };
     case 'SET_RAW_RECIPE':
       return { ...state, rawRecipe: action.payload };
+    case 'SET_RECIPE_NAME':
+      return { ...state, recipeName: action.payload};
     case "UPDATE_RECIPE":
       const { phase, data } = action.payload;
       // Only update the specified phase with new data
