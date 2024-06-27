@@ -4,9 +4,10 @@ import { useRecipe } from './RecipeContext';
 import ingredients from './ingredients';
 
 function ConfirmRecipe() {
-  const { state } = useRecipe();
+  const { state, dispatch } = useRecipe();
 
   const goToNextPhase = () => {
+    dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
     alert("Recipe Confirmed!");
   };
 

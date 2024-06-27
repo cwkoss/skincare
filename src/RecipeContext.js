@@ -15,6 +15,7 @@ const initialRecipeState = {
   phaseOrder: [],
   currentPhase: "",
   recipe: {},
+  rawRecipe: {},
 };
 
 const recipeReducer = (state, action) => {
@@ -29,6 +30,8 @@ const recipeReducer = (state, action) => {
       return { ...state, selectedMoods: action.payload };
     case 'SET_CURRENT_PHASE':
       return { ...state, currentPhase: action.payload };
+    case 'SET_RAW_RECIPE':
+      return { ...state, rawRecipe: action.payload };
     case "UPDATE_RECIPE":
       const { phase, data } = action.payload;
       // Only update the specified phase with new data
