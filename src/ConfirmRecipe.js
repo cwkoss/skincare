@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Layout from './Layout';
 import { useRecipe } from './RecipeContext';
 import ingredients from './ingredients';
+import { useNavigate } from 'react-router-dom';
 
 function ConfirmRecipe() {
   const { state, dispatch } = useRecipe();
+  
+  const navigate = useNavigate();
   const [recipeName, setRecipeName] = useState(state.recipeName || '');
 
   useEffect(() => {
@@ -13,6 +16,7 @@ function ConfirmRecipe() {
 
   const goToNextPhase = () => {
     dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
+    navigate('/order-formulation');
     alert("Recipe Confirmed!");
   };
 

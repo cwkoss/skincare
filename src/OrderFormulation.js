@@ -3,9 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './firebase-config';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { updateSession } from './sessionUtils';
+import { useRecipe } from './RecipeContext';
+import { set } from 'firebase/database';
 
 function OrderFormulation() {
     const navigate = useNavigate();
+    const { state } = useRecipe();
     const [recipeData, setRecipeData] = useState(null);
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,6 +22,10 @@ function OrderFormulation() {
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
+        if (state.rawRecipe && Object.keys(state.rawRecipe).length > 0) {
+            setRecipeData({name: state.recipeName, ingredients: state.rawRecipe});
+            return;
+        }
         if (recipeId) {
             const fetchData = async () => {
                 const docRef = doc(db, "formulations", recipeId);

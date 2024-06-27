@@ -16,6 +16,7 @@ const initialRecipeState = {
   currentPhase: "",
   recipe: {},
   rawRecipe: {},
+  recipeName: ''
 };
 
 const recipeReducer = (state, action) => {
