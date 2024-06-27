@@ -18,7 +18,7 @@ function OrderFormulation() {
     const [note, setNote] = useState('');
     const [userLocation, setUserLocation] = useState('');
     const location = useLocation();
-    const recipeId = location.state?.recipeId;
+    const recipeId = location.state?.recipeId ? location.state.recipeId : state.recipeId;
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
@@ -43,6 +43,7 @@ function OrderFormulation() {
     }, [recipeId]);
 
     const handleSubmit = async (e) => {
+        console.log(recipeId);
         setHasError(false);
         e.preventDefault();
         try {
