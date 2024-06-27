@@ -29,8 +29,8 @@ Boolean choice
 
 --- Next steps --- 
 
+- Selecting phases is not clear that selection succeeded
 
-- Improve ConfirmRecipe and have it calculate final percentages
 - Implement devmode switch to new questionaire
 - Improve preservative descriptions
 - Improve active examples
@@ -85,7 +85,7 @@ Save for later versions:
 COMPLETE
 ----
 
-
+- DONE Improve ConfirmRecipe and have it calculate final percentages
 - DONE Make page for choosing emulsifier, proportion and consistency (I think this should be first page of  phase choices when formula contains aqueous ingredients)
 - DONE Make final summary page for phased recipe
 - DONE Make preservative selection a static object (doens't change enough for hitting AI)
