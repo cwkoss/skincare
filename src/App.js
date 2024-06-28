@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Goals from './Goals';
@@ -20,6 +20,9 @@ import PhaseSelection from './PhaseSelection';
 import { FeatureFlagProvider } from './FeatureFlagContext';
 import PhaseChoices from './PhaseChoices';
 import ConfirmRecipe from './ConfirmRecipe';
+import Login from './Login';
+import { auth } from "./firebase-config";
+
 
 import posthog from 'posthog-js';
 
@@ -29,11 +32,23 @@ if (window.location.hostname !== "localhost") {
   });
 }
 function App() {
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     pushFirstPageLoadInfo();
   }, []); // The empty array ensures this effect runs only once after the initial render
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   // Style for background image
   const homePageStyle = {
@@ -71,6 +86,7 @@ function App() {
                 </div>
                 <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
                 <Link to="/contact"><span>Contact us</span></Link>
+                <Login />
               </div>
             } />
             <Route path="/goals" element={<Goals />} />
