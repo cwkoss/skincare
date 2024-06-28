@@ -29,6 +29,9 @@ Boolean choice
 
 --- Next steps --- 
 
+- Build "My orders" page
+- Build variation selection flow
+
 - Selecting phases is not clear that selection succeeded
 
 - Implement devmode switch to new questionaire
