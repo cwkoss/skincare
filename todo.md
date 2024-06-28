@@ -29,17 +29,22 @@ Boolean choice
 
 --- Next steps --- 
 
-- Build "My orders" page
-- Build variation selection flow
-
+- CSS the PhaseChoices page
 - Selecting phases is not clear that selection succeeded
-
-- Implement devmode switch to new questionaire
 - Improve preservative descriptions
 - Improve active examples
+
+- remove devmode switch on new phased selection
+
+- Implement devmode switch to new questionaire
+
 - 
 - Have recipecontext save to a session/user specific 
-- CSS the PhaseChoices page
+
+
+- Build variation selection flow
+
+- Build "My orders" page
 
 - Improve emulsifier selection (more options?)
 - Create user login mechanism tied to google authentication
