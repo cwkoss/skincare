@@ -70,7 +70,7 @@ const phaseExamples = {
       "title": "Forest Harmony",
       "ingredients": {
         "Rosemary Oil": 2,
-        "Cedarwood Oil": 2,
+        "Cedar Oil": 2,
         "Pine Oil": 1
       },
       "description": "Creates a grounding and calming aroma reminiscent of a forest setting, combining Rosemary, Cedarwood, and Pine essential oils for a refreshing and earthy scent."

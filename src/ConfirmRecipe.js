@@ -19,44 +19,50 @@ function ConfirmRecipe() {
     navigate('/order-formulation');
     alert("Recipe Confirmed!");
   };
-
   const calculateOverallPercentages = () => {
-    if (!state.recipe || !state.recipe.emulsifier || !state.recipe.emulsifier.ingredients) {
-      return {};
-    }
-
-    const emulsifierPercentages = state.recipe.emulsifier.ingredients;
     const overallPercentages = {};
     let totalAdditivePercent = 0;
-
-    // Add emulsifier percentages directly to the overall percentages, filtering out "oil" and "aqueous"
-    Object.keys(emulsifierPercentages).forEach(emulsifier => {
-      if (emulsifier === "oil" || emulsifier === "aqueous") {
-        return;
-      }
-      const percentage = parseFloat(emulsifierPercentages[emulsifier]);
-      if (overallPercentages[emulsifier]) {
-        overallPercentages[emulsifier] += percentage;
-      } else {
-        overallPercentages[emulsifier] = percentage;
-      }
-    });
-
+  
+    // Check if the emulsifier phase is present
+    if (state.recipe && state.recipe.emulsifier && state.recipe.emulsifier.ingredients) {
+      const emulsifierPercentages = state.recipe.emulsifier.ingredients;
+  
+      // Add emulsifier percentages directly to the overall percentages, filtering out "oil" and "aqueous"
+      Object.keys(emulsifierPercentages).forEach(emulsifier => {
+        if (emulsifier === "oil" || emulsifier === "aqueous") {
+          return;
+        }
+        const percentage = parseFloat(emulsifierPercentages[emulsifier]);
+        if (overallPercentages[emulsifier]) {
+          overallPercentages[emulsifier] += percentage;
+        } else {
+          overallPercentages[emulsifier] = percentage;
+        }
+      });
+    }
+  
     Object.keys(state.recipe).forEach(phase => {
       if (phase !== 'emulsifier') {
         const phaseIngredients = state.recipe[phase].ingredients;
         const totalParts = Object.values(phaseIngredients).reduce((total, part) => total + part, 0);
-
+  
         Object.keys(phaseIngredients).forEach(ingredient => {
           const ingredientPhase = ingredients[ingredient]?.phase;
-
+  
           if (ingredientPhase === 'additive' && ingredients[ingredient]?.default_percent) {
             const defaultPercent = ingredients[ingredient].default_percent;
             overallPercentages[ingredient] = defaultPercent;
             totalAdditivePercent += defaultPercent;
-          } else if (ingredientPhase && emulsifierPercentages[ingredientPhase]) {
-            const phasePercentage = parseFloat(emulsifierPercentages[ingredientPhase]);
+          } else if (ingredientPhase && state.recipe.emulsifier && state.recipe.emulsifier.ingredients && state.recipe.emulsifier.ingredients[ingredientPhase]) {
+            const phasePercentage = parseFloat(state.recipe.emulsifier.ingredients[ingredientPhase]);
             const ingredientPercentage = (phaseIngredients[ingredient] / totalParts) * phasePercentage;
+            if (overallPercentages[ingredient]) {
+              overallPercentages[ingredient] += ingredientPercentage;
+            } else {
+              overallPercentages[ingredient] = ingredientPercentage;
+            }
+          } else {
+            const ingredientPercentage = (phaseIngredients[ingredient] / totalParts) * 100; // No emulsifier, direct percentage
             if (overallPercentages[ingredient]) {
               overallPercentages[ingredient] += ingredientPercentage;
             } else {
@@ -66,7 +72,7 @@ function ConfirmRecipe() {
         });
       }
     });
-
+  
     // Adjust non-additive ingredients by the remaining percentage
     const remainingPercentage = 100 - totalAdditivePercent;
     const totalNonAdditivePercentage = Object.keys(overallPercentages).reduce((total, ingredient) => {
@@ -75,15 +81,16 @@ function ConfirmRecipe() {
       }
       return total;
     }, 0);
-
+  
     Object.keys(overallPercentages).forEach(ingredient => {
       if (ingredients[ingredient]?.phase !== 'additive') {
         overallPercentages[ingredient] = (overallPercentages[ingredient] / totalNonAdditivePercentage) * remainingPercentage;
       }
     });
-
+  
     return overallPercentages;
   };
+  
 
   const overallPercentages = calculateOverallPercentages();
 
