@@ -124,13 +124,19 @@ function PhaseChoices() {
       title={"Choose Your " + state.currentPhase + " Phase"}
       handleSubmit={() => { goToNextPhase() }}
       isSubmitDisabled={selectedPhase === null}
-        whyDisabled="Choose an option">
+      whyDisabled="Choose an option">
       {phaseSuggestions.map((item, index) => (
-        <div key={index} style={selectedPhase === item.title ? { border: '2px solid blue', padding: '10px' } : {}}>
+        <div key={index} style={selectedPhase === item.title ? { border: '2px solid blue', padding: '10px' } : {}} onClick={() => handlePhaseSelection(item)}>
           <h2>Phase {index + 1}: {item.title}</h2>
-          <p>Ingredients:  {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
-          <p>Description: {item.description}</p>
-          <button onClick={() => handlePhaseSelection(phaseSuggestions[index])}>Choose Phase {index + 1}</button>
+          {selectedPhase === item.title ? (
+            <>
+              <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
+              <p>Description: {item.description}</p>
+            </>
+          ) : (
+            <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
+          )}
+          <button >Choose Phase {index + 1}</button>
         </div>
       ))}
     </Layout>
