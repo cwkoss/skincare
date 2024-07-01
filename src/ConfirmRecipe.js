@@ -42,7 +42,7 @@ function ConfirmRecipe() {
     }
   
     Object.keys(state.recipe).forEach(phase => {
-      if (phase !== 'emulsifier') {
+      if (phase !== 'emulsifier' && state.recipe[phase].ingredients && Object.keys(state.recipe[phase].ingredients).length > 0) {
         const phaseIngredients = state.recipe[phase].ingredients;
         const totalParts = Object.values(phaseIngredients).reduce((total, part) => total + part, 0);
   
