@@ -10,6 +10,7 @@ function PhaseChoices() {
   const [isLoading, setIsLoading] = useState(false);
   const { state, dispatch } = useRecipe();
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
+  const [selectedPhase, setSelectedPhase] = useState(null);
 
   useEffect(() => {
     async function fetchPhaseSuggestions() {
@@ -49,6 +50,7 @@ function PhaseChoices() {
   };
 
   const handlePhaseSelection = (phase) => {
+    setSelectedPhase(phase.title);
     dispatch({
       type: "UPDATE_RECIPE",
       payload: {
@@ -98,13 +100,13 @@ function PhaseChoices() {
         handleSubmit={() => { goToNextPhase() }}>
         <div>
           <h2>Choose Formula Consistency</h2>
-          <div>
+          <div style={selectedPhase === lotionFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
             <h3>{lotionFormula.title}</h3>
             <p>Ingredients: {Object.entries(lotionFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
             <p>Description: {lotionFormula.description}</p>
             <button onClick={() => handlePhaseSelection(lotionFormula)}>Choose {lotionFormula.title}</button>
           </div>
-          <div>
+          <div style={selectedPhase === creamFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
             <h3>{creamFormula.title}</h3>
             <p>Ingredients: {Object.entries(creamFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
             <p>Description: {creamFormula.description}</p>
@@ -120,7 +122,7 @@ function PhaseChoices() {
       title={"Choose Your " + state.currentPhase + " Phase"}
       handleSubmit={() => { goToNextPhase() }}>
       {phaseSuggestions.map((item, index) => (
-        <div key={index}>
+        <div key={index} style={selectedPhase === item.title ? { border: '2px solid blue', padding: '10px' } : {}}>
           <h2>Phase {index + 1}: {item.title}</h2>
           <p>Ingredients:  {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
           <p>Description: {item.description}</p>
