@@ -96,18 +96,17 @@ function PhaseChoices() {
 
     return (
       <Layout
-        title={"Choose Your " + state.currentPhase + " Phase"}
+        title={"Choose Formula Consistency"}
         handleSubmit={() => { goToNextPhase() }}>
         <div>
-          <h2>Choose Formula Consistency</h2>
           <div style={selectedPhase === lotionFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
-            <h3>{lotionFormula.title}</h3>
+            <h4>{lotionFormula.title}</h4>
             <p>Ingredients: {Object.entries(lotionFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
             <p>Description: {lotionFormula.description}</p>
             <button onClick={() => handlePhaseSelection(lotionFormula)}>Choose {lotionFormula.title}</button>
           </div>
           <div style={selectedPhase === creamFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
-            <h3>{creamFormula.title}</h3>
+            <h4>{creamFormula.title}</h4>
             <p>Ingredients: {Object.entries(creamFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
             <p>Description: {creamFormula.description}</p>
             <button onClick={() => handlePhaseSelection(creamFormula)}>Choose {creamFormula.title}</button>
