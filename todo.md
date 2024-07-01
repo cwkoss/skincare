@@ -33,6 +33,7 @@ Boolean choice
 - Selecting phases is not clear that selection succeeded
 - Improve preservative descriptions
 - Improve active examples
+- Make name suggester on Confirm Recipe
 
 - remove devmode switch on new phased selection
 
