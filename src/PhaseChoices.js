@@ -41,6 +41,7 @@ function PhaseChoices() {
   };
 
   const goToNextPhase = () => {
+    setSelectedPhase(null);
     const nextPhase = getNextPhase();
     if (nextPhase) {
       dispatch({ type: "SET_CURRENT_PHASE", payload: nextPhase });
@@ -97,7 +98,9 @@ function PhaseChoices() {
     return (
       <Layout
         title={"Choose Formula Consistency"}
-        handleSubmit={() => { goToNextPhase() }}>
+        handleSubmit={() => { goToNextPhase() }}
+        isSubmitDisabled={selectedPhase === null}
+        whyDisabled="Choose Consistency">
         <div>
           <div style={selectedPhase === lotionFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
             <h4>{lotionFormula.title}</h4>
@@ -119,7 +122,9 @@ function PhaseChoices() {
   return (
     <Layout
       title={"Choose Your " + state.currentPhase + " Phase"}
-      handleSubmit={() => { goToNextPhase() }}>
+      handleSubmit={() => { goToNextPhase() }}
+      isSubmitDisabled={selectedPhase === null}
+        whyDisabled="Choose an option">
       {phaseSuggestions.map((item, index) => (
         <div key={index} style={selectedPhase === item.title ? { border: '2px solid blue', padding: '10px' } : {}}>
           <h2>Phase {index + 1}: {item.title}</h2>
