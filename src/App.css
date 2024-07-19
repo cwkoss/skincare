@@ -481,7 +481,7 @@ input[type="text"] {
 
 .selected-phase {
   background-color: #f1f8f0;
-  border: 1px solid black;
-  padding: 5px;
+  border: 1px solid #999999;
+  padding: 7px;
   border-radius: 5px;
 }
