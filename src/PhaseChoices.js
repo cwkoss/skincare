@@ -64,7 +64,7 @@ function PhaseChoices() {
   };
 
   const capitalizeFirstLetter = (str) => {
-    if (!str) return str; // Check for empty or null string
+    if (!str) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   const renderExpandedIngredient = (key, value) => {
