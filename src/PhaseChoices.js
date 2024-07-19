@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
 import { getPhaseSuggestions } from './OpenAiUtils';
+import ingredients from './ingredients';
 
 function PhaseChoices() {
   const navigate = useNavigate();
@@ -66,7 +67,14 @@ function PhaseChoices() {
     if (!str) return str; // Check for empty or null string
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-
+  const renderExpandedIngredient = (key, value) => {
+    return (
+      <>
+        <p className='description'>{key}: {value} Parts</p>
+        <p className='description'>{ingredients[key].description}</p>
+      </>
+    );
+  };
   if (isLoading) {
     return (
       <div style={{ textAlign: "center" }}>
@@ -135,8 +143,8 @@ function PhaseChoices() {
           <h2>Phase {index + 1}: {item.title}</h2>
           {selectedPhase === item.title ? (
             <>
-              <p className="description">Description: {item.description}</p>
-              <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
+              <p className="description">{item.description}</p>
+              <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => renderExpandedIngredient(key, value)) : 'No ingredients listed'}</p>
             </>
           ) : (
             <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
