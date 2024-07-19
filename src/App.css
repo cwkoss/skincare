@@ -487,7 +487,12 @@ input[type="text"] {
 
   h2 {
     margin-top: 0;
+    margin-bottom:4px;
     font-weight: 400;
+  }
+
+  p {
+    margin: 4px;
   }
 
   .description {
