@@ -7,7 +7,7 @@
   --button-clickable: #e7ffe4;
   --button-clickable-lines: #657c62;
   --button-active-lines: #507c4a;
-  --text-color: #333;
+  --text-color: #666;
 }
 
 
@@ -484,4 +484,14 @@ input[type="text"] {
   border: 1px solid #999999;
   padding: 7px;
   border-radius: 5px;
+
+  h2 {
+    margin-top: 0;
+    font-weight: 400;
+  }
+
+  .description {
+    font-size: 0.9em;
+    color: #777;
+  }
 }

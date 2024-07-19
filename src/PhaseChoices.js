@@ -135,8 +135,8 @@ function PhaseChoices() {
           <h2>Phase {index + 1}: {item.title}</h2>
           {selectedPhase === item.title ? (
             <>
+              <p className="description">Description: {item.description}</p>
               <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
-              <p>Description: {item.description}</p>
             </>
           ) : (
             <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
