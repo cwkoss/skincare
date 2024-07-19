@@ -376,6 +376,12 @@ const ingredients = {
         soothing_stimulating: 2,
         gentle_active: 3,
     },
+    "Sorbitan Oleate": {
+        phase: "emulsifier",
+        type: "emulsifier",
+        hlb: 4.3,
+        description: "A non-ionic surfactant and emulsifier derived from the fatty acids of olive oil and sorbitol. Used in creams, lotions, and other cosmetics to stabilize oil-in-water formulations.",
+    },
     /*"Castille Soap": {
         phase: "surfactant",
         hlb: 10,
@@ -767,7 +773,7 @@ const ingredients = {
         hlb: 20,
         max_percent: 2,
         default_percent: 1,
-        description: "Unique blend of garlic, ginger & wasabi extracts dissolved in hydrating glycols providing effective microbial growth prevention.",
+        description: "This blend of garlic, ginger & wasabi extracts dissolved in hydrating glycols provides effective microbial growth prevention.",
         cost_per_g: 0.16,
         good_for: [],
         bad_for: [],

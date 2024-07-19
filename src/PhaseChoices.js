@@ -126,7 +126,7 @@ function PhaseChoices() {
       isSubmitDisabled={selectedPhase === null}
       whyDisabled="Choose an option">
       {phaseSuggestions.map((item, index) => (
-        <div key={index} style={selectedPhase === item.title ? { border: '2px solid blue', padding: '10px' } : {}} onClick={() => handlePhaseSelection(item)}>
+        <div key={index} className={selectedPhase === item.title ? 'selected-phase' : ''} onClick={() => handlePhaseSelection(item)}>
           <h2>Phase {index + 1}: {item.title}</h2>
           {selectedPhase === item.title ? (
             <>
@@ -136,7 +136,7 @@ function PhaseChoices() {
           ) : (
             <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
           )}
-          <button >Choose Phase {index + 1}</button>
+          <button className={selectedPhase === item.title ? 'selected' : ''}>Choose Phase {index + 1}</button>
         </div>
       ))}
     </Layout>
