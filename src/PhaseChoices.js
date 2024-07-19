@@ -62,6 +62,11 @@ function PhaseChoices() {
     console.log(state);
   };
 
+  const capitalizeFirstLetter = (str) => {
+    if (!str) return str; // Check for empty or null string
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   if (isLoading) {
     return (
       <div style={{ textAlign: "center" }}>
@@ -121,7 +126,7 @@ function PhaseChoices() {
 
   return (
     <Layout
-      title={"Choose Your " + state.currentPhase + " Phase"}
+      title={"Choose Your " + capitalizeFirstLetter(state.currentPhase) + " Phase"}
       handleSubmit={() => { goToNextPhase() }}
       isSubmitDisabled={selectedPhase === null}
       whyDisabled="Choose an option">
