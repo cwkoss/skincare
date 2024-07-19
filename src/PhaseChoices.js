@@ -71,7 +71,7 @@ function PhaseChoices() {
     return (
       <>
         <p className='expanded-ingredient'>{key}: {value} Parts</p>
-        <p className='description'>{ingredients[key].description}</p>
+        <p className='ingredient-description'>{ingredients[key].description}</p>
       </>
     );
   };

@@ -498,4 +498,8 @@ input[type="text"] {
     font-size: 0.9em;
     color: #666;
   }
+  .ingredient-description {
+    font-size: 0.75em;
+    color: #888;
+  }
 }
