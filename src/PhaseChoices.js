@@ -70,7 +70,7 @@ function PhaseChoices() {
   const renderExpandedIngredient = (key, value) => {
     return (
       <>
-        <p className='description'>{key}: {value} Parts</p>
+        <p className='expanded-ingredient'>{key}: {value} Parts</p>
         <p className='description'>{ingredients[key].description}</p>
       </>
     );
