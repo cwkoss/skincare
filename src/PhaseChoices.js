@@ -147,7 +147,7 @@ function PhaseChoices() {
               <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => renderExpandedIngredient(key, value)) : 'No ingredients listed'}</p>
             </>
           ) : (
-            <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key} ${value}`).join(', ') : 'No ingredients listed'}</p>
+            <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key}`).join(', ') : 'No ingredients listed'}</p>
           )}
           <button className={selectedPhase === item.title ? 'selected' : ''}>Choose Phase {index + 1}</button>
         </div>
