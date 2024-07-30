@@ -30,7 +30,7 @@ Boolean choice
 --- Next steps --- 
 
 
-- why are emulsifiers % lower than expected?
+
 - Improve preservative descriptions
 - Improve active examples
 - Make name suggester on Confirm Recipe
@@ -111,7 +111,7 @@ COMPLETE
 - DONE - Make actually AI call to load phase options (not just dummy copy)
 - CSS the PhaseChoices page
 - Selecting phases is not clear that selection succeeded
-
+- why are emulsifiers % lower than expected?
 -------
 
 OLD
