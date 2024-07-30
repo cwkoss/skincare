@@ -29,7 +29,8 @@ Boolean choice
 
 --- Next steps --- 
 
-
+- confirm recipe page feels too bare.  should there be an AI summary of the recipe?  Options to modify?
+- Add variation selection flow
 
 - Improve preservative descriptions
 - Improve active examples
@@ -41,9 +42,6 @@ Boolean choice
 
 - 
 - Have recipecontext save to a session/user specific 
-
-
-- Build variation selection flow
 
 - Build "My orders" page
 
