@@ -29,8 +29,8 @@ Boolean choice
 
 --- Next steps --- 
 
-- CSS the PhaseChoices page
-- Selecting phases is not clear that selection succeeded
+
+- why are emulsifiers % lower than expected?
 - Improve preservative descriptions
 - Improve active examples
 - Make name suggester on Confirm Recipe
@@ -109,7 +109,8 @@ COMPLETE
 ? DECIDE - should preservatives be a static object rather than hitting AI?
 - DONE - Write 3 example phase options for each phase type for AI examples. 
 - DONE - Make actually AI call to load phase options (not just dummy copy)
-
+- CSS the PhaseChoices page
+- Selecting phases is not clear that selection succeeded
 
 -------
 

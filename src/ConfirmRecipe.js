@@ -22,12 +22,13 @@ function ConfirmRecipe() {
   const calculateOverallPercentages = () => {
     const overallPercentages = {};
     let totalAdditivePercent = 0;
-  
+    let totalEmulsifierPercent = 0;
+    
     // Check if the emulsifier phase is present
     if (state.recipe && state.recipe.emulsifier && state.recipe.emulsifier.ingredients) {
       const emulsifierPercentages = state.recipe.emulsifier.ingredients;
-  
-      // Add emulsifier percentages directly to the overall percentages, filtering out "oil" and "aqueous"
+    
+      // Add emulsifier percentages directly to the overall percentages, excluding "oil" and "aqueous"
       Object.keys(emulsifierPercentages).forEach(emulsifier => {
         if (emulsifier === "oil" || emulsifier === "aqueous") {
           return;
@@ -38,17 +39,18 @@ function ConfirmRecipe() {
         } else {
           overallPercentages[emulsifier] = percentage;
         }
+        totalEmulsifierPercent += percentage;
       });
     }
-  
+    
     Object.keys(state.recipe).forEach(phase => {
       if (phase !== 'emulsifier' && state.recipe[phase].ingredients && Object.keys(state.recipe[phase].ingredients).length > 0) {
         const phaseIngredients = state.recipe[phase].ingredients;
         const totalParts = Object.values(phaseIngredients).reduce((total, part) => total + part, 0);
-  
+    
         Object.keys(phaseIngredients).forEach(ingredient => {
           const ingredientPhase = ingredients[ingredient]?.phase;
-  
+    
           if (ingredientPhase === 'additive' && ingredients[ingredient]?.default_percent) {
             const defaultPercent = ingredients[ingredient].default_percent;
             overallPercentages[ingredient] = defaultPercent;
@@ -72,22 +74,22 @@ function ConfirmRecipe() {
         });
       }
     });
-  
-    // Adjust non-additive ingredients by the remaining percentage
-    const remainingPercentage = 100 - totalAdditivePercent;
-    const totalNonAdditivePercentage = Object.keys(overallPercentages).reduce((total, ingredient) => {
-      if (ingredients[ingredient]?.phase !== 'additive') {
+    
+    // Adjust non-additive, non-emulsifier ingredients by the remaining percentage
+    const remainingPercentage = 100 - totalAdditivePercent - totalEmulsifierPercent;
+    const totalNonAdditiveNonEmulsifierPercentage = Object.keys(overallPercentages).reduce((total, ingredient) => {
+      if (ingredients[ingredient]?.phase !== 'additive' && !(state.recipe.emulsifier && state.recipe.emulsifier.ingredients && state.recipe.emulsifier.ingredients[ingredient])) {
         return total + overallPercentages[ingredient];
       }
       return total;
     }, 0);
-  
+    
     Object.keys(overallPercentages).forEach(ingredient => {
-      if (ingredients[ingredient]?.phase !== 'additive') {
-        overallPercentages[ingredient] = (overallPercentages[ingredient] / totalNonAdditivePercentage) * remainingPercentage;
+      if (ingredients[ingredient]?.phase !== 'additive' && !(state.recipe.emulsifier && state.recipe.emulsifier.ingredients && state.recipe.emulsifier.ingredients[ingredient])) {
+        overallPercentages[ingredient] = (overallPercentages[ingredient] / totalNonAdditiveNonEmulsifierPercentage) * remainingPercentage;
       }
     });
-  
+    
     return overallPercentages;
   };
   
