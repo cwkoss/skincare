@@ -32,6 +32,7 @@ Boolean choice
 - confirm recipe page feels too bare.  should there be an AI summary of the recipe?  Options to modify?
 -- Should we have a name suggester here? 
 - Add variation selection flow
+-- Should we just do variation over text for next version? Let's build an option page where doing it yourself starts as disabled, can add it in after launch. User can just specify the goals of their variation.  (ex. I'd like to try a variation that changes (select many): Texture, fragrance, Oil ingredients, Water Soluable ingredients, Other (freetext)) Then, I'll decide how to do the variation for this next iteration until I get variation thing reliable. 
 
 - Improve preservative descriptions
 - Improve active examples
