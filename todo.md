@@ -30,6 +30,7 @@ Boolean choice
 --- Next steps --- 
 
 - confirm recipe page feels too bare.  should there be an AI summary of the recipe?  Options to modify?
+-- Should we have a name suggester here? 
 - Add variation selection flow
 
 - Improve preservative descriptions
