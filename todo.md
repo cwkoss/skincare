@@ -36,8 +36,8 @@ Boolean choice
 - Add some "process" pages that explains to the user what to expect between homepage and beginning to start creating the recipe.  
 Let's build a recipe together!
 1. We'll ask you questions to understand your preferences and skincare goals
-2. We'll present you with options for the different parts of the recipe for you to choose
-3. Once your recipe is complete, we'll design a variation - you try two variations with every order so that your recipe can evolve with every order. 
+2. You'll choose from options to design your skincare recipe
+3. You'll receive two 1-oz containers: your base recipe and a variation, so you can choose which recipe you prefer, and evolve it further on your next order. 
 Let's GO!
 
 - Improve preservative descriptions
