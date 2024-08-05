@@ -34,9 +34,9 @@ Boolean choice
 - Add variation selection flow
 -- Should we just do variation over text for next version? Let's build an option page where doing it yourself starts as disabled, can add it in after launch. User can just specify the goals of their variation.  (ex. I'd like to try a variation that changes (select many): Texture, fragrance, Oil ingredients, Water Soluable ingredients, Other (freetext)) Then, I'll decide how to do the variation for this next iteration until I get variation thing reliable. 
 - Add some "process" pages that explains to the user what to expect between homepage and beginning to start creating the recipe.  
-Let's build a recipe together!
-1. We'll ask you questions to understand your preferences and skincare goals
-2. You'll choose from options to design your skincare recipe
+How it works
+1. Answer questions - to understand your unique skincare needs
+2. Choose Options - AI will curate custom ingredient options based on your unique requirements
 3. You'll receive two 1-oz containers: your base recipe and a variation, so you can choose which recipe you prefer, and evolve it further on your next order. 
 Let's GO!
 
