@@ -280,6 +280,7 @@ const ingredients = {
         hlb: 20,
         description: "Natural humectant, antibacterial, great for acne treatment and hydration, soothing for the skin.",
         good_for: ["Dry skin", "Adult acne"],
+        cost_per_g: 0.03,
         bad_for: [],
         light_heavy: 6,
         penetrating_occlusive: 3,
