@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { db } from './firebase-config'; // Adjust with your actual firebase config import
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import ingredients from './ingredients';
 
 function OrderPricing() {
@@ -18,18 +18,39 @@ function OrderPricing() {
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
+        console.log(searchParams);
+        const recipeName = searchParams.get('recipeName');
+        console.log(recipeName);
         const fetchData = async () => {
+            if(recipeName && recipeName.length > 0) {
+                console.log("Fetching recipe by name");
+                const recipeName = searchParams.get('recipeName');
+                const recipesRef = collection(db, "recipes");
+                const q = query(recipesRef, where("recipeName", "==", recipeName));
+            
+                const querySnapshot = await getDocs(q);
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        var data = doc.data(); 
+                        console.log(data);
+                        setRecipeData({"ingredients": data.rawRecipe});
+                    });
+                } else {
+                    console.log("No such document!");
+                }
+                return;
+            }
             const docRef = doc(db, "formulations", searchParams.get('recipeId'));
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                setRecipeData(docSnap.data());
+                setRecipeData(docSnap.data().rawRecipe);
             } else {
                 console.log("No such document!");
             }
         };
 
-        if (searchParams.get('recipeId')) {
+        if (searchParams.get('recipeId') || searchParams.get('recipeName')) {
             fetchData();
         }
     }, [location.search]);
