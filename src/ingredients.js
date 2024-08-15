@@ -455,6 +455,7 @@ const ingredients = {
         penetrating_occlusive: 3,
         soothing_stimulating: 9,
         gentle_active: 9,
+        advanced: true,
     },
     "Vitamin C": {
         phase: "additive",
@@ -803,6 +804,7 @@ export const getIngredientsByType = (type) => {
     return Object.keys(ingredients)
         .filter(ingredient => ingredients[ingredient].type === type)
         .filter(ingredient => ingredients[ingredient].deprecated !== true)
+        .filter(ingredient => ingredients[ingredient].advanced !== true)
         .reduce((acc, key) => {
             acc[key] = ingredients[key];
             return acc;
