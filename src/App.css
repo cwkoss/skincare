@@ -143,7 +143,7 @@ button.startbutton:hover {
   justify-content: flex-start;
   width: 353px;
   background-color: #fff9;
-  height: 85vh;
+  height: 83vh;
   padding: 0px 10px;
 }
 
@@ -253,7 +253,7 @@ p.why-disabled {
   width: 333px;
   text-align: center;
   font-size: 0.6em;
-  top: 92vh;
+  top: 90vh;
 }
 
 .product-container {
