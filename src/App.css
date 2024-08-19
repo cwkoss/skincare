@@ -19,7 +19,6 @@ body {
   background: linear-gradient(to bottom, #e8ebe6 0%, #e7ebe6 10%, #ebeee9 30%, #ebe2d8 60%, #ece5db 80%);
   background-attachment: fixed;
   background-size: cover;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -144,7 +143,7 @@ button.startbutton:hover {
   justify-content: flex-start;
   width: 353px;
   background-color: #fff9;
-  height: 90vh;
+  height: 85vh;
   padding: 0px 10px;
 }
 
@@ -254,7 +253,7 @@ p.why-disabled {
   width: 333px;
   text-align: center;
   font-size: 0.6em;
-  bottom: -5px;
+  top: 92vh;
 }
 
 .product-container {
