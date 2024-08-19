@@ -63,7 +63,7 @@ button.startbutton:hover {
   display: flex;
   flex-direction: column;
   text-align: left;
-  margin-bottom: 3vh;
+  margin-bottom: 3dvh;
 }
 
 .homePageContainer .title h1 {
@@ -81,9 +81,9 @@ button.startbutton:hover {
 }
 
 .homePageContainer .startbutton {
-  margin: 11vh 2vh 12vh;
-  padding: 4vh 1vh;
-  border-radius: 9vh;
+  margin: 11dvh 2dvh 12dvh;
+  padding: 4dvh 1dvh;
+  border-radius: 9dvh;
   background-color: #eeddc7;
   color: #61685f;
   font-size: 1em;
@@ -96,7 +96,7 @@ button.startbutton:hover {
   background-color: var(--button-clickable);
   color: #61685f;
   width: 323px;
-  height: 10vh;
+  height: 10dvh;
   font-size: 1.1em;
   border: 1px solid #6d655a;
   font-family: "Noto Sans";
@@ -123,7 +123,7 @@ button.startbutton:hover {
   font-family: "Noto Sans";
   font-weight: 300;
   background-color: #fff;
-  padding: 2vh 2vh;
+  padding: 2dvh 2dvh;
 }
 
 /* TODO once layout migration complete this can be deleted */
@@ -133,7 +133,7 @@ button.startbutton:hover {
   justify-content: flex-start;
   width: 353px;
   background-color: #fff9;
-  height: 100vh;
+  height: 100dvh;
   padding: 0px 10px;
 }
 
@@ -143,7 +143,7 @@ button.startbutton:hover {
   justify-content: flex-start;
   width: 353px;
   background-color: #fff9;
-  height: 83vh;
+  height: 83dvh;
   padding: 0px 10px;
 }
 
@@ -154,7 +154,7 @@ button.startbutton:hover {
   align-items: center;
   width: 353px;
   background-color: #fff9;
-  height: 10vh;
+  height: 10dvh;
   padding: 0px 10px;
 }
 
@@ -173,7 +173,7 @@ button.startbutton:hover {
 }
 
 .layout .scroller {
-  max-height: calc(80vh);
+  max-height: calc(80dvh);
   overflow-y: auto;
   padding-bottom: 20px;
   /* Space at the bottom inside the scrollable area */
@@ -200,7 +200,7 @@ h3 {
 }
 
 p {
-  margin-top: 6vh 0vh;
+  margin-top: 6dvh 0dvh;
 }
 
 button {
@@ -253,7 +253,7 @@ p.why-disabled {
   width: 333px;
   text-align: center;
   font-size: 0.6em;
-  top: 90vh;
+  top: 90ddvh;
 }
 
 .product-container {
@@ -312,7 +312,7 @@ div.ingredient-row {
 }
 
 .scrollable-content {
-  max-height: calc(100vh - 120px);
+  max-height: calc(100ddvh - 120px);
   overflow-y: auto;
   padding-bottom: 20px;
   /* Space at the bottom inside the scrollable area */
@@ -339,7 +339,7 @@ div.commentary {
   margin-top: 20px;
   /* Space between loader and message */
   text-align: center;
-  width: 25vh;
+  width: 25dvh;
   word-wrap: break-word;
 }
 
