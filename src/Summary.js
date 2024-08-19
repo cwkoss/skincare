@@ -16,7 +16,6 @@ const loadingMessages = [
 ];
 
 function Summary() {
-  const { isDevFeatureEnabled } = useFeatureFlag();
   const { state } = useRecipe();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -24,48 +23,9 @@ function Summary() {
 
 
   const handleAIClick = () => {
-    if (isDevFeatureEnabled) {
-      navigate('/phase-choices');
-      return;
-    }
 
-    setLoading(true);
-    setCurrentMessage(loadingMessages[0]);
-    const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getInitialRecipe';
-    const goals = state.goalsData.join(', ');
-    const productType = state.productData;
+    navigate('/phase-choices');
 
-    const fragranceSentence = state.includeFragrance === 'yes' ? `Essential oils should be added that will make me feel  ${state.selectedMoods.join(' and ')} .` : 'It should not have fragrance added.';
-
-    const data = {
-      text: `Hello, I am trying to formulate a ${productType} for ${goals}. ${fragranceSentence} Please suggest a recipe?`,
-      ingredients: formatIngredientsList(ingredients)
-    };
-
-    console.log('Sending OpenAI request: ', data.text, data.ingredients);
-
-    fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-      .then(response => response.json())
-      .then(data => {
-        setLoading(false);
-        console.log('Success:', data);
-        const recipeResponse = data.reply.choices[0].message.content;
-        const parsedResponse = JSON.parse(recipeResponse);
-        console.log(parsedResponse);
-        // Update the session with the AI response
-        updateSession({ aiRecipeResponse: parsedResponse }).then(() => {
-          navigate('/recipe-builder', { state: { recipe: parsedResponse } });
-        });
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.error('Error:', error);
-        // Handle error state here, e.g., display an error message
-      });
   };
 
 
@@ -149,12 +109,6 @@ function Summary() {
             ))}
           </ul>
         </>
-      )}
-
-      {isDevFeatureEnabled ? (
-        <div>Dev Feature Enabled Content Here</div>
-      ) : (
-        <span></span>
       )}
 
       {loading ? (
