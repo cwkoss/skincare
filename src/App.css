@@ -143,7 +143,7 @@ button.startbutton:hover {
   justify-content: flex-start;
   width: 353px;
   background-color: #fff9;
-  height: 83dvh;
+  height: 90dvh;
   padding: 0px 10px;
 }
 
@@ -253,7 +253,7 @@ p.why-disabled {
   width: 333px;
   text-align: center;
   font-size: 0.6em;
-  top: 90ddvh;
+  top: 98dvh;
 }
 
 .product-container {
@@ -312,7 +312,7 @@ div.ingredient-row {
 }
 
 .scrollable-content {
-  max-height: calc(100ddvh - 120px);
+  max-height: calc(100dvh - 120px);
   overflow-y: auto;
   padding-bottom: 20px;
   /* Space at the bottom inside the scrollable area */
