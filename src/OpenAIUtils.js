@@ -59,6 +59,10 @@ const phaseExamples = {
   ],
   "fragrance": [
     {
+      "title": "No Fragrance",
+      "description": "Opt for a fragrance-free formulation to minimize the risk of irritation and maintain a neutral scent, suitable for sensitive skin or those preferring a natural product."
+    },
+    {
       "title": "Floral Elegance",
       "ingredients": {
         "Jasmine Oil": 1,
@@ -121,6 +125,10 @@ const phaseExamples = {
   ],
   "active": [
     {
+      "title": "No Active Ingredients",
+      "description": "Embrace simplicity with a plant-based formula that harnesses the natural benefits of oils and extracts, free from added active ingredients."
+    },
+    {
       "title": "Ultimate Sun Protection",
       "ingredients": {
         "Zinc Oxide": 10,
@@ -131,7 +139,7 @@ const phaseExamples = {
     {
       "title": "Anti-Aging Night Treatment",
       "ingredients": {
-        "Retinyl Palmitate": 0.1,
+        "Retinyl Palmitate": 1,
         "Vitamin E": 0.5,
         "Niacinamide (Vitamin B3)": 2
       },
@@ -144,24 +152,7 @@ const phaseExamples = {
         "Zinc Oxide": 5,
         "Vitamin E": 0.5
       },
-      "description": "A soothing formulation with Niacinamide to reduce redness and irritation, Zinc Oxide for protection, and Vitamin E for its moisturizing and healing properties, suitable for sensitive skin."
-    },
-    {
-      "title": "Brightening and Smoothing",
-      "ingredients": {
-        "Niacinamide (Vitamin B3)": 2,
-        "Vitamin E": 0.5
-      },
-      "description": "Enhances skin brightness and smoothness with Niacinamide and Vitamin E, targeting enlarged pores, uneven skin tone, and fine lines, leaving the skin radiant and smooth."
-    },
-    {
-      "title": "Youthful Glow",
-      "ingredients": {
-        "Retinyl Palmitate": 1,
-        "Zinc Oxide": 10,
-        "Vitamin E": 0.5
-      },
-      "description": "Combines the anti-aging benefits of Retinyl Palmitate, the protective qualities of Zinc Oxide, and the antioxidant power of Vitamin E to promote a youthful and glowing complexion."
+      "description": "A soothing formulation with Niacinamide to reduce redness and irritation, Zinc Oxide for soothing and protection, and Vitamin E for its moisturizing and healing properties, suitable for sensitive skin."
     }
   ]
   
@@ -219,6 +210,15 @@ export const getPhaseSuggestions = (state) => {
       console.log("response: " + data.reply.choices[0].message.content);
       const recipeResponse = data.reply.choices[0].message.content;
       const parsedResponse = JSON.parse(recipeResponse);
+
+      // Prepend "No Active Ingredients" or "No Fragrance" option if applicable
+      if (phase === "active" || phase === "fragrance") {
+        const noOption = phaseExamples[phase].find(example => example.title.startsWith("No "));
+        if (noOption) {
+          parsedResponse.unshift(noOption);  // Add the "No ___" option to the beginning of the array
+        }
+      }
+      
       console.log(parsedResponse);
       return parsedResponse;
     })
