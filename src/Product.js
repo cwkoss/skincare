@@ -18,22 +18,22 @@ const getAqueousIngredients = () => {
 
 export const skincareProducts = {
     "Face Moisturizing Cream or Lotion": {
-        description: "An invigorating morning cream that hydrates your skin while providing sun protection with natural zinc oxide, perfect for applying after your morning cleanse to keep your skin soft and shielded throughout the day.",
-        mustIncludeIngredients: ["Zinc Oxide"],
+        description: "Maintain your skin's hydration and keep it soft and supple with a moisturizing cream or lotion. Regular use supports a healthy skin barrier, protecting against dryness and environmental stressors while promoting a balanced complexion.",
+        mustIncludeIngredients: [],
         typeOrder: ["emulsifier", "carrier", "aqueous", "active", "fragrance", "preservative"], 
     },
     "Body Moisturizing Cream or Body Butter": {
-        description: "Build a deeply hydrading and nourishing to lock in moisture and rejuvenate the skin. Body moisturizers are typically richer and thicker in texture than facial moisturizers, designed to hydrate the less sensitive, more robust skin of the body.",
+        description: "A deeply hydrating and nourishing body moisturizer that locks in moisture and rejuvenates the skin. Its rich, thick texture is ideal for the body's less sensitive, resilient skin.",
         mustIncludeIngredients: [],
         typeOrder: ["emulsifier", "carrier", "aqueous", "active", "fragrance", "preservative"], 
     },
     "Face Oil": {
-        description: "Formulate an oil to deeply nourish and rejuvenate your skin, best used in combination with a separate SPF product during the day to ensure full sun protection while maintaining radiant skin.",
+        description: "Face oil offers intense hydration and nourishment, absorbing deeply to enhance skin's natural glow. Unlike lotions, oils lock in moisture and provide a concentrated boost, ideal for restoring softness and radiance.",
         mustIncludeIngredients: [],
         typeOrder: ["carrier", "fragrance"], 
     },
     "Hair and Scalp Oil": {
-        description: "Formulate a soothing and revitalizing hair and scalp oil to nourish your scalp, strengthen hair roots, and add a healthy shine to your hair.  Use as a pre-shampoo treatment or as a leave-in conditioner.",
+        description: "A soothing and revitalizing oil that nourishes the scalp, strengthens hair roots, and adds a healthy shine. Use as a pre-shampoo treatment or leave-in conditioner.",
         mustIncludeIngredients: [],
         typeOrder: ["carrier", "fragrance"], 
     },
