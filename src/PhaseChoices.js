@@ -6,6 +6,14 @@ import { set } from 'firebase/database';
 import { getPhaseSuggestions } from './OpenAiUtils';
 import ingredients from './ingredients';
 
+const phaseDescriptions = {
+ "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
+ "aqueous": "The aqueous phase is responsible for hydrating the skin and delivering water-soluble ingredients, forming the foundation of emulsions and adding moisture to the formulation.",
+"active":  "The active phase contains potent ingredients that target specific skin concerns, such as anti-aging, brightening, or soothing, providing the primary therapeutic benefits of the product.",
+"fragrance": "The fragrance phase enhances the sensory experience of the product by adding pleasant scents, which can also have therapeutic properties, contributing to the overall appeal and enjoyment of the skincare routine.",
+"preservative": "The preservative phase ensures the stability and safety of the product by preventing the growth of bacteria, mold, and other microorganisms, thereby extending the shelf life of the formulation."
+};
+
 function PhaseChoices() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +31,7 @@ function PhaseChoices() {
       } catch (error) {
         console.error('Error fetching phase suggestions:', error);
       } finally {
-        setIsLoading(false);
+        //setIsLoading(false);
         console.log("Phase suggestions:", fetchedPhaseSuggestions);
       }
     }
@@ -81,7 +89,8 @@ function PhaseChoices() {
         <div className="loading-container">
           <div className="loader"></div>
         </div>
-        Loading...
+        Loading... <br />
+        <div style={{ width:  "80dvw"}}>{phaseDescriptions[state.currentPhase]}</div>
       </div>
     );
   }
