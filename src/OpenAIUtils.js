@@ -97,30 +97,31 @@ const phaseExamples = {
     }
   ],
   "preservative": [
-    {
-      "title": "No Preservative",
-      "description": "Ideal for formulations where the natural shelf life is sufficient, and where there's minimal risk of contamination, suitable for products meant for immediate use."
-    },
+
     {
       "title": "Phenoxyethanol",
       "ingredients": {
-        "Phenoxyethanol": 1
+        "Phenoxyethanol": 0.5
       },
-      "description": "A widely used synthetic preservative effective against a broad spectrum of bacteria and fungi, providing reliable protection and extending product shelf life."
+      "description": "A widely used synthetic preservative effective against a broad spectrum of bacteria and fungi, providing reliable protection and extending product shelf life. Approximate shelf life: 24 months."
     },
     {
       "title": "AntiMicro Root Blend",
       "ingredients": {
-        "AntiMicro Root Blend": 2
+        "AntiMicro Root Blend": 1
       },
-      "description": "A natural plant-based preservative blend derived from root extracts, offering antimicrobial properties while being gentle on the skin, suitable for organic and natural formulations."
+      "description": "A natural plant-based preservative blend derived from root extracts, offering antimicrobial properties while being gentle on the skin, suitable for organic and natural formulations. Approximate shelf life: 6 months."
     },
     {
       "title": "AntiMicro Banana",
       "ingredients": {
         "AntiMicro Banana": 2
       },
-      "description": "A natural plant-based, banana-derived antimicrobial blend, providing effective preservation with a mild sweet scent, ideal for those looking for natural preservation options with added sensory appeal."
+      "description": "A natural plant-based, banana-derived antimicrobial blend, providing effective preservation with a mild sweet scent, ideal for those looking for natural preservation options with added sensory appeal. Approximate shelf life: 6 months."
+    },
+    {
+      "title": "No Preservative",
+      "description": "Ideal for people with specific skin sensitivities who plan to use the product rapidly.  Approximate shelf life: 2-8 weeks."
     }
   ],
   "active": [
@@ -215,10 +216,10 @@ export const getPhaseSuggestions = (state) => {
       if (phase === "active" || phase === "fragrance") {
         const noOption = phaseExamples[phase].find(example => example.title.startsWith("No "));
         if (noOption) {
-          parsedResponse.unshift(noOption);  // Add the "No ___" option to the beginning of the array
+          parsedResponse.push(noOption);  // Add the "No ___" option to the beginning of the array
         }
       }
-      
+
       console.log(parsedResponse);
       return parsedResponse;
     })
