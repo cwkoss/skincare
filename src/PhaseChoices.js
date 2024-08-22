@@ -31,7 +31,7 @@ function PhaseChoices() {
       } catch (error) {
         console.error('Error fetching phase suggestions:', error);
       } finally {
-        //setIsLoading(false);
+        setIsLoading(false);
         console.log("Phase suggestions:", fetchedPhaseSuggestions);
       }
     }
