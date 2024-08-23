@@ -12,7 +12,6 @@ const initialRecipeState = {
   goalsData: [],
   productData: '',
   includeFragrance: 'no',
-  selectedMoods: [],
   phaseOrder: [],
   currentPhase: "",
   recipe: {},
@@ -28,8 +27,6 @@ const recipeReducer = (state, action) => {
       return { ...state, goalsData: action.payload };
     case 'SET_INCLUDE_FRAGRANCE':
       return { ...state, includeFragrance: action.payload };
-    case 'SET_SELECTED_MOODS':
-      return { ...state, selectedMoods: action.payload };
     case 'SET_CURRENT_PHASE':
       return { ...state, currentPhase: action.payload };
     case 'SET_RAW_RECIPE':
