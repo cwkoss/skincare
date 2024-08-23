@@ -15,6 +15,14 @@ const loadingMessages = [
   "Almost there, just adding the finishing touches..."
 ];
 
+const phaseDescriptions = {
+  "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
+  "aqueous": "The aqueous phase is responsible for hydrating the skin and delivering water-soluble ingredients, forming the foundation of emulsions and adding moisture to the formulation.",
+  "active": "The active phase contains potent ingredients that target specific skin concerns, such as anti-aging, brightening, or soothing, providing the primary therapeutic benefits of the product.",
+  "fragrance": "The fragrance phase enhances the sensory experience of the product by adding pleasant scents, which can also have therapeutic properties, contributing to the overall appeal and enjoyment of the skincare routine.",
+  "preservative": "The preservative phase ensures the stability and safety of the product by preventing the growth of bacteria, mold, and other microorganisms, thereby extending the shelf life of the formulation."
+};
+
 function Summary() {
   const { state } = useRecipe();
   const navigate = useNavigate();
@@ -48,36 +56,6 @@ function Summary() {
     navigate('/recipe-builder'); // Replace with your actual route
   };*/
 
-  function formatIngredientsList(ingredients) {
-    let formattedString = "";
-
-    Object.keys(ingredients).forEach((key, index, array) => {
-      formattedString += key;
-
-      if (ingredients[key].hasOwnProperty('default_percent') || ingredients[key].hasOwnProperty('max_percent')) {
-        formattedString += " (";
-
-        if (ingredients[key].hasOwnProperty('default_percent')) {
-          formattedString += `default: ${ingredients[key].default_percent}`;
-          if (ingredients[key].hasOwnProperty('max_percent')) {
-            formattedString += ", ";
-          }
-        }
-
-        if (ingredients[key].hasOwnProperty('max_percent')) {
-          formattedString += `max: ${ingredients[key].max_percent}`;
-        }
-
-        formattedString += ")";
-      }
-
-      if (index < array.length - 1) {
-        formattedString += ", ";
-      }
-    });
-
-    return formattedString;
-  }
 
   return (
     <Layout title="Your Selections"
@@ -86,30 +64,15 @@ function Summary() {
       isSubmitDisabled={loading}
       whyDisabled="Loading...">
 
-      <h3>Selected Skincare Product:</h3>
-      <ul><li>{state.productData.charAt(0).toUpperCase() + state.productData.slice(1)}</li></ul>
-
-      <h3>Skincare Goals/Concerns:</h3>
+      <h3>How it works</h3>
+      Skincare recipes have a bunch of phases, each with a specific purpose. Here are the phases we'll be working with:
       <ul>
-        {state.goalsData.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
+        <li>Carrier: {phaseDescriptions.carrier}</li>
+        <li>Aqueous: {phaseDescriptions.aqueous}</li>
+        <li>Active: {phaseDescriptions.active}</li>
+        <li>Fragrance: {phaseDescriptions.fragrance}</li>
+        <li>Preservative: {phaseDescriptions.preservative}</li>
       </ul>
-
-
-
-      <h3>Include Fragrance: </h3>
-      <ul><li>{state.includeFragrance.charAt(0).toUpperCase() + state.includeFragrance.slice(1)}</li></ul>
-      {state.includeFragrance === 'yes' && (
-        <>
-          <h3>Selected Moods:</h3>
-          <ul>
-            {state.selectedMoods.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </>
-      )}
 
       {loading ? (
         <div className="loading-container">
