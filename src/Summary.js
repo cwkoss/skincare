@@ -36,7 +36,7 @@ function Summary() {
     navigate('/phase-choices');
 
   };
-
+  
 
 
   useEffect(() => {
