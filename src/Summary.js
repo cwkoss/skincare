@@ -68,7 +68,7 @@ function Summary() {
       <h3></h3>
       AI is going to help you make a {state.productData} formulation. 
       <br /><br /> For each 'phase' (groups of ingredients that are mixed into the formula at the same time),  AI will suggest options choose from. 
-       <br /><br /> The AI will also suggest the order in which you should add the phases to your formulation. Here's a brief overview of each phase:
+      <br /><br /> The AI will also suggest the order in which you should add the phases to your formulation. Here's a brief overview of each phase:
       <ol>
         <li> Emulsifier: Determines the consistency and texture of the product and allows oil and water to combine.</li>
         {Object.entries(phaseDescriptions).map(([phase, description]) => (
