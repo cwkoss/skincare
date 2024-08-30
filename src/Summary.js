@@ -16,12 +16,13 @@ const loadingMessages = [
 ];
 
 const phaseDescriptions = {
-  "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
-  "aqueous": "The aqueous phase is responsible for hydrating the skin and delivering water-soluble ingredients, forming the foundation of emulsions and adding moisture to the formulation.",
-  "active": "The active phase contains potent ingredients that target specific skin concerns, such as anti-aging, brightening, or soothing, providing the primary therapeutic benefits of the product.",
-  "fragrance": "The fragrance phase enhances the sensory experience of the product by adding pleasant scents, which can also have therapeutic properties, contributing to the overall appeal and enjoyment of the skincare routine.",
-  "preservative": "The preservative phase ensures the stability and safety of the product by preventing the growth of bacteria, mold, and other microorganisms, thereby extending the shelf life of the formulation."
+  "carrier": "The oil phase hydrates and nourishes skin, diluting and spreading active ingredients evenly.",
+  "aqueous": "The aqueous phase hydrates skin and delivers water-soluble ingredients, forming the emulsion base.",
+  "active": "The active phase targets specific skin concerns, providing the product's main therapeutic effects.",
+  "fragrance": "The fragrance phase adds pleasant scents, enhancing the sensory experience and overall appeal.",
+  "preservative": "The preservative phase prevents microbial growth, ensuring product stability and extending shelf life."
 };
+
 
 function Summary() {
   const { state } = useRecipe();
@@ -58,21 +59,22 @@ function Summary() {
 
 
   return (
-    <Layout title="Your Selections"
+    <Layout title="How it works"
       handleSubmit={handleAIClick}
       buttonText="Generate a Formulation with AI"
       isSubmitDisabled={loading}
       whyDisabled="Loading...">
 
-      <h3>How it works</h3>
-      Skincare recipes have a bunch of phases, each with a specific purpose. Here are the phases we'll be working with:
-      <ul>
-        <li>Carrier: {phaseDescriptions.carrier}</li>
-        <li>Aqueous: {phaseDescriptions.aqueous}</li>
-        <li>Active: {phaseDescriptions.active}</li>
-        <li>Fragrance: {phaseDescriptions.fragrance}</li>
-        <li>Preservative: {phaseDescriptions.preservative}</li>
-      </ul>
+      <h3></h3>
+      AI is going to help you make a {state.productData} formulation. 
+      <br /><br /> For each 'phase' (groups of ingredients that are mixed into the formula at the same time),  AI will suggest options choose from. 
+       <br /><br /> The AI will also suggest the order in which you should add the phases to your formulation. Here's a brief overview of each phase:
+      <ol>
+        <li> Emulsifier: Determines the consistency and texture of the product and allows oil and water to combine.</li>
+        {Object.entries(phaseDescriptions).map(([phase, description]) => (
+          <li key={phase}>{phase.charAt(0).toUpperCase() + phase.slice(1)}: {description}</li>
+        ))}
+      </ol>
 
       {loading ? (
         <div className="loading-container">
@@ -80,9 +82,7 @@ function Summary() {
           <p className="loading-message">{currentMessage}</p>
         </div>
       ) : (
-        <>
-          {/*<button onClick={handleManualClick}>Choose Ingredients Manually</button>*/}
-        </>
+        <></>
       )}
     </Layout>
   );
