@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth, provider, signInWithPopup, signInWithRedirect, signOut, getRedirectResult } from "./firebase-config";
 import { useUser } from './UserContext';
 
 const Login = () => {
-    const { user } = useUser();
+    const { user, setUser } = useUser(); // Assume setUser is provided by your UserContext to set the user state
 
     // Function to detect if the user is on a mobile device
     const isMobileDevice = () => {
@@ -16,6 +16,7 @@ const Login = () => {
                 await signInWithRedirect(auth, provider);
             } else {
                 const result = await signInWithPopup(auth, provider);
+                setUser(result.user); // Update the user context immediately
                 console.log(result.user);
             }
         } catch (error) {
@@ -26,6 +27,7 @@ const Login = () => {
     const handleLogout = async () => {
         try {
             await signOut(auth);
+            setUser(null); // Clear the user context on logout
             console.log("User signed out");
         } catch (error) {
             console.error("Error signing out: ", error);
@@ -33,11 +35,13 @@ const Login = () => {
     };
 
     // Handle the redirect result after returning from the provider's page
-    React.useEffect(() => {
+    useEffect(() => {
+        console.log("Checking redirect result");
         const checkRedirectResult = async () => {
             try {
                 const result = await getRedirectResult(auth);
-                if (result) {
+                if (result && result.user) {
+                    setUser(result.user); // Update the user context with the result
                     console.log(result.user);
                 }
             } catch (error) {
@@ -46,7 +50,16 @@ const Login = () => {
         };
 
         checkRedirectResult();
-    }, []);
+
+        // Optional: Listen for auth state changes to ensure the user is always captured
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user); // Update the user context if a user is authenticated
+            }
+        });
+
+        return () => unsubscribe(); // Cleanup on component unmount
+    }, [setUser]);
 
     if (user && user.uid) {
         return (
