@@ -309,7 +309,7 @@ const ingredients = {
         penetrating_occlusive: 2,
         soothing_stimulating: 1,
         gentle_active: 2,
-        cost_per_g: 0.005,
+        cost_per_g: 0.025,
     },
     "Oat Milk": {
         phase: "aqueous",
