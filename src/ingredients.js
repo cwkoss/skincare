@@ -493,7 +493,7 @@ const ingredients = {
         gentle_active: 4,
     },
     "Niacinamide (Vitamin B3)": {
-        phase: "aqueous",
+        phase: "additive",
         type: "active",
         hlb: 20,
         max_percent: 5,
