@@ -5,6 +5,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { updateSession } from './sessionUtils';
 import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
+import Layout from './Layout';
 
 function OrderFormulation() {
     const navigate = useNavigate();
@@ -42,10 +43,9 @@ function OrderFormulation() {
         }
     }, [recipeId]);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async () => {
         console.log(recipeId);
         setHasError(false);
-        e.preventDefault();
         try {
             const orderId = new Date().getTime() + "-" + recipeId;
             await setDoc(doc(db, "orders", orderId), {
@@ -65,8 +65,8 @@ function OrderFormulation() {
             await updateSession({ orderId });
 
             navigate('/order-success');
-        } catch (e) {
-            console.error("Error submitting order: ", e);
+        } catch (err) {
+            console.error("Error submitting order: ", err);
             setHasError(true);
         }
     };
@@ -74,18 +74,19 @@ function OrderFormulation() {
     if (!recipeData) return <div>Loading...</div>;
 
     return (
-        <div className="body-container">
-            <h2>{recipeData.name}</h2>
-            <div className="scrollable-content">
+        <Layout title="Request Your Order"
+        buttonText="Place Your Order"
+        handleSubmit={() => { handleSubmit() }}>
                 <div className="recipe">
+                    <strong>Formulation Name</strong>: { state.recipeName }
                     {Object.keys(recipeData.ingredients).map((key, index) => (
                         <div key={index}>
                             <strong>{key}</strong>: {recipeData.ingredients[key]}
                         </div>
                     ))}
                 </div>
-                <p>While this service is in development, formulations are free to people located in Seattle! We only ask that you please provide a review of your product and feedback about your experience using the service. (We'll send you a way to access that after we deliver your formulation).</p>
-                <form onSubmit={handleSubmit} className="contact-us-form">
+                <p>While this service is in development, we are requesting that you donate to the Palestinian Children's Relief Fund in lieu of payment!</p>
+                <form className="contact-us-form">
                     <div>
                         <label>Your Name:</label><br />
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
@@ -130,14 +131,9 @@ function OrderFormulation() {
                     )}
                     <label>Note:</label><br />
                     <textarea placeholder="Enter your note here" value={note} onChange={(e) => setNote(e.target.value)}></textarea>
-                    <button type="submit" className="submit">Submit Order</button>
                 </form>
-            </div>
-            <div className="bottom-spacer"></div>
-            <div className="bottom-spacer"></div>
-
             {hasError && (<p className="why-disabled">Something went wrong submitting... please try again</p>) }
-        </div>
+        </Layout>
     );
 }
 
