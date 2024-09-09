@@ -24,7 +24,7 @@ function OrderFormulation() {
 
     useEffect(() => {
         if (state.rawRecipe && Object.keys(state.rawRecipe).length > 0) {
-            setRecipeData({name: state.recipeName, ingredients: state.rawRecipe});
+            setRecipeData({ name: state.recipeName, ingredients: state.rawRecipe });
             return;
         }
         if (recipeId) {
@@ -75,64 +75,48 @@ function OrderFormulation() {
 
     return (
         <Layout title="Request Your Order"
-        buttonText="Place Your Order"
-        handleSubmit={() => { handleSubmit() }}>
-                <div className="recipe">
-                    <strong>Formulation Name</strong>: { state.recipeName }
-                    {Object.keys(recipeData.ingredients).map((key, index) => (
-                        <div key={index}>
-                            <strong>{key}</strong>: {recipeData.ingredients[key]}
-                        </div>
-                    ))}
+            buttonText="Place Your Order"
+            handleSubmit={() => { handleSubmit() }}>
+            <div className="recipe">
+                <strong>Formulation Name</strong>: {state.recipeName}
+                {Object.keys(recipeData.ingredients).map((key, index) => (
+                    <div key={index}>
+                        <strong>{key}</strong>: {recipeData.ingredients[key]}
+                    </div>
+                ))}
+            </div>
+            <p>While this service is in development, we are requesting that you donate to the Palestinian Children's Relief Fund in lieu of payment!</p>
+            <form className="contact-us-form">
+                <div>
+                    <label>Your Name:</label><br />
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
-                <p>While this service is in development, we are requesting that you donate to the Palestinian Children's Relief Fund in lieu of payment!</p>
-                <form className="contact-us-form">
-                    <div>
-                        <label>Your Name:</label><br />
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-                    </div>
-                    <div>
-                        <label>Mobile phone number (We'll text with you to coordinate delivery):</label><br />
-                        <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                    </div>
-                    <div>
-                        <label>Do you live in the Seattle area?</label><br />
-                        <select value={inSeattleArea} onChange={(e) => setInSeattleArea(e.target.value === 'true')}>
-                            <option value="true">Yes</option>
-                            <option value="false">No</option>
-                        </select>
-                    </div>
-                    {inSeattleArea ? (
-                        // Form fields for Seattle area users
+                <div>
+                    <label>Mobile phone number (We'll text with you to coordinate delivery):</label><br />
+                    <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                </div>
+                <div>
+                    <label>Do you want to pick it up from Chris Koss's house (South Beacon Hill in Seattle)?</label><br />
+                    <select value={pickup} onChange={(e) => setPickup(e.target.value === 'true')}>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    {!pickup && (
                         <div>
-                            {/* ... existing form fields ... */}
-                            <label>Do you want to pick it up from Chris Koss's house (South Beacon Hill)?</label><br />
-                            <select value={pickup} onChange={(e) => setPickup(e.target.value === 'true')}>
-                                <option value="true">Yes</option>
-                                <option value="false">No</option>
-                            </select>
-                            {!pickup && (
-                                <div>
-                                    <label>Delivery Address:</label><br />
-                                    <input type="text" placeholder="Street 1" value={address.street1} onChange={(e) => setAddress({ ...address, street1: e.target.value })} /><br />
-                                    <input type="text" placeholder="Street 2" value={address.street2} onChange={(e) => setAddress({ ...address, street2: e.target.value })} /><br />
-                                    <input type="text" value="Seattle" readOnly /><br />
-                                    <input type="text" value="WA" readOnly /><br />
-                                    <input type="text" placeholder="Zip Code" value={address.zip} onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <div>
-                            <p>We are currently only fulfilling orders within the Seattle area. You'll be added to the waitlist and we'll contact you when we start shipping orders.</p>
-                            <label>Where are you located?</label><br />
-                            <input type="text" placeholder="Your Location" onChange={(e) => {setUserLocation(e.target.value)}} />
+                            <label>Delivery Address:</label><br />
+                            <input type="text" placeholder="Street 1" value={address.street1} onChange={(e) => setAddress({ ...address, street1: e.target.value })} /><br />
+                            <input type="text" placeholder="Street 2" value={address.street2} onChange={(e) => setAddress({ ...address, street2: e.target.value })} /><br />
+                            <input type="text" value="Seattle" readOnly /><br />
+                            <input type="text" value="WA" readOnly /><br />
+                            <input type="text" placeholder="Zip Code" value={address.zip} onChange={(e) => setAddress({ ...address, zip: e.target.value })} />
                         </div>
                     )}
-                    <label>Note:</label><br />
-                    <textarea placeholder="Enter your note here" value={note} onChange={(e) => setNote(e.target.value)}></textarea>
-                </form>
-            {hasError && (<p className="why-disabled">Something went wrong submitting... please try again</p>) }
+                </div>
+
+                <label>Note:</label><br />
+                <textarea placeholder="Enter your note here" value={note} onChange={(e) => setNote(e.target.value)}></textarea>
+            </form>
+            {hasError && (<p className="why-disabled">Something went wrong submitting... please try again</p>)}
         </Layout>
     );
 }
