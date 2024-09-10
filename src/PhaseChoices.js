@@ -17,25 +17,29 @@ const phaseDescriptions = {
 function PhaseChoices() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [wantSomethingElse, setWantSomethingElse] = useState(false);
   const { state, dispatch } = useRecipe();
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
   const [selectedPhase, setSelectedPhase] = useState(null);
   const itemRefs = useRef([]); // Add refs to scroll into view
+  const [somethingElseText, setSomethingElseText] = useState('');
+
+  const fetchPhaseSuggestions = async () => {
+    let fetchedPhaseSuggestions = "dummy";
+    try {
+      // Assuming that getPhaseSuggestions properly handles the 'phase' and 'state'
+      fetchedPhaseSuggestions = await getPhaseSuggestions(state, somethingElseText);
+      setPhaseSuggestions(fetchedPhaseSuggestions);
+    } catch (error) {
+      console.error('Error fetching phase suggestions:', error);
+    } finally {
+      setIsLoading(false);
+      console.log("Phase suggestions:", fetchedPhaseSuggestions);
+    }
+  };
 
   useEffect(() => {
-    async function fetchPhaseSuggestions() {
-      let fetchedPhaseSuggestions = "dummy";
-      try {
-        // Assuming that getPhaseSuggestions properly handles the 'phase' and 'state'
-        fetchedPhaseSuggestions = await getPhaseSuggestions(state);
-        setPhaseSuggestions(fetchedPhaseSuggestions);
-      } catch (error) {
-        console.error('Error fetching phase suggestions:', error);
-      } finally {
-        setIsLoading(false);
-        console.log("Phase suggestions:", fetchedPhaseSuggestions);
-      }
-    }
+
     if (phaseSuggestions && phaseSuggestions.length === 0 && isLoading === false && state.currentPhase !== "emulsifier") {
       setIsLoading(true);
       fetchPhaseSuggestions();
@@ -77,6 +81,12 @@ function PhaseChoices() {
       itemRefs.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
     }
     console.log(state);
+  };
+
+  const requestSomethingElse = () => {
+    setWantSomethingElse(false);
+    setIsLoading(true);
+    fetchPhaseSuggestions();
   };
 
   const capitalizeFirstLetter = (str) => {
@@ -149,10 +159,29 @@ function PhaseChoices() {
     )
   };
 
+  if (wantSomethingElse) {
+    return (
+      <Layout
+        title="Request Something Else"
+        handleSubmit={() => { requestSomethingElse() }}
+        buttonText="Get New Suggestions"
+        isSubmitDisabled={false}
+        whyDisabled="Choose Consistency">
+        <p>Tell the AI what you're looking for and we'll generate new options closer to what you want!</p>
+        <textarea
+          className="big-text-area"
+          placeholder="Enter your request.  Are there specific ingredients you want to use?  Are there specific skin concerns you want to address?  The more detail you provide, the better the AI can help you!"
+          onChange={(e) => setSomethingElseText(e.target.value)}
+          value = {somethingElseText}
+        />
+      </Layout>
+    );
+  };
+
 
   return (
     <Layout
-      title={`Choose Your ${state.currentPhase}`}
+      title={`Choose Your ${capitalizeFirstLetter(state.currentPhase)}`}
       handleSubmit={goToNextPhase}
       isSubmitDisabled={selectedPhase === null}
       whyDisabled="Choose an option"
@@ -171,6 +200,7 @@ function PhaseChoices() {
           </div>
         ))}
       </div>
+      <p className="something-else"><a onClick={() => setWantSomethingElse(true)}>Looking for something else?</a></p>
     </Layout>
   );
 

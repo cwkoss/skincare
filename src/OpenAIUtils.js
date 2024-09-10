@@ -164,7 +164,7 @@ const phaseSpecificInstructions = {
   "fragrance": "Focus on the skin benefits over the aromatic profile of the fragrance phase, highlighting the sensory experience and therapeutic properties of essential oils to enhance the overall product appeal.",
 };
 
-export const getPhaseSuggestions = (state) => {
+export const getPhaseSuggestions = (state, somethingElseText) => {
   if (!state.currentPhase || !state.productData || !state.goalsData) {
     console.error("Invalid state data provided.");
     return Promise.reject("Invalid state data provided.");  // Return a rejected promise when inputs are invalid
@@ -192,6 +192,8 @@ export const getPhaseSuggestions = (state) => {
 
   const userPrompt = `Hello please assist me in the formulation of a customized skincare product for my individual skin type and concerns.
   My skincare concerns are ${state.goalsData.join(", ")}. The product I would like to make is a ${state.productData}.
+
+  ${somethingElseText ? `The user is specifically asking for: ${somethingElseText}.` : ""}
 
   What are three possible phase formulations for the ${phase} phase of my skincare product?  Please include the ingredients and proportions for each formulation
   `;

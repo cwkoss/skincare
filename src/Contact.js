@@ -44,6 +44,7 @@ const Contact = () => {
       <label>
         <strong>Message:</strong><br />
         <textarea
+          className="big-text-area"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />

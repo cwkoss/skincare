@@ -373,10 +373,11 @@ div.commentary {
   margin-top: 20px;
 }
 
-.contact-us-form textarea {
-  width: 100%;
+textarea.big-text-area {
+  width: 98%;
   height: 300px;
   padding: 12px 20px;
+  margin-left: 2px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -422,7 +423,7 @@ input[type="text"] {
 }
 
 .survey textarea {
-  width: 100%;
+  width: 98%;
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
@@ -493,7 +494,7 @@ input[type="text"] {
 .phase-item {
   flex: 0 0 auto;
   width: 270px; 
-  height: 75dvh;
+  height: 72dvh;
   margin-right: 5px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -536,4 +537,10 @@ input[type="text"] {
 
 .phase-container::-webkit-scrollbar {
   display: none;
+}
+
+.something-else {
+  text-align: center;
+  color: blue;
+  text-decoration: underline;
 }
