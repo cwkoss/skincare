@@ -78,7 +78,7 @@ function OrderFormulation() {
             buttonText="Place Your Order"
             handleSubmit={() => { handleSubmit() }}>
             <div className="recipe">
-                <strong>Formulation Name</strong>: {state.recipeName}
+                <strong>Recipe Name</strong>: {state.recipeName}
                 {Object.keys(recipeData.ingredients).map((key, index) => (
                     <div key={index}>
                         <strong>{key}</strong>: {recipeData.ingredients[key]}

@@ -479,9 +479,31 @@ input[type="text"] {
 }
 
 .selected-phase {
+
+}
+
+/* Phase Choices */
+.phase-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.phase-item {
+  flex: 0 0 auto;
+  width: 270px; 
+  height: 75dvh;
+  margin-right: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  word-wrap: break-word; /* Ensure text wraps */
+  box-sizing: border-box; /* Prevent content overflow */
+  cursor: pointer;
   background-color: #f1f8f0;
   border: 1px solid #999999;
-  padding: 7px;
+  padding: 5px;
   border-radius: 5px;
 
   h2 {
@@ -506,4 +528,12 @@ input[type="text"] {
     font-size: 0.75em;
     color: #888;
   }
+}
+
+.selected-phase {
+  border: 2px solid blue;
+}
+
+.phase-container::-webkit-scrollbar {
+  display: none;
 }

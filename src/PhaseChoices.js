@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Layout from './Layout';
 import { useNavigate } from 'react-router-dom';
 import { useRecipe } from './RecipeContext';
@@ -7,11 +7,11 @@ import { getPhaseSuggestions } from './OpenAiUtils';
 import ingredients from './ingredients';
 
 const phaseDescriptions = {
- "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
- "aqueous": "The aqueous phase is responsible for hydrating the skin and delivering water-soluble ingredients, forming the foundation of emulsions and adding moisture to the formulation.",
-"active":  "The active phase contains potent ingredients that target specific skin concerns, such as anti-aging, brightening, or soothing, providing the primary therapeutic benefits of the product.",
-"fragrance": "The fragrance phase enhances the sensory experience of the product by adding pleasant scents, which can also have therapeutic properties, contributing to the overall appeal and enjoyment of the skincare routine.",
-"preservative": "The preservative phase ensures the stability and safety of the product by preventing the growth of bacteria, mold, and other microorganisms, thereby extending the shelf life of the formulation."
+  "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
+  "aqueous": "The aqueous phase is responsible for hydrating the skin and delivering water-soluble ingredients, forming the foundation of emulsions and adding moisture to the formulation.",
+  "active": "The active phase contains potent ingredients that target specific skin concerns, such as anti-aging, brightening, or soothing, providing the primary therapeutic benefits of the product.",
+  "fragrance": "The fragrance phase enhances the sensory experience of the product by adding pleasant scents, which can also have therapeutic properties, contributing to the overall appeal and enjoyment of the skincare routine.",
+  "preservative": "The preservative phase ensures the stability and safety of the product by preventing the growth of bacteria, mold, and other microorganisms, thereby extending the shelf life of the formulation."
 };
 
 function PhaseChoices() {
@@ -20,6 +20,7 @@ function PhaseChoices() {
   const { state, dispatch } = useRecipe();
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
   const [selectedPhase, setSelectedPhase] = useState(null);
+  const itemRefs = useRef([]); // Add refs to scroll into view
 
   useEffect(() => {
     async function fetchPhaseSuggestions() {
@@ -59,7 +60,7 @@ function PhaseChoices() {
     setPhaseSuggestions([]);
   };
 
-  const handlePhaseSelection = (phase) => {
+  const handlePhaseSelection = (phase, index) => {
     setSelectedPhase(phase.title);
     dispatch({
       type: "UPDATE_RECIPE",
@@ -68,6 +69,13 @@ function PhaseChoices() {
         data: phase
       }
     });
+    // TODO - pull this out and update emulsifier display
+    if (state.currentPhase === "emulsifier") {
+      return;
+    }
+    if (itemRefs.current[index]) {
+      itemRefs.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    }
     console.log(state);
   };
 
@@ -90,7 +98,7 @@ function PhaseChoices() {
           <div className="loader"></div>
         </div>
         Loading... <br />
-        <div style={{ width:  "80dvw"}}>{phaseDescriptions[state.currentPhase]}</div>
+        <div style={{ width: "80dvw" }}>{phaseDescriptions[state.currentPhase]}</div>
       </div>
     );
   }
@@ -141,28 +149,32 @@ function PhaseChoices() {
     )
   };
 
+
   return (
     <Layout
-      title={"Choose Your " + capitalizeFirstLetter(state.currentPhase) + " Phase"}
-      handleSubmit={() => { goToNextPhase() }}
+      title={`Choose Your ${state.currentPhase}`}
+      handleSubmit={goToNextPhase}
       isSubmitDisabled={selectedPhase === null}
-      whyDisabled="Choose an option">
-      {phaseSuggestions.map((item, index) => (
-        <div key={index} className={selectedPhase === item.title ? 'selected-phase' : ''} onClick={() => handlePhaseSelection(item)}>
-          <h2>Phase {index + 1}: {item.title}</h2>
-          {selectedPhase === item.title ? (
-            <>
-              <p className="description">{item.description}</p>
-              <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => renderExpandedIngredient(key, value)) : 'No ingredients listed'}</p>
-            </>
-          ) : (
-            <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => `${key}`).join(', ') : 'No ingredients listed'}</p>
-          )}
-          <button className={selectedPhase === item.title ? 'selected' : ''}>Choose Phase {index + 1}</button>
-        </div>
-      ))}
+      whyDisabled="Choose an option"
+    >
+      <div className="phase-container">
+        {phaseSuggestions.map((item, index) => (
+          <div
+            key={index}
+            ref={(el) => (itemRefs.current[index] = el)} // Attach ref to each item
+            className={`phase-item ${selectedPhase === item.title ? 'selected-phase' : ''}`}
+            onClick={() => handlePhaseSelection(item, index)}
+          >
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+            <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => renderExpandedIngredient(key, value)) : 'No ingredients listed'}</p>
+          </div>
+        ))}
+      </div>
     </Layout>
   );
+
+
 }
 
 export default PhaseChoices;
