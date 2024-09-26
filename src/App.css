@@ -14,11 +14,9 @@
   --button-background: var(--accent-color);
   --button-text-color: #ffffff;
   --button-hover-background: #a5646d; /* Slightly darker rose gold */
-  --button-active: #adf7a4;
+  --button-active: #c48b95;
   --button-hover: #d8fdd4;
-  --button-clickable: #e7ffe4;
-  --button-clickable-lines: #657c62;
-  --button-active-lines: #507c4a;
+  --button-active-lines: #7a434d;
 }
 
 /* Base Styles */
@@ -295,3 +293,21 @@ button.submit:disabled {
 }
 
 /* End Scroll Container */
+
+/* Layout */
+.footer-submit {
+  width: 90dvw;
+  margin: 0 5dvw;
+}
+
+.why-disabled {
+  font-size: 0.6em;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.multiselect-button {
+  margin: 10px; 
+  width: 40dvw;
+  height: 8dvh;
+}

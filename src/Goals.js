@@ -16,12 +16,11 @@ function Goals() {
   if (state.productData === "Hair and Scalp Oil") {
     skincareGoals = ["Dry scalp", "Hair growth", "Hair shine", "Hair strength"];
   } else if (state.productData === "Body Moisturizing Cream or Body Butter") {
-    skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Calloused Skin", "Stretch marks", "Eczema", "Aging or age spots"];
+    skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Calloused Skin", "Stretch marks", "Eczema", "Aging"];
   } else {
     skincareGoals = [
-      "Adult acne", "Dry skin", "Sensitive Skin", "Wrinkles",
-      "Puffiness", "Redness", "Sun Protection", "Aging or age spots", "Large pores",
-      "Eczema"
+      "Adult acne", "Dry skin", "Inflamation", "Wrinkles",
+      "Puffiness", "Redness", "Aging", "Large pores"
     ];
   }
 
@@ -80,7 +79,7 @@ function Goals() {
             key={index}
             type="button"
             onClick={() => toggleOption(goal)}
-            className={`goals-button ${isOptionSelected(goal) ? 'selected' : ''}`}
+            className={`multiselect-button ${isOptionSelected(goal) ? 'selected' : ''}`}
           >
             {goal}
           </button>
