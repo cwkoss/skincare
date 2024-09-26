@@ -118,26 +118,17 @@ button.submit:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 20px 60px;
-  background-image: url('/public/bgimg.webp');
+  padding: 5px 20px 60px;
+  background: 
+  linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
+  url('/public/bgimg.webp');
+  /*background-image: url('/public/bgimg.webp');*/
   background-size: cover; /* or 'contain' */
   background-repeat: no-repeat;
   background-position: center top;
-  height: 100vh;
+  background-attachment: fixed;
   color: #61685f;
   /* No need for overflow hidden here */
-}
-
-.homePageContainer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent overlay */
-  z-index: 1; /* Place overlay above background but below content */
-  pointer-events: none; /* Ensure overlay doesn't block interactions */
 }
 
 .homePageContainer > * {
@@ -152,6 +143,9 @@ button.submit:disabled {
   align-items: center;
   text-align: center;
   margin-bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 15px;
+  border-radius: 15px;
 }
 
 .homePageContainer .title h1 {
@@ -191,10 +185,6 @@ button.submit:disabled {
   transform: translateY(-2px);
 }
 
-.homePageContainer p {
-  width: 100%;
-}
-
 .homePageContainer a {
   text-align: center;
   padding-bottom: 10px;
@@ -202,7 +192,6 @@ button.submit:disabled {
 
 .homePageContainer .homepageText {
   max-width: 800px;
-  margin: 0 auto;
   padding: 20px;
 }
 
@@ -211,7 +200,11 @@ button.submit:disabled {
   line-height: 1.6;
   color: var(--text-color);
   margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 15px;
+  border-radius: 15px;
 }
+
 
 /* Phase Choices */
 .phase-container {
