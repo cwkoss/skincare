@@ -205,29 +205,30 @@ button.submit:disabled {
   border-radius: 15px;
 }
 
+/* Scroll Container */
+.scroll-container {
+  overflow-x: auto;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
 
-/* Phase Choices */
-.phase-container {
+.scroll-items {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px 0;
 }
 
-.phase-container::-webkit-scrollbar {
+.scroll-items::-webkit-scrollbar {
   display: none;
 }
 
-.phase-item {
+.scroll-item {
   flex: 0 0 auto;
   width: 270px;
-  height: auto;
   margin-right: 15px;
   padding: 15px;
   border: 1px solid #ccc;
   text-align: left;
-  word-wrap: break-word;
   box-sizing: border-box;
   cursor: pointer;
   background-color: #f9f9f9;
@@ -235,45 +236,58 @@ button.submit:disabled {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.phase-item:last-child {
+.scroll-item:last-child {
   margin-right: 0;
 }
 
-.phase-item:hover {
+.scroll-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.phase-item h2 {
+.scroll-item h2 {
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: 500;
   font-size: 1.2em;
-  color: var(--text-color);
+  color: #333;
 }
 
-.phase-item p {
+.scroll-item p {
   margin: 10px 0;
   font-size: 0.95em;
-  color: var(--text-color-alt);
+  color: #555;
 }
 
-.phase-item .description {
+.item-feature {
   font-size: 0.9em;
-  color: #777777;
+  color: #777;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
-.phase-item .expanded-ingredient {
-  font-size: 0.9em;
-  color: #666666;
-}
-
-.phase-item .ingredient-description {
+.item-description {
   font-size: 0.85em;
-  color: #888888;
+  color: #888;
+  margin-bottom: 10px;
 }
 
-.selected-phase {
+.additional-option {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.additional-option a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.additional-option a:hover {
+  text-decoration: underline;
+}
+
+.selected-item {
   border: 2px solid var(--accent-color);
 }
 
+/* End Scroll Container */
