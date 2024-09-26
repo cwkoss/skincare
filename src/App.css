@@ -128,7 +128,6 @@ button.submit:disabled {
   background-position: center top;
   background-attachment: fixed;
   color: #61685f;
-  /* No need for overflow hidden here */
 }
 
 .homePageContainer > * {
@@ -208,7 +207,7 @@ button.submit:disabled {
 /* Scroll Container */
 .scroll-container {
   overflow-x: auto;
-  padding: 10px 5px;
+  overflow-y: visible;
   scroll-behavior: smooth;
 }
 
@@ -216,6 +215,8 @@ button.submit:disabled {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
+  padding: 15px 0 10px;
+  overflow-y: visible;
 }
 
 .scroll-items::-webkit-scrollbar {
@@ -243,19 +244,21 @@ button.submit:disabled {
 .scroll-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative; /* Create a new positioning context */
+  z-index: 1; 
 }
 
 .scroll-item h2 {
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #333;
 }
 
 .scroll-item p {
   margin: 10px 0;
-  font-size: 0.95em;
+  font-size: 0.85em;
   color: #555;
 }
 
@@ -267,7 +270,7 @@ button.submit:disabled {
 }
 
 .item-description {
-  font-size: 0.85em;
+  font-size: 0.80em;
   color: #888;
   margin-bottom: 10px;
 }
@@ -287,6 +290,7 @@ button.submit:disabled {
 }
 
 .selected-item {
+  transform: translateY(-3px);
   border: 2px solid var(--accent-color);
 }
 
