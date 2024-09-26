@@ -62,22 +62,22 @@ function App() {
                 <div className="homePageContainer">
                   <div className="title">
                     <h1><img src="/logo.png" className="logo" alt="A logo of a leaf inside a drop"></img> Skincremental</h1>
-                    <h4>Revolutionizing Skincare, One Batch at a Time!</h4>
+                    <h4>Experience Skincare Made Exclusively for You</h4>
                   </div>
-                  <Link to="/product"><button className="startbutton">Design Custom <br /> Skincare Recipe</button></Link>
+                  <Link to="/product"><button className="startbutton">Start Your Personalized Skincare Journey</button></Link>
                   <div className="homepageText">
-                    <p><strong>Personalized Skincare, Evolving with You:</strong> Custom-crafted skincare that adapts to your unique needs, environment and the seasons.</p>
+    <p><strong>Personalized Skincare, Evolving With You:</strong> Custom-crafted skincare that adapts to your unique needs, environment, and the seasons. Because your skin deserves nothing less.</p>
 
-                    <p><strong>Experience Double Discovery:</strong> With every order, try two variations of your custom formulation. Use, assess, and select your favorite. Our AI refines your choice for your next order, making your skincare journey a continuous evolution.</p>
+    <p><strong>Discover Your Perfect Match:</strong> Try two custom formulas, choose your favorite, and let our smart algorithm enhance it for next time. Skincare that learns and grows with you.</p>
 
-                    <p><strong>Pure Ingredients, No Fillers:</strong> We provide skincare free from unnecessary fillers or excessive preservatives. Only deeply nourishing ingredients for your skin.</p>
+    <p><strong>Pure Ingredients, Transparent Choices:</strong> Only pure, nourishing ingredients your skin will love—no unnecessary fillers or confusing preservatives. Understand exactly what's in your skincare.</p>
 
-                    <p><strong>Informed Choices:</strong> Customize your formulation with guidance on each ingredient's purpose. Say goodbye to mystery chemicals.</p>
+    <p><strong>Empower Your Skincare Journey:</strong> Customize your formulation with clear guidance on each ingredient's purpose. Crafting your perfect skincare is now within your reach.</p>
 
-                    <p><strong>Conscious & Sustainable:</strong> Committed to a healthier planet. Our packaging is recycled, sterilized, and reused. We source locally whenever possible. Return your jars for recycling, and we'll donate to charity.</p>
+    <p><strong>Conscious & Sustainable:</strong> We're committed to a healthier planet. Our packaging is recycled, sterilized, and reused. We source locally whenever possible. Return your jars for recycling, and we'll donate to charity on your behalf.</p>
 
-                    <p><strong>Join the Skincare Revolution:</strong> Skincare is more than a routine—it's a personalized journey. Join a community embracing sustainability, customization, and innovation.</p>
-                  </div>
+    <p><strong>Join the Skincare Revolution:</strong> Skincare is more than a routine—it's your personal journey. Join a community embracing sustainability, personalization, and innovation.</p>
+  </div>
 
                   <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
                   <Link to="/contact"><span>Contact us</span></Link>
