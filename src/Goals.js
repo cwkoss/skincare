@@ -34,10 +34,6 @@ function Goals() {
     dispatch({ type: 'SET_INCLUDE_FRAGRANCE', payload: fragrance });
   };
 
-  const updateSelectedMoods = (moods) => {
-    dispatch({ type: 'SET_SELECTED_MOODS', payload: moods });
-  }
-
   const toggleOption = (option) => {
     const newSelectedOptions = selectedOptions.includes(option)
       ? selectedOptions.filter(item => item !== option)
