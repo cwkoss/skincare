@@ -5,6 +5,7 @@ import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
 import { getPhaseSuggestions } from './OpenAiUtils';
 import ingredients from './ingredients';
+import ScrollContainer from './ScrollContainer';
 
 const phaseDescriptions = {
   "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
@@ -93,14 +94,7 @@ function PhaseChoices() {
     if (!str) return str;
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-  const renderExpandedIngredient = (key, value) => {
-    return (
-      <>
-        <p className='expanded-ingredient'>{key}: {value} Parts</p>
-        <p className='ingredient-description'>{ingredients[key].description}</p>
-      </>
-    );
-  };
+
   if (isLoading) {
     return (
       <div style={{ textAlign: "center" }}>
@@ -172,7 +166,7 @@ function PhaseChoices() {
           className="big-text-area"
           placeholder="Enter your request.  Are there specific ingredients you want to use?  Are there specific skin concerns you want to address?  The more detail you provide, the better the AI can help you!"
           onChange={(e) => setSomethingElseText(e.target.value)}
-          value = {somethingElseText}
+          value={somethingElseText}
         />
       </Layout>
     );
@@ -187,20 +181,12 @@ function PhaseChoices() {
       whyDisabled="Choose an option"
     >
       <div className="scroll-container">
-        <div className="scroll-items">
-        {phaseSuggestions.map((item, index) => (
-          <div
-            key={index}
-            ref={(el) => (itemRefs.current[index] = el)} // Attach ref to each item
-            className={`scroll-item ${selectedPhase === item.title ? 'selected-item' : ''}`}
-            onClick={() => handlePhaseSelection(item, index)}
-          >
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-            <p>Ingredients: {item.ingredients ? Object.entries(item.ingredients).map(([key, value]) => renderExpandedIngredient(key, value)) : 'No ingredients listed'}</p>
-          </div>
-        ))}
-        </div>
+        <ScrollContainer
+          items={phaseSuggestions}
+          handleSelection={handlePhaseSelection}
+          selectedItem={selectedPhase}
+          itemRefs={itemRefs}
+        />
       </div>
       <p className="something-else"><a onClick={() => setWantSomethingElse(true)}>Looking for something else?</a></p>
     </Layout>
