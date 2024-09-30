@@ -21,7 +21,7 @@ const ingredients = {
         type: "carrier",
         hlb: 0,
         description: "Moisturizer, mimics natural skin oils, balances sebum production, good for acne-prone skin.",
-        good_for: ["Adult acne", "Dry skin", "Sensitive Skin"],
+        good_for: ["Oily Skin", "Dry skin", "Sensitive Skin"],
         bad_for: [],
         cost: "$9.99/8oz",
         density: 0.87,
@@ -83,7 +83,7 @@ const ingredients = {
         hlb: 8,
         description: "Moisturizer, rich in fatty acids and vitamins, anti-inflammatory, helps with skin healing.",
         good_for: ["Dry skin", "Atopic dermatitis"],
-        bad_for: ["Adult acne"], // due to its comedogenic properties
+        bad_for: ["Oily Skin"], // due to its comedogenic properties
         cost: "$9.99/16oz",
         density: 0.927,
         cost_per_g: 0.0228,
@@ -98,7 +98,7 @@ const ingredients = {
         hlb: 8,
         description: "Moisturizer, high in fatty acids, helps to hydrate and nourish the skin, reduces the appearance of scars.",
         good_for: ["Dry skin", "Wrinkles"],
-        bad_for: ["Adult acne"],
+        bad_for: ["Oily Skin"],
         cost: "$1/oz",
         cost_per_g: 0.0338,
         buy_again_url: "https://simply-ingredients.com/collections/butters-waxes/products/fair-trade-cocoa-butter?variant=37889946484922",
@@ -113,7 +113,7 @@ const ingredients = {
         hlb: 8,
         description: "Moisturizes skin and hair, rich in fatty acids and antioxidants. Can be comedogenic (acne-causing) for some.",
         good_for: ["Dry skin"],
-        bad_for: ["Adult acne"], // high comedogenic rating
+        bad_for: ["Oily Skin"], // high comedogenic rating
         cost: "$6.96/15oz",
         density: 0.924,
         cost_per_g: 0.0170,
@@ -142,7 +142,7 @@ const ingredients = {
         type: "carrier",
         hlb: 0,
         description: "Rich in zinc and vitamins, improves skin tone, fights acne, and soothes sensitive skin.",
-        good_for: ["Adult acne", "Sensitive Skin"],
+        good_for: ["Oily Skin", "Sensitive Skin"],
         bad_for: [],
         cost: "$3/2oz",
         density: 0.95,
@@ -180,7 +180,7 @@ const ingredients = {
         hlb: 0,
         description: "Promotes a healthy scalp and is rich in unsaturated fats. (comedogenic rating estimated)",
         good_for: ["Sensitive Skin"],
-        bad_for: ["Adult acne"]
+        bad_for: ["Oily Skin"]
     },*/
     "Olive Oil": {
         phase: "oil",
@@ -188,7 +188,7 @@ const ingredients = {
         hlb: 0,
         description: "Moisturizer, rich in vitamins and antioxidants, promotes skin and hair health, but can be comedogenic (acne-causing) for some.",
         good_for: ["Dry skin"],
-        bad_for: ["Adult acne"],
+        bad_for: ["Oily Skin"],
         cost: "$18.99/68oz",
         density: 0.9,
         cost_per_g: 0.0105,
@@ -279,7 +279,7 @@ const ingredients = {
         type: "aqueous",
         hlb: 20,
         description: "Natural humectant, antibacterial, great for acne treatment and hydration, soothing for the skin.",
-        good_for: ["Dry skin", "Adult acne"],
+        good_for: ["Dry skin", "Oily Skin"],
         cost_per_g: 0.03,
         bad_for: [],
         light_heavy: 6,
@@ -291,7 +291,7 @@ const ingredients = {
         phase: "aqueous",
         hlb: 20,
         description: "Balances skin's pH, astringent properties, good for acne-prone skin but can be drying.",
-        good_for: ["Adult acne", "Large pores"],
+        good_for: ["Oily Skin", "Large pores"],
         bad_for: ["Dry skin"], // can be drying
         light_heavy: 1,
         penetrating_occlusive: 1,
@@ -547,7 +547,7 @@ const ingredients = {
         max_percent: 2,
         default_percent: 1,
         description: "Antimicrobial and anti-inflammatory, very effective against acne, helps in cleansing the skin.",
-        good_for: ["Adult acne"],
+        good_for: ["Oily Skin"],
         bad_for: ["Dry skin"], // can be drying if overused
         density: 0.878,
         cost_per_g: 0.3792,
@@ -579,7 +579,7 @@ const ingredients = {
         max_percent: 2,
         default_percent: 1,
         description: "Antiseptic and anti-inflammatory properties, good for healing. Refreshing scent.",
-        good_for: ["Adult acne"],
+        good_for: ["Oily Skin"],
         bad_for: ["Sensitive Skin", "Dry skin"], // can be irritating and drying
         densitY: 0.914,
         cost_per_g: 0.1530,
@@ -595,7 +595,7 @@ const ingredients = {
         max_percent: 1,
         default_percent: 0.5,
         description: "Cooling sensation and refreshing scent. It has antiseptic and antimicrobial properties. Can help with acne and oily skin, but can be irritating.",
-        good_for: ["Adult acne", "Puffiness"],
+        good_for: ["Oily Skin", "Puffiness"],
         bad_for: ["Sensitive Skin", "Redness"], // can be irritating and cause a burning sensation for sensitive skin types
         density: 0.898,
         cost_per_g: 0.0942,
@@ -611,7 +611,7 @@ const ingredients = {
         max_percent: 1,
         default_percent: 0.5,
         description: "Known for its invigorating and refreshing scent, has antimicrobial and anti-inflammatory properties. It's often used in skincare for its soothing effects on the skin and its ability to help with respiratory issues.",
-        good_for: ["Atopic dermatitis", "Adult acne"],
+        good_for: ["Atopic dermatitis", "Oily Skin"],
         bad_for: ["Sensitive Skin"], // can be irritating due to its potent nature
         cost_per_g: 1.155,
         light_heavy: 4,
@@ -626,7 +626,7 @@ const ingredients = {
         max_percent: 1,
         default_percent: 0.5,
         description: "With its woodsy aroma, is known for its calming and grounding effects. It has antiseptic, anti-inflammatory, and astringent properties, making it beneficial for skin conditions like acne and aiding in soothing irritated skin.",
-        good_for: ["Adult acne", "Atopic dermatitis"],
+        good_for: ["Oily Skin", "Atopic dermatitis"],
         bad_for: ["Sensitive Skin"], // may cause irritation in higher concentrations or sensitive individuals
         density: 0.952,
         cost_per_g: 1.7507,
@@ -642,7 +642,7 @@ const ingredients = {
         max_percent: 2,
         default_percent: 0.5,
         description: "Geranium Oil, known for its floral scent, is used for its astringent, antiseptic, and anti-inflammatory properties. It helps in balancing sebum production, enhancing skin elasticity, and promoting the healing of scars and spots.",
-        good_for: ["Adult acne", "Large pores", "Wrinkles"],
+        good_for: ["Oily Skin", "Large pores", "Wrinkles"],
         bad_for: ["Sensitive Skin"], // Can be irritating for some sensitive skin types
         density: 0.887,
         cost_per_g: 1.5031,
@@ -701,7 +701,7 @@ const ingredients = {
         max_percent: 1,
         default_percent: 0.5,
         description: " Anti-inflammatory, antimicrobial, helps in improving skin tone and reducing scars.",
-        good_for: ["Redness", "Adult acne", "Atopic dermatitis"],
+        good_for: ["Redness", "Oily Skin", "Atopic dermatitis"],
         bad_for: []
     },
      "Cinnamon": {
@@ -710,7 +710,7 @@ const ingredients = {
         max_percent: 0.5,
         default_percent: 0.2,
         description: "Antimicrobial, stimulates blood flow, but can be irritating to the skin so should be used cautiously.",
-        good_for: ["Adult acne"],
+        good_for: ["Oily Skin"],
         bad_for: ["Sensitive Skin", "Dry skin"] // potential irritant
     },
     "Black Pepper": {
