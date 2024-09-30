@@ -16,16 +16,20 @@ const ScrollContainer = ({ items, handleSelection, selectedItem, itemRefs }) => 
       {items.map((item, index) => (
         <div
           key={index}
-          ref={(el) => (itemRefs.current[index] = el)} 
+          ref={(el) => (itemRefs.current[index] = el)}
           className={`scroll-item ${selectedItem === item.title ? 'selected-item' : ''}`}
           onClick={() => handleSelection(item, index)}
         >
           <h2>{item.title}</h2>
           <p>{item.description}</p>
-          <p>Ingredients:</p>
-          {item.ingredients
-            ? Object.entries(item.ingredients).map(([key, value]) => renderExpandedIngredient(key, value))
-            : 'No ingredients listed'}
+          {item.ingredients && Object.keys(item.ingredients).length > 0 && (
+            <>
+              <p>Ingredients:</p>
+              {Object.entries(item.ingredients).map(([key, value]) =>
+                renderExpandedIngredient(key, value, index)
+              )}
+            </>
+          )}
         </div>
       ))}
     </div>
