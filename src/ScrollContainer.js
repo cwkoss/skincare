@@ -1,7 +1,7 @@
 import React from 'react';
 import ingredients from './ingredients'; // Import ingredients
 
-const ScrollContainer = ({ items, handleSelection, selectedItem, itemRefs }) => {
+const ScrollContainer = ({ items, handleSelection, selectedItem, itemRefs, big }) => {
   const renderExpandedIngredient = (key, value) => {
     return (
       <React.Fragment key={key}>
@@ -21,7 +21,7 @@ const ScrollContainer = ({ items, handleSelection, selectedItem, itemRefs }) => 
           onClick={() => handleSelection(item, index)}
         >
           <h2>{item.title}</h2>
-          <p>{item.description}</p>
+          <p className={big ? 'big' : ''}>{item.description}</p>
           {item.ingredients && Object.keys(item.ingredients).length > 0 && (
             <>
               <p>Ingredients:</p>

@@ -93,6 +93,7 @@ function Product() {
         selectedItem={selectedProduct}
         isMultipleSelection={false}
         itemRefs={itemRefs}
+        big={true}
       />
     </Layout>
   );

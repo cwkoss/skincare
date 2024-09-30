@@ -260,6 +260,10 @@ button.submit:disabled {
   color: #555;
 }
 
+.scroll-item p.big {
+  font-size: 1em;
+}
+
 .item-feature {
   font-size: 0.9em;
   color: #777;
@@ -311,3 +315,4 @@ button.submit:disabled {
   width: 40dvw;
   height: 8dvh;
 }
+
