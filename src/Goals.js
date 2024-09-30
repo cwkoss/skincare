@@ -16,11 +16,11 @@ function Goals() {
   if (state.productData === "Hair and Scalp Oil") {
     skincareGoals = ["Dry scalp", "Hair growth", "Hair shine", "Hair strength"];
   } else if (state.productData === "Body Moisturizing Cream or Body Butter") {
-    skincareGoals = ["Dry skin", "Sensitive Skin", "Sun Protection", "Calloused Skin", "Stretch marks", "Eczema", "Aging"];
+    skincareGoals = ["Oily Skin", "Dry skin", "Sensitive Skin", "Calloused Skin", "Stretch marks", "Eczema", "Aging"];
   } else {
     skincareGoals = [
-      "Adult acne", "Dry skin", "Inflamation", "Wrinkles",
-      "Puffiness", "Redness", "Aging", "Large pores"
+      "Oily Skin", "Dry Skin", "Inflamation", "Wrinkles",
+      "Puffiness", "Redness", "Aging", "Large Pores"
     ];
   }
 
