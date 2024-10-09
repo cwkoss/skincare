@@ -8,7 +8,7 @@ import { act } from 'react';
 const RecipeContext = createContext();
 
 const initialRecipeState = {
-  recipeId: new Date().getTime().toString(),
+  recipeId: new Date().getTime().toString(), // TODO: Change to basename + generation + timestamp
   goalsData: [],
   productData: '',
   includeFragrance: 'no',
@@ -16,7 +16,12 @@ const initialRecipeState = {
   currentPhase: "",
   recipe: {},
   rawRecipe: {},
-  recipeName: ''
+  recipeName: '', //deprecated old field
+  baseName: '', // "Bob's Cool Cream"
+  variationName: '', //"Lavender"
+  generation: 0, 
+  displayName: '',  // "Bob's Cool Cream var. Lavender (Gen 2)
+  parentRecipeId: '', // if generation zero, equal to recipeId, if not, equal to parent recipeId, used to query all generations of a recipe
 };
 
 const recipeReducer = (state, action) => {

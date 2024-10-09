@@ -33,7 +33,7 @@ function Summary() {
 
   const handleAIClick = () => {
 
-    navigate('/phase-choices');
+    navigate('/product');
 
   };
   
@@ -61,29 +61,21 @@ function Summary() {
   return (
     <Layout title="How it works"
       handleSubmit={handleAIClick}
-      buttonText="Generate a Formulation with AI"
+      buttonText="Let's Get Started!"
       isSubmitDisabled={loading}
       whyDisabled="Loading...">
 
-      <h3></h3>
-      AI is going to help you make a {state.productData} formulation. 
-      <br /><br /> For each 'phase' (groups of ingredients that are mixed into the formula at the same time),  AI will suggest options choose from. 
-      <br /><br /> The AI will also suggest the order in which you should add the phases to your formulation. Here's a brief overview of each phase:
       <ol>
-        <li> Emulsifier: Determines the consistency and texture of the product and allows oil and water to combine.</li>
-        {Object.entries(phaseDescriptions).map(([phase, description]) => (
-          <li key={phase}>{phase.charAt(0).toUpperCase() + phase.slice(1)}: {description}</li>
-        ))}
-      </ol>
+  <li><b>Complete a Brief Questionnaire:</b> You'll answer a brief questionnaire to help us understand your skincare needs and goals.</li>
+  <li><b>Build Your Base Recipe:</b> Based on your responses, you'll select customized options to build a base recipe tailored just for you.</li>
+  <li><b>Create a Variation:</b> You'll choose a variation—tweaking your base recipe to experiment and further personalize your formula.</li>
+  <li><b>Try Your Customized Products:</b> You'll receive <b>TWO 1-oz portions</b>—one of your base recipe and one of your variation (about a 1-3 month supply)—to try and compare.</li>
+  <li><b>Refine and Reorder:</b> You'll choose your favorite and design a new variation based on that recipe for your next order, continually enhancing your skincare experience.</li>
+  <li><b>Perfect Your Skincare Recipe:</b> Repeat every couple of months until you've found the <b>perfect skincare recipe</b> uniquely tailored to your skin!</li>
+</ol>
 
-      {loading ? (
-        <div className="loading-container">
-          <div className="loader"></div>
-          <p className="loading-message">{currentMessage}</p>
-        </div>
-      ) : (
-        <></>
-      )}
+      
+
     </Layout>
   );
 }

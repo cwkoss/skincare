@@ -59,7 +59,7 @@ function Goals() {
     updateSession(sessionData).then(() => {
       updateGoalsData(selectedOptions); 
       updateIncludeFragrance(includeFragrance);
-      navigate('/summary');
+      navigate('/phase-choices');
     });
   };
   

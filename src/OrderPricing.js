@@ -32,7 +32,7 @@ function OrderPricing() {
                 if (!querySnapshot.empty) {
                     querySnapshot.forEach((doc) => {
                         var data = doc.data(); 
-                        console.log(data);
+                        console.log("Recipe data:", JSON.stringify(data));
                         setRecipeData({"ingredients": data.rawRecipe});
                     });
                 } else {
@@ -45,6 +45,7 @@ function OrderPricing() {
 
             if (docSnap.exists()) {
                 setRecipeData(docSnap.data().rawRecipe);
+
             } else {
                 console.log("No such document!");
             }
@@ -53,6 +54,8 @@ function OrderPricing() {
         if (searchParams.get('recipeId') || searchParams.get('recipeName')) {
             fetchData();
         }
+
+
     }, [location.search]);
 
     useEffect(() => {

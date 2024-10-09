@@ -64,7 +64,7 @@ function App() {
                     <h1><img src="/logo.png" className="logo" alt="A logo of a leaf inside a drop"></img> Skincremental</h1>
                     <h4>Experience Skincare Made Exclusively for You</h4>
                   </div>
-                  <Link to="/product"><button className="startbutton">Start Your Personalized Skincare Journey</button></Link>
+                  <Link to="/summary"><button className="startbutton">Start Your Personalized Skincare Journey</button></Link>
                   <div className="homepageText">
     <p><strong>Personalized Skincare, Evolving With You:</strong> Custom-crafted skincare that adapts to your unique needs, environment, and the seasons. Because your skin deserves nothing less.</p>
 
