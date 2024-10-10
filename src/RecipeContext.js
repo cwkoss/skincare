@@ -8,7 +8,8 @@ import { act } from 'react';
 const RecipeContext = createContext();
 
 const initialRecipeState = {
-  recipeId: new Date().getTime().toString(), // TODO: Change to basename + generation + timestamp
+  recipeId: '', // TODO: Change to basename + generation + timestamp
+  createdAt: new Date().getTime().toString(),
   goalsData: [],
   productData: '',
   includeFragrance: 'no',
@@ -17,11 +18,15 @@ const initialRecipeState = {
   recipe: {},
   rawRecipe: {},
   recipeName: '', //deprecated old field
-  baseName: '', // "Bob's Cool Cream"
+  baseName: 'Untitled', // "Bob's Cool Cream"
   variationName: '', //"Lavender"
   generation: 0, 
   displayName: '',  // "Bob's Cool Cream var. Lavender (Gen 2)
-  parentRecipeId: '', // if generation zero, equal to recipeId, if not, equal to parent recipeId, used to query all generations of a recipe
+  originRecipeId: '', // if generation zero, equal to recipeId, if not, equal to recursed parent recipeId, used to query all generations of a recipe
+  parentRecipeId: '', // if generation zero, equal to recipeId, if not, equal to parent recipeId
+  creatorId: '', // user id of the creator
+  orderCount: 0, // number of times this recipe has been ordered
+  favoriteCount: 0, // number of times this recipe has been favorited
 };
 
 const recipeReducer = (state, action) => {
@@ -53,10 +58,43 @@ const recipeReducer = (state, action) => {
       };
     case 'RESET_RECIPE':
       return initialRecipeState;
-    default:
-      return state;
-  }
-};
+      case 'SET_BASE_NAME':
+        return { ...state, baseName: action.payload };
+      case 'SET_VARIATION_NAME':
+        return { ...state, variationName: action.payload };
+      case 'SET_DISPLAY_NAME':
+        return { ...state, displayName: action.payload };
+      case 'SET_PARENT_RECIPE_ID':
+        return { ...state, parentRecipeId: action.payload };
+      case 'SET_ORIGIN_RECIPE_ID':
+        return { ...state, originRecipeId: action.payload };
+      case 'SET_GENERATION':
+        return { ...state, generation: action.payload };
+      case 'INCREMENT_ORDER_COUNT':
+        return { ...state, orderCount: state.orderCount + 1 };
+      case 'INCREMENT_FAVORITE_COUNT':
+        return { ...state, favoriteCount: state.favoriteCount + 1 };
+      case 'DECREMENT_FAVORITE_COUNT':
+        return { ...state, favoriteCount: Math.max(0, state.favoriteCount - 1) };
+      case 'CREATE_VARIATION':
+        return {
+          ...initialRecipeState,
+          baseName: state.baseName,
+          parentRecipeId: state.id,
+          originRecipeId: state.originRecipeId || state.id,
+          generation: state.generation + 1,
+          recipe: JSON.parse(JSON.stringify(state.recipe)), // Deep copy
+          rawRecipe: JSON.parse(JSON.stringify(state.rawRecipe)), // Deep copy
+          productData: state.productData,
+          goalsData: [...state.goalsData],
+          includeFragrance: state.includeFragrance,
+          phaseOrder: [...state.phaseOrder],
+          currentPhase: state.currentPhase
+        };
+      default:
+        return state;
+    }
+  };
 
 export const RecipeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(recipeReducer, initialRecipeState);
