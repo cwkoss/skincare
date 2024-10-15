@@ -27,7 +27,7 @@ const initialRecipeState = {
   creatorId: '', // user id of the creator
   orderCount: 0, // number of times this recipe has been ordered
   favoriteCount: 0, // number of times this recipe has been favorited
-};
+  status: 'incomplete', // incomplete, complete, archived
 
 const recipeReducer = (state, action) => {
   switch (action.type) {
