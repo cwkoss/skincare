@@ -5,7 +5,8 @@ import { useUser } from './UserContext';
 const Login = () => {
     const { user, setUser } = useUser();
     const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isInitializing, setIsInitializing] = useState(true);
 
     const isMobileDevice = () => {
         return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -17,6 +18,7 @@ const Login = () => {
         try {
             if (isMobileDevice()) {
                 await signInWithRedirect(auth, provider);
+                // The page will redirect, so we don't need to do anything else here
             } else {
                 const result = await signInWithPopup(auth, provider);
                 setUser(result.user);
@@ -53,14 +55,12 @@ const Login = () => {
             } catch (error) {
                 console.error("Error handling redirect: ", error);
                 setError("Failed to complete login. Please try again.");
-            } finally {
-                setIsLoading(false);
             }
         };
 
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
-            setIsLoading(false);
+            setIsInitializing(false);
         });
 
         checkRedirectResult();
@@ -68,8 +68,8 @@ const Login = () => {
         return () => unsubscribe();
     }, [setUser]);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
+    if (isInitializing) {
+        return <div>Initializing...</div>;
     }
 
     if (user && user.uid) {
