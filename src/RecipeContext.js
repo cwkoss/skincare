@@ -72,7 +72,8 @@ const recipeReducer = (state, action) => {
       return {
         ...state,
         baseName: action.payload,
-        displayName: generateDisplayName(action.payload, state.variationName, state.generation)
+        displayName: generateDisplayName(action.payload, state.variationName, state.generation),
+        recipeId: state.createdAt+action.payload+state.generation
       };
     case 'SET_VARIATION_NAME':
       return {
@@ -84,12 +85,14 @@ const recipeReducer = (state, action) => {
       return {
         ...state,
         generation: action.payload,
-        displayName: generateDisplayName(state.baseName, state.variationName, action.payload)
+        displayName: generateDisplayName(state.baseName, state.variationName, action.payload),
+        recipeId: state.createdAt+state+baseName+state.generation
       };
     case 'CREATE_VARIATION':
       const newGeneration = state.generation + 1;
       return {
         ...initialRecipeState,
+        createdAt: new Date().getTime().toString(),
         baseName: state.baseName,
         parentRecipeId: state.recipeId,
         originRecipeId: state.originRecipeId || state.recipeId,

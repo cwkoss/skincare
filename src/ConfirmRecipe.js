@@ -10,11 +10,13 @@ function ConfirmRecipe() {
   const navigate = useNavigate();
   const [recipeName, setRecipeName] = useState(state.recipeName || '');
 
-  useEffect(() => {
-    dispatch({ type: 'SET_RECIPE_NAME', payload: recipeName });
-  }, [recipeName, dispatch]);
+ /* TODO REMOVE useEffect(() => {
+
+  }, [recipeName, dispatch]);*/
 
   const goToNextPhase = () => {
+    dispatch({ type: 'SET_RECIPE_NAME', payload: recipeName });
+    dispatch({ type: 'SET_BASE_NAME', payload: recipeName });
     dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
     navigate('/order-formulation');
     alert("Recipe Confirmed!");
