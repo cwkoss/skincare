@@ -1,78 +1,94 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, provider, signInWithPopup, signInWithRedirect, signOut, getRedirectResult } from "./firebase-config";
 import { useUser } from './UserContext';
 
 const Login = () => {
-    const { user, setUser } = useUser(); // Assume setUser is provided by your UserContext to set the user state
+    const { user, setUser } = useUser();
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Function to detect if the user is on a mobile device
     const isMobileDevice = () => {
         return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     };
 
     const handleLogin = async () => {
+        setError(null);
+        setIsLoading(true);
         try {
             if (isMobileDevice()) {
                 await signInWithRedirect(auth, provider);
             } else {
                 const result = await signInWithPopup(auth, provider);
-                setUser(result.user); // Update the user context immediately
-                console.log(result.user);
+                setUser(result.user);
             }
         } catch (error) {
             console.error("Error logging in: ", error);
+            setError("Failed to log in. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const handleLogout = async () => {
+        setError(null);
+        setIsLoading(true);
         try {
             await signOut(auth);
-            setUser(null); // Clear the user context on logout
-            console.log("User signed out");
+            setUser(null);
         } catch (error) {
             console.error("Error signing out: ", error);
+            setError("Failed to log out. Please try again.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    // Handle the redirect result after returning from the provider's page
     useEffect(() => {
-        console.log("Checking redirect result");
         const checkRedirectResult = async () => {
             try {
                 const result = await getRedirectResult(auth);
                 if (result && result.user) {
-                    setUser(result.user); // Update the user context with the result
-                    console.log(result.user);
+                    setUser(result.user);
                 }
             } catch (error) {
                 console.error("Error handling redirect: ", error);
+                setError("Failed to complete login. Please try again.");
+            } finally {
+                setIsLoading(false);
             }
         };
 
-        checkRedirectResult();
-
-        // Optional: Listen for auth state changes to ensure the user is always captured
         const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (user) {
-                setUser(user); // Update the user context if a user is authenticated
-            }
+            setUser(user);
+            setIsLoading(false);
         });
 
-        return () => unsubscribe(); // Cleanup on component unmount
+        checkRedirectResult();
+
+        return () => unsubscribe();
     }, [setUser]);
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     if (user && user.uid) {
         return (
             <div>
                 <h1>Welcome, {user.displayName}</h1>
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleLogout} disabled={isLoading}>
+                    {isLoading ? "Logging out..." : "Logout"}
+                </button>
             </div>
         );
     }
 
     return (
         <div>
-            <button onClick={handleLogin}>Login with Google</button>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <button onClick={handleLogin} disabled={isLoading}>
+                {isLoading ? "Logging in..." : "Login with Google"}
+            </button>
         </div>
     );
 };
