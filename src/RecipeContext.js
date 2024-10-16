@@ -143,6 +143,9 @@ export const RecipeProvider = ({ children }) => {
 
   // Effect to send state changes to Firebase
   useEffect(() => {
+    if(state.baseName === 'Untitled') {
+      return;
+    }
     console.log(state);
     updateRecipeInFirebase(state);
   }, [state]); // Re-run this effect whenever the state changes
