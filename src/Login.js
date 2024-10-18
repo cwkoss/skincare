@@ -3,7 +3,7 @@ import { auth, provider, signInWithPopup, signInWithRedirect } from "./firebase-
 import { useUser } from './UserContext';
 
 const Login = () => {
-    const { user, loading } = useUser();
+    const { user, loading, logout } = useUser();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -21,8 +21,7 @@ const Login = () => {
                 // The page will redirect, so we don't need to do anything else here
             } else {
                 console.log('Login: Attempting popup sign-in');
-                const result = await signInWithPopup(auth, provider);
-                console.log('Login: Popup result', result.user);
+                await signInWithPopup(auth, provider);
             }
         } catch (error) {
             console.error("Login: Error logging in", error);
@@ -45,7 +44,7 @@ const Login = () => {
             <div>
                 <h1>Welcome, {user.displayName}</h1>
                 <p>Email: {user.email}</p>
-                <button onClick={() => auth.signOut()} disabled={isLoading}>
+                <button onClick={logout} disabled={isLoading}>
                     {isLoading ? "Logging out..." : "Logout"}
                 </button>
             </div>

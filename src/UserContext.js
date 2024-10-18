@@ -8,30 +8,35 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkRedirectResult = async () => {
+    let unsubscribe;
+    
+    const initializeAuth = async () => {
       try {
+        console.log('UserProvider: Checking redirect result');
         const result = await getRedirectResult(auth);
         if (result && result.user) {
-          console.log('UserProvider: Redirect result', result.user);
+          console.log('UserProvider: Redirect result found', result.user);
           setUser(result.user);
+          setLoading(false);
+        } else {
+          console.log('UserProvider: No redirect result, setting up auth listener');
+          unsubscribe = auth.onAuthStateChanged((currentUser) => {
+            console.log('UserProvider: Auth state changed', currentUser);
+            setUser(currentUser);
+            setLoading(false);
+          });
         }
       } catch (error) {
-        console.error('UserProvider: Error handling redirect', error);
+        console.error('UserProvider: Error during auth initialization', error);
+        setLoading(false);
       }
     };
 
-    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
-      console.log('UserProvider: Auth state changed', currentUser);
-      if (currentUser) {
-        setUser(currentUser);
-      } else {
-        setUser(null);
-        await checkRedirectResult(); // Check for redirect result if no user is found
-      }
-      setLoading(false);
-    });
+    initializeAuth();
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const logout = async () => {
