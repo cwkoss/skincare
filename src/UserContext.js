@@ -12,23 +12,23 @@ export const UserProvider = ({ children }) => {
     
     const initializeAuth = async () => {
       try {
-        console.log('UserProvider: Checking redirect result');
+        console.log('UserProvider: Initializing auth');
         const result = await getRedirectResult(auth);
         if (result && result.user) {
           console.log('UserProvider: Redirect result found', result.user);
           setUser(result.user);
-          setLoading(false);
         } else {
-          console.log('UserProvider: No redirect result, setting up auth listener');
-          unsubscribe = auth.onAuthStateChanged((currentUser) => {
-            console.log('UserProvider: Auth state changed', currentUser);
-            setUser(currentUser);
-            setLoading(false);
-          });
+          console.log('UserProvider: No redirect result found');
         }
       } catch (error) {
-        console.error('UserProvider: Error during auth initialization', error);
-        setLoading(false);
+        console.error('UserProvider: Error handling redirect', error);
+      } finally {
+        console.log('UserProvider: Setting up auth state listener');
+        unsubscribe = auth.onAuthStateChanged((currentUser) => {
+          console.log('UserProvider: Auth state changed', currentUser);
+          setUser(currentUser);
+          setLoading(false);
+        });
       }
     };
 

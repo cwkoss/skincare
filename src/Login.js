@@ -8,7 +8,9 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const isMobileDevice = () => {
-        return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        return false;
+        const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+        return mobileRegex.test(navigator.userAgent) || window.innerWidth <= 768;
     };
 
     const handleLogin = async () => {
@@ -16,11 +18,10 @@ const Login = () => {
         setIsLoading(true);
         try {
             if (isMobileDevice()) {
-                console.log('Login: Attempting redirect sign-in');
+                console.log('Login: Detected mobile device, attempting redirect sign-in');
                 await signInWithRedirect(auth, provider);
-                // The page will redirect, so we don't need to do anything else here
             } else {
-                console.log('Login: Attempting popup sign-in');
+                console.log('Login: Detected non-mobile device, attempting popup sign-in');
                 await signInWithPopup(auth, provider);
             }
         } catch (error) {
