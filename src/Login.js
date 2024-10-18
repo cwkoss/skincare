@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { auth, provider, signInWithPopup, signInWithRedirect } from "./firebase-config";
+import { auth, provider, signInWithPopup } from "./firebase-config";
 import { useUser } from './UserContext';
 
 const Login = () => {
@@ -7,23 +7,12 @@ const Login = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const isMobileDevice = () => {
-        return false;
-        const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-        return mobileRegex.test(navigator.userAgent) || window.innerWidth <= 768;
-    };
-
     const handleLogin = async () => {
         setError(null);
         setIsLoading(true);
         try {
-            if (isMobileDevice()) {
-                console.log('Login: Detected mobile device, attempting redirect sign-in');
-                await signInWithRedirect(auth, provider);
-            } else {
-                console.log('Login: Detected non-mobile device, attempting popup sign-in');
-                await signInWithPopup(auth, provider);
-            }
+            console.log('Login: Attempting sign-in with popup');
+            await signInWithPopup(auth, provider);
         } catch (error) {
             console.error("Login: Error logging in", error);
             setError("Failed to log in. Please try again.");
