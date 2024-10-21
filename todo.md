@@ -1,13 +1,16 @@
 Goals for launch
 
-- AI generates a recipe that is broken down by phase (could be multiple calls)
-- Normalize phase based recipe to ensure 
---- Contains appropriate amount of emulsifier if has both water and oil phases
---- Make sure proportions of each phase type are reasonably balanced
-- User is able to "chat" with AI to update rather than having to manually adjust recipe (though manual mode should still be an option).  This could either be freetext or with a 'suggestions' based button interface
+- Link up login to recipe generation flow
+- Add variation request page (just goals, not ingredients yet for v1)
+- Decide how I'll manually manage variation creation so it gets stored in DB before launch
+- Restyle emulsifier page to use scrollcontainer
 - Do a better job of explaining what the user should expect from their recipe.  This could be based on the scales I prototyped or something else, but I'd like something more illustrative than a paragraph of text. 
-- Revist design of site
-- Update new ingredients
+- Add rest of essential oils to ingredients for more fragrance options - make sure frangrances can go further from examples.
+- Improve styling on order-formulation
+
+
+Bugs:
+- Active ingredient can show no ingredients twice
 
 
 User choices for recipe dichotomies

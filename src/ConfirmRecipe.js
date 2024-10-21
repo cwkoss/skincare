@@ -19,8 +19,8 @@ function ConfirmRecipe() {
     dispatch({ type: 'SET_BASE_NAME', payload: recipeName });
     dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
     navigate('/order-formulation');
-    alert("Recipe Confirmed!");
   };
+  
   const calculateOverallPercentages = () => {
     const overallPercentages = {};
     let totalAdditivePercent = 0;
