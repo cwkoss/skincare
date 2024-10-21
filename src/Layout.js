@@ -16,11 +16,18 @@ const Layout = ({ children, title, handleSubmit, isSubmitDisabled, buttonText, w
                 </div>
             </div>
             <div className="button-footer">
-                <button className={"footer-submit" + (isSubmitDisabled ? " disabled" : "")} type="submit" onClick={handleSubmit}>{buttonText}</button>
+                <button
+                    className={`footer-submit${isSubmitDisabled ? " disabled" : ""}`}
+                    type="submit"
+                    onClick={handleSubmit}
+                    disabled={isSubmitDisabled}  // This line actually disables the button
+                >
+                    {buttonText}
+                </button>
                 {isSubmitDisabled && <p className="why-disabled">{whyDisabled}</p>}
             </div>
         </div>
     );
-}; 
+};
 
 export default Layout;

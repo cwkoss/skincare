@@ -11,7 +11,7 @@ Goals for launch
 
 Bugs:
 - Active ingredient can show no ingredients twice
-- Product next button clickable with no product selected
+
 
 
 
