@@ -3,7 +3,7 @@ Goals for launch
 - Link up login to recipe generation flow
 - Add variation request page (just goals, not ingredients yet for v1)
 - Decide how I'll manually manage variation creation so it gets stored in DB before launch
-- Restyle emulsifier page to use scrollcontainer
+- Improve option text on emulsifier page 
 - Do a better job of explaining what the user should expect from their recipe.  This could be based on the scales I prototyped or something else, but I'd like something more illustrative than a paragraph of text. 
 - Add rest of essential oils to ingredients for more fragrance options - make sure frangrances can go further from examples.
 - Improve styling on order-formulation
@@ -11,6 +11,7 @@ Goals for launch
 
 Bugs:
 - Active ingredient can show no ingredients twice
+- Product next button clickable with no product selected
 
 
 

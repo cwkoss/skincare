@@ -25,6 +25,29 @@ function PhaseChoices() {
   const itemRefs = useRef([]); // Add refs to scroll into view
   const [somethingElseText, setSomethingElseText] = useState('');
 
+  const emulsifierOptions = [
+    {
+      title: 'Lotion',
+      ingredients: {
+        aqueous: '60%',
+        oil: '34%',
+        "Cetearyl Alcohol": '6%',
+      },
+      description: 'A lightweight formulation ideal for normal to oily skin types.'
+    },
+    {
+      title: 'Cream',
+      ingredients: {
+        aqueous: '35%',
+        oil: '57%',
+        "Lecithin": '4%',
+        "Cetearyl Alcohol": '4%',
+      },
+      description: 'A rich formulation suitable for dry and aging skin.'
+    }
+  ];
+
+
   const fetchPhaseSuggestions = async () => {
     let fetchedPhaseSuggestions = "dummy";
     try {
@@ -74,10 +97,6 @@ function PhaseChoices() {
         data: phase
       }
     });
-    // TODO - pull this out and update emulsifier display
-    if (state.currentPhase === "emulsifier") {
-      return;
-    }
     if (itemRefs.current[index]) {
       itemRefs.current[index].scrollIntoView({ behavior: 'smooth', inline: 'center' });
     }
@@ -95,6 +114,21 @@ function PhaseChoices() {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  const renderPhaseChoices = () => {
+    const options = state.currentPhase === "emulsifier" ? emulsifierOptions : phaseSuggestions;
+
+    return (
+      <div className="scroll-container">
+        <ScrollContainer
+          items={options}
+          handleSelection={handlePhaseSelection}
+          selectedItem={selectedPhase}
+          itemRefs={itemRefs}
+        />
+      </div>
+    );
+  };
+
   if (isLoading) {
     return (
       <div style={{ textAlign: "center" }}>
@@ -107,54 +141,17 @@ function PhaseChoices() {
     );
   }
 
-  if (state.currentPhase === "emulsifier") {
-    const lotionFormula = {
-      title: 'Lotion',
-      ingredients: {
-        aqueous: '60%',
-        oil: '34%',
-        "Cetearyl Alcohol": '6%',
-      },
-      description: 'A lightweight formulation ideal for normal to oily skin types.'
-    };
 
-    const creamFormula = {
-      title: 'Cream',
-      ingredients: {
-        aqueous: '35%',
-        oil: '57%',
-        "Lecithin": '4%',
-        "Cetearyl Alcohol": '4%',
-      },
-      description: 'A rich formulation suitable for dry and aging skin.'
-    };
 
-    return (
-      <Layout
-        title={"Choose Formula Consistency"}
-        handleSubmit={() => { goToNextPhase() }}
-        isSubmitDisabled={selectedPhase === null}
-        whyDisabled="Choose Consistency">
-        <div>
-          <div style={selectedPhase === lotionFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
-            <h4>{lotionFormula.title}</h4>
-            <p>Ingredients: {Object.entries(lotionFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
-            <p>Description: {lotionFormula.description}</p>
-            <button onClick={() => handlePhaseSelection(lotionFormula)}>Choose {lotionFormula.title}</button>
-          </div>
-          <div style={selectedPhase === creamFormula.title ? { border: '2px solid blue', padding: '10px' } : {}}>
-            <h4>{creamFormula.title}</h4>
-            <p>Ingredients: {Object.entries(creamFormula.ingredients).map(([key, value]) => `${key} ${value}`).join(', ')}</p>
-            <p>Description: {creamFormula.description}</p>
-            <button onClick={() => handlePhaseSelection(creamFormula)}>Choose {creamFormula.title}</button>
-          </div>
-        </div>
-      </Layout>
-    )
-  };
+return (
+  <Layout
+    title={state.currentPhase === "emulsifier" ? "Choose Formula Consistency" : `Choose Your ${capitalizeFirstLetter(state.currentPhase)}`}
+    handleSubmit={goToNextPhase}
+    isSubmitDisabled={selectedPhase === null}
+    whyDisabled={state.currentPhase === "emulsifier" ? "Choose Consistency" : "Choose an option"}
+  >
+    {wantSomethingElse ? (
 
-  if (wantSomethingElse) {
-    return (
       <Layout
         title="Request Something Else"
         handleSubmit={() => { requestSomethingElse() }}
@@ -169,30 +166,15 @@ function PhaseChoices() {
           value={somethingElseText}
         />
       </Layout>
-    );
-  };
 
-
-  return (
-    <Layout
-      title={`Choose Your ${capitalizeFirstLetter(state.currentPhase)}`}
-      handleSubmit={goToNextPhase}
-      isSubmitDisabled={selectedPhase === null}
-      whyDisabled="Choose an option"
-    >
-      <div className="scroll-container">
-        <ScrollContainer
-          items={phaseSuggestions}
-          handleSelection={handlePhaseSelection}
-          selectedItem={selectedPhase}
-          itemRefs={itemRefs}
-        />
-      </div>
-      <p className="something-else"><a onClick={() => setWantSomethingElse(true)}>Looking for something else?</a></p>
-    </Layout>
-  );
-
-
+    ) : (
+      <>
+        {renderPhaseChoices()}
+        <p className="something-else"><a onClick={() => setWantSomethingElse(true)}>Looking for something else?</a></p>
+      </>
+    )}
+  </Layout>
+);
 }
 
 export default PhaseChoices;
