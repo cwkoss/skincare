@@ -13,22 +13,6 @@ Bugs:
 - Active ingredient can show no ingredients twice
 
 
-User choices for recipe dichotomies
-Gentle <> Active OR Soothing <> Stimulating
-Prevents Acne <> Moisturizes Intensely
-Light <> Heavy or Penetrating <> Occlusive
-
-New user flow:
-- User makes the above choices then
--- For each phase
---- User is presented with 3 suggestions for the phase, each with a description.  
---- User chooses one before moving to the next phase, or can reroll with a text area for a description of what they are looking for
--- After all phases are complete, there is a final step for choosing proportions of the phases. 
-
-Boolean choice
-- Do you wish to only use plant derived ingredients? 
-- All fragrances options are from plant derived essential oils that offer skin benefits. Do you wish to include these fragrances or would you like to minimize fragrance? 
-
 
 --- Next steps --- 
 
@@ -151,3 +135,10 @@ DONE
 - build page that computes weights from target weight and proportions "prep assist" tool
 - Build review page
 - Style other pages so they all have a center column with fixed width like the homepage. 
+
+
+User choices for recipe dichotomies
+Gentle <> Active OR Soothing <> Stimulating
+Prevents Acne <> Moisturizes Intensely
+Light <> Heavy or Penetrating <> Occlusive
+
