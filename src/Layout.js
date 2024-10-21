@@ -1,18 +1,19 @@
 import React from 'react';
 
-const Layout = ({ children, title, handleSubmit, isSubmitDisabled, buttonText, whyDisabled }) => {
-    if (!buttonText) {
-        buttonText = "Next";
-    }
-    if (!whyDisabled) {
-        whyDisabled = "Please make a selection";
-    }
+const Layout = React.memo(({ 
+    children, 
+    title, 
+    handleSubmit, 
+    isSubmitDisabled = false, 
+    buttonText = "Next", 
+    whyDisabled = "Please make a selection" 
+}) => {
     return (
         <div className="layout">
             <div className="body-container">
                 <h2>{title}</h2>
                 <div className="scroller">
-                    {children} {/* This will render the passed-in JSX content */}
+                    {children}
                 </div>
             </div>
             <div className="button-footer">
@@ -20,14 +21,17 @@ const Layout = ({ children, title, handleSubmit, isSubmitDisabled, buttonText, w
                     className={`footer-submit${isSubmitDisabled ? " disabled" : ""}`}
                     type="submit"
                     onClick={handleSubmit}
-                    disabled={isSubmitDisabled}  // This line actually disables the button
+                    disabled={isSubmitDisabled}
+                    aria-label={isSubmitDisabled ? whyDisabled : buttonText}
                 >
                     {buttonText}
                 </button>
-                {isSubmitDisabled && <p className="why-disabled">{whyDisabled}</p>}
+                {isSubmitDisabled && <p className="why-disabled" aria-live="polite">{whyDisabled}</p>}
             </div>
         </div>
     );
-};
+});
+
+Layout.displayName = 'Layout';
 
 export default Layout;
