@@ -57,7 +57,8 @@ function OrderFormulation() {
                 createdAt: new Date(),
                 waitlist: !inSeattleArea,
                 location: userLocation,
-                note
+                note,
+                variationRequest: state.variationRequest // Add this line
             });
             console.log("Order submitted");
 

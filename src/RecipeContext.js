@@ -28,6 +28,10 @@ const initialRecipeState = {
   orderCount: 0, // number of times this recipe has been ordered
   favoriteCount: 0, // number of times this recipe has been favorited
   status: 'incomplete', // incomplete, complete, archived
+  variationRequest: {
+    selectedOptions: [],
+    customRequest: ''
+  },
 };
 
 const generateDisplayName = (baseName, variationName, generation) => {
@@ -73,7 +77,7 @@ const recipeReducer = (state, action) => {
         ...state,
         baseName: action.payload,
         displayName: generateDisplayName(action.payload, state.variationName, state.generation),
-        recipeId: state.createdAt+action.payload+state.generation
+        recipeId: state.createdAt + action.payload + state.generation
       };
     case 'SET_VARIATION_NAME':
       return {
@@ -86,7 +90,7 @@ const recipeReducer = (state, action) => {
         ...state,
         generation: action.payload,
         displayName: generateDisplayName(state.baseName, state.variationName, action.payload),
-        recipeId: state.createdAt+state+baseName+state.generation
+        recipeId: state.createdAt + state + baseName + state.generation
       };
     case 'CREATE_VARIATION':
       const newGeneration = state.generation + 1;
@@ -133,6 +137,11 @@ const recipeReducer = (state, action) => {
         phaseOrder: [...state.phaseOrder],
         currentPhase: state.currentPhase
       };
+    case 'SET_VARIATION_REQUEST':
+      return {
+        ...state,
+        variationRequest: action.payload
+      };
     default:
       return state;
   }
@@ -143,7 +152,7 @@ export const RecipeProvider = ({ children }) => {
 
   // Effect to send state changes to Firebase
   useEffect(() => {
-    if(state.baseName === 'Untitled') {
+    if (state.baseName === 'Untitled') {
       return;
     }
     console.log(state);
