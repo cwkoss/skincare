@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecipe } from './RecipeContext';
 import Layout from './Layout';
+import { Button, TextField, Typography, Box, Chip } from '@mui/material';
 
 const variationOptions = [
   'More Hydrating',
@@ -13,6 +16,8 @@ const variationOptions = [
 export default function VariationRequest() {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [customRequest, setCustomRequest] = useState('');
+  const { dispatch } = useRecipe();
+  const navigate = useNavigate();
 
   const handleOptionToggle = (option) => {
     setSelectedOptions((prev) =>
@@ -26,6 +31,12 @@ export default function VariationRequest() {
     // Handle form submission here
     console.log('Selected options:', selectedOptions);
     console.log('Custom request:', customRequest);
+    
+    // Save the variation request to the recipe context
+    dispatch({ type: 'SET_VARIATION_REQUEST', payload: { selectedOptions, customRequest } });
+    
+    // Navigate to the order formulation page
+    navigate('/order-formulation');
   };
 
   const isFormEmpty = selectedOptions.length === 0 && customRequest.trim() === '';
