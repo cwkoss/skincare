@@ -316,3 +316,20 @@ button.submit:disabled {
   height: 8dvh;
 }
 
+.variation-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.big-text-area {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-size: 1em;
+  resize: vertical;
+}

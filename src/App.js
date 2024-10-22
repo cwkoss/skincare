@@ -23,6 +23,7 @@ import ConfirmRecipe from './ConfirmRecipe';
 import Login from './Login';
 import { auth } from "./firebase-config";
 import { UserProvider } from './UserContext';
+import VariationRequest from './VariationRequest';
 
 
 import posthog from 'posthog-js';
@@ -100,6 +101,7 @@ function App() {
               <Route path="/phase-selection" element={<PhaseSelection />} />
               <Route path="/phase-choices" element={<PhaseChoices />} />
               <Route path="/confirm-recipe" element={<ConfirmRecipe />} />
+              <Route path="/variation-request" element={<VariationRequest />} />
             </Routes>
           </Router>
         </RecipeProvider>
