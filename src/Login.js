@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth, provider, signInWithPopup } from "./firebase-config";
 import { useUser } from './UserContext';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const { user, loading, logout } = useUser();
@@ -34,6 +35,9 @@ const Login = () => {
             <div>
                 <h1>Welcome, {user.displayName}</h1>
                 <p>Email: {user.email}</p>
+                {user.email === 'chris@mckoss.com' && (
+                    <Link to="/admin">Go to Admin Page</Link>
+                )}
                 <button onClick={logout} disabled={isLoading}>
                     {isLoading ? "Logging out..." : "Logout"}
                 </button>

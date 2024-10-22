@@ -28,14 +28,11 @@ export default function VariationRequest() {
   };
 
   const handleSubmit = () => {
-    // Handle form submission here
-    console.log('Selected options:', selectedOptions);
-    console.log('Custom request:', customRequest);
+    dispatch({
+      type: 'SET_VARIATION_REQUEST',
+      payload: { selectedOptions, customRequest }
+    });
     
-    // Save the variation request to the recipe context
-    dispatch({ type: 'SET_VARIATION_REQUEST', payload: { selectedOptions, customRequest } });
-    
-    // Navigate to the order formulation page
     navigate('/order-formulation');
   };
 
