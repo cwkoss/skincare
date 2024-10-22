@@ -4,19 +4,15 @@ import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Goals from './Goals';
 import Product from './Product';
 import Summary from './Summary';
-import RecipeBuilder from './RecipeBuilder';
-import FinalizeRecipe from './FinalizeRecipe';
 import SavedRecipe from './SavedRecipe';
 import OrderFormulation from './OrderFormulation';
 import OrderSuccess from './OrderSuccess';
 import Contact from './Contact';
 import OrderPricing from './OrderPricing';
-import VariationSelection from './VariationSelection';
 import OrderSurvey from './OrderSurvey';
 import { pushFirstPageLoadInfo } from './sessionUtils';
 import IngredientsTable from './IngredientsTable';
 import { RecipeProvider } from './RecipeContext'; // Adjust the path as needed
-import PhaseSelection from './PhaseSelection';
 import { FeatureFlagProvider } from './FeatureFlagContext';
 import PhaseChoices from './PhaseChoices';
 import ConfirmRecipe from './ConfirmRecipe';
@@ -89,17 +85,13 @@ function App() {
               <Route path="/goals" element={<Goals />} />
               <Route path="/product" element={<Product />} />
               <Route path="/summary" element={<Summary />} />
-              <Route path="/recipe-builder" element={<RecipeBuilder />} />
-              <Route path="/finalize-recipe" element={<FinalizeRecipe />} />
               <Route path="/saved-recipe" element={<SavedRecipe />} />
               <Route path="/order-formulation" element={<OrderFormulation />} />
               <Route path="/order-success" element={<OrderSuccess />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/order-pricing" element={<OrderPricing />} />
-              <Route path="/variation-selection" element={<VariationSelection />} />
               <Route path="/order-survey" element={<OrderSurvey />} />
               <Route path="/ingredients-table" element={<IngredientsTable />} />
-              <Route path="/phase-selection" element={<PhaseSelection />} />
               <Route path="/phase-choices" element={<PhaseChoices />} />
               <Route path="/confirm-recipe" element={<ConfirmRecipe />} />
               <Route path="/variation-request" element={<VariationRequest />} />
