@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import { db } from './firebase-config'; // Adjust with your actual firebase config import
-import { doc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import ingredients from './ingredients';
 
 function OrderPricing() {
@@ -10,60 +10,55 @@ function OrderPricing() {
     const [targetGrams, setTargetGrams] = useState(60);
     const [ingredientList, setIngredientList] = useState([]);
     const [ingredientsText, setIngredientsText] = useState('');
-
+    const [error, setError] = useState(null);
 
     const totalGrams = ingredientList.reduce((sum, ingredient) => sum + ingredient.grams, 0);
     const totalCost = ingredientList.reduce((sum, ingredient) => sum + ingredient.cost, 0);
-    const totalParts = Object.values(recipeData?.ingredients || {}).reduce((sum, part) => sum + part, 0);
+    const totalParts = recipeData ? Object.values(recipeData).reduce((sum, part) => sum + part, 0) : 0;
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-        console.log(searchParams);
-        const recipeName = searchParams.get('recipeName');
-        console.log(recipeName);
+        const recipeId = searchParams.get('recipeId');
+
         const fetchData = async () => {
-            if(recipeName && recipeName.length > 0) {
-                console.log("Fetching recipe by name");
-                const recipeName = searchParams.get('recipeName');
-                const recipesRef = collection(db, "recipes");
-                const q = query(recipesRef, where("recipeName", "==", recipeName));
-            
-                const querySnapshot = await getDocs(q);
-                if (!querySnapshot.empty) {
-                    querySnapshot.forEach((doc) => {
-                        var data = doc.data(); 
-                        console.log("Recipe data:", JSON.stringify(data));
-                        setRecipeData({"ingredients": data.rawRecipe});
-                    });
-                } else {
-                    console.log("No such document!");
+            if (recipeId) {
+                try {
+                    // First, try to fetch from 'recipes' table
+                    const recipeDoc = await getDoc(doc(db, "recipes", recipeId));
+                    if (recipeDoc.exists()) {
+                        const data = recipeDoc.data();
+                        console.log("Recipe data:", data);
+                        setRecipeData(data.rawRecipe); // Set recipeData to rawRecipe
+                        return;
+                    }
+
+                    // If not found in 'recipes', try 'formulations' table
+                    const formulationDoc = await getDoc(doc(db, "formulations", recipeId));
+                    if (formulationDoc.exists()) {
+                        const data = formulationDoc.data().rawRecipe;
+                        console.log("Formulation data:", data);
+                        setRecipeData(data);
+                        return;
+                    }
+
+                    // If not found in either table, set error
+                    setError("Cannot find recipe by ID");
+                } catch (err) {
+                    console.error("Error fetching recipe:", err);
+                    setError("Error fetching recipe");
                 }
-                return;
-            }
-            const docRef = doc(db, "formulations", searchParams.get('recipeId'));
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                setRecipeData(docSnap.data().rawRecipe);
-
-            } else {
-                console.log("No such document!");
             }
         };
 
-        if (searchParams.get('recipeId') || searchParams.get('recipeName')) {
-            fetchData();
-        }
-
-
+        fetchData();
     }, [location.search]);
 
     useEffect(() => {
         if (recipeData && totalParts > 0) {
-            const ingredientsText = Object.entries(recipeData.ingredients)
+            const ingredientsText = Object.entries(recipeData)
                 .sort((a, b) => b[1] - a[1])
                 .map(([name, parts]) => {
-                    const percentage = ((parts / totalParts) * 100); // Keeping 3 decimal places
+                    const percentage = ((parts / totalParts) * 100);
                     return `${name} (${percentage.toFixed(2)}%)`;
                 })
                 .join(', ');
@@ -71,16 +66,20 @@ function OrderPricing() {
             setIngredientsText(`Base Recipe Ingredients: ${ingredientsText}`);
         }
     }, [recipeData, totalParts]);
-    
-
 
     const calculateIngredients = useCallback(() => {
         if (recipeData) {
-            const totalParts = Object.values(recipeData.ingredients).reduce((sum, part) => sum + part, 0);
-            const newIngredientList = Object.entries(recipeData.ingredients).map(([name, parts]) => {
+            const totalParts = Object.values(recipeData).reduce((sum, part) => sum + part, 0);
+            const newIngredientList = Object.entries(recipeData).map(([name, parts]) => {
                 const ingredientGrams = (targetGrams / totalParts) * parts;
-                const ingredientCost = ingredients[name].cost_per_g ? ingredients[name].cost_per_g * ingredientGrams : "N/A";
-                return { name, parts: parts, grams: ingredientGrams, cost: ingredientCost, type: ingredients[name].type };
+                const ingredientCost = ingredients[name]?.cost_per_g ? ingredients[name].cost_per_g * ingredientGrams : "N/A";
+                return { 
+                    name, 
+                    parts: parts, 
+                    grams: ingredientGrams, 
+                    cost: ingredientCost, 
+                    type: ingredients[name]?.type || 'Unknown'
+                };
             });
             setIngredientList(newIngredientList);
         }
@@ -92,6 +91,13 @@ function OrderPricing() {
         }
     }, [recipeData, targetGrams, calculateIngredients]);
 
+    if (error) {
+        return <div className="error">{error}</div>;
+    }
+
+    if (!recipeData) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="order-pricing">
@@ -99,7 +105,7 @@ function OrderPricing() {
             <input
                 type="number"
                 value={targetGrams}
-                onChange={(e) => setTargetGrams(e.target.value)}
+                onChange={(e) => setTargetGrams(Number(e.target.value))}
                 placeholder="Target Grams"
             />
             <table>
@@ -113,7 +119,7 @@ function OrderPricing() {
                     </tr>
                 </thead>
                 <tbody>
-                    {ingredientList.sort((a, b) => a.type.localeCompare(b.type) )
+                    {ingredientList.sort((a, b) => a.type.localeCompare(b.type))
                     .map((ingredient, index) => (
                         <tr key={index}>
                             <td>{ingredient.name}</td>

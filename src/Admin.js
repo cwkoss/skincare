@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from './UserContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { db } from './firebase-config';
 import { collection, getDocs, query, orderBy, doc, getDoc } from 'firebase/firestore';
 
@@ -60,6 +60,7 @@ const Admin = () => {
             <th>Status</th>
             <th>OldRecipeName</th>
             <th>Recipe</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +71,11 @@ const Admin = () => {
               <td>{order.status || 'Pending'}</td>
               <td>{order.recipeName}</td>
               <td>{order.recipeDisplayName}</td>
+              <td>
+                <Link to={`/admin/order/${order.id}`}>
+                  <button>View Details</button>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -25,6 +25,7 @@ import { auth } from "./firebase-config";
 import { UserProvider } from './UserContext';
 import VariationRequest from './VariationRequest';
 import Admin from './Admin';
+import AdminOrderDetails from './AdminOrderDetails';
 
 import posthog from 'posthog-js';
 
@@ -103,6 +104,7 @@ function App() {
               <Route path="/confirm-recipe" element={<ConfirmRecipe />} />
               <Route path="/variation-request" element={<VariationRequest />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/admin/order/:orderId" element={<AdminOrderDetails />} />
             </Routes>
           </Router>
         </RecipeProvider>
