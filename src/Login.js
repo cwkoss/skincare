@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { auth, provider, signInWithPopup } from "./firebase-config";
-import { useUser, useRecipe } from './UserContext';
+import { useUser } from './UserContext';
+import { useRecipe } from './RecipeContext';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
