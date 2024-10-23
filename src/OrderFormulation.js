@@ -58,14 +58,17 @@ function OrderFormulation() {
                 waitlist: !inSeattleArea,
                 location: userLocation,
                 note,
-                variationRequest: state.variationRequest // Add this line
+                variationRequest: state.variationRequest
             });
             console.log("Order submitted");
 
             // Update the session with the new orderId
             await updateSession({ orderId });
 
-            navigate('/order-success');
+            // Check if user is logged in 
+            const isLoggedIn = checkUserLoggedIn(); // TODO: Implement this function
+
+            navigate('/order-success', { state: { orderId, isLoggedIn } });
         } catch (err) {
             console.error("Error submitting order: ", err);
             setHasError(true);
