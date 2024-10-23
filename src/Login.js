@@ -44,6 +44,7 @@ const Login = () => {
             <div>
                 <h1>Welcome, {user.displayName}</h1>
                 <p>Email: {user.email}</p>
+                <Link to="/dashboard">View My Recipes</Link>
                 {user.email === 'chris@mckoss.com' && (
                     <Link to="/admin">Go to Admin Page</Link>
                 )}

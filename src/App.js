@@ -22,6 +22,7 @@ import { UserProvider } from './UserContext';
 import VariationRequest from './VariationRequest';
 import Admin from './Admin';
 import AdminOrderDetails from './AdminOrderDetails';
+import Dashboard from './Dashboard';
 
 import posthog from 'posthog-js';
 
@@ -97,6 +98,7 @@ function App() {
               <Route path="/variation-request" element={<VariationRequest />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/order/:orderId" element={<AdminOrderDetails />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </Router>
         </RecipeProvider>
