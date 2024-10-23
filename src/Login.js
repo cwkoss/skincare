@@ -3,6 +3,7 @@ import { auth, provider, signInWithPopup } from "./firebase-config";
 import { useUser } from './UserContext';
 import { useRecipe } from './RecipeContext';
 import { Link } from 'react-router-dom';
+import { saveUserToFirestore } from './userUtils';
 
 const Login = () => {
     const { user, loading, logout } = useUser();
@@ -16,6 +17,8 @@ const Login = () => {
         try {
             console.log('Login: Attempting sign-in with popup');
             const result = await signInWithPopup(auth, provider);
+            // Save user data to Firestore
+            await saveUserToFirestore(result.user);
             // Update creatorId in RecipeContext after successful login
             if (result.user) {
                 dispatch({ type: 'SET_CREATOR_ID', payload: result.user.uid });
