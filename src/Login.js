@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { auth, provider, signInWithPopup } from "./firebase-config";
-import { useUser } from './UserContext';
+import { useUser, useRecipe } from './UserContext';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
     const { user, loading, logout } = useUser();
+    const { dispatch } = useRecipe();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -13,7 +14,11 @@ const Login = () => {
         setIsLoading(true);
         try {
             console.log('Login: Attempting sign-in with popup');
-            await signInWithPopup(auth, provider);
+            const result = await signInWithPopup(auth, provider);
+            // Update creatorId in RecipeContext after successful login
+            if (result.user) {
+                dispatch({ type: 'SET_CREATOR_ID', payload: result.user.uid });
+            }
         } catch (error) {
             console.error("Login: Error logging in", error);
             setError("Failed to log in. Please try again.");

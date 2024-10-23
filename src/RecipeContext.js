@@ -4,6 +4,7 @@ import { skincareProducts } from './Product';
 // Assuming you have a utility function for Firebase operations
 import { updateRecipeInFirebase } from './FirebaseUtils';
 import { act } from 'react';
+import { useUser } from './UserContext';
 
 const RecipeContext = createContext();
 
@@ -142,6 +143,8 @@ const recipeReducer = (state, action) => {
         ...state,
         variationRequest: action.payload
       };
+    case 'SET_CREATOR_ID':
+      return { ...state, creatorId: action.payload };
     default:
       return state;
   }
@@ -149,15 +152,21 @@ const recipeReducer = (state, action) => {
 
 export const RecipeProvider = ({ children }) => {
   const [state, dispatch] = useReducer(recipeReducer, initialRecipeState);
+  const { user } = useUser();
 
-  // Effect to send state changes to Firebase
   useEffect(() => {
     if (state.baseName === 'Untitled') {
       return;
     }
+    
+    // If user is logged in and creatorId is not set, update it
+    if (user && user.uid && !state.creatorId) {
+      dispatch({ type: 'SET_CREATOR_ID', payload: user.uid });
+    }
+    
     console.log(state);
     updateRecipeInFirebase(state);
-  }, [state]); // Re-run this effect whenever the state changes
+  }, [state, user]);
 
   return (
     <RecipeContext.Provider value={{ state, dispatch }}>
