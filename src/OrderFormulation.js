@@ -65,10 +65,8 @@ function OrderFormulation() {
             // Update the session with the new orderId
             await updateSession({ orderId });
 
-            // Check if user is logged in 
-            const isLoggedIn = checkUserLoggedIn(); // TODO: Implement this function
 
-            navigate('/order-success', { state: { orderId, isLoggedIn } });
+            navigate('/order-success', { state: { orderId } });
         } catch (err) {
             console.error("Error submitting order: ", err);
             setHasError(true);
