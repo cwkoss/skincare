@@ -130,10 +130,21 @@ function PhaseChoices() {
   };
 
   if (isLoading) {
+    const phaseMessages = {
+      carrier: "Crafting the perfect base for your skincare...",
+      aqueous: "Infusing hydration into your formula...",
+      active: "Selecting potent ingredients for your skin goals...",
+      fragrance: "Designing a delightful sensory experience...",
+      preservative: "Ensuring your product stays fresh and effective...",
+      emulsifier: "Perfecting the texture of your skincare..."
+    };
+
+    const loadingMessage = phaseMessages[state.currentPhase] || "Personalizing your skincare formula...";
+
     return (
       <div className="loading-container">
         <div className="loader"></div>
-        <p className="loading-text">Loading...</p>
+        <p className="loading-text">{loadingMessage}</p>
         <p className="phase-description">{phaseDescriptions[state.currentPhase]}</p>
       </div>
     );

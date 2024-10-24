@@ -354,6 +354,18 @@ button.submit:disabled {
   width: 100%;
 }
 
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -361,11 +373,15 @@ button.submit:disabled {
   align-items: center;
   height: 100vh;
   text-align: center;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  padding: 0 20px; /* Add horizontal padding */
 }
 
 .loader {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid var(--accent-color);
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #ffffff;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -381,10 +397,15 @@ button.submit:disabled {
 .loading-text {
   font-size: 1.2em;
   margin-bottom: 10px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  max-width: 80%; /* Limit the width of the text */
 }
 
 .phase-description {
-  max-width: 80%;
+  max-width: 80%; /* Limit the width of the text */
   font-size: 0.9em;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0 10px; /* Add some extra padding to the description */
 }
