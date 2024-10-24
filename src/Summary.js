@@ -65,21 +65,19 @@ function Summary() {
       isSubmitDisabled={loading}
       whyDisabled="Loading...">
 
-      <div>
-        <p>Welcome to our personalized skincare journey! Here, you'll create custom skincare formulations tailored to your unique needs and preferences. Our AI-driven process ensures that you receive the most effective and personalized skincare solutions.</p>
+      <div className="summary-content">
+        <p className="intro-text">Welcome to our personalized skincare journey! Create custom skincare formulations tailored to your unique needs and preferences.</p>
 
-        <ol>
-          <li><b>Complete a Brief Questionnaire:</b> Start by answering a few questions about your skincare goals and concerns.</li>
-          <li><b>Design Your Formula:</b> Choose from AI-suggested ingredients to build your base skincare product recipe—from moisturizing oils to active ingredients and natural fragrances.</li>
-          <li><b>Create a Variation:</b> Experiment with a second version of your formula, adjusting ingredients to find your perfect match.</li>
-          <li><b>Try Your Customized Products:</b> You'll receive <b>TWO 1-oz portions</b>—one of your base recipe and one of your variation (about a 1-3 month supply)—to try and compare.</li>
-          <li><b>Refine and Reorder:</b> You'll choose your favorite and design a new variation based on that recipe for your next order, continually enhancing your skincare experience.</li>
-          <li><b>Perfect Your Skincare Recipe:</b> Repeat every couple of months until you've found the <b>perfect skincare recipe</b> uniquely tailored to your skin!</li>
+        <ol className="steps-list">
+          <li><b>Complete a Brief Questionnaire:</b> Answer questions about your skincare goals and concerns.</li>
+          <li><b>Design Your Formula:</b> Choose from AI-suggested ingredients to build your base skincare product recipe.</li>
+          <li><b>Create a Variation:</b> Experiment with a second version of your formula to find your perfect match.</li>
+          <li><b>Try Your Customized Products:</b> Receive <b>TWO 1-oz portions</b> to try and compare.</li>
+          <li><b>Refine and Reorder:</b> Choose your favorite and design a new variation for your next order.</li>
+          <li><b>Perfect Your Skincare Recipe:</b> Repeat until you've found your perfect skincare recipe!</li>
         </ol>
 
-        <p>Our service offers unparalleled personalization, ensuring that your skincare products are as unique as you are. With the ability to iterate and refine your formulations, you'll achieve optimal results over time.</p>
-
-        <p>Ready to begin your personalized skincare journey? Click 'Let's Get Started!' to begin crafting your perfect skincare solution.</p>
+        <p className="outro-text">Our service offers unparalleled personalization, ensuring your skincare products are as unique as you are.</p>
       </div>
     </Layout>
   );

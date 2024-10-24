@@ -333,3 +333,23 @@ button.submit:disabled {
   font-size: 1em;
   resize: vertical;
 }
+
+.summary-content {
+  font-size: 0.9rem;
+  padding: 0 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.intro-text, .outro-text {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.steps-list {
+  padding-left: 20px;
+}
+
+.steps-list li {
+  margin-bottom: 10px;
+}
