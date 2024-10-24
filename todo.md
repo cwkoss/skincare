@@ -1,7 +1,6 @@
 Goals for launch
 
-- Link up login to recipe generation flow
-- Add variation request page (just goals, not ingredients yet for v1)
+- Improve saved recipe page. Display percentage breakdown of ingredients instead of parts in each phase, maybe show description of each phase.  
 - Decide how I'll manually manage variation creation so it gets stored in DB before launch
 - Improve option text on emulsifier page 
 - Do a better job of explaining what the user should expect from their recipe.  This could be based on the scales I prototyped or something else, but I'd like something more illustrative than a paragraph of text. 

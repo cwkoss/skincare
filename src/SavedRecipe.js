@@ -5,6 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 function SavedRecipe() {
     const [recipeData, setRecipeData] = useState(null);
+    const [creatorName, setCreatorName] = useState('Unknown');
     const location = useLocation();
     const navigate = useNavigate();
     const recipeId = new URLSearchParams(location.search).get('id');
@@ -16,9 +17,23 @@ function SavedRecipe() {
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
-                    setRecipeData(docSnap.data());
+                    const data = docSnap.data();
+                    setRecipeData(data);
+                    fetchCreatorName(data.creatorId);
                 } else {
                     console.log("No such document!");
+                }
+            }
+        };
+
+        const fetchCreatorName = async (creatorId) => {
+            if (creatorId) {
+                const userDocRef = doc(db, "users", creatorId);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (userDocSnap.exists()) {
+                    const userData = userDocSnap.data();
+                    setCreatorName(userData.displayName || 'Unknown');
                 }
             }
         };
@@ -42,7 +57,7 @@ function SavedRecipe() {
         <div>
             <h2>{recipeData.displayName || recipeData.baseName}</h2>
             <p><strong>Created At:</strong> {createdAtString}</p>
-            <p><strong>Creator ID:</strong> {recipeData.creatorId}</p>
+            <p><strong>Creator:</strong> {creatorName}</p>
             <p><strong>Status:</strong> {recipeData.status}</p>
             <div className="recipe-details">
                 <h3>Ingredients:</h3>
