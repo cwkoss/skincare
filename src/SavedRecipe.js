@@ -7,15 +7,12 @@ function SavedRecipe() {
     const [recipeData, setRecipeData] = useState(null);
     const location = useLocation();
     const navigate = useNavigate();
-    const recipeId = location.state?.recipeId;
-    const [shareButtonText, setShareButtonText] = useState('Share this Recipe');
+    const recipeId = new URLSearchParams(location.search).get('id');
 
     useEffect(() => {
-        const searchParams = new URLSearchParams(location.search);
-        const paramRecipeId = searchParams.get('recipeId');
-        if(paramRecipeId) {
-            const fetchData = async () => {
-                const docRef = doc(db, "formulations", paramRecipeId);
+        const fetchRecipeData = async () => {
+            if (recipeId) {
+                const docRef = doc(db, "recipes", recipeId);
                 const docSnap = await getDoc(docRef);
 
                 if (docSnap.exists()) {
@@ -23,60 +20,50 @@ function SavedRecipe() {
                 } else {
                     console.log("No such document!");
                 }
-            };
+            }
+        };
 
-            fetchData();
-        }
-            
-        else if (recipeId) {
-            const fetchData = async () => {
-                const docRef = doc(db, "formulations", recipeId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    setRecipeData(docSnap.data());
-                } else {
-                    console.log("No such document!");
-                }
-            };
-
-            fetchData();
-        }
-    }, [recipeId, location.search]);
-
-    const handleShareRecipe = () => {
-        const currentUrl = window.location.href;
-        const shareUrl = `${currentUrl}?recipeId=${recipeId}`;
-        navigator.clipboard.writeText(shareUrl).then( () => {
-            console.log('Recipe URL copied to clipboard!');
-            setShareButtonText('Copied!'); // Change button text to 'Copied!'
-
-            setTimeout(() => {
-                setShareButtonText('Share this Recipe');
-            }, 3000);
-        }).catch( () => {
-            console.log('Error copying to clipboard');
-        });
-    };
-
-    const handleOrderFormulation = () => {
-        navigate('/order-formulation', { state: { recipeId } });
-    };
+        fetchRecipeData();
+    }, [recipeId]);
 
     if (!recipeData) return <div>Loading...</div>;
 
+    // Handle createdAt conversion
+    let createdAtString = "Invalid Date";
+    if (recipeData.createdAt) {
+        const timestamp = typeof recipeData.createdAt === 'string' ? parseInt(recipeData.createdAt, 10) : recipeData.createdAt;
+        const createdAt = new Date(timestamp);
+        if (!isNaN(createdAt.getTime())) {
+            createdAtString = createdAt.toLocaleString();
+        }
+    }
+
     return (
         <div>
-            <h2>{recipeData.name}</h2>
-            <div className="recipe">
-                {Object.keys(recipeData.ingredients).map((key, index) => (
-                    <div className="recipe-row" key={index}>
-                        <strong>{key}:</strong> <span className="align-right">{recipeData.ingredients[key].toFixed(2)}</span>
-                    </div>
-                ))}
+            <h2>{recipeData.displayName || recipeData.baseName}</h2>
+            <p><strong>Created At:</strong> {createdAtString}</p>
+            <p><strong>Creator ID:</strong> {recipeData.creatorId}</p>
+            <p><strong>Status:</strong> {recipeData.status}</p>
+            <div className="recipe-details">
+                <h3>Ingredients:</h3>
+                {recipeData.recipe && Object.keys(recipeData.recipe).length > 0 ? (
+                    Object.keys(recipeData.recipe).map((phase, index) => (
+                        <div key={index}>
+                            <h4>{phase.charAt(0).toUpperCase() + phase.slice(1)} Phase</h4>
+                            <ul>
+                                {Object.entries(recipeData.recipe[phase].ingredients || {}).map(([ingredient, amount]) => (
+                                    <li key={ingredient}>{ingredient}: {amount}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))
+                ) : (
+                    <p>No ingredients listed.</p>
+                )}
             </div>
-            <button onClick={handleShareRecipe}>{shareButtonText}</button>
-            <button onClick={handleOrderFormulation}>Order Formulation of this Recipe</button>
+            <button onClick={() => navigate('/order-formulation', { state: { recipeId } })}>
+                Order Formulation
+            </button>
         </div>
     );
 }
