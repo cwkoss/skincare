@@ -131,12 +131,10 @@ function PhaseChoices() {
 
   if (isLoading) {
     return (
-      <div style={{ textAlign: "center" }}>
-        <div className="loading-container">
-          <div className="loader"></div>
-        </div>
-        Loading... <br />
-        <div style={{ width: "80dvw" }}>{phaseDescriptions[state.currentPhase]}</div>
+      <div className="loading-container">
+        <div className="loader"></div>
+        <p className="loading-text">Loading...</p>
+        <p className="phase-description">{phaseDescriptions[state.currentPhase]}</p>
       </div>
     );
   }
