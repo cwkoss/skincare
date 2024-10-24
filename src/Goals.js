@@ -70,17 +70,18 @@ function Goals() {
             handleSubmit={handleSubmit}
             buttonText="Next">
       <form>
-        {skincareGoals.map((goal, index) => (
-          <button
-            key={index}
-            type="button"
-            onClick={() => toggleOption(goal)}
-            className={`multiselect-button ${isOptionSelected(goal) ? 'selected' : ''}`}
-          >
-            {goal}
-          </button>
-        ))}
-
+        <div className="multiselect-container">
+          {skincareGoals.map((goal, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => toggleOption(goal)}
+              className={`multiselect-button ${isOptionSelected(goal) ? 'selected' : ''}`}
+            >
+              {goal}
+            </button>
+          ))}
+        </div>
       </form>
     </Layout>
   );

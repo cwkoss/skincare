@@ -47,7 +47,7 @@ export default function VariationRequest() {
       buttonText="Submit Variation Request"
     >
       <p>Now that you've completed a base recipe, what kind of variation would you like?</p>
-      <div className="variation-options">
+      <div className="multiselect-container">
         {variationOptions.map((option) => (
           <button
             key={option}
