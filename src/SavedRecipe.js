@@ -66,8 +66,10 @@ function SavedRecipe() {
                         <div key={index}>
                             <h4>{phase.charAt(0).toUpperCase() + phase.slice(1)} Phase</h4>
                             <ul>
-                                {Object.entries(recipeData.recipe[phase].ingredients || {}).map(([ingredient, amount]) => (
-                                    <li key={ingredient}>{ingredient}: {amount}</li>
+                                {Object.keys(recipeData.recipe[phase].ingredients || {}).map(ingredient => (
+                                    <li key={ingredient}>
+                                        {ingredient}: {recipeData.rawRecipe && recipeData.rawRecipe[ingredient] ? parseFloat(recipeData.rawRecipe[ingredient]).toFixed(2) : '0.00'}%
+                                    </li>
                                 ))}
                             </ul>
                         </div>
