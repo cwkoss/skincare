@@ -79,7 +79,7 @@ function App() {
   </div>
 
                   <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
-                  <Link to="/contact"><span>Contact us</span></Link>
+                  <Link to="/contact" className="modern-link"><span>Contact us</span></Link>
                   <Login />
                 </div>
               } />

@@ -44,9 +44,9 @@ const Login = () => {
             <div>
                 <h1>Welcome, {user.displayName}</h1>
                 <p>Email: {user.email}</p>
-                <Link to="/dashboard">View My Recipes</Link>
+                <p><Link className="modern-link" to="/dashboard">View My Recipes</Link></p>
                 {user.email === 'chris@mckoss.com' && (
-                    <Link to="/admin">Go to Admin Page</Link>
+                    <p><Link className="modern-link" to="/admin">Go to Admin Page</Link></p>
                 )}
                 <button onClick={logout} disabled={isLoading}>
                     {isLoading ? "Logging out..." : "Logout"}
