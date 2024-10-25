@@ -141,7 +141,7 @@ const AdminOrderDetails = () => {
             <button onClick={handleDeleteClick} className="delete-button">Delete Order</button>
           ) : (
             <div>
-              <button onClick={handleCancelDelete}>Cancel</button>
+              <button onClick={handleCancelDelete}>Cancel!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</button>
               <button onClick={handleConfirmDelete} className="confirm-delete-button">Confirm Delete</button>
             </div>
           )}
