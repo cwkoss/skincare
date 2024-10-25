@@ -28,7 +28,7 @@ const initialRecipeState = {
   creatorId: '', // user id of the creator
   orderCount: 0, // number of times this recipe has been ordered
   favoriteCount: 0, // number of times this recipe has been favorited
-  status: 'incomplete', // incomplete, complete, archived
+  status: 'Incomplete', // Incomplete, Complete, Archived
   variationRequest: {
     selectedOptions: [],
     customRequest: ''

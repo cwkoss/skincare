@@ -18,6 +18,7 @@ function ConfirmRecipe() {
     dispatch({ type: 'SET_RECIPE_NAME', payload: recipeName });
     dispatch({ type: 'SET_BASE_NAME', payload: recipeName });
     dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
+    dispatch({ type: "SET_STATUS", payload: 'Complete' });
     navigate('/variation-request');
   };
   
