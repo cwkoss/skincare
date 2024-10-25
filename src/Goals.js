@@ -65,7 +65,7 @@ function Goals() {
   
 
   return (
-    <Layout title="Select Your Skincare Goals/Concerns"
+    <Layout title="Select Your Skincare Goals + Concerns"
             isSubmitDisabled={selectedOptions.length === 0 || (includeFragrance === 'yes' && selectedMoods.length === 0)}
             handleSubmit={handleSubmit}
             buttonText="Next">

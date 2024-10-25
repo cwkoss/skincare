@@ -82,7 +82,7 @@ function Product() {
 
   return (
     <Layout
-      title="Select a Skincare Product Type"
+      title="Select a Skincare Product"
       handleSubmit={handleSubmit}
       isSubmitDisabled={!selectedProduct}
       buttonText="Next"

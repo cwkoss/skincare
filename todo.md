@@ -1,5 +1,5 @@
 Goals for launch
-
+- don't show order id on order success
 - Improve saved recipe page. Display percentage breakdown of ingredients instead of parts in each phase, maybe show description of each phase.  
 - Decide how I'll manually manage variation creation so it gets stored in DB before launch
 - Improve option text on emulsifier page 

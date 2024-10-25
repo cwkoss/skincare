@@ -104,10 +104,11 @@ function ConfirmRecipe() {
     <Layout title="Confirm Your Recipe"
       buttonText="Confirm Recipe"
       handleSubmit={() => { goToNextPhase() }}>
-      <div>
+      <div className='card'>
         <label>
           Recipe Name:
           <input
+          className='input'
             type="text"
             value={recipeName}
             onChange={(e) => setRecipeName(e.target.value)}
@@ -115,7 +116,7 @@ function ConfirmRecipe() {
           />
         </label>
 
-        <h2>Overall Percentages</h2>
+        <h3>Overall Percentages</h3>
         {Object.keys(overallPercentages).length > 0 ? (
           <ul>
             {Object.entries(overallPercentages)

@@ -79,6 +79,7 @@ function OrderFormulation() {
         <Layout title="Request Your Order"
             buttonText="Place Your Order"
             handleSubmit={() => { handleSubmit() }}>
+            <div className="card summary-content">
             <div className="recipe">
                 <strong>Recipe Name</strong>: {state.recipeName}
                 {Object.keys(recipeData.ingredients).map((key, index) => (
@@ -119,6 +120,7 @@ function OrderFormulation() {
                 <textarea placeholder="Enter your note here" value={note} onChange={(e) => setNote(e.target.value)}></textarea>
             </form>
             {hasError && (<p className="why-disabled">Something went wrong submitting... please try again</p>)}
+            </div>
         </Layout>
     );
 }

@@ -30,11 +30,13 @@ const Contact = () => {
   }
 
   return (
+    <div className='content-container'>
     <form onSubmit={handleSubmit} className='contact-us-form'>
         <h2>Contact Us</h2>
       <label>
         <strong>Phone number</strong> (if you'd like us to text you a response): <br />
         <input
+        className='input'
           type="text"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
@@ -44,13 +46,14 @@ const Contact = () => {
       <label>
         <strong>Message:</strong><br />
         <textarea
-          className="big-text-area"
+          className="big-text-area input"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
       </label>
       <button type="submit">Submit</button>
     </form>
+    </div>
   );
 };
 
