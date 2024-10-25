@@ -51,7 +51,7 @@ const Admin = () => {
   return (
     <div>
       <h1>Admin Page</h1>
-      <h2>Orders</h2>
+      <h2>Orders ({orders.length})</h2>
       <table>
         <thead>
           <tr>
