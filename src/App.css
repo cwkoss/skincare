@@ -3,20 +3,38 @@
 
 /* Root Variables */
 :root {
-  /* Color Variables */
+  /* Background Gradient Colors (softer versions of loading colors) */
+  --bg-color-1: #fae8e1; /* Soft orange */
+  --bg-color-2: #fce4ec; /* Soft pink */
+  --bg-color-3: #e1f5fe; /* Soft blue */
+  --bg-color-4: #e0f2f1; /* Soft teal */
+
+  /* Main Color Scheme */
   --primary-color: #ffffff; /* White background */
-  --secondary-color: #f2f2f2; /* Light gray for sections */
-  --accent-color: #b76e79; /* Rose gold for accents */
-  --text-color: #333333; /* Dark gray for text */
-  --text-color-alt: #666666; /* Alternate text color */
+  --secondary-color: #f5f7fa; /* Very light blue-gray for sections */
+  --accent-color: #e6a8a8; /* Softer dusty rose accent */
+  --text-color: #2c3e50; /* Dark blue-gray for text */
+  --text-color-alt: #5d6d7e; /* Lighter blue-gray for alternate text */
 
   /* Button Colors */
   --button-background: var(--accent-color);
   --button-text-color: #ffffff;
-  --button-hover-background: #a5646d; /* Slightly darker rose gold */
-  --button-active: #c48b95;
-  --button-hover: #d8fdd4;
-  --button-active-lines: #7a434d;
+  --button-hover-background: #d99393; /* Slightly darker dusty rose */
+  --button-active: #cc7e7e; /* Even darker dusty rose for active state */
+  --button-hover-alt: #c7e6fd; /* Light blue for alternate hover */
+  --button-active-lines: #bf6969; /* Darker shade for active lines or borders */
+
+  /* Additional Accent Colors */
+  --accent-light-orange: #f5d0c3; /* Light orange accent */
+  --accent-light-pink: #f5c7d7; /* Light pink accent */
+  --accent-light-blue: #c7e6fd; /* Light blue accent */
+  --accent-light-teal: #c4e8e2; /* Light teal accent */
+
+  /* Loading Colors */
+  --loading-color-1: #ee7752; /* Orange */
+  --loading-color-2: #e73c7e; /* Pink */
+  --loading-color-3: #23a6d5; /* Blue */
+  --loading-color-4: #23d5ab; /* Teal */
 }
 
 /* Base Styles */
@@ -25,8 +43,15 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--primary-color);
   font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
+}
+
+body {
+  background: linear-gradient(-60deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3), var(--bg-color-4));
+  background-size: 400% 400%;
+  animation: subtleGradientAnimation 8s ease-in-out infinite;
+  background-attachment: fixed;
   color: var(--text-color);
 }
 
@@ -85,6 +110,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button:disabled:hover {
+  background-color: #ccc;
+  transform: none;
+}
+
 button.selected {
   background-color: var(--button-active);
 }
@@ -110,29 +140,41 @@ button.submit:disabled {
   background-color: #ccc;
 }
 
+/* Content Container */
+.content-container {
+  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+  z-index: 1;
+}
+
 /* Home Page Container */
 .homePageContainer {
-  position: relative; /* Establish positioning context */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 5px 20px 60px;
-  background: 
-  linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-  url('/public/bgimg.webp');
-  /*background-image: url('/public/bgimg.webp');*/
-  background-size: cover; /* or 'contain' */
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-attachment: fixed;
   color: #61685f;
+  position: relative;
+}
+
+.homePageContainer::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(10px);
+  z-index: -1;
+  animation: pulseBlur 5s infinite alternate;
 }
 
 .homePageContainer > * {
-  position: relative; /* Ensure content is above the overlay */
-  z-index: 2; /* Place content above the overlay */
+  position: relative;
+  z-index: 2;
 }
-
 
 .homePageContainer .title {
   display: flex;
@@ -373,7 +415,12 @@ button.submit:disabled {
   align-items: center;
   height: 100vh;
   text-align: center;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, 
+    var(--loading-color-1), 
+    var(--loading-color-2), 
+    var(--loading-color-3), 
+    var(--loading-color-4)
+  );
   background-size: 400% 400%;
   animation: gradientAnimation 15s ease infinite;
   padding: 0 20px; /* Add horizontal padding */
@@ -409,3 +456,53 @@ button.submit:disabled {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   padding: 0 10px; /* Add some extra padding to the description */
 }
+
+@keyframes subtleGradientAnimation {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 0.9;
+  }
+  25% {
+    background-position: 70% 30%;
+    opacity: 1;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.9;
+  }
+  75% {
+    background-position: 30% 70%;
+    opacity: 1;
+  }
+}
+
+@keyframes pulseBlur {
+  0% {
+    filter: blur(10px);
+  }
+  100% {
+    filter: blur(15px);
+  }
+}
+
+.section {
+  background-color: var(--secondary-color);
+}
+
+.accent-text {
+  color: var(--accent-color);
+}
+
+button {
+  background-color: var(--button-background);
+  color: var(--button-text-color);
+}
+
+button:hover {
+  background-color: var(--button-hover-background);
+}
+
+.alternate-button:hover {
+  background-color: var(--button-hover-alt);
+}
+

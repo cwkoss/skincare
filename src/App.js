@@ -58,7 +58,7 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={
-                <div className="homePageContainer">
+                <div className="content-container homePageContainer">
                   <div className="title">
                     <h1><img src="/logo.png" className="logo" alt="A logo of a leaf inside a drop"></img> Skincremental</h1>
                     <h4>Experience Skincare Made Exclusively for You</h4>
