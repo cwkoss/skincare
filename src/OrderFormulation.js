@@ -59,7 +59,8 @@ function OrderFormulation() {
                 waitlist: !inSeattleArea,
                 location: userLocation,
                 note,
-                variationRequest: state.variationRequest
+                variationRequest: state.variationRequest,
+                status: "Pending"
             });
             console.log("Order submitted");
 
