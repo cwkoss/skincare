@@ -30,20 +30,21 @@ const Dashboard = () => {
     return (
         <div>
             <h1>My Recipes</h1>
+            <Link className="modern-link" to="/product">+ Create a new recipe</Link>
             {recipes.length === 0 ? (
                 <p>You haven't created any recipes yet.</p>
             ) : (
                 <ul>
                     {recipes.map(recipe => (
                         <li key={recipe.id}>
-                            <Link to={`/saved-recipe?id=${recipe.id}`}>
+                            <Link className="modern-link" to={`/saved-recipe?id=${recipe.id}`}>
                                 {recipe.displayName || recipe.baseName}
                             </Link>
                         </li>
                     ))}
                 </ul>
             )}
-            <Link to="/product">Create a new recipe</Link>
+
         </div>
     );
 };
