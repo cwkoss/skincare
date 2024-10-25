@@ -55,6 +55,7 @@ function OrderFormulation() {
                 pickup,
                 address: pickup ? null : address,
                 createdAt: new Date(),
+                devilveredAt: null,
                 waitlist: !inSeattleArea,
                 location: userLocation,
                 note,

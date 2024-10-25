@@ -61,6 +61,7 @@ const Admin = () => {
             <th>OldRecipeName</th>
             <th>Recipe</th>
             <th>Actions</th>
+            <th>Delivered At</th>
           </tr>
         </thead>
         <tbody>
@@ -76,6 +77,7 @@ const Admin = () => {
                   <button>View Details</button>
                 </Link>
               </td>
+              <td>{order.status === 'Delivered' && order.deliveredAt ? new Date(order.deliveredAt).toLocaleString() : '-'}</td>
             </tr>
           ))}
         </tbody>

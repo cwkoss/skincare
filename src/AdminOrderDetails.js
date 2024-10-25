@@ -58,7 +58,11 @@ const AdminOrderDetails = () => {
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
     setStatus(newStatus);
-    await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
+    const updateData = { status: newStatus };
+    if (newStatus === 'Delivered') {
+      updateData.deliveredAt = new Date().toISOString();
+    }
+    await updateDoc(doc(db, 'orders', orderId), updateData);
   };
 
   const handleDeleteClick = () => {
@@ -146,6 +150,9 @@ const AdminOrderDetails = () => {
             </div>
           )}
           </p>
+          {status === 'Delivered' && order.deliveredAt && (
+            <p><strong>Delivered At:</strong> {new Date(order.deliveredAt).toLocaleString()}</p>
+          )}
         </>
       ) : (
         <p>Order not found</p>
