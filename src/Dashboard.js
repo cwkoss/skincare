@@ -45,6 +45,8 @@ const Dashboard = () => {
         return <div>Loading...</div>;
     }
 
+    const isAdminUser = user && user.uid === "NMsFUVT3W1MRWRhuQ5PTVJF3IEK2";
+
     return (
         <div className="dashboard">
             <h1>My Orders</h1>
@@ -56,8 +58,8 @@ const Dashboard = () => {
                     {orders.map(order => (
                         <div key={order.id} className="order-card">
                             <div className="order-header">
-                                <h2>Order #{order.id}</h2>
-                                <p>Date: {new Date(order.createdAt.toDate()).toLocaleDateString()}</p>
+                                {isAdminUser && <p>Order {order.id}</p>}
+                                <p>Order Date: {new Date(order.createdAt.toDate()).toLocaleDateString()}</p>
                                 <p>Status: {order.status}</p>
                             </div>
                             <div className="recipe-info">
