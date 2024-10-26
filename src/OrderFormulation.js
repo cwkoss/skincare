@@ -6,10 +6,12 @@ import { updateSession } from './sessionUtils';
 import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
 import Layout from './Layout';
+import { useUser } from './UserContext';
 
 function OrderFormulation() {
     const navigate = useNavigate();
     const { state } = useRecipe();
+    const { user } = useUser();
     const [recipeData, setRecipeData] = useState(null);
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -54,7 +56,7 @@ function OrderFormulation() {
                 phoneNumber,
                 pickup,
                 address: pickup ? null : address,
-                creatorId: user.uid ? user.uid : null,
+                creatorId: user? user.uid ? user.uid : null : null,
                 createdAt: new Date(),
                 devilveredAt: null,
                 waitlist: !inSeattleArea,
