@@ -3,7 +3,7 @@ import { useUser } from './UserContext';
 import { db } from './firebase-config';
 import { collection, query, where, getDocs, orderBy, doc, getDoc } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-
+import LoadingScreen from './LoadingScreen';
 const Dashboard = () => {
     const { user } = useUser();
     const [orders, setOrders] = useState([]);
@@ -42,7 +42,7 @@ const Dashboard = () => {
     }, [user]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <LoadingScreen message="Getting your orders..." />;
     }
 
     const isAdminUser = user && user.uid === "NMsFUVT3W1MRWRhuQ5PTVJF3IEK2";

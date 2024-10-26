@@ -44,8 +44,7 @@ const Login = () => {
     if (user) {
         return (
             <div>
-                <h1>Welcome, {user.displayName}</h1>
-                <p>Email: {user.email}</p>
+                <p>Signed in as {user.displayName}</p>
                 <p><Link className="modern-link" to="/dashboard">View My Recipes</Link></p>
                 {user.email === 'chris@mckoss.com' && (
                     <p><Link className="modern-link" to="/admin">Go to Admin Page</Link></p>

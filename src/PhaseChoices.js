@@ -6,6 +6,7 @@ import { set } from 'firebase/database';
 import { getPhaseSuggestions } from './OpenAiUtils';
 import ingredients from './ingredients';
 import ScrollContainer from './ScrollContainer';
+import LoadingScreen from './LoadingScreen';
 
 const phaseDescriptions = {
   "carrier": "The oil phase provides a base for the formulation, delivering hydration and nourishment to the skin while helping to dilute and spread active ingredients evenly.",
@@ -142,11 +143,10 @@ function PhaseChoices() {
     const loadingMessage = phaseMessages[state.currentPhase] || "Personalizing your skincare formula...";
 
     return (
-      <div className="loading-container">
-        <div className="loader"></div>
-        <p className="loading-text">{loadingMessage}</p>
-        <p className="phase-description">{phaseDescriptions[state.currentPhase]}</p>
-      </div>
+      <LoadingScreen 
+        message={loadingMessage}
+        description={phaseDescriptions[state.currentPhase]}
+      />
     );
   }
 
