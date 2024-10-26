@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import { auth, provider, signInWithPopup } from "./firebase-config";
 import { useUser } from './UserContext';
 import { useRecipe } from './RecipeContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { saveUserToFirestore } from './userUtils';
+
 
 const Login = () => {
     const { user, loading, logout } = useUser();
     const { dispatch } = useRecipe();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const navigate = useNavigate();
     const handleLogin = async () => {
         setError(null);
         setIsLoading(true);
@@ -23,6 +24,7 @@ const Login = () => {
             if (result.user) {
                 dispatch({ type: 'SET_CREATOR_ID', payload: result.user.uid });
             }
+            navigate('/dashboard');
         } catch (error) {
             console.error("Login: Error logging in", error);
             setError("Failed to log in. Please try again.");
