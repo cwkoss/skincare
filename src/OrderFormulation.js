@@ -50,13 +50,12 @@ function OrderFormulation() {
         setHasError(false);
         try {
             const orderId = new Date().getTime() + "-" + recipeId;
-            await setDoc(doc(db, "orders", orderId), {
+            const orderDoc = {
                 name,
                 recipeId,
                 phoneNumber,
                 pickup,
                 address: pickup ? null : address,
-                creatorId: user? user.uid ? user.uid : null : null,
                 createdAt: new Date(),
                 devilveredAt: null,
                 waitlist: !inSeattleArea,
@@ -64,7 +63,11 @@ function OrderFormulation() {
                 note,
                 variationRequest: state.variationRequest,
                 status: "Pending"
-            });
+            };
+            if (user && user.uid) {
+                orderDoc.creatorId = user.uid;
+            }
+            await setDoc(doc(db, "orders", orderId), orderDoc);
             console.log("Order submitted");
 
             // Update the session with the new orderId
