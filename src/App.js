@@ -23,6 +23,7 @@ import VariationRequest from './VariationRequest';
 import Admin from './Admin';
 import AdminOrderDetails from './AdminOrderDetails';
 import Dashboard from './Dashboard';
+import RecipeCopier from './RecipeCopier';
 
 import posthog from 'posthog-js';
 
@@ -65,18 +66,18 @@ function App() {
                   </div>
                   <Link to="/summary"><button className="startbutton">Start Your Personalized Skincare Journey</button></Link>
                   <div className="homepageText">
-    <p><strong>Personalized Skincare, Evolving With You:</strong> Custom-crafted skincare that adapts to your unique needs, environment, and the seasons. Because your skin deserves nothing less.</p>
+                    <p><strong>Personalized Skincare, Evolving With You:</strong> Custom-crafted skincare that adapts to your unique needs, environment, and the seasons. Because your skin deserves nothing less.</p>
 
-    <p><strong>Discover Your Perfect Match:</strong> Try two custom formulas, choose your favorite, and let our smart algorithm enhance it for next time. Skincare that learns and grows with you.</p>
+                    <p><strong>Discover Your Perfect Match:</strong> Try two custom formulas, choose your favorite, and let our smart algorithm enhance it for next time. Skincare that learns and grows with you.</p>
 
-    <p><strong>Pure Ingredients, Transparent Choices:</strong> Only pure, nourishing ingredients your skin will love—no unnecessary fillers or confusing preservatives. Understand exactly what's in your skincare.</p>
+                    <p><strong>Pure Ingredients, Transparent Choices:</strong> Only pure, nourishing ingredients your skin will love—no unnecessary fillers or confusing preservatives. Understand exactly what's in your skincare.</p>
 
-    <p><strong>Empower Your Skincare Journey:</strong> Customize your formulation with clear guidance on each ingredient's purpose. Crafting your perfect skincare is now within your reach.</p>
+                    <p><strong>Empower Your Skincare Journey:</strong> Customize your formulation with clear guidance on each ingredient's purpose. Crafting your perfect skincare is now within your reach.</p>
 
-    <p><strong>Conscious & Sustainable:</strong> We're committed to a healthier planet. Our packaging is recycled, sterilized, and reused. We source locally whenever possible. Return your jars for recycling, and we'll donate to charity on your behalf.</p>
+                    <p><strong>Conscious & Sustainable:</strong> We're committed to a healthier planet. Our packaging is recycled, sterilized, and reused. We source locally whenever possible. Return your jars for recycling, and we'll donate to charity on your behalf.</p>
 
-    <p><strong>Join the Skincare Revolution:</strong> Skincare is more than a routine—it's your personal journey. Join a community embracing sustainability, personalization, and innovation.</p>
-  </div>
+                    <p><strong>Join the Skincare Revolution:</strong> Skincare is more than a routine—it's your personal journey. Join a community embracing sustainability, personalization, and innovation.</p>
+                  </div>
 
                   <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
                   <Link to="/contact" className="modern-link"><span>Contact us</span></Link>
@@ -99,6 +100,10 @@ function App() {
               <Route path="/admin" element={<Admin />} />
               <Route path="/admin/order/:orderId" element={<AdminOrderDetails />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/admin/recipe-copier"
+                element={<RecipeCopier />}
+              />
             </Routes>
           </Router>
         </RecipeProvider>

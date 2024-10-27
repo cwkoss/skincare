@@ -50,7 +50,7 @@ const Admin = () => {
 
   return (
     <div>
-      <h1>Admin Page</h1>
+      <h1>Admin Console</h1>
       <h2>Orders ({orders.length})</h2>
       <table>
         <thead>
@@ -82,6 +82,7 @@ const Admin = () => {
           ))}
         </tbody>
       </table>
+      <Link to="/admin/recipe-copier">Recipe Copier</Link>
     </div>
   );
 };

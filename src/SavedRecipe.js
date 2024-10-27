@@ -58,7 +58,7 @@ function SavedRecipe() {
             <h2>{recipeData.displayName || recipeData.baseName}</h2>
             <p><strong>Created At:</strong> {createdAtString}</p>
             <p><strong>Creator:</strong> {creatorName}</p>
-            <p><strong>Status:</strong> {recipeData.status || 'Incomplete'}</p>
+            <p><strong>Status:</strong> {recipeData.status}</p>
             <div className="recipe-details">
                 <h3>Ingredients:</h3>
                 {recipeData.recipe && Object.keys(recipeData.recipe).length > 0 ? (
