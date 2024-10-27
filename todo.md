@@ -1,4 +1,6 @@
 Goals for launch
+- Status on recipes isn't getting updated.  Should this field exist? Deleted for now
+- update display name on copy, also figure out what to do about recipeId (should it be renamed and used as ancestorId or updated to be the recipeId of the new variation?)
 - make spaces in names work
 - don't show order id on order success
 - Improve saved recipe page. Display percentage breakdown of ingredients instead of parts in each phase, maybe show description of each phase.  

@@ -6,8 +6,8 @@ import { db } from './firebase-config';
 const AdminOrderDetails = () => {
   const { orderId } = useParams();
   const [order, setOrder] = useState(null);
-  const [recipe, setRecipe] = useState(null);
-  const [formulation, setFormulation] = useState(null);
+  const [baseRecipe, setBaseRecipe] = useState(null);
+  const [variationRecipe, setVariationRecipe] = useState(null);
   const [status, setStatus] = useState('');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const AdminOrderDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrderAndRecipe = async () => {
+    const fetchOrderAndRecipes = async () => {
       try {
         const orderDoc = await getDoc(doc(db, 'orders', orderId));
         if (orderDoc.exists()) {
@@ -24,35 +24,29 @@ const AdminOrderDetails = () => {
           setStatus(orderData.status || 'Pending');
 
           if (orderData.recipeId) {
-            try {
-              const recipeDoc = await getDoc(doc(db, 'recipes', orderData.recipeId));
-              if (recipeDoc.exists()) {
-                setRecipe(recipeDoc.data());
-              } else {
-                // Fallback to formulations table
-                const formulationDoc = await getDoc(doc(db, 'formulations', orderData.recipeId));
-                if (formulationDoc.exists()) {
-                  setFormulation(formulationDoc.data());
-                } else {
-                  setError('Recipe not found');
-                }
-              }
-            } catch (recipeError) {
-              console.error("Error fetching recipe:", recipeError);
-              setError('Error fetching recipe');
+            const baseRecipeDoc = await getDoc(doc(db, 'recipes', orderData.recipeId));
+            if (baseRecipeDoc.exists()) {
+              setBaseRecipe(baseRecipeDoc.data());
+            }
+          }
+
+          if (orderData.variationId) {
+            const variationRecipeDoc = await getDoc(doc(db, 'recipes', orderData.variationId));
+            if (variationRecipeDoc.exists()) {
+              setVariationRecipe(variationRecipeDoc.data());
             }
           }
         } else {
           setError('Order not found');
         }
-      } catch (orderError) {
-        console.error("Error fetching order:", orderError);
-        setError('Error fetching order');
+      } catch (error) {
+        console.error("Error fetching order and recipes:", error);
+        setError('Error fetching order and recipes');
       } finally {
         setLoading(false);
       }
     };
-    fetchOrderAndRecipe();
+    fetchOrderAndRecipes();
   }, [orderId]);
 
   const handleStatusChange = async (e) => {
@@ -112,14 +106,18 @@ const AdminOrderDetails = () => {
             </select>
           </p>
           
-          {recipe ? (
-            <>
-              <p><strong>Recipe:</strong> {recipe.displayName || recipe.baseName}</p>
+          {baseRecipe && (
+            <div>
+              <h2>Base Recipe</h2>
+              <p><strong>Name:</strong> {baseRecipe.displayName || baseRecipe.baseName}</p>
+              <Link to={`/saved-recipe?id=${order.recipeId}`}>
+                View Base Recipe
+              </Link>
               <div>
-                <h2>Raw Recipe</h2>
-                {recipe.rawRecipe ? (
+                <h3>Raw Recipe</h3>
+                {baseRecipe.rawRecipe ? (
                   <ul>
-                    {Object.entries(recipe.rawRecipe).map(([ingredient, percentage]) => (
+                    {Object.entries(baseRecipe.rawRecipe).map(([ingredient, percentage]) => (
                       <li key={ingredient}>{ingredient}: {parseFloat(percentage).toFixed(2)}%</li>
                     ))}
                   </ul>
@@ -127,25 +125,41 @@ const AdminOrderDetails = () => {
                   <p>No raw recipe data available.</p>
                 )}
               </div>
-            </>
-          ) : formulation ? (
-            <>
-              <p><strong>Formulation:</strong></p>
-              <pre>{JSON.stringify(formulation, null, 2)}</pre>
-            </>
-          ) : (
-            <p>No recipe or formulation data available.</p>
+            </div>
+          )}
+          
+          {variationRecipe && (
+            <div>
+              <h2>Variation Recipe</h2>
+              <p><strong>Name:</strong> {variationRecipe.displayName || variationRecipe.baseName}</p>
+              <Link to={`/saved-recipe?id=${order.variationId}`}>
+                View Variation Recipe
+              </Link>
+              <div>
+                <h3>Raw Recipe</h3>
+                {variationRecipe.rawRecipe ? (
+                  <ul>
+                    {Object.entries(variationRecipe.rawRecipe).map(([ingredient, percentage]) => (
+                      <li key={ingredient}>{ingredient}: {parseFloat(percentage).toFixed(2)}%</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No raw recipe data available.</p>
+                )}
+              </div>
+            </div>
           )}
 
           <Link to={`/order-pricing?recipeId=${order.recipeId}`}>
             <button>View Recipe Pricing</button>
           </Link>
+          
           <p>
           {!showDeleteConfirm ? (
             <button onClick={handleDeleteClick} className="delete-button">Delete Order</button>
           ) : (
             <div>
-              <button onClick={handleCancelDelete}>Cancel!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</button>
+              <button onClick={handleCancelDelete}>Cancel</button>
               <button onClick={handleConfirmDelete} className="confirm-delete-button">Confirm Delete</button>
             </div>
           )}
