@@ -3,6 +3,19 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './firebase-config'; // Adjust the path as necessary
 import { doc, getDoc } from 'firebase/firestore';
 import { useRecipe } from './RecipeContext';
+import Layout from './Layout';
+
+const getPhaseEmoji = (phase) => {
+    const emojis = {
+        oil: '🫧',
+        aqueous: '💧',
+        active: '⚡',
+        fragrance: '🌸',
+        preservative: '🛡️',
+        emulsifier: '🔄'
+    };
+    return emojis[phase] || '📦';
+};
 
 function SavedRecipe() {
     const [recipeData, setRecipeData] = useState(null);
@@ -70,33 +83,52 @@ function SavedRecipe() {
     };
 
     return (
-        <div>
-            <h2>{recipeData.displayName || recipeData.baseName}</h2>
-            <p><strong>Created At:</strong> {createdAtString}</p>
-            <p><strong>Creator:</strong> {creatorName}</p>
-            <div className="recipe-details">
-                <h3>Ingredients:</h3>
-                {recipeData.recipe && Object.keys(recipeData.recipe).length > 0 ? (
-                    Object.keys(recipeData.recipe).map((phase, index) => (
-                        <div key={index}>
-                            <h4>{phase.charAt(0).toUpperCase() + phase.slice(1)} Phase</h4>
-                            <ul>
-                                {Object.keys(recipeData.recipe[phase].ingredients || {}).map(ingredient => (
-                                    <li key={ingredient}>
-                                        {ingredient}: {recipeData.rawRecipe && recipeData.rawRecipe[ingredient] ? parseFloat(recipeData.rawRecipe[ingredient]).toFixed(2) : '0.00'}%
-                                    </li>
-                                ))}
-                            </ul>
+        <Layout 
+            title={recipeData.displayName || recipeData.baseName}
+            handleSubmit={handleOrderClick}
+            buttonText="Order Formulation"
+        >
+            <div className="recipe-container">
+                {/* Recipe Info Card */}
+                <div className="card recipe-info">
+                    <div className="recipe-metadata">
+                        <p><i className="far fa-calendar"></i> Created: {createdAtString}</p>
+                        <p><i className="far fa-user"></i> Creator: {creatorName}</p>
+                    </div>
+                </div>
+
+                {/* Recipe Details Card */}
+                <div className="card recipe-details">
+                    <h3>Recipe Composition</h3>
+                    {recipeData.recipe && Object.keys(recipeData.recipe).length > 0 ? (
+                        <div className="phase-grid">
+                            {Object.keys(recipeData.recipe).map((phase, index) => (
+                                <div key={index} className="phase-card">
+                                    <h4>
+                                        <span className="phase-emoji">{getPhaseEmoji(phase)}</span>
+                                        {phase.charAt(0).toUpperCase() + phase.slice(1)} Phase
+                                    </h4>
+                                    <div className="ingredients-list">
+                                        {Object.keys(recipeData.recipe[phase].ingredients || {}).map(ingredient => (
+                                            <div key={ingredient} className="ingredient-row">
+                                                <span className="ingredient-name">{ingredient}</span>
+                                                <span className="ingredient-percentage">
+                                                    {recipeData.rawRecipe && recipeData.rawRecipe[ingredient] 
+                                                        ? parseFloat(recipeData.rawRecipe[ingredient]).toFixed(1) + '%'
+                                                        : '0.0%'}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    ))
-                ) : (
-                    <p>No ingredients listed.</p>
-                )}
+                    ) : (
+                        <p>No ingredients listed.</p>
+                    )}
+                </div>
             </div>
-            <button onClick={handleOrderClick}>
-                Order Formulation
-            </button>
-        </div>
+        </Layout>
     );
 }
 
