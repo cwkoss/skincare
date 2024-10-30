@@ -44,6 +44,10 @@ const generateDisplayName = (baseName, variationName, generation) => {
   return displayName;
 };
 
+const sanitizeNameForId = (name) => {
+  return name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
+};
+
 const recipeReducer = (state, action) => {
   switch (action.type) {
     case 'SET_PRODUCT_DATA':
@@ -74,11 +78,12 @@ const recipeReducer = (state, action) => {
     case 'RESET_RECIPE':
       return initialRecipeState;
     case 'SET_BASE_NAME':
+      const sanitizedName = sanitizeNameForId(action.payload);
       return {
         ...state,
         baseName: action.payload,
         displayName: generateDisplayName(action.payload, state.variationName, state.generation),
-        recipeId: state.createdAt + action.payload + state.generation
+        recipeId: state.createdAt + sanitizedName + state.generation
       };
     case 'SET_VARIATION_NAME':
       return {
