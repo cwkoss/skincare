@@ -1,5 +1,6 @@
 Goals for launch
 - Status on recipes isn't getting updated.  Should this field exist? Deleted for now
+- Ordering from saved recipe page goes straight to variation request, but maybe we need a little something to ease the user in?
 - update display name on copy, also figure out what to do about recipeId (should it be renamed and used as ancestorId or updated to be the recipeId of the new variation?)
 - make spaces in names work
 - don't show order id on order success

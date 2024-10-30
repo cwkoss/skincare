@@ -28,7 +28,7 @@ const initialRecipeState = {
   creatorId: '', // user id of the creator
   orderCount: 0, // number of times this recipe has been ordered
   favoriteCount: 0, // number of times this recipe has been favorited
-  status: 'Incomplete', // Incomplete, Complete, Archived
+  status: 'incomplete', // incomplete, complete, archived
   variationRequest: {
     selectedOptions: [],
     customRequest: ''
@@ -145,6 +145,16 @@ const recipeReducer = (state, action) => {
       };
     case 'SET_CREATOR_ID':
       return { ...state, creatorId: action.payload };
+    case 'LOAD_SAVED_RECIPE':
+      return {
+        ...state,
+        recipe: action.payload.recipe,
+        rawRecipe: action.payload.rawRecipe,
+        recipeName: action.payload.displayName || action.payload.baseName,
+        baseName: action.payload.baseName,
+        recipeId: action.payload.id,
+        status: 'Complete'
+      };
     default:
       return state;
   }

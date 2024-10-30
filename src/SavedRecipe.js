@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { db } from './firebase-config'; // Adjust the path as necessary
 import { doc, getDoc } from 'firebase/firestore';
+import { useRecipe } from './RecipeContext';
 
 function SavedRecipe() {
     const [recipeData, setRecipeData] = useState(null);
@@ -9,6 +10,7 @@ function SavedRecipe() {
     const location = useLocation();
     const navigate = useNavigate();
     const recipeId = new URLSearchParams(location.search).get('id');
+    const { dispatch } = useRecipe();
 
     useEffect(() => {
         const fetchRecipeData = async () => {
@@ -53,6 +55,20 @@ function SavedRecipe() {
         }
     }
 
+    const handleOrderClick = () => {
+        dispatch({
+            type: 'LOAD_SAVED_RECIPE',
+            payload: {
+                recipe: recipeData.recipe,
+                rawRecipe: recipeData.rawRecipe,
+                displayName: recipeData.displayName,
+                baseName: recipeData.baseName,
+                id: recipeId
+            }
+        });
+        navigate('/variation-request');
+    };
+
     return (
         <div>
             <h2>{recipeData.displayName || recipeData.baseName}</h2>
@@ -77,7 +93,7 @@ function SavedRecipe() {
                     <p>No ingredients listed.</p>
                 )}
             </div>
-            <button onClick={() => navigate('/order-formulation', { state: { recipeId } })}>
+            <button onClick={handleOrderClick}>
                 Order Formulation
             </button>
         </div>
