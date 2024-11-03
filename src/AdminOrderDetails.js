@@ -107,12 +107,18 @@ const AdminOrderDetails = () => {
           </p>
           
           {baseRecipe && (
-            <div>
+            <div className="recipe-section">
               <h2>Base Recipe</h2>
               <p><strong>Name:</strong> {baseRecipe.displayName || baseRecipe.baseName}</p>
-              <Link to={`/saved-recipe?id=${order.recipeId}`}>
-                View Base Recipe
-              </Link>
+              <div className="recipe-actions">
+                <Link to={`/saved-recipe?id=${order.recipeId}`}>
+                  View Base Recipe
+                </Link>
+                <br />
+                <Link to={`/order-pricing?recipeId=${order.recipeId}`}>
+                  View Base Recipe Pricing
+                </Link>
+              </div>
               <div>
                 <h3>Raw Recipe</h3>
                 {baseRecipe.rawRecipe ? (
@@ -129,12 +135,18 @@ const AdminOrderDetails = () => {
           )}
           
           {variationRecipe && (
-            <div>
+            <div className="recipe-section">
               <h2>Variation Recipe</h2>
               <p><strong>Name:</strong> {variationRecipe.displayName || variationRecipe.baseName}</p>
-              <Link to={`/saved-recipe?id=${order.variationId}`}>
-                View Variation Recipe
-              </Link>
+              <div className="recipe-actions">
+                <Link to={`/saved-recipe?id=${order.variationId}`}>
+                  View Variation Recipe
+                </Link>
+                <br />
+                <Link to={`/order-pricing?recipeId=${order.variationId}`}>
+                  View Variation Recipe Pricing
+                </Link>
+              </div>
               <div>
                 <h3>Raw Recipe</h3>
                 {variationRecipe.rawRecipe ? (
@@ -150,10 +162,6 @@ const AdminOrderDetails = () => {
             </div>
           )}
 
-          <Link to={`/order-pricing?recipeId=${order.recipeId}`}>
-            <button>View Recipe Pricing</button>
-          </Link>
-          
           <p>
           {!showDeleteConfirm ? (
             <button onClick={handleDeleteClick} className="delete-button">Delete Order</button>

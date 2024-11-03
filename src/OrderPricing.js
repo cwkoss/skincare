@@ -7,7 +7,7 @@ import ingredients from './ingredients';
 function OrderPricing() {
     const location = useLocation();
     const [recipeData, setRecipeData] = useState(null);
-    const [targetGrams, setTargetGrams] = useState(60);
+    const [targetGrams, setTargetGrams] = useState(30);
     const [ingredientList, setIngredientList] = useState([]);
     const [ingredientsText, setIngredientsText] = useState('');
     const [error, setError] = useState(null);
