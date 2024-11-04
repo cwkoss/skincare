@@ -695,3 +695,207 @@ button:hover {
 .primary-button:hover {
     background: var(--primary-color-dark);
 }
+
+.variation-request-section {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.variation-request-section h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.variation-request-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.variation-request-section li {
+  margin: 5px 0;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.variation-request-section p {
+  margin: 10px 0;
+}
+
+
+.build-variation-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.variation-request-info {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.recipe-editor {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.total-percentage {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.percentage-indicator {
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.percentage-indicator.valid {
+  background-color: #4caf50;
+  color: white;
+}
+
+.percentage-indicator.invalid {
+  background-color: #f44336;
+  color: white;
+}
+
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.ingredient-input {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.ingredient-input label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.percentage-input {
+  display: flex;
+  align-items: center;
+}
+
+.percentage-input input {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.percentage-symbol {
+  color: #666;
+}
+
+.base-percentage {
+  margin-top: 8px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.ingredient-typeahead {
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.typeahead-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: border-color 0.2s;
+}
+
+.typeahead-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-top: 4px;
+}
+
+.suggestion-item {
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background-color: #f5f5f5;
+}
+
+.suggestion-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.suggestion-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 0.9em;
+}
+
+.suggestion-type {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.suggestion-description {
+  color: #666;
+}
+
+.no-suggestions {
+  padding: 12px;
+  text-align: center;
+  color: #666;
+  background: #f5f5f5;
+  border-radius: 6px;
+  margin-top: 4px;
+}

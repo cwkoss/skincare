@@ -77,6 +77,10 @@ const AdminOrderDetails = () => {
     }
   };
 
+  const handleBuildVariation = () => {
+    navigate(`/build-variation/${orderId}`);
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -97,7 +101,42 @@ const AdminOrderDetails = () => {
               <p>Seattle, WA {order.address.zip}</p>
             </div>
           )}
-          <p><strong>Status:</strong> 
+
+          {order.variationRequest && (
+            <div className="variation-request-section">
+              <h2>Variation Request</h2>
+              {order.variationRequest.selectedOptions && order.variationRequest.selectedOptions.length > 0 && (
+                <div>
+                  <p><strong>Selected Options:</strong></p>
+                  <ul>
+                    {order.variationRequest.selectedOptions.map((option, index) => (
+                      <li key={index}>{option}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {order.variationRequest.customRequest && (
+                <div>
+                  <p><strong>Custom Request:</strong></p>
+                  <p>{order.variationRequest.customRequest}</p>
+                </div>
+              )}
+
+              {order.variationRequest && !order.variationId && (
+                <div className="variation-actions">
+                  <button
+                    onClick={handleBuildVariation}
+                    className="build-variation-button"
+                  >
+                    Build Variation Recipe
+                  </button>
+                </div>
+              )}
+            </div>
+
+          )}
+
+          <p><strong>Status:</strong>
             <select value={status} onChange={handleStatusChange}>
               <option value="Pending">Pending</option>
               <option value="Processing">Processing</option>
@@ -105,7 +144,7 @@ const AdminOrderDetails = () => {
               <option value="Delivered">Delivered</option>
             </select>
           </p>
-          
+
           {baseRecipe && (
             <div className="recipe-section">
               <h2>Base Recipe</h2>
@@ -133,7 +172,7 @@ const AdminOrderDetails = () => {
               </div>
             </div>
           )}
-          
+
           {variationRecipe && (
             <div className="recipe-section">
               <h2>Variation Recipe</h2>
@@ -163,14 +202,14 @@ const AdminOrderDetails = () => {
           )}
 
           <p>
-          {!showDeleteConfirm ? (
-            <button onClick={handleDeleteClick} className="delete-button">Delete Order</button>
-          ) : (
-            <div>
-              <button onClick={handleCancelDelete}>Cancel</button>
-              <button onClick={handleConfirmDelete} className="confirm-delete-button">Confirm Delete</button>
-            </div>
-          )}
+            {!showDeleteConfirm ? (
+              <button onClick={handleDeleteClick} className="delete-button">Delete Order</button>
+            ) : (
+              <div>
+                <button onClick={handleCancelDelete}>Cancel</button>
+                <button onClick={handleConfirmDelete} className="confirm-delete-button">Confirm Delete</button>
+              </div>
+            )}
           </p>
           {status === 'Delivered' && order.deliveredAt && (
             <p><strong>Delivered At:</strong> {new Date(order.deliveredAt).toLocaleString()}</p>

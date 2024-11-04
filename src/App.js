@@ -24,6 +24,7 @@ import Admin from './Admin';
 import AdminOrderDetails from './AdminOrderDetails';
 import Dashboard from './Dashboard';
 import RecipeCopier from './RecipeCopier';
+import BuildVariation from './BuildVariation';
 
 import posthog from 'posthog-js';
 
@@ -104,6 +105,7 @@ function App() {
                 path="/admin/recipe-copier"
                 element={<RecipeCopier />}
               />
+              <Route path="/build-variation/:orderId" element={<BuildVariation />} />
             </Routes>
           </Router>
         </RecipeProvider>

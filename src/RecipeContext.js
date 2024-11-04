@@ -35,7 +35,7 @@ const initialRecipeState = {
   },
 };
 
-const generateDisplayName = (baseName, variationName, generation) => {
+export const generateDisplayName = (baseName, variationName, generation) => {
   let displayName = baseName || 'Untitled';
   if (variationName) {
     displayName += ` var. ${variationName}`;
