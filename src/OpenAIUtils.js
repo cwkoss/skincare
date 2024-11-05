@@ -165,29 +165,51 @@ const phaseSpecificInstructions = {
 };
 
 export const getPhaseSuggestions = (state, somethingElseText) => {
+  console.log("State received in getPhaseSuggestions:", {
+    currentPhase: state.currentPhase,
+    productData: state.productData,
+    goalsData: state.goalsData,
+    fullState: state
+  });
+
   if (!state.currentPhase || !state.productData || !state.goalsData) {
-    console.error("Invalid state data provided.");
-    return Promise.reject("Invalid state data provided.");  // Return a rejected promise when inputs are invalid
+    console.error("Invalid state data provided. Missing:", {
+      currentPhase: !state.currentPhase,
+      productData: !state.productData,
+      goalsData: !state.goalsData
+    });
+    return Promise.reject("Invalid state data provided.");
   }
+
   // Preservative phase has static phase suggestions
-  if (state.currentPhase === "preservative") { 
-    return Promise.resolve(phaseExamples["preservative"]);  // No phase suggestions for preservative phase
+  if (state.currentPhase === "preservative") {
+    return Promise.resolve(phaseExamples["preservative"]);
   }
+
   let phase = state.currentPhase;
+  let productType = state.productData;
+  
+  // Parse new product type format if present (e.g., "face_cream" -> "Face Cream")
+  if (productType.includes('_')) {
+    const [area, type] = productType.split('_');
+    productType = `${area.charAt(0).toUpperCase() + area.slice(1)} ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+  }
+
   console.log("Phase and state: ", phase, state);
   const endpoint = 'https://us-central1-skincare-recipe-tool.cloudfunctions.net/getPhaseSuggestions';
-  const systemPrompt = `You are an award winning cosmetic chemist helping the user formulate a 
-  new skincare product customized to the particulars of their skin. This recipe is being written 
-  one phase at a time, and you are currently working on the ${phase} phase of the formulation. 
-  Please provide three examples of ${phase} formulations with ingredients and proportions. ${phaseSpecificInstructions[phase] || ""}
   
-  Here are examples of ${phase} formulations: ${JSON.stringify(phaseExamples[phase])}.  con
+  // Modify system prompt based on product type
+  const systemPrompt = `You are an award winning cosmetic chemist helping the user formulate a 
+  new ${productType} customized to the particulars of their skin. This recipe is being written 
+  one phase at a time, and you are currently working on the ${phase} phase of the formulation. 
+  Please provide three examples of ${phase} formulations with ingredients and proportions that are specifically appropriate for a ${productType}. ${phaseSpecificInstructions[phase] || ""}
+  
+  Here are examples of ${phase} formulations: ${JSON.stringify(phaseExamples[phase])}.
   The units after each ingredient represent the number of 'parts' of that ingredient to include in the formulation, and may be integers between 1-10.
 
   You may only use the ingredients found in this object: ${JSON.stringify(getIngredientsByType(phase))}. 
   
-  Output your examples as an array
-  of JSON formated including a title and 1-sentence description of the phase to help the user understand the 
+  Output your examples as an array of JSON formatted including a title and 1-sentence description of the phase to help the user understand the 
   contrasting benefits of each phase option.  Do not include any commentary outside of array of JSON objects.`;
 
   const userPrompt = `Hello please assist me in the formulation of a customized skincare product for my individual skin type and concerns.

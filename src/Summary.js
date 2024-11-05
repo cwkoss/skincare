@@ -32,9 +32,7 @@ function Summary() {
 
 
   const handleAIClick = () => {
-
-    navigate('/product');
-
+    navigate('/product-select');
   };
   
 

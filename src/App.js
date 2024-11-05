@@ -25,6 +25,7 @@ import AdminOrderDetails from './AdminOrderDetails';
 import Dashboard from './Dashboard';
 import RecipeCopier from './RecipeCopier';
 import BuildVariation from './BuildVariation';
+import ProductTypeSelector from './components/ProductTypeSelector';
 
 import posthog from 'posthog-js';
 
@@ -80,13 +81,13 @@ function App() {
                     <p><strong>Join the Skincare Revolution:</strong> Skincare is more than a routine—it's your personal journey. Join a community embracing sustainability, personalization, and innovation.</p>
                   </div>
 
-                  <Link to="/product"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
+                  <Link to="/summary"><button className="bottomstartbutton">Begin Your Skincare Journey</button></Link>
                   <Link to="/contact" className="modern-link"><span>Contact us</span></Link>
                   <Login />
                 </div>
               } />
               <Route path="/goals" element={<Goals />} />
-              <Route path="/product" element={<Product />} />
+              <Route path="/product-select" element={<ProductTypeSelector />} />
               <Route path="/summary" element={<Summary />} />
               <Route path="/saved-recipe" element={<SavedRecipe />} />
               <Route path="/order-formulation" element={<OrderFormulation />} />

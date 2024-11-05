@@ -23,8 +23,24 @@ function PhaseChoices() {
   const { state, dispatch } = useRecipe();
   const [phaseSuggestions, setPhaseSuggestions] = useState([]);
   const [selectedPhase, setSelectedPhase] = useState(null);
-  const itemRefs = useRef([]); // Add refs to scroll into view
+  const itemRefs = useRef([]);
   const [somethingElseText, setSomethingElseText] = useState('');
+
+  useEffect(() => {
+    console.log("PhaseChoices state:", {
+      currentPhase: state.currentPhase,
+      productData: state.productData,
+      goalsData: state.goalsData,
+      fullState: state
+    });
+  }, [state]);
+
+  useEffect(() => {
+    if (phaseSuggestions && phaseSuggestions.length === 0 && !isLoading && state.currentPhase !== "emulsifier") {
+      setIsLoading(true);
+      fetchPhaseSuggestions();
+    }
+  }, [state, phaseSuggestions, isLoading]);
 
   const emulsifierOptions = [
     {
@@ -48,7 +64,6 @@ function PhaseChoices() {
     }
   ];
 
-
   const fetchPhaseSuggestions = async () => {
     let fetchedPhaseSuggestions = "dummy";
     try {
@@ -62,14 +77,6 @@ function PhaseChoices() {
       console.log("Phase suggestions:", fetchedPhaseSuggestions);
     }
   };
-
-  useEffect(() => {
-
-    if (phaseSuggestions && phaseSuggestions.length === 0 && isLoading === false && state.currentPhase !== "emulsifier") {
-      setIsLoading(true);
-      fetchPhaseSuggestions();
-    }
-  }, [state]);
 
   const getNextPhase = () => {
     const currentIndex = state.phaseOrder.indexOf(state.currentPhase);
@@ -150,40 +157,38 @@ function PhaseChoices() {
     );
   }
 
+  return (
+    <Layout
+      title={state.currentPhase === "emulsifier" ? "Choose Formula Consistency" : `Choose Your ${capitalizeFirstLetter(state.currentPhase)}`}
+      handleSubmit={goToNextPhase}
+      isSubmitDisabled={selectedPhase === null}
+      whyDisabled={state.currentPhase === "emulsifier" ? "Choose Consistency" : "Choose an option"}
+    >
+      {wantSomethingElse ? (
 
+        <Layout
+          title="Request Something Else"
+          handleSubmit={() => { requestSomethingElse() }}
+          buttonText="Get New Suggestions"
+          isSubmitDisabled={false}
+          whyDisabled="Choose Consistency">
+          <p>Tell the AI what you're looking for and we'll generate new options closer to what you want!</p>
+          <textarea
+            className="big-text-area"
+            placeholder="Enter your request.  Are there specific ingredients you want to use?  Are there specific skin concerns you want to address?  The more detail you provide, the better the AI can help you!"
+            onChange={(e) => setSomethingElseText(e.target.value)}
+            value={somethingElseText}
+          />
+        </Layout>
 
-return (
-  <Layout
-    title={state.currentPhase === "emulsifier" ? "Choose Formula Consistency" : `Choose Your ${capitalizeFirstLetter(state.currentPhase)}`}
-    handleSubmit={goToNextPhase}
-    isSubmitDisabled={selectedPhase === null}
-    whyDisabled={state.currentPhase === "emulsifier" ? "Choose Consistency" : "Choose an option"}
-  >
-    {wantSomethingElse ? (
-
-      <Layout
-        title="Request Something Else"
-        handleSubmit={() => { requestSomethingElse() }}
-        buttonText="Get New Suggestions"
-        isSubmitDisabled={false}
-        whyDisabled="Choose Consistency">
-        <p>Tell the AI what you're looking for and we'll generate new options closer to what you want!</p>
-        <textarea
-          className="big-text-area"
-          placeholder="Enter your request.  Are there specific ingredients you want to use?  Are there specific skin concerns you want to address?  The more detail you provide, the better the AI can help you!"
-          onChange={(e) => setSomethingElseText(e.target.value)}
-          value={somethingElseText}
-        />
-      </Layout>
-
-    ) : (
-      <>
-        {renderPhaseChoices()}
-        <p className="something-else"><a onClick={() => setWantSomethingElse(true)}>Looking for something else?</a></p>
-      </>
-    )}
-  </Layout>
-);
+      ) : (
+        <>
+          {renderPhaseChoices()}
+          <p className="something-else"><a onClick={() => setWantSomethingElse(true)}>Looking for something else?</a></p>
+        </>
+      )}
+    </Layout>
+  );
 }
 
 export default PhaseChoices;

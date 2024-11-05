@@ -48,10 +48,63 @@ const sanitizeNameForId = (name) => {
   return name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
 };
 
+// Add this mapping at the top of the file
+const PRODUCT_TYPE_PHASES = {
+  // Face products
+  face_oil: {
+    typeOrder: ['carrier', /*'active',*/ 'fragrance']
+  },
+  face_cream: {
+    typeOrder: ['emulsifier', 'carrier', 'aqueous', 'active', 'fragrance', 'preservative']
+  },
+  face_lotion: {
+    typeOrder: ['emulsifier', 'carrier', 'aqueous', 'active', 'fragrance', 'preservative']
+  },
+  face_serum: {
+    typeOrder: ['aqueous', 'active', 'fragrance', 'preservative']
+  },
+  // Body products
+  body_oil: {
+    typeOrder: ['carrier', /*'active',*/ 'fragrance']
+  },
+  body_cream: {
+    typeOrder: ['emulsifier', 'carrier', 'aqueous', 'active', 'fragrance', 'preservative']
+  },
+  body_lotion: {
+    typeOrder: ['emulsifier', 'carrier', 'aqueous', 'active', 'fragrance', 'preservative']
+  },
+  // Hair & Scalp products
+  hair_scalp_oil: {
+    typeOrder: ['carrier', /*'active',*/ 'fragrance']
+  }
+};
+
 const recipeReducer = (state, action) => {
   switch (action.type) {
     case 'SET_PRODUCT_DATA':
-      return { ...state, productData: action.payload, phaseOrder: skincareProducts[action.payload].typeOrder, currentPhase: skincareProducts[action.payload].typeOrder[0] };
+      // Handle both old and new product type formats
+      const productType = action.payload;
+      let phaseOrder, firstPhase;
+
+      if (PRODUCT_TYPE_PHASES[productType]) {
+        // New format (e.g., "face_cream")
+        phaseOrder = PRODUCT_TYPE_PHASES[productType].typeOrder;
+      } else if (skincareProducts[productType]) {
+        // Old format (e.g., "Face Moisturizing Cream or Lotion")
+        phaseOrder = skincareProducts[productType].typeOrder;
+      } else {
+        console.error(`Unknown product type: ${productType}`);
+        return state;
+      }
+
+      firstPhase = phaseOrder[0];
+      
+      return { 
+        ...state, 
+        productData: productType,
+        phaseOrder: phaseOrder,
+        currentPhase: firstPhase
+      };
     case 'SET_GOALS_DATA':
       return { ...state, goalsData: action.payload };
     case 'SET_INCLUDE_FRAGRANCE':
