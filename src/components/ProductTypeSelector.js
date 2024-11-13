@@ -19,11 +19,11 @@ const PRODUCT_AREAS = {
       lotion: {
         label: 'Face Lotion',
         description: 'Lightweight daily hydration that absorbs quickly without feeling heavy'
-      },
+      }/*,
       serum: {
         label: 'Face Serum',
         description: 'Concentrated treatment targeting specific skin concerns'
-      }
+      }*/
     }
   },
   body: {
