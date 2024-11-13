@@ -8,10 +8,6 @@ const PRODUCT_AREAS = {
     label: 'Face',
     description: 'Formulations specifically designed for delicate facial skin, focusing on concerns like aging, acne, and hydration',
     types: {
-      oil: {
-        label: 'Face Oil',
-        description: 'Deep nourishment and glow, perfect for targeted treatment and overnight care'
-      },
       cream: {
         label: 'Face Cream',
         description: 'Rich moisture barrier that protects and nourishes throughout the day'
@@ -19,7 +15,11 @@ const PRODUCT_AREAS = {
       lotion: {
         label: 'Face Lotion',
         description: 'Lightweight daily hydration that absorbs quickly without feeling heavy'
-      }/*,
+      },
+      oil: {
+        label: 'Face Oil',
+        description: 'Deep nourishment and glow, perfect for targeted treatment and overnight care'
+      },/*,
       serum: {
         label: 'Face Serum',
         description: 'Concentrated treatment targeting specific skin concerns'
@@ -30,10 +30,6 @@ const PRODUCT_AREAS = {
     label: 'Body',
     description: 'Nourishing formulas for all-over body care, focusing on moisture, softness, and skin health',
     types: {
-      oil: {
-        label: 'Body Oil',
-        description: 'Rich, lasting moisture that leaves skin silky and glowing'
-      },
       cream: {
         label: 'Body Cream',
         description: 'Deep hydration for dry or mature skin'
@@ -41,6 +37,10 @@ const PRODUCT_AREAS = {
       lotion: {
         label: 'Body Lotion',
         description: 'Everyday moisture that absorbs quickly'
+      },
+      oil: {
+        label: 'Body Oil',
+        description: 'Rich, lasting moisture that leaves skin silky and glowing'
       }
     }
   },
