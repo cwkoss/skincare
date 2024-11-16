@@ -1,4 +1,5 @@
 Goals for launch
+- Make recipe id's shorter so they fit in QR codes better
 - Make variation request options fit particular product type
 - Status on recipes isn't getting updated.  Should this field exist? Deleted for now
 - Ordering from saved recipe page goes straight to variation request, but maybe we need a little something to ease the user in?
