@@ -9,6 +9,15 @@ function toBase62(num) {
   return result.padStart(4, '0'); // Ensure at least 4 chars
 }
 
+function toBase62Short(num) {
+  let result = '';
+  do {
+    result = BASE62_CHARS[num % 62] + result;
+    num = Math.floor(num / 62);
+  } while (num > 0);
+  return result.padStart(3, '0'); // Shorter than recipe IDs
+}
+
 export function generateRecipeId(productType) {
   // Get timestamp in seconds
   const timestamp = Math.floor(Date.now() / 1000);
@@ -20,4 +29,16 @@ export function generateRecipeId(productType) {
   const prefix = (area[0] + product[0]).toUpperCase();
   
   return `${prefix}${toBase62(timestamp)}${toBase62(random)}`;
+}
+
+export function generateOrderId(recipeId) {
+  // Get timestamp in seconds
+  const timestamp = Math.floor(Date.now() / 1000);
+  // Get 1 random byte (0-255)
+  const random = Math.floor(Math.random() * 256);
+  
+  // Extract product type prefix from recipe ID (first 2 chars)
+  const prefix = recipeId.slice(0, 2);
+  
+  return `${prefix}O${toBase62Short(timestamp)}${toBase62Short(random)}`;
 } 

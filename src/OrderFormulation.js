@@ -7,6 +7,7 @@ import { useRecipe } from './RecipeContext';
 import { set } from 'firebase/database';
 import Layout from './Layout';
 import { useUser } from './UserContext';
+import { generateOrderId } from './utils/idGenerator';
 
 function OrderFormulation() {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ function OrderFormulation() {
         console.log(recipeId);
         setHasError(false);
         try {
-            const orderId = new Date().getTime() + "-" + recipeId;
+            const orderId = generateOrderId(recipeId);
             const orderDoc = {
                 name,
                 recipeId,
@@ -57,7 +58,7 @@ function OrderFormulation() {
                 pickup,
                 address: pickup ? null : address,
                 createdAt: new Date(),
-                devilveredAt: null,
+                deliveredAt: null,
                 waitlist: !inSeattleArea,
                 location: userLocation,
                 note,
@@ -72,7 +73,6 @@ function OrderFormulation() {
 
             // Update the session with the new orderId
             await updateSession({ orderId });
-
 
             navigate('/order-success', { state: { orderId } });
         } catch (err) {

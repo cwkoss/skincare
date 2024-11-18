@@ -5,6 +5,7 @@ import { db } from './firebase-config';
 import Layout from './Layout';
 import IngredientTypeahead from './components/IngredientTypeahead';
 import { generateDisplayName } from './RecipeContext';
+import { generateRecipeId } from './utils/idGenerator';
 
 function BuildVariation() {
   const { orderId } = useParams();
@@ -88,21 +89,20 @@ function BuildVariation() {
     if (!validateRecipe()) return;
 
     try {
-      const variationId = `${newRecipe.createdAt}-${orderId}`;
-      
-      // Strip any existing generation number from the base name
-      const baseNameWithoutGen = (baseRecipe.displayName || baseRecipe.baseName)
-        .replace(/\s*\(Gen \d+\)/, '');
+      const variationId = generateRecipeId(baseRecipe.productType);
       
       const updatedRecipe = {
         ...newRecipe,
+        recipeId: variationId,
         displayName: generateDisplayName(
           baseNameWithoutGen,
           variationName,
           (baseRecipe.generation || 0) + 1
         ),
         generation: (baseRecipe.generation || 0) + 1,
-        variationName: variationName
+        variationName: variationName,
+        parentRecipeId: baseRecipe.recipeId,
+        originRecipeId: baseRecipe.originRecipeId || baseRecipe.recipeId
       };
       
       await setDoc(doc(db, 'recipes', variationId), updatedRecipe);
