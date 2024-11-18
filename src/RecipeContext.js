@@ -5,6 +5,7 @@ import { skincareProducts } from './Product';
 import { updateRecipeInFirebase } from './FirebaseUtils';
 import { act } from 'react';
 import { useUser } from './UserContext';
+import { generateRecipeId } from './utils/idGenerator';
 
 const RecipeContext = createContext();
 
@@ -131,12 +132,10 @@ const recipeReducer = (state, action) => {
     case 'RESET_RECIPE':
       return initialRecipeState;
     case 'SET_BASE_NAME':
-      const sanitizedName = sanitizeNameForId(action.payload);
       return {
         ...state,
         baseName: action.payload,
-        displayName: generateDisplayName(action.payload, state.variationName, state.generation),
-        recipeId: state.createdAt + sanitizedName + state.generation
+        displayName: generateDisplayName(action.payload, state.variationName, state.generation)
       };
     case 'SET_VARIATION_NAME':
       return {
@@ -148,8 +147,7 @@ const recipeReducer = (state, action) => {
       return {
         ...state,
         generation: action.payload,
-        displayName: generateDisplayName(state.baseName, state.variationName, action.payload),
-        recipeId: state.createdAt + state + baseName + state.generation
+        displayName: generateDisplayName(state.baseName, state.variationName, action.payload)
       };
     case 'CREATE_VARIATION':
       const newGeneration = state.generation + 1;
@@ -213,6 +211,33 @@ const recipeReducer = (state, action) => {
         recipeId: action.payload.id,
         status: 'Complete'
       };
+    case 'CREATE_NEW_RECIPE':
+      const newRecipeId = generateRecipeId(action.payload.productType);
+      console.log(newRecipeId);
+      return {
+        ...state,
+        recipeId: newRecipeId,
+        createdAt: new Date().getTime().toString(),
+        productType: action.payload.productType,
+        baseName: action.payload.baseName || 'Untitled',
+        variationName: action.payload.variationName || '',
+        generation: action.payload.generation || 0,
+        displayName: generateDisplayName(
+          action.payload.baseName, 
+          action.payload.variationName, 
+          action.payload.generation
+        ),
+        originRecipeId: action.payload.originRecipeId || newRecipeId,
+        parentRecipeId: action.payload.parentRecipeId || newRecipeId,
+        creatorId: action.payload.creatorId || '',
+        orderCount: 0,
+        favoriteCount: 0,
+        status: 'incomplete',
+        variationRequest: {
+          selectedOptions: [],
+          customRequest: ''
+        }
+      };
     default:
       return state;
   }
@@ -232,7 +257,7 @@ export const RecipeProvider = ({ children }) => {
       dispatch({ type: 'SET_CREATOR_ID', payload: user.uid });
     }
     
-    console.log(state);
+    console.log("state", state);
     updateRecipeInFirebase(state);
   }, [state, user]);
 

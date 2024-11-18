@@ -44,7 +44,7 @@ const PRODUCT_AREAS = {
       }
     }
   },
-  hair_scalp_oil: {
+  hair_scalp: {
     label: 'Hair & Scalp',
     description: 'Specialized treatments for hair health and scalp care',
     types: {

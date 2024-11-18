@@ -15,6 +15,17 @@ function ConfirmRecipe() {
   }, [recipeName, dispatch]);*/
 
   const goToNextPhase = () => {
+    // First create a new recipe with proper ID
+    dispatch({ 
+      type: 'CREATE_NEW_RECIPE',
+      payload: {
+        productType: state.productData,
+        baseName: recipeName,
+        generation: 0
+      }
+    });
+    
+    // Then set other recipe properties
     dispatch({ type: 'SET_RECIPE_NAME', payload: recipeName });
     dispatch({ type: 'SET_BASE_NAME', payload: recipeName });
     dispatch({ type: "SET_RAW_RECIPE", payload: overallPercentages });
