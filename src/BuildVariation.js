@@ -95,7 +95,7 @@ function BuildVariation() {
         ...newRecipe,
         recipeId: variationId,
         displayName: generateDisplayName(
-          baseNameWithoutGen,
+          baseRecipe.displayName,
           variationName,
           (baseRecipe.generation || 0) + 1
         ),
